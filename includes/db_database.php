@@ -2,8 +2,8 @@
   class MySQL {
     private $conexion;
     public function __construct() {
-        $host   = "localhost";
-        $dbname = "erp";
+        $host   = "127.0.0.1:3307";
+        $dbname = "isg0f26bvkz76vjd";
         $user   = "root";
         $pass   = "";
  
@@ -17,8 +17,10 @@
         $dbname = "isg0f26bvkz76vjd";
         $user   = "x0obcpfmbmeoh6g2";
         $pass   = "jjvuwi069kl9bqid";*/
+
         if (!isset($this->conexion)) {
             $this->conexion = (mysqli_connect($host,$user,$pass,$dbname)) or die(mysqli_error());
+		
         }
         //mysqli_set_charset($conexion, "utf8");
     }

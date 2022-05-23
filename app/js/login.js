@@ -3,7 +3,8 @@ $(document).on('submit','#frmLogin',function(event){
 
   let datos = {
     login : $("#txt_UserName").val(),
-    passw : SHA1($("#txt_UserPass").val()).toString().toUpperCase()
+    passw : $("#txt_UserPass").val()
+   // passw : SHA1($("#txt_UserPass").val()).toString().toUpperCase()
   }
 
   $.ajax({

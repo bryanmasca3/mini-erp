@@ -10,7 +10,7 @@
 <!-- Main content -->
 <section class="content">
   <input type="hidden" id="uniopeID" value="<?php echo($_SESSION["padreID"]);?>" />
-  <div class="row" id="div_unioperativas">
+  <div class="row" id="div_unioperativas">    
   </div>
 </section>
 

@@ -23,9 +23,16 @@
   <link rel="stylesheet" href="app/css/admin.css" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-  
-  <script src="libs/jquery/jquery-3.3.1.min.js"></script>
+
+
+  <!--<script src="libs/jquery/jquery-3.3.1.min.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"> </script>  
   <script src="libs/jquery-ui/jquery-ui.min.js"></script>
+ 
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.56/pdfmake.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.56/vfs_fonts.js"></script>        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clocklet/css/clocklet.min.css">
+<script src="https://cdn.jsdelivr.net/npm/clocklet"></script>
  <!--  <script
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -119,6 +126,8 @@
       case "arbol": $appPage = "pages/catalogos/arbol/arbol.php"; break;
       case "lineaneg": $appPage = "pages/catalogos/lineaneg/lineaneg.php"; break;
       case "logistica": $appPage = "pages/catalogos/logistica/logistica.php"; break;
+      case "asistance": $appPage = "pages/catalogos/Seguridad/asistance.php"; break;
+      case "seguridad": $appPage = "pages/catalogos/Seguridad/seguridad.php"; break;
       case "operaciones": $appPage = "pages/catalogos/operaciones/operaciones.php"; break;
       case "catMaestro" :   $menuCat = 'active menu-open'; $menuCatMaestro = 'class="active"'; $appPage = "pages/catalogos/maestro/maestro.php"; break;
       case "catUbigeo" :    $menuCat = 'active menu-open'; $menuCatUbigeo = 'class="active"'; $appPage = "pages/catalogos/ubigeo/ubigeo.php"; break;

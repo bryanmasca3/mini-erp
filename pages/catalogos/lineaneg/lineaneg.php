@@ -21,7 +21,7 @@
         <a href="javascript:appSubmitButton('logistica',1);" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a></div></div>
   </div>
   <div class="row">
-  <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-xs-6">
         <div class="small-box bg-blue">
         <div class="inner">
         <h3><sup style="font-size:20px">OPE</sup></h3>
@@ -30,6 +30,15 @@
         <a href="javascript:appSubmitButton('operaciones',1);" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a></div></div>
   </div>
 
+  <div class="row">
+    <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-blue">
+        <div class="inner">
+        <h3><sup style="font-size:20px">Seguridad</sup></h3>
+        <p>Seguridad</p></div>
+        <div class="icon"><i class="fa fa-truck"></i></div>
+        <a href="javascript:appSubmitButton('seguridad',1);" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a></div></div>
+  </div>
  
 
 </section>
