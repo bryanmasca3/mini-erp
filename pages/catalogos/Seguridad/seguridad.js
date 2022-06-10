@@ -357,7 +357,7 @@ function SeguridadHistorialRegistro(){
               { data: "id",
               fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                 if(oData.id) {
-                    $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-trash btn btn-danger btn-xs" onclick="modalDeleteSolmnolenciaFatiga('+oData.id+')"></button></div>');
+                    $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print btn btn-success btn-xs" type="button" onclick="pdf_control_fatiga_sonnolencia('+oData.id+')"></button><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="modalDeleteSolmnolenciaFatiga('+oData.id+')"></button></div>');
                 }
               }
             }
@@ -403,9 +403,8 @@ function SeguridadHistorialRegistro(){
                { data: "id"},                       
                { data: "nombres" },                   
                { data: "dni" }, 
-               { data: "cargo" }, 
-               { data: "cantidad" }, 
-             { data: "id",
+               { data: "cargo" },            
+           /*  { data: "id",
              fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                if(oData.id) {
                   if(oData.cantidad<3){
@@ -420,7 +419,7 @@ function SeguridadHistorialRegistro(){
                  
                }
              }
-           }              
+           }   */           
            ]
        } );                          
        }  
@@ -580,9 +579,10 @@ function SeguridadHistorialRegistro(){
       TipoQuery : '03_pdf_pernocte',
       id:id 
     }
-    var hashmap = new Map();
+   // var hashmap = new Map();
     appAjaxQuery(datos,rutaSQL).done(function(resp){  
-      let result = resp.tabla2.reduce((r, a) => { 
+      console.log(resp)
+      /*let result = resp.tabla2.reduce((r, a) => { 
         r[a.id_trabajadores] = [...r[a.id_trabajadores] || [], a];
         return r;
        }, {});
@@ -604,6 +604,8 @@ function SeguridadHistorialRegistro(){
       data.push(value)
     }
     console.log(data)
+    */
+    
     var docDefinition = {
       pageOrientation: 'landscape',
       content: [
@@ -681,20 +683,144 @@ table: {
  
    ]
 }
-},
-{
+},{
   table: {
-    widths: ['5%','15%','10%','10%','5%','5%','5%','5%','5%','5%','5%','5%','5%','5%','5%','5%' ],
+    widths: ['40%', '15%', '15%', '15%','15%'],
     // heights: [10,10,10,10,30,10,25],
      headerRows: 1,
-     body:buildTableBody(['n','nombres','dni','cargo',
-     'hor_ini_1','firma_1_1','hor_fin_1','firma_1_2',
-     'hor_ini_2','firma_2_1','hor_fin_2','firma_2_2',
-     'hor_ini_3','firma_3_1','hor_fin_3','firma_3_2'],data, [
+     body: [
+         [
+           {
+             
+             text: 'SUPERVISOR ESCOLTA',                       
+             fontSize: 8,
+             bold: true,     
+             alignment: 'center',
+            fillColor: '#d9d9d9',  
+             border: [true, false, true, true]    
+           } , 
+             {
+               text: 'FECHA DE INICIO DE RUTA',              
+               bold: true,     
+               fontSize: 8,      
+               alignment: 'center',
+              fillColor: '#d9d9d9', 
+               border: [true, false, true, true]   
+             },
+             { 
+               text: 'FIRMA',              
+               bold: true,     
+               fontSize: 8,
+               alignment: 'center',
+              fillColor: '#d9d9d9', 
+               border: [true, false, true, true]   
+             },
+             {
+              text: 'FECHA INICIO PERNOCTE',              
+              bold: true,     
+              fontSize: 8,
+              alignment: 'center',
+            fillColor: '#d9d9d9', 
+              border: [true, false, true, true]   
+         
+             },
+             {
+              text: 'FECHA FINAL PERNOCTE',              
+              bold: true,     
+              fontSize: 8,
+              alignment: 'center',
+            fillColor: '#d9d9d9', 
+              border: [true, false, true, true]   
+         
+             }
+         ],                                
+         [
+          {
+            
+            text: resp.tabla1.dni_supervisor,                       
+            fontSize: 8,
+            bold: true,     
+            alignment: 'center',      
+          } , 
+            {
+              text: resp.tabla1.fecha_inicio_ruta,              
+              bold: true,     
+              fontSize: 8,      
+              alignment: 'center'
+            },
+            { 
+              text: '',              
+              bold: true,     
+              fontSize: 8,
+              alignment: 'center'
+            },
+            {
+             text:  resp.tabla1.fecha_inicio_pernocte,              
+             bold: true,     
+             fontSize: 8,
+             alignment: 'center'
+        
+            },
+            {
+             text:  resp.tabla1.fecha_fin_pernocte,              
+             bold: true,     
+             fontSize: 8,
+             alignment: 'center'
+        
+            }
+        ],
+        [
+          {
+            
+            text: 'PROYECTO / RUTA',                       
+            fontSize: 8,
+            bold: true,  
+            colSpan:3,   
+                  fillColor: '#d9d9d9', 
+            alignment: 'center',      
+          } , {},{},
+            {
+              text: 'LUGAR',              
+              bold: true,     
+              fontSize: 8,
+                    fillColor: '#d9d9d9',       
+              colSpan:2,
+              alignment: 'center'
+            },{}
+        ],
+        [
+          {
+            
+            text: resp.tabla1.proyecto,                       
+            fontSize: 8,
+            bold: true,  
+            colSpan:3,   
+            alignment: 'center',      
+          } , {},{},
+            {
+              text: resp.tabla1.lugar,              
+              bold: true,     
+              fontSize: 8,      
+              colSpan:2,
+              alignment: 'center'
+            },{}
+        ]
+   
+     ]
+  }
+  },
+{
+  table: {
+    widths: ['5%','25%','15%','15%','10%','10%','10%','10%' ],
+    // heights: [10,10,10,10,30,10,25],
+     headerRows: 1,
+     body:buildTableBody(['id_trabajadores','nombres','dni','cargo',
+     'hora_ini','firma','hora_fin','firma'],resp.tabla2, [
       { 
           text: 'N°',               
           bold: true,              
-          fontSize: 8,            
+          fontSize: 8,       
+          fillColor: '#339966',     
           border: [true, false, true, false]
           
       },{ 
@@ -702,19 +828,22 @@ table: {
         text: ' NOMBRES Y APELLIDOS ',               
         bold: true,          
         fontSize: 8,  
+        fillColor: '#339966',  
         border: [true, false, true, false]        
     },
     { 
      
       text: 'DNI',               
       bold: true,          
-      fontSize: 8,  
+      fontSize: 8,
+      fillColor: '#339966',    
       border: [true, false, true, false]        
       }  ,
       { 
         
         text: 'CARGO',               
-        bold: true,          
+        bold: true,        
+        fillColor: '#339966',    
         fontSize: 8,  
         border: [true, false, true, false]        
     }  ,
@@ -723,13 +852,15 @@ table: {
       text: 'HORA DE INICIO',               
       bold: true,          
       fontSize: 8,  
+      fillColor: '#d9d9d9', 
       border: [true, false, true, false]        
     }    ,
     { 
         
       text: 'FIRMA',               
       bold: true,          
-      fontSize: 8,  
+      fontSize: 8,
+       fillColor: '#d9d9d9',  
       border: [true, false, true, false]        
     } , 
     { 
@@ -737,6 +868,7 @@ table: {
       text: 'HORA TERMINO',               
       bold: true,          
       fontSize: 8,  
+       fillColor: '#d9d9d9', 
       border: [true, false, true, false]        
     } , 
     { 
@@ -744,65 +876,53 @@ table: {
       text: 'FIRMA',               
       bold: true,          
       fontSize: 8,  
-      border: [true, false, true, false]        
-    } ,{ 
-        
-      text: 'HORA DE INICIO',               
-      bold: true,          
-      fontSize: 8,  
-      border: [true, false, true, false]        
-    }    ,
-    { 
-        
-      text: 'FIRMA',               
-      bold: true,          
-      fontSize: 8,  
-      border: [true, false, true, false]        
-    } , 
-    { 
-        
-      text: 'HORA TERMINO',               
-      bold: true,          
-      fontSize: 8,  
-      border: [true, false, true, false]        
-    } , 
-    { 
-        
-      text: 'FIRMA',               
-      bold: true,          
-      fontSize: 8,  
-      border: [true, false, true, false]        
-    } ,{ 
-        
-      text: 'HORA DE INICIO',               
-      bold: true,          
-      fontSize: 8,  
-      border: [true, false, true, false]        
-    }    ,
-    { 
-        
-      text: 'FIRMA',               
-      bold: true,          
-      fontSize: 8,  
-      border: [true, false, true, false]        
-    } , 
-    { 
-        
-      text: 'HORA TERMINO',               
-      bold: true,          
-      fontSize: 8,  
-      border: [true, false, true, false]        
-    } , 
-    { 
-        
-      text: 'FIRMA',               
-      bold: true,          
-      fontSize: 8,  
+       fillColor: '#d9d9d9', 
       border: [true, false, true, false]        
     }                
   ])
-  }
-  }
+  },
+  },
+  {
+    table: {
+      widths: ['80%','20%'],
+      // heights: [10,10,10,10,30,10,25],
+       headerRows: 1,
+       body:[
+        [
+          {
+            
+            text: 'Tomar en cuenta:',                       
+            fontSize: 8,
+            bold: true,      
+            border: [true, false, true, true]                       
+          } , 
+            {
+              text: 'FIRMA DEL SUPERVISOR HSE',              
+              bold: true,     
+              fontSize: 8,      
+              alignment: 'center',
+              border: [true, false, true, true]   
+            }
+        ],                                        
+       [
+         {
+          text:  '1. La escolta es responsable de hacer el control respectivo para el cumplimiento del presente documento. '+
+          '2. Los operadores deben cumplir con las normas de la zona de pernocte. '+
+          '3. De incumplir con las normas de seguridad establecidas por Coporación de Servicios Moquegua será merecedor de una sanción pre-escrita por la empresa, si es reincidente se solicitará su retiro inmediato',                       
+          fontSize: 8,                  
+                         
+         } ,
+           {
+             text: '',                          
+             fontSize: 8,                 
+             alignment: 'center'
+           }
+       ],
+    
+  
+    ]
+    }
+   }
  
 ],
     defaultStyle: {
@@ -919,15 +1039,15 @@ function gridCheckListPreUso(){
   };
   var table;
   appAjaxQuery(datos,rutaSQL).done(function(resp){
-   
-    if(resp.tabla.length>0){      
+   let newData=resp.tabla1.concat(resp.tabla2)  
+    if(newData.length>0){      
      table= $('#grd01checkListHistorial').DataTable( {         
         "sPaginationType": "simple",
         "language": {
           "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
         },
         
-        data: resp.tabla,
+        data: newData,
         destroy: true,
         columns: 
         [
@@ -940,8 +1060,12 @@ function gridCheckListPreUso(){
             { data: "id",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
               if(oData.id) {
-                  console.log(oData.id)
-                  $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print btn btn-success btn-xs"  type="button" onclick="pdf_check_list_camioneta('+oData.id+')"></button><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="deleteCheckListCamio_Cister('+oData.id+')">');
+                  if(oData.tipo=="camioneta"){
+                    $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print btn btn-success btn-xs"  type="button" onclick="pdf_check_list_camioneta('+oData.id+')"></button><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="deleteCheckListCamio_Cister('+oData.id+')">');
+                  }else{
+                    $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print btn btn-success btn-xs"  type="button" onclick="pdf_check_list_cisterna('+oData.id+')"></button><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="deleteCheckListCamio_Cister2('+oData.id+')">');
+                  }
+                  
               }
             }
           }
@@ -977,7 +1101,29 @@ function deleteCheckListCamio_Cister(id){
   .then((willDelete) => {
     if (willDelete) {  
       let datos = {
-        TipoQuery : '01_delete_checklist_camio_cis',
+        TipoQuery : '01_delete_checklist_camioneta',
+        value:id
+      };
+       
+      appAjaxQuery(datos,rutaSQL).done(function(resp){      
+        gridCheckListPreUso();   
+      });  
+      
+    }
+  });
+}
+function deleteCheckListCamio_Cister2(id){
+
+  swal({    
+    text: "¿Deseas Eliminar la registro?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {  
+      let datos = {
+        TipoQuery : '01_delete_checklist_cisterna',
         value:id
       };
        
@@ -1018,7 +1164,7 @@ function deleteCheckListCamio_Cister(id){
               fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                 if(oData.id) {
                     console.log(oData.id)
-                    $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print btn btn-success btn-xs" type="button" onclick="pdf_capacitacion('+oData.id+')"></button><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="modalDeleteCapacitacion('+oData.id+')"></button><button class="fa fa-pencil  btn btn-primary btn-xs"type="button" onclick="modalEditCapacitacion('+oData.id+')"></button></div>');
+                    $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button type="button" class ="fa fa-copy btn btn-warning btn-xs"onclick="copyToClipboard();"></button><button class="fa fa-print btn btn-success btn-xs" type="button" onclick="pdf_capacitacion('+oData.id+')"></button><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="modalDeleteCapacitacion('+oData.id+')">');
                 }
               }
             }
@@ -1192,6 +1338,36 @@ function search_Trabajador(){
     });
   
   }*/
+  function resetCheckListCisterna(){    
+    $("#txt_search_cisterna_conductor").val("");
+    $("#txt01_conductor_cisterna_nombre").val("");
+    $("#txt01_conductor_cisterna_dni").val("");
+    $("#txt_firma_conductor_citerna").val("");
+    $("#txt_firma_supervisor_citerna").val("");
+    $('#txt01_conductor_cisterna_id').val("");
+    $('#txt01_conductor_cisterna_LC').val("");
+    $('#txt01_conductor_cisterna_capacidad').val("");       
+    $("#txt01_conductor_cisterna_hora").val("");
+    $("#txt01_conductor_cisterna_placas").val("");
+    $("#txt01_conductor_cisterna_km_tracto").val("");
+    $("#txt01_conductor_cisterna_km_cisterna").val("");
+    $("#txt01_conductor_cisterna_actividad").val("");
+    $("#txt01_conductor_cisterna_fecha").datepicker("setDate",moment().format("DD/MM/YYYY"));
+    $("#txt01_conductor_km_inicial").val("");
+    $("#txt01_conductor_hora_ini").val("");
+    $("#txt01_conductor_km_inicial_2").val("");
+    $("#txt01_conductor_hora_ini_2").val("");
+    $("#txt01_camioneta_km_observaciones").val("");
+
+    $(".checkList2_declaracion_jurada:radio").prop("checked", false);
+    $(".checkList2_luces:radio").prop("checked", false);
+    $(".checkList2_documentos:radio").prop("checked", false);
+    $(".checkList2_general:radio").prop("checked", false);
+    $(".checkList2_neumaticos:radio").prop("checked", false);
+    $(".checkList2_motor:radio").prop("checked", false);
+    $(".checkList2_seguridad:radio").prop("checked", false);
+    $(".checkList2_sistema_recarga:radio").prop("checked", false);
+  }
   function resetCheckListCamioneta(){  
     $("#txt01_camioneta_fecha").datepicker("setDate",moment().format("DD/MM/YYYY"));
     $('#txt01_camioneta_conductor_id').val("")
@@ -1645,11 +1821,2187 @@ pdfMake.createPdf(docDefinition).open();
 })
   }
 
+  function pdf_check_list_cisterna(id){
+           
+    let  datos={
+      TipoQuery : '03_pdf_checkList_cisterna', 
+      id:id
+    }
+   appAjaxQuery(datos,rutaSQL).done(function(resp){  
+        console.log(resp)
+  
+      var docDefinition = {
+        content: [
+  {
+  table: {
+      widths: ['15%', '65%', '10%', '10%'],
+     // heights: [10,10,10,10,30,10,25],
+      headerRows: 1,
+      body: [
+          [
+            {
+              
+              text: 'LOGO',              
+          
+              fontSize: 8,
+              alignment: 'center',
+              rowSpan:4
+            } , 
+              {
+                text: 'FORMATO',              
+                bold: true,
+                fontSize: 8,
+                alignment: 'center'
+              },
+              { 
+                text: 'CODIGO:',              
+       
+                fontSize: 8,
+                alignment: 'center'
+              },
+              {
+                  text: 'SSOMA-F-01',
+                  fontSize: 8
+          
+              }
+          ],
+          [
+            {               
+            }, 
+            {
+              text: 'REGISTRO',
+              rowSpan: 3,              
+              bold: true,
+              fontSize: 8,
+              alignment: 'center'
+            },
+            { 
+              text: 'Versión :',              
+           
+              fontSize: 8
+            },
+            {
+                text: '01',
+                fontSize: 8
+          
+            }
+        ],                  
+        [
+          {               
+          }, 
+          {
+        
+          },
+          { 
+            text: 'F. de Aprobn:',              
+            fontSize: 8
+          },
+          {
+              text: '01/02/02',
+              fontSize: 8
+    
+          }
+      ],  
+      [
+        {               
+        }, 
+        {      
+        },
+        { 
+          text: 'Páginas:',              
+          fontSize: 8
+        },
+        {
+            text: '1',
+            fontSize: 8
+        }
+    ] 
+    
+      ]
+  }
+  },
+  {
+    table: {
+        widths: ['20%', '20%', '15%','15%', '15%','15%'],
+       // heights: [10,10,10,10,30,10,25],
+        headerRows: 1,
+        body: [
+            [
+              {              
+                text: 'CONDUCTOR',         
+                fillColor: '#65b58f',     
+                bold: true,
+                alignment: 'center', 
+                fontSize: 8,             
+                border: [true, false, true, true]                   
+              }, 
+              { 
+              text: resp.tabla.nombres,               
+              bold: true,
+              fontSize: 8,       
+              border: [true, false, true, true] 
+             },
+              {              
+                text: 'DNI',                    
+                bold: true,
+                alignment: 'center', 
+                fontSize: 8, 
+                fillColor: '#65b58f',             
+                border: [true, false, true, true]                  
+              } ,
+              { text: resp.tabla.dni,     
+                border: [true, false, true, true] ,          
+                fontSize: 8,         
+                  },
+                {              
+                  text: 'L.C #',                    
+                  bold: true,
+                  alignment: 'center', 
+                  fontSize: 8, 
+                  fillColor: '#65b58f',             
+                  border: [true, false, true, true]                  
+                } ,
+                { text: resp.tabla.lc,                                      
+                  fontSize: 8,    
+                  border: [true, false, true, true]      
+                   },
+            ],     
+            [
+              {              
+                text: 'CAPACIDAD',         
+                fillColor: '#65b58f',     
+                bold: true,
+                alignment: 'center', 
+                fontSize: 8,             
+                                 
+              }, 
+              { 
+              text: resp.tabla.capacidad,               
+              
+              fontSize: 8,       
+              
+             },
+              {              
+                text: 'FECHA',                    
+                bold: true,
+                alignment: 'center', 
+                fontSize: 8, 
+                fillColor: '#65b58f',             
+                                   
+              } ,
+              { text: resp.tabla.fecha,     
+                              
+                fontSize: 8,         
+                },
+                {              
+                  text: 'HORA',                    
+                  bold: true,
+                  alignment: 'center', 
+                  fontSize: 8, 
+                  fillColor: '#65b58f',             
+                                      
+                } ,
+                { text: resp.tabla.hora_cisterna,                    
+                  
+                  fontSize: 8,         
+                   },
+            ],
+            [
+              {              
+                text: 'PLACA',         
+                fillColor: '#65b58f',     
+                bold: true,
+                alignment: 'center', 
+                fontSize: 8,             
+                                 
+              }, 
+              { 
+              text: resp.tabla.placa,               
+              
+              fontSize: 8,       
+              
+             },
+              {              
+                text: 'TRACTO',                    
+                bold: true,
+                alignment: 'center', 
+                fontSize: 8, 
+                fillColor: '#65b58f',             
+                                   
+              } ,
+              { text: resp.tabla.km_tracto,     
+                              
+                fontSize: 8,         
+                 },
+                {              
+                  text: 'CISTERNA',                    
+                  bold: true,
+                  alignment: 'center', 
+                  fontSize: 8, 
+                  fillColor: '#65b58f',             
+                                      
+                } ,
+                { text: resp.tabla.km_cisterna,                    
+                  
+                  fontSize: 8,         
+                   },
+            ],
+            [
+              {              
+                text: 'ACTIVIDAD',         
+                fillColor: '#65b58f',     
+                bold: true,
+                alignment: 'center', 
+                fontSize: 8,  
+                rowSpan:2,           
+                                 
+              }, 
+              { 
+              text: resp.tabla.actividad,               
+              rowSpan:2,    
+              fontSize: 8,       
+              
+             },
+              {              
+                text: 'KILOMETRAJE INICIAL',                    
+                bold: true,
+                alignment: 'center', 
+                fontSize: 8, 
+                fillColor: '#65b58f',             
+                                     
+              } ,
+              { text: resp.tabla.km_inicial,     
+                              
+                fontSize: 8,         
+                  },
+                {              
+                  text: 'HORA',                    
+                  bold: true,
+                  alignment: 'center', 
+                  fontSize: 8, 
+                  fillColor: '#65b58f',             
+                                     
+                } ,
+                { text: resp.tabla.hora_ini,                    
+                  
+                  fontSize: 8,         
+                   },
+              
+            ],
+            [
+              {                                              
+              }, 
+              {              
+             },
+              {              
+                text: 'KILOMETRAJE FINAL',                    
+                bold: true,
+                alignment: 'center', 
+                fontSize: 8, 
+                fillColor: '#65b58f',             
+                                    
+              } ,
+              { text: resp.tabla.km_inicial_2,     
+                              
+                fontSize: 8,         
+                 },
+                {              
+                  text: 'HORA',                    
+                  bold: true,
+                  alignment: 'center', 
+                  fontSize: 8, 
+                  fillColor: '#65b58f',             
+                                      
+                } ,
+                { text: resp.tabla.hora_ini_2,                    
+                  
+                  fontSize: 8,         
+                   },
+              
+            ]
+        ]
+    }
+    },
+    {
+      table: {
+          widths: ['80%','10%','10%'],
+         // heights: [10,10,10,10,30,10,25],
+          headerRows: 1,
+          body: [
+              [
+                  { 
+                      text: 'DECLARACION JURADA DEL CONDUCTOR',               
+                      bold: true,
+                      fontSize: 8,
+                      fillColor: '#ffff00',
+                      border: [true, false, true, true] ,  
+                      alignment: 'center',            
+                  } ,
+                {
+                  text: 'SI',               
+                  bold: true,
+                  fontSize: 8,          
+                  fillColor: '#d9d9d9',
+                  border: [true, false, true, true] 
+                },  
+                {
+                  text: 'NO',               
+                  bold: true,
+                  fontSize: 8,              
+                  fillColor: '#d9d9d9',
+                  border: [true, false, true, true] 
+                }
+                  
+              ],
+              [
+                { 
+                  text: 'He descansado lo suficiente y me encuentro en condiciones de conducir',               
+                  bold: true,
+                  fontSize: 8,           
+                              
+              } ,         
+            {
+              text: resp.tabla.J_1=="1"?'X':'',               
+              bold: true,
+              fontSize: 8,          
+              
+            },  
+            {
+              text:  resp.tabla.J_1=="0"?'X':'',               
+              bold: true,
+              fontSize: 8,              
+              
+            }
+            ],
+            [
+              { 
+                text: 'Me siento en buenas condiciones físicas y no tengo ninguna dolencia o enfermedad que me impida conducir en forma segura ',               
+                bold: true,
+                fontSize: 8,
+              
+                            
+            } ,         
+          {
+            text:  resp.tabla.J_2=="1"?'X':'',               
+            bold: true,
+            fontSize: 8,          
+            
+          },  
+          {
+            text:  resp.tabla.J_2=="0"?'X':'',               
+            bold: true,
+            fontSize: 8,              
+            
+          }
+          ] ,
+          [
+            { 
+              text: 'Estoy tomando medicamentos recetados por un médico quien me ha asegurado que no son impedimento para conducir de forma segura',               
+              bold: true,
+              fontSize: 8,
+       
+                          
+          } ,         
+        {
+          text:  resp.tabla.J_3=="1"?'X':'',               
+          bold: true,
+          fontSize: 8,          
+          
+        },  
+        {
+          text:  resp.tabla.J_3=="0"?'X':'',               
+          bold: true,
+          fontSize: 8,              
+          
+        }
+        ] ,
+        [
+          { 
+            text: 'Me encuentro emocional y personalmente en buenas condiciones para poder concentrarme en la conducción segura del vehculo',               
+            bold: true,
+            fontSize: 8
+        
+                        
+        } ,         
+      {
+        text:  resp.tabla.J_4=="1"?'X':'',               
+        bold: true,
+        fontSize: 8,          
+        
+      },  
+      {
+        text:  resp.tabla.J_4=="0"?'X':'',               
+        bold: true,
+        fontSize: 8,              
+        
+      }
+      ] ,
+      [
+        { 
+          text: 'Estoy consciente de la responsabilidad que significa conducir este vehiculo , sin poner en riesgo mi integridad, la de mis compañeros ni el patrimonio de la empresa',               
+          bold: true,
+          fontSize: 8
+                      
+      } ,         
+    {
+      text:  resp.tabla.J_5=="1"?'X':'',               
+      bold: true,
+      fontSize: 8,          
+      
+    },  
+    {
+      text:  resp.tabla.J_5=="0"?'X':'',               
+      bold: true,
+      fontSize: 8,              
+      
+    }
+    ] ]
+      }
+    } ,
+    {
+      table: {
+          widths: ['40%','10%','40%','10%'],
+         // heights: [10,10,10,10,30,10,25],
+          headerRows: 1,
+          body: [
+              [
+                  { 
+                      text: 'LUCES',               
+                      bold: true,
+                      fontSize: 8,                               
+                      alignment: 'center', 
+                      fillColor: '#65b58f',   
+                        border: [true, false, true, true]                 
+                  } ,
+                {
+                  text: 'Conforme?',               
+                  bold: true,
+                  fontSize: 8,      
+                  alignment: 'center',     
+                  fillColor: '#d9d9d9',
+                    border: [true, false, true, true]  
+                },  
+                {
+                  text: 'NEUMATICOS',               
+                  bold: true,
+                  fontSize: 8,              
+                  alignment: 'center', 
+                  fillColor: '#65b58f', 
+                    border: [true, false, true, true]  
+                },
+                {
+                  text: 'Conforme?',               
+                  bold: true,
+                  fontSize: 8,    
+                  alignment: 'center',           
+                  fillColor: '#d9d9d9',
+                    border: [true, false, true, true]  
+                }
+                  
+              ],
+              [
+                { 
+                  text: 'Luces altas',               
+                  bold: true,
+                  fontSize: 8,                                      
+              } ,
+            {
+              text: resp.tabla.L_1=="1" ? "SI"
+                : resp.tabla.L_1=="0" ? "NO"              
+                : "N/A",               
+              bold: true,
+              fontSize: 8,               
+            },  
+            {
+              text: 'Presion de Aire',               
+              bold: true,
+              fontSize: 8,              
+         
+            },
+            {
+              text: resp.tabla.N_1=="1" ? "SI"
+              : resp.tabla.N_1=="0" ? "NO"              
+              : "N/A",               
+              bold: true,
+              fontSize: 8,              
+           
+            }
+            ],
+            [
+              { 
+                text: 'Luces bajas',               
+                bold: true,
+                fontSize: 8,               
+                              
+            } ,
+          {
+            text: resp.tabla.L_2=="1" ? "SI"
+            : resp.tabla.L_2=="0" ? "NO"              
+            : "N/A",               
+            bold: true,
+            fontSize: 8,          
+           
+          },  
+          {
+            text: 'Abultamientos',               
+            bold: true,
+            fontSize: 8,              
+      
+          },
+          {
+            text: resp.tabla.N_2=="1" ? "SI"
+            : resp.tabla.N_2=="0" ? "NO"              
+            : "N/A",               
+            bold: true,
+            fontSize: 8,              
+           
+          }
+          ] ,
+          [
+            { 
+              text: 'Luces laterales',               
+              bold: true,
+              fontSize: 8,               
+                           
+          } ,
+        {
+          text: resp.tabla.L_3=="1" ? "SI"
+          : resp.tabla.L_3=="0" ? "NO"              
+          : "N/A",               
+          bold: true,
+          fontSize: 8,          
+   
+        },  
+        {
+          text: 'Cortaduras',               
+          bold: true,
+          fontSize: 8,              
+       
+        },
+        {
+          text: resp.tabla.N_3=="1" ? "SI"
+          : resp.tabla.N_3=="0" ? "NO"              
+          : "N/A",               
+          bold: true,
+          fontSize: 8,              
+      
+        }
+        ] ,
+        [
+          { 
+            text: 'Luz de placa ',               
+            bold: true,
+            fontSize: 8,               
+                          
+        } ,
+      {
+        text: resp.tabla.L_4=="1" ? "SI"
+        : resp.tabla.L_4=="0" ? "NO"              
+        : "N/A",               
+        bold: true,
+        fontSize: 8,          
+    
+      },  
+      {
+        text: 'Llanta de respuesto (02)' ,               
+        bold: true,
+        fontSize: 8,              
+  
+      },
+      {
+        text: resp.tabla.N_4=="1" ? "SI"
+        : resp.tabla.N_4=="0" ? "NO"              
+        : "N/A",               
+        bold: true,
+        fontSize: 8,              
+       
+      }
+      ] ,
+      [
+        { 
+          text: 'Luz de Frenos',               
+          bold: true,
+          fontSize: 8,               
+                           
+      } ,
+    {
+      text: resp.tabla.L_5=="1" ? "SI"
+      : resp.tabla.L_5=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,          
+   
+    },  
+    {
+      text: 'Luces bajas',                   
+      bold: true,
+      fontSize: 8,                        
+    },
+    {
+      text: resp.tabla.N_5=="1" ? "SI"
+      : resp.tabla.N_5=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8, 
+    }
+    ] ,
+    [
+      { 
+        text: 'Luz de emergencia',               
+        bold: true,
+        fontSize: 8,               
+                       
+    } ,
+    {
+    text: resp.tabla.L_6=="1" ? "SI"
+    : resp.tabla.L_6=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+   
+    },  
+    {
+        text: 'MOTOR',               
+        bold: true,
+        rowSpan:2,
+        fontSize: 8,   
+        alignment: 'center', 
+                  fillColor: '#65b58f', 
+    },
+    {
+        text: 'Conforme?',   
+        rowSpan:2,             
+        bold: true,
+        alignment: 'center',           
+        fillColor: '#d9d9d9',
+        fontSize: 8,   
+    }
+    ] ,
+    [
+      { 
+        text: 'Luz de proceso',               
+        bold: true,
+        fontSize: 8,               
+                     
+    } ,
+    {
+    text: resp.tabla.L_7=="1" ? "SI"
+    : resp.tabla.L_7=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    },  
+    { 
+            
+                     
+    } ,
+    {
+         
+  
+    }
+    ] ,
+    [
+      { 
+        text: 'Luz de parqueo',               
+        bold: true,
+        fontSize: 8,               
+                   
+    } ,
+    {
+    text: resp.tabla.L_8=="1" ? "SI"
+    : resp.tabla.L_8=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    },  
+    { 
+      text: 'Nivel de aceite',               
+      bold: true,
+      fontSize: 8,               
+                   
+    } ,
+    {
+    text:  resp.tabla.M_1=="1" ? "SI"
+    : resp.tabla.M_1=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ] ,
+    [
+      { 
+        text: 'Indicadores del tablero',               
+        bold: true,
+        fontSize: 8,               
+                     
+    } ,
+    {
+    text: resp.tabla.L_9=="1" ? "SI"
+    : resp.tabla.L_9=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    },  
+    { 
+      text: 'Nivel de refrigerante',               
+      bold: true,
+      fontSize: 8,               
+                 
+    } ,
+    {
+    text: resp.tabla.M_2=="1" ? "SI"
+    : resp.tabla.M_2=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],
+    [
+      { 
+        text: 'Cicrulina (ambar) / Baliza estroboscopica',               
+        bold: true,
+        fontSize: 8,               
+                     
+    } ,
+    {
+    text: resp.tabla.L_10=="1" ? "SI"
+    : resp.tabla.L_10=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    },  
+    { 
+      text: 'Nivel de liquido de frenos',               
+      bold: true,
+      fontSize: 8,               
+                 
+    } ,
+    {
+    text: resp.tabla.M_3=="1" ? "SI"
+    : resp.tabla.M_3=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ], [
+      { 
+        text: 'Faros principales / Faros neblineros / Luces pirata',               
+        bold: true,
+        fontSize: 8,               
+                     
+    } ,
+    {
+    text: resp.tabla.L_11=="1" ? "SI"
+    : resp.tabla.L_11=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    },  
+    { 
+      text: 'Nivel de liquido de embriague',               
+      bold: true,
+      fontSize: 8,               
+                 
+    } ,
+    {
+    text: resp.tabla.M_4=="1" ? "SI"
+    : resp.tabla.M_4=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ], [
+      { 
+        text: 'Bocina',               
+        bold: true,
+        fontSize: 8,               
+                     
+    } ,
+    {
+    text: resp.tabla.L_12=="1" ? "SI"
+    : resp.tabla.L_12=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    },  
+    { 
+      text: 'Nivel de agua para limpia parabrisas',               
+      bold: true,
+      fontSize: 8,               
+                 
+    } ,
+    {
+    text: resp.tabla.M_5=="1" ? "SI"
+    : resp.tabla.M_5=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],[
+      { 
+        text: 'Limpia parabrisas',               
+        bold: true,
+        fontSize: 8,               
+                     
+    } ,
+    {
+    text: resp.tabla.L_13=="1" ? "SI"
+    : resp.tabla.L_13=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    },  
+    { 
+      text: 'Fugas hidraulicas',               
+      bold: true,
+      fontSize: 8,               
+                 
+    } ,
+    {
+    text: resp.tabla.M_6=="1" ? "SI"
+    : resp.tabla.M_6="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],
+    [
+      { 
+        text: 'Direcionales (izq. - der.)',               
+        bold: true,
+        fontSize: 8,               
+                     
+    } ,
+    {
+    text: resp.tabla.L_14=="1" ? "SI"
+    : resp.tabla.L_14=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    },  
+    { 
+      text: 'Estado de Fajas',               
+      bold: true,
+      fontSize: 8,               
+                 
+    } ,
+    {
+    text: resp.tabla.M_7=="1" ? "SI"
+    : resp.tabla.M_7=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],
+    [
+      { 
+        text: 'DOCUMENTOS',               
+        bold: true,
+        fontSize: 8,   
+        rowSpan:2,      
+        alignment: 'center',         
+        fillColor: '#65b58f'                 
+    } ,
+    {
+    text: 'Conforme?',               
+    bold: true,
+    rowSpan:2,
+    fontSize: 8,          
+    fillColor: '#d9d9d9'
+    },  
+    { 
+      text: 'Estado de Radiador',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text:  resp.tabla.M_8=="1" ? "SI"
+    : resp.tabla.M_8=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],
+    [
+      { 
+                        
+    } ,
+    {
+    
+    },  
+    { 
+      text: 'Estado de Bateria',               
+      bold: true,
+      fontSize: 8,               
+                       
+    } ,
+    {
+    text:  resp.tabla.M_9=="1" ? "SI"
+    : resp.tabla.M_9=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],
+    [
+      { 
+        text: 'Licencia de conducir',               
+        bold: true,
+        fontSize: 8,               
+                   
+    } ,
+    {
+      text:  resp.tabla.D_1=="1" ? "SI"
+      : resp.tabla.D_1=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'SEGURIDAD',               
+      bold: true,
+      rowSpan:2,
+      fontSize: 8,               
+      alignment: 'center',         
+      fillColor: '#65b58f'   
+    } ,
+    {
+    text:  "Conforme?",             
+    bold: true,
+    fontSize: 8,          
+    rowSpan:2,
+    alignment: 'center',         
+    fillColor: '#d9d9d9' 
+    }
+    ] ,
+    [
+      { 
+        text: 'DNI del conductor',               
+        bold: true,
+        fontSize: 8,               
+                       
+    } ,
+    {
+      text:  resp.tabla.D_2=="1" ? "SI"
+      : resp.tabla.D_2=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+                
+                  
+    } ,
+    {
+         
+  
+    }
+    ],
+    [
+      { 
+        text: 'Tarjeta de Propiedad ',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_3=="1" ? "SI"
+      : resp.tabla.D_3=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'Rombos NFPA',               
+      bold: true,
+      fontSize: 8,               
+                  
+    } ,
+    {
+    text:  resp.tabla.S_1=="1" ? "SI"
+    : resp.tabla.S_1=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],
+    [
+      { 
+        text: 'SOAT',               
+        bold: true,
+        fontSize: 8,               
+               
+    } ,
+    {
+      text:  resp.tabla.D_4=="1" ? "SI"
+      : resp.tabla.D_4=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'Números UN',               
+      bold: true,
+      fontSize: 8,               
+                  
+    } ,
+    {
+    text:  resp.tabla.S_2=="1" ? "SI"
+    : resp.tabla.S_2=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    
+    }
+    ],
+    [
+      { 
+        text: 'Fotocheck con licencia interna de manejo',               
+        bold: true,
+        fontSize: 8,               
+                 
+    } ,
+    {
+      text: resp.tabla.D_5=="1" ? "SI"
+      : resp.tabla.D_5=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+   
+    },  
+    { 
+      text: 'Rombos DOT (4 lados)',               
+      fontSize: 8,    
+      bold: true,   
+                               
+    } ,
+    {
+      text: resp.tabla.S_3=="1" ? "SI"
+      : resp.tabla.S_3=="0" ? "NO"              
+      : "N/A",
+      bold: true,        
+    fontSize: 8,          
 
+    }
+    ],
+    [
+      { 
+        text: 'Revision Tecnica',               
+        bold: true,
+        fontSize: 8,               
+                 
+    } ,
+    {
+      text: resp.tabla.D_6=="1" ? "SI"
+      : resp.tabla.D_6=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+     
+    },  
+    { 
+      text: 'Mata chisps en tubo de escape',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_5=="1" ? "SI"
+    : resp.tabla.S_5=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    
+    }
+    ],
+    [
+      { 
+        text: 'Cartilla de emergencias',               
+        bold: true,
+        fontSize: 8,               
+                     
+    } ,
+    {
+      text: resp.tabla.D_7=="1" ? "SI"
+      : resp.tabla.D_7=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'Cinturón de seguridad',               
+      bold: true,
+      fontSize: 8,               
+                  
+    } ,
+    {
+    text: resp.tabla.S_6=="1" ? "SI"
+    : resp.tabla.S_6=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],
+    [
+      { 
+        text: 'Otros: ',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_8=="1" ? "SI"
+      : resp.tabla.D_8=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'Alarma de retroceso',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_7=="1" ? "SI"
+    : resp.tabla.S_7=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],[
+      { 
+        text: 'Plan de emergencia ',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_9=="1" ? "SI"
+      : resp.tabla.D_9=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'Bocina',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_8=="1" ? "SI"
+    : resp.tabla.S_8=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],[
+      { 
+        text: 'MSDS ',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_10=="1" ? "SI"
+      : resp.tabla.D_10=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'EPP completo y en buen estado',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_9=="1" ? "SI"
+    : resp.tabla.S_9=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],[
+      { 
+        text: 'Directorio de emergencia ',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_11=="1" ? "SI"
+      : resp.tabla.D_11=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'Ropa impermeable',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_10=="1" ? "SI"
+    : resp.tabla.S_10=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],[
+      { 
+        text: 'Poliza de seguros y responsabilidad civil ',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_12=="1" ? "SI"
+      : resp.tabla.D_12=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'Extintores Cargados y vigentes',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_11=="1" ? "SI"
+    : resp.tabla.S_11=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],[
+      { 
+        text: 'SCTR Pensión y salud',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_13=="1" ? "SI"
+      : resp.tabla.D_13=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: '01 kit de herramientas',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_12=="1" ? "SI"
+    : resp.tabla.S_12=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],[
+      { 
+        text: 'Seguro de vida Ley',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_14=="1" ? "SI"
+      : resp.tabla.D_14=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: '01 kit de antiderrames',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_13=="1" ? "SI"
+    : resp.tabla.S_13=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],[
+      { 
+        text: 'Expediente del conductor (cursos CAMO)',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_15=="1" ? "SI"
+      : resp.tabla.D_15=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'Gata y palanca',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_14=="1" ? "SI"
+    : resp.tabla.S_14=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],[
+      { 
+        text: 'Tarjeta ubicación vigente',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_16=="1" ? "SI"
+      : resp.tabla.D_16=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'Tacos de madera para gata hidráulica (02)',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_15=="1" ? "SI"
+    : resp.tabla.S_15=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],[
+      { 
+        text: 'Ficha de registro por OSINERGMING (DGH)',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_17=="1" ? "SI"
+      : resp.tabla.D_17=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'Llave de ruedas',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_16=="1" ? "SI"
+    : resp.tabla.S_16=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],[
+      { 
+        text: 'Certificado de hermeticidad del tanque císterna (copia)',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text:  resp.tabla.D_18=="1" ? "SI"
+      : resp.tabla.D_18=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+  
+    },  
+    { 
+      text: 'Manguera de aire',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_17=="1" ? "SI"
+    : resp.tabla.S_17=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],
+    [
+      { 
+        text: 'GENERALES',               
+        bold: true,
+        fontSize: 8,
+        rowSpan:2,     
+        alignment: 'center',             
+        fillColor: '#65b58f',                 
+    } ,
+    {
+      text: 'Conforme?',               
+      bold: true,
+      fontSize: 8,  
+      rowSpan:2,    
+      alignment: 'center',          
+      fillColor: '#d9d9d9' 
+    },  
+    { 
+      text: 'Botiquín',               
+      bold: true,
+      fontSize: 8,               
+                  
+    } ,
+    {
+    text: resp.tabla.S_18=="1" ? "SI"
+    : resp.tabla.S_18=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],
+    [
+      { 
+                     
+    } ,
+    {
+      
+    },  
+    { 
+      text: 'Linterna',               
+      bold: true,
+      fontSize: 8,               
+                      
+    } ,
+    {
+    text: resp.tabla.S_19=="1" ? "SI"
+    : resp.tabla.S_19=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+  
+    }
+    ],
+    [
+      { 
+        text: 'Estado de máscara frontal',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text: resp.tabla.G_1=="1" ? "SI"
+      : resp.tabla.G_1=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Triángulos reflectivos (02)',               
+      bold: true,
+      fontSize: 8,               
+                      
+    } ,
+    {
+    text: resp.tabla.S_20=="1" ? "SI"
+    : resp.tabla.S_20=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],
+    [
+  
+      { 
+        text: 'Espejos retrovisores e interiores',               
+        bold: true,
+        fontSize: 8,               
+             
+    } ,
+    {
+      text: resp.tabla.G_2=="1" ? "SI"
+      : resp.tabla.G_2=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Conos de seguridad con cinta reflectiva (03)',               
+      bold: true,
+      fontSize: 8,               
+                 
+    } ,
+    {
+    text: resp.tabla.S_21=="1" ? "SI"
+    : resp.tabla.S_21=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],
+    [
+      { 
+        text: 'Estado de la carrocería',               
+        bold: true,
+        fontSize: 8,               
+              
+    } ,
+    {
+      text: resp.tabla.G_3=="1" ? "SI"
+      : resp.tabla.G_3=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Tacos de madera (02)',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_22=="1" ? "SI"
+    : resp.tabla.S_22=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],
+    [
+      { 
+        text: 'Espejos convexos',               
+        bold: true,
+        fontSize: 8,               
+              
+    } ,
+    {
+      text: resp.tabla.G_4=="1" ? "SI"
+      : resp.tabla.G_4=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Tacos de goma para llantas (02)',               
+      bold: true,
+      fontSize: 8,               
+                 
+    } ,
+    {
+    text: resp.tabla.S_23=="1" ? "SI"
+    : resp.tabla.S_23=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],
+    [
+      { 
+        text: 'Defensas laterales',               
+        bold: true,
+        fontSize: 8,               
+            
+    } ,
+    {
+      text: resp.tabla.G_5=="1" ? "SI"
+      : resp.tabla.G_5=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Estrobo (01) cable remolcador de 1 x 5m  de largo',               
+      bold: true,
+      fontSize: 8,               
+                  
+    } ,
+    {
+    text: resp.tabla.S_24=="1" ? "SI"
+    : resp.tabla.S_24=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],
+    [
+      { 
+        text: 'Llave de corte de energia',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text: resp.tabla.G_6=="1" ? "SI"
+      : resp.tabla.G_6=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Cables cocdrillo de terminal rojo y verde (02)',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_25=="1" ? "SI"
+    : resp.tabla.S_25=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],
+    [
+      { 
+        text: 'Sistema de aire acondicionado y calefacción operativo',               
+        bold: true,
+        fontSize: 8,               
+                
+    } ,
+    {
+      text: resp.tabla.G_7=="1" ? "SI"
+      : resp.tabla.G_7=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Maletín de parchado',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_26=="1" ? "SI"
+    : resp.tabla.S_26=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],
+    [
+      { 
+        text: 'Traba tuercas (12)',               
+        bold: true,
+        fontSize: 8,               
+                  
+    } ,
+    {
+      text: resp.tabla.G_8=="1" ? "SI"
+      : resp.tabla.G_8=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Lampa y pico',               
+      bold: true,
+      fontSize: 8,               
+                    
+    } ,
+    {
+    text: resp.tabla.S_27=="1" ? "SI"
+    : resp.tabla.S_27=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],
+    [
+      { 
+        text: 'Bandeja pequeña en caja de válvulas de carga / descarga',               
+        bold: true,
+        fontSize: 8,               
+               
+    } ,
+    {
+      text: resp.tabla.G_9=="1" ? "SI"
+      : resp.tabla.G_9=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'SISTEMA DE RECARGA Y ABASTECIMIENTO',               
+      bold: true,
+      rowSpan:2,
+      alignment: 'center',             
+      fillColor: '#65b58f',
+      fontSize: 8,               
+                  
+    } ,
+    {
+    text: "Conforme?",               
+    bold: true,
+    rowSpan:2,
+    alignment: 'center',          
+    fillColor: '#d9d9d9',
+    fontSize: 8,          
+    }
+    ],
+    [
+      { 
+        text: 'Exterior de la cisterna en buen esstado',               
+        bold: true,
+        fontSize: 8,               
+               
+    } ,
+    {
+      text: resp.tabla.G_10=="1" ? "SI"
+      : resp.tabla.G_10=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+             
+                   
+    } ,
+    {
+      
+    }
+    ],
+    [
+      { 
+        text: 'Parabrisas y ventanas sin rajaduras',               
+        bold: true,
+        fontSize: 8,               
+               
+    } ,
+    {
+      text: resp.tabla.G_11=="1" ? "SI"
+      : resp.tabla.G_11=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Tapas de manhole hermeticamente cerrada',               
+      bold: true,
+      fontSize: 8,               
+                   
+    } ,
+    {
+    text: resp.tabla.R_1=="1" ? "SI"
+    : resp.tabla.R_1=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],
+    [
+      { 
+        text: 'Plumillas limpia y lava parabrisas',               
+        bold: true,
+        fontSize: 8,               
+              
+    } ,
+    {
+      text: resp.tabla.G_12=="1" ? "SI"
+      : resp.tabla.G_12=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Válvulas de fondo (*)',               
+      bold: true,
+      fontSize: 8,               
+                   
+    } ,
+    {
+    text: resp.tabla.R_2=="1" ? "SI"
+    : resp.tabla.R_2=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],[
+      { 
+        text: 'Seguro de puertas',               
+        bold: true,
+        fontSize: 8,               
+              
+    } ,
+    {
+      text: resp.tabla.G_13=="1" ? "SI"
+      : resp.tabla.G_13=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Mangueras de descarga en buen estado',               
+      bold: true,
+      fontSize: 8,               
+                   
+    } ,
+    {
+    text: resp.tabla.R_3=="1" ? "SI"
+    : resp.tabla.R_3=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],[
+      { 
+        text: 'Equipo de comunicación (Celular o radio de comunicación)',               
+        bold: true,
+        fontSize: 8,               
+              
+    } ,
+    {
+      text: resp.tabla.G_14=="1" ? "SI"
+      : resp.tabla.G_14=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Puesta a tierra',               
+      bold: true,
+      fontSize: 8,               
+                   
+    } ,
+    {
+    text: resp.tabla.R_4=="1" ? "SI"
+    : resp.tabla.R_4=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],[
+      { 
+        text: 'GPS con señal',               
+        bold: true,
+        fontSize: 8,               
+              
+    } ,
+    {
+      text: resp.tabla.G_15=="1" ? "SI"
+      : resp.tabla.G_15=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Mangueras de reuperación de gases 4 x 6m incluye tapas y cadenas',               
+      bold: true,
+      fontSize: 8,               
+                   
+    } ,
+    {
+    text: resp.tabla.R_5=="1" ? "SI"
+    : resp.tabla.R_5=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],[
+      { 
+        text: 'Cámaras HD Operativas',               
+        bold: true,
+        fontSize: 8,               
+              
+    } ,
+    {
+      text: resp.tabla.G_16=="1" ? "SI"
+      : resp.tabla.G_16=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+    
+    },  
+    { 
+      text: 'Codo visor',               
+      bold: true,
+      fontSize: 8,               
+                   
+    } ,
+    {
+    text: resp.tabla.R_6=="1" ? "SI"
+    : resp.tabla.R_6=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],[
+      { 
+        text: 'Tablet copiloto con rutas cargadas',               
+        bold: true,
+        fontSize: 8,               
+              rowSpan:3,
+    } ,
+    {
+      text: resp.tabla.G_17=="1" ? "SI"
+      : resp.tabla.G_17=="0" ? "NO"              
+      : "N/A",               
+      bold: true,
+      fontSize: 8,               
+      rowSpan:3,
+    },  
+    { 
+      text: '01 acople 4 pulgadas macho macho',               
+      bold: true,
+      fontSize: 8,               
+                   
+    } ,
+    {
+    text: resp.tabla.R_7=="1" ? "SI"
+    : resp.tabla.R_7=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],[
+      { 
+                  
+              
+    } ,
+    {
+             
+    
+    },  
+    { 
+      text: 'Manta polar',               
+      bold: true,
+      fontSize: 8,               
+                   
+    } ,
+    {
+    text: resp.tabla.R_8=="1" ? "SI"
+    : resp.tabla.R_8=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ],[
+      { 
+    
+    } ,
+    {
+                
+    
+    },  
+    { 
+      text: 'Frazada',               
+      bold: true,
+      fontSize: 8,               
+                   
+    } ,
+    {
+    text: resp.tabla.R_9=="1" ? "SI"
+    : resp.tabla.R_9=="0" ? "NO"              
+    : "N/A",               
+    bold: true,
+    fontSize: 8,          
+    }
+    ]]
+      }
+    } ,
+
+    {
+      table: {
+          widths: ['100%'],       
+          headerRows: 1,
+          body: [    
+            [
+              { 
+                text: 'OBSERVACIONES',               
+                bold: true,
+                fontSize: 8,
+                fillColor: '#65b58f',   
+                border: [true, false, true, true]  
+                            
+            }
+          ] ,
+          [
+            { 
+              text: resp.tabla.observacion,               
+                  bold: true,
+                  fontSize: 8,
+                  border: [true, false, true, true]  
+                                                         
+          } ] , [       
+        {
+          text: 'DEJO CONSTANCIA DEL ESTADO DE MI UNIDAD Y ASUMO LA RESPONSABILIDAD CON SEGURIDAD',               
+          bold: true,
+          fontSize: 8,          
+          fillColor: '#65b58f',
+        }
+        ]]
+      }
+    },
+    {
+      table: {
+          widths: ['20%','30%','20%','30%'],       
+          headerRows: 1,
+          body: [    
+            [
+              { 
+                text: 'FIRMA DEL CONDUCTOR',               
+                bold: true,
+                fontSize: 8,
+                fillColor: '#d9d9d9',
+                colSpan:2,
+                alignment: 'center',  
+                border: [true, false, true, true]  
+                            
+              },{},
+              { 
+                text: 'FIRMA DEL SUPERVISOR',               
+                bold: true,
+                fontSize: 8,
+                colSpan:2,
+                alignment: 'center',  
+                fillColor: '#d9d9d9',
+                border: [true, false, true, true]  
+                            
+            },{}    
+          ] ,
+          [
+            { 
+              text: '',               
+              bold: true,
+              fontSize: 8,     
+              colSpan:2,
+         
+                          
+            },{},
+            { 
+              text: '',               
+              bold: true,
+              fontSize: 8,
+              colSpan:2,                              
+          },{}   
+          ],
+          [
+            { 
+              text: 'NOMBRE Y APELLIDOS',               
+              bold: true,
+              fontSize: 8,                                         
+            },{
+              text: '',               
+              bold: true,
+              fontSize: 8,
+            },
+            { 
+              text: 'NOMBRE Y APELLIDOS',               
+              bold: true,
+              fontSize: 8,
+                                          
+          },{
+            text: '',               
+            bold: true,
+            fontSize: 8
+        }   ]  ,
+        [
+          { 
+            text: 'DNI',               
+            bold: true,
+            fontSize: 8,                                         
+          },{
+            text: '',               
+            bold: true,
+            fontSize: 8,
+          },
+          { 
+            text: 'DNI',               
+            bold: true,
+            fontSize: 8,
+                                        
+        },{
+          text: '',               
+          bold: true,
+          fontSize: 8
+      }   ]      
+         ]
+      }
+    }  
+  ],
+      defaultStyle: {
+      }
+  };
+  pdfMake.createPdf(docDefinition).open();
+  })
+     }
   function pdf_check_list_camioneta(id){
            
   let  datos={
-    TipoQuery : '03_pdf_checkList_camio_cister', 
+    TipoQuery : '03_pdf_checkList_camioneta', 
     id:id
   }
  appAjaxQuery(datos,rutaSQL).done(function(resp){  
@@ -3153,13 +5505,19 @@ table: {
 pdfMake.createPdf(docDefinition).open();
 })
    }
-  function pdf_control_fatiga_sonnolencia(){
-    var section1=$(".check_Section_1:radio:checked").map(function(){return $(this).attr('id');}).get(); 
-    var section2=$(".check_Section_2:radio:checked").map(function(){return $(this).attr('id');}).get();
+  function pdf_control_fatiga_sonnolencia(id){
+    let datos = {
+      TipoQuery : '03_pdf_fatiga_somnolencia',
+      id:id 
+    }
 
-   // appAjaxQuery(datos,rutaSQL).done(function(resp){ 
-           
-  let  data={ 
+    /*
+    var section1=$(".check_Section_1:radio:checked").map(function(){return $(this).attr('id');}).get(); 
+    var section2=$(".check_Section_2:radio:checked").map(function(){return $(this).attr('id');}).get();*/
+
+    appAjaxQuery(datos,rutaSQL).done(function(resp){ 
+           console.log(resp)
+  /*let  data={ 
     operador:$("#txt_view_operador").val(),
     proyecto:$("#txt01_proyecto_somnolencia").val(),
     fecha:$("#txt_fecha_control").val(),
@@ -3191,7 +5549,7 @@ pdfMake.createPdf(docDefinition).open();
     f_evaluador:$("#txt01_control_somnolencia_firma_evaluador").val(),
     sec1:section1,
     sec2:section2
-  }
+  }*/
 // console.log(data)
 
     var docDefinition = {
@@ -3299,7 +5657,7 @@ table: {
               border: [true, false, true, false]                   
             },
             {              
-              text: data.operador,              
+              text: resp.table.operador,              
               bold: true,
               fontSize: 8,
               colSpan:3,
@@ -3317,7 +5675,7 @@ table: {
             },
             {
               
-              text: data.proyecto,              
+              text: resp.table.operacion,              
               bold: true,
               fontSize: 8, 
                border: [true, true, true, false]                        
@@ -3330,7 +5688,7 @@ table: {
                 border: [true, true, true, false]         
             },
             { 
-                text: data.fecha,              
+                text: resp.table.fecha,              
                 bold: true,
                 fontSize: 8,  
                  border: [true, true, true, false]          
@@ -3347,7 +5705,7 @@ table: {
             } ,
             {
               
-              text: data.evaluador,              
+              text: resp.table.evaluador,              
               bold: true,
               fontSize: 8,
               colSpan:3,
@@ -3417,16 +5775,16 @@ table: {
               fontSize: 8            
           } ,  
           {
-            text: data.sec1[0]=="1"?'X':'',               
+            text: resp.table.S_1=="1"?'X':'',               
             bold: true,
             fontSize: 8 
           }, 
-          {text:data.sec1[0]=="0"?'X':'',               
+          {text:resp.table.S_1=="0"?'X':'',               
           bold: true,
           fontSize: 8 
 
           },
-          {text: data.obs1,               
+          {text: resp.table.S_1_Obs,               
           bold: true,
           fontSize: 8 
           }
@@ -3443,16 +5801,16 @@ table: {
             fontSize: 8            
         } ,  
         {
-          text: data.sec1[1]=="1"?'X':'',               
+          text: resp.table.S_2=="1"?'X':'',               
           bold: true,
           fontSize: 8 
         }, 
-        {text:data.sec1[1]=="0"?'X':'',               
+        {text:resp.table.S_2=="0"?'X':'',               
         bold: true,
         fontSize: 8 
 
         },
-        {text: data.obs2,               
+        {text: resp.table.S_2_Obs,               
         bold: true,
         fontSize: 8 
         }
@@ -3469,16 +5827,16 @@ table: {
           fontSize: 8            
       } ,  
       {
-        text: data.sec1[2]=="1"?'X':'',               
+        text: resp.table.S_3=="1"?'X':'',               
         bold: true,
         fontSize: 8 
       }, 
-      {text:data.sec1[2]=="0"?'X':'',               
+      {text:resp.table.S_3=="0"?'X':'',               
       bold: true,
       fontSize: 8 
 
       },
-      {text: data.obs3,               
+      {text: resp.table.S_3_Obs,               
       bold: true,
       fontSize: 8 
       }
@@ -3495,16 +5853,16 @@ table: {
         fontSize: 8            
     } ,  
     {
-      text: data.sec1[3]=="1"?'X':'',               
+      text: resp.table.S_4=="1"?'X':'',               
       bold: true,
       fontSize: 8 
     }, 
-    {text:data.sec1[3]=="0"?'X':'',               
+    {text:resp.table.S_4=="0"?'X':'',               
     bold: true,
     fontSize: 8 
 
     },
-    {text: data.obs4,               
+    {text: resp.table.S_4_Obs,               
     bold: true,
     fontSize: 8 
     }
@@ -3521,16 +5879,16 @@ table: {
       fontSize: 8            
   } ,  
   {
-    text: data.sec1[4]=="1"?'X':'',               
+    text: resp.table.S_5=="1"?'X':'',               
     bold: true,
     fontSize: 8 
   }, 
-  {text:data.sec1[4]=="0"?'X':'',               
+  {text:resp.table.S_5=="0"?'X':'',               
   bold: true,
   fontSize: 8 
 
   },
-  {text: data.obs5,               
+  {text: resp.table.S_5_Obs,               
   bold: true,
   fontSize: 8 
   }
@@ -3547,16 +5905,16 @@ table: {
     fontSize: 8            
 } ,  
 {
-  text: data.sec1[5]=="1"?'X':'',               
+  text: resp.table.S_6=="1"?'X':'',               
   bold: true,
   fontSize: 8 
 }, 
-{text:data.sec1[5]=="0"?'X':'',               
+{text:resp.table.S_6=="0"?'X':'',               
 bold: true,
 fontSize: 8 
 
 },
-{text: data.obs6,               
+{text: resp.table.S_6_Obs,               
 bold: true,
 fontSize: 8 
 }
@@ -3573,16 +5931,16 @@ fontSize: 8
     fontSize: 8            
 } ,  
 {
-  text: data.sec1[6]=="1"?'X':'',               
+  text: resp.table.S_7=="1"?'X':'',               
   bold: true,
   fontSize: 8 
 }, 
-{text:data.sec1[6]=="0"?'X':'',               
+{text:resp.table.S_7=="0"?'X':'',               
 bold: true,
 fontSize: 8 
 
 },
-{text: data.obs7,               
+{text: resp.table.S_7_Obs,               
 bold: true,
 fontSize: 8 
 }
@@ -3599,16 +5957,16 @@ fontSize: 8
     fontSize: 8            
 } ,  
 {
-  text: data.sec1[7]=="1"?'X':'',               
+  text: resp.table.S_8=="1"?'X':'',               
   bold: true,
   fontSize: 8 
 }, 
-{text:data.sec1[7]=="0"?'X':'',               
+{text:resp.table.S_8=="0"?'X':'',               
 bold: true,
 fontSize: 8 
 
 },
-{text: data.obs8,               
+{text: resp.table.S_8_Obs,               
 bold: true,
 fontSize: 8 
 }
@@ -3625,16 +5983,16 @@ fontSize: 8
     fontSize: 8            
 } ,  
 {
-  text: data.sec1[8]=="1"?'X':'',               
+  text: resp.table.S_9=="1"?'X':'',               
   bold: true,
   fontSize: 8 
 }, 
-{text:data.sec1[8]=="0"?'X':'',               
+{text:resp.table.S_9=="0"?'X':'',               
 bold: true,
 fontSize: 8 
 
 },
-{text: data.obs9,               
+{text:  resp.table.S_9_Obs,               
 bold: true,
 fontSize: 8 
 }
@@ -3651,16 +6009,16 @@ fontSize: 8
     fontSize: 8            
 } ,  
 {
-  text: data.sec1[9]=="1"?'X':'',               
+  text: resp.table.S_10=="1"?'X':'',               
   bold: true,
   fontSize: 8 
 }, 
-{text:data.sec1[9]=="0"?'X':'',               
+{text:resp.table.S_10=="0"?'X':'',               
 bold: true,
 fontSize: 8 
 
 },
-{text: data.obs10,               
+{text: resp.table.S_10_Obs,               
 bold: true,
 fontSize: 8 
 }
@@ -3704,7 +6062,7 @@ fontSize: 8
                 border: [false, false, false, false]             
             } ,  
             {
-              text: 'Nº horas: '+data.sueno, 
+              text: 'Nº horas: '+resp.table.horas_transcurridas, 
               border: [false, false, true, false] ,              
               bold: true,
               fontSize: 8 
@@ -3724,7 +6082,7 @@ fontSize: 8
               fontSize: 8            
           } ,  
           {
-            text: 'Nº horas: '+data.durmio,  
+            text: 'Nº horas: '+resp.table.horas_duerme,  
             border: [false, false, true, false] ,               
             bold: true,
             fontSize: 8 
@@ -3784,16 +6142,16 @@ fontSize: 8
                 fontSize: 8            
             } ,  
             {
-              text: data.sec2[0]=="1"?'X':'',               
+              text: resp.table.R_1=="1"?'X':'',               
               bold: true,
               fontSize: 8 
             }, 
-            {text:data.sec2[0]=="0"?'X':'',               
+            {text:resp.table.R_1=="0"?'X':'',               
             bold: true,
             fontSize: 8 
             
             },
-            {text: data.obs21,               
+            {text: resp.table.R_1_Obs,               
             bold: true,
             fontSize: 8 
             }
@@ -3810,16 +6168,16 @@ fontSize: 8
               fontSize: 8            
           } ,  
           {
-            text: data.sec2[1]=="1"?'X':'',               
+            text: resp.table.R_2=="1"?'X':'',               
             bold: true,
             fontSize: 8 
           }, 
-          {text:data.sec2[1]=="0"?'X':'',               
+          {text:resp.table.R_2=="0"?'X':'',               
           bold: true,
           fontSize: 8 
           
           },
-          {text: data.obs22,               
+          {text:  resp.table.R_2_Obs,               
           bold: true,
           fontSize: 8 
           }
@@ -3836,16 +6194,16 @@ fontSize: 8
             fontSize: 8            
         } ,  
         {
-          text: data.sec2[2]=="1"?'X':'',               
+          text: resp.table.R_3=="1"?'X':'',               
           bold: true,
           fontSize: 8 
         }, 
-        {text:data.sec2[2]=="0"?'X':'',               
+        {text:resp.table.R_3=="0"?'X':'',               
         bold: true,
         fontSize: 8 
         
         },
-        {text: data.obs23,               
+        {text:  resp.table.R_3_Obs,               
         bold: true,
         fontSize: 8 
         }
@@ -3862,16 +6220,16 @@ fontSize: 8
           fontSize: 8            
       } ,  
       {
-        text: data.sec2[3]=="1"?'X':'',               
+        text: resp.table.R_4=="1"?'X':'',               
         bold: true,
         fontSize: 8 
       }, 
-      {text:data.sec2[3]=="0"?'X':'',               
+      {text:resp.table.R_4=="0"?'X':'',               
       bold: true,
       fontSize: 8 
       
       },
-      {text: data.obs24,               
+      {text:  resp.table.R_4_Obs,               
       bold: true,
       fontSize: 8 
       }
@@ -3888,16 +6246,16 @@ fontSize: 8
         fontSize: 8            
     } ,  
     {
-      text: data.sec2[4]=="1"?'X':'',               
+      text: resp.table.R_5=="1"?'X':'',               
       bold: true,
       fontSize: 8 
     }, 
-    {text:data.sec2[4]=="0"?'X':'',               
+    {text:resp.table.R_5=="0"?'X':'',               
     bold: true,
     fontSize: 8 
     
     },
-    {text: data.obs25,               
+    {text:  resp.table.R_5_Obs,               
     bold: true,
     fontSize: 8 
     }
@@ -3914,16 +6272,16 @@ fontSize: 8
       fontSize: 8            
   } ,  
   {
-    text: data.sec2[5]=="1"?'X':'',               
+    text: resp.table.R_6=="1"?'X':'',               
     bold: true,
     fontSize: 8 
   }, 
-  {text:data.sec2[5]=="0"?'X':'',               
+  {text:resp.table.R_6=="0"?'X':'',               
   bold: true,
   fontSize: 8 
   
   },
-  {text: data.obs26,               
+  {text:  resp.table.R_6_Obs,               
   bold: true,
   fontSize: 8 
   }
@@ -3940,16 +6298,16 @@ fontSize: 8
       fontSize: 8            
   } ,  
   {
-    text: data.sec2[6]=="1"?'X':'',               
+    text: resp.table.R_7=="1"?'X':'',               
     bold: true,
     fontSize: 8 
   }, 
-  {text:data.sec2[6]=="0"?'X':'',               
+  {text:resp.table.R_7=="0"?'X':'',               
   bold: true,
   fontSize: 8 
   
   },
-  {text: data.obs27,               
+  {text:  resp.table.R_7_Obs,               
   bold: true,
   fontSize: 8 
   }
@@ -3966,16 +6324,16 @@ fontSize: 8
       fontSize: 8            
   } ,  
   {
-    text: data.sec2[7]=="1"?'X':'',               
+    text: resp.table.R_8=="1"?'X':'',               
     bold: true,
     fontSize: 8 
   }, 
-  {text:data.sec2[7]=="0"?'X':'',               
+  {text:resp.table.R_8=="0"?'X':'',               
   bold: true,
   fontSize: 8 
   
   },
-  {text: data.obs28,               
+  {text:resp.table.R_8_Obs,               
   bold: true,
   fontSize: 8 
   }
@@ -3992,23 +6350,23 @@ fontSize: 8
       fontSize: 8            
   } ,  
   {
-    text: data.sec2[8]=="1"?'X':'',               
+    text: resp.table.R_9=="1"?'X':'',               
     bold: true,
     fontSize: 8 
   }, 
-  {text:data.sec2[8]=="0"?'X':'',               
+  {text:resp.table.R_9=="0"?'X':'',               
   bold: true,
   fontSize: 8 
   
   },
-  {text: data.obs29,               
+  {text:  resp.table.R_9_Obs,               
   bold: true,
   fontSize: 8 
   }
   ] ,
   [
     { 
-      text: '1',               
+      text: '10',               
       bold: true,
       fontSize: 8                    
   } ,
@@ -4018,16 +6376,16 @@ fontSize: 8
       fontSize: 8            
   } ,  
   {
-    text: data.sec2[9]=="1"?'X':'',               
+    text: resp.table.R_10=="1"?'X':'',               
     bold: true,
     fontSize: 8 
   }, 
-  {text:data.sec2[9]=="0"?'X':'',               
+  {text:resp.table.R_10=="0"?'X':'',               
   bold: true,
   fontSize: 8 
   
   },
-  {text: data.obs30,               
+  {text: resp.table.R_10_Obs,               
   bold: true,
   fontSize: 8 
   }
@@ -4067,19 +6425,19 @@ fontSize: 8
               ],
               [
                 { 
-                  text: data.conclusion,               
+                  text: resp.table.conclusion,               
                   bold: true,
                   fontSize: 8               
                                 
               } ,                 
             {
-              text: data.f_operador,               
+              text: '',               
               bold: true,
               fontSize: 8             
              
             },  
             {
-              text: data.f_evaluador,               
+              text: '',               
               bold: true,
               fontSize: 8            
             
@@ -4094,7 +6452,7 @@ fontSize: 8
     }
 };
 pdfMake.createPdf(docDefinition).open();
-//})
+})
   }
   function pdf_capacitacion(id){
     
@@ -4657,6 +7015,83 @@ function buildTableBody(header,data, columns) {
   
     return body;
 }
+  function insert_checklist_cisterna(){
+    if(validatecamposchecklistcisterna()){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+
+    }else{
+
+        let datos = {
+          TipoQuery : '01_validate_firma_checkList',
+          /*evaluadorFirma:$("#txt01_control_somnolencia_firma_evaluador").val(),
+          evaluador:$("#idEvaluadorHidden").val(),*/
+          operadorFirma:$("#txt_firma_conductor_citerna").val(),
+          operador:$("#txt01_conductor_cisterna_id").val()
+        }
+        console.log(datos)
+        appAjaxQuery(datos,rutaSQL).done(function(resp){     
+
+          if(resp.error){
+            swal("Verifica que el código de firmas sea correcto", {
+              icon: "warning",
+            });
+          }else{     
+
+                  
+            var checkboxDeclaracionJurada=$(".checkList2_declaracion_jurada:radio:checked").map(function(){return $(this).attr('id');}).get(); 
+            var checkboxLuces=$(".checkList2_luces:radio:checked").map(function(){return $(this).attr('id');}).get(); 
+            var checkboxDocumentos=$(".checkList2_documentos:radio:checked").map(function(){return $(this).attr('id');}).get(); 
+            var checkboxGeneral=$(".checkList2_general:radio:checked").map(function(){return $(this).attr('id');}).get(); 
+            var checkboxNeumatico=$(".checkList2_neumaticos:radio:checked").map(function(){return $(this).attr('id');}).get(); 
+            var checkboxMotor=$(".checkList2_motor:radio:checked").map(function(){return $(this).attr('id');}).get(); 
+            var checkboxSeguridad=$(".checkList2_seguridad:radio:checked").map(function(){return $(this).attr('id');}).get(); 
+        
+            var checkboxSistemaRecarga=$(".checkList2_sistema_recarga:radio:checked").map(function(){return $(this).attr('id');}).get(); 
+            
+            let datos = {
+              TipoQuery : '01_insert_checklick_cisterna',
+              data:{
+                id:(new Date()).getTime(),
+                id_conductor:$("#txt01_conductor_cisterna_id").val(),
+                lc:$("#txt01_conductor_cisterna_LC").val(),
+                capacidad:$("#txt01_conductor_cisterna_capacidad").val(),
+                fecha:$("#txt01_conductor_cisterna_fecha").val(),
+                hora_cisterna:$("#txt01_conductor_cisterna_hora").val(),
+                placa:$("#txt01_conductor_cisterna_placas").val(),
+                km_tracto:$("#txt01_conductor_cisterna_km_tracto").val(),
+                km_cisterna:$("#txt01_conductor_cisterna_km_cisterna").val(),
+                actividad:$("#txt01_conductor_cisterna_actividad").val(),
+                km_inicial:$("#txt01_conductor_km_inicial").val(),
+                hora_ini:$("#txt01_conductor_hora_ini").val(),
+                km_inicial_2:$("#txt01_conductor_km_inicial_2").val(),
+                hora_ini_2:$("#txt01_conductor_hora_ini_2").val(),
+                observacion:$("#txt01_camioneta_km_observaciones").val(),
+                declaracionJurada:checkboxDeclaracionJurada,
+                luces:checkboxLuces,
+                documentos:checkboxDocumentos,
+                general:checkboxGeneral,
+                neumatico:checkboxNeumatico,
+                motor:checkboxMotor,
+                seguridad:checkboxSeguridad,            
+                recarga:checkboxSistemaRecarga                                   
+              }        
+            };   
+            console.log(datos)
+            appAjaxQuery(datos,rutaSQL).done(function(resp){                           
+              swal("Se ha insertado correctamente", {
+                icon: "success",
+            });                               
+            resetCheckListCisterna();
+          
+          })            
+        }
+        });
+               
+
+  }
+  }
   function insert_checklist_camioneta(){
     if(validatecamposchecklistcamioneta()){
       swal("Completa todos los campos", {
@@ -4851,7 +7286,18 @@ function buildTableBody(header,data, columns) {
     "</div></td></tr>" )
   }
   function removeChildFormPasajeros(id){
-    $( "#"+id ).remove();
+    swal({    
+      text: "¿Deseas Eliminar?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        $( "#"+id ).remove();        
+      }
+    });
+
   }
   function addPasajerosChecklist(){
     $('#table_pasajeros_checklist > tbody').append( "<tr id='"+(new Date()).getTime()+"'><td><input type='text' class='form-control pasajeros_checklist'/>"+
@@ -5174,6 +7620,31 @@ function buildTableBody(header,data, columns) {
       }
     });
   }
+  function searchConductorEscolta2(){
+    var msn=$('#txt_search_cisterna_conductor').val();
+    let datos = {
+      TipoQuery : '02_search_conductor_camioneta',
+      value:msn     
+    };      
+    appAjaxQuery(datos,rutaSQL).done(function(resp){    
+      if(resp.error){
+        swal("No se encontro incidencia para el DNI", {
+          icon: "warning",
+        });
+      }else{
+        
+        swal("Has seleccionado a: "+resp.tabla.nombres+" "+resp.tabla.apellidos+"", {
+          icon: "success",
+        });
+
+        $("#txt01_conductor_cisterna_id").val(resp.tabla.id);
+        $('#txt01_conductor_cisterna_nombre').val(resp.tabla.nombres+" "+resp.tabla.apellidos);
+        $("#txt01_conductor_cisterna_dni").val(resp.tabla.dni);
+        
+      
+      }
+    });
+  }
   function searchExpositors(){
     var msn=$('#txt_search_expositor').val();
     let datos = {
@@ -5373,4 +7844,11 @@ function buildTableBody(header,data, columns) {
     $("#idAsistenciaHidden").val("");
     $("#txt_search_asistance_dni").val("");
     $("#txt_search_asistance_dni_view").val("");
+  }
+  function copyToClipboard(){
+    var $temp = $("<input>");
+    $("body").append($temp);
+    $temp.val("http://localhost/ERP/mini-erp/mini-erp/asistance.php").select();
+    document.execCommand("copy");
+    $temp.remove();
   }

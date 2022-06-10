@@ -15,6 +15,141 @@ function validatecamposAsistance(){
   }  
   return error;
 }
+function validatecamposchecklistcisterna(){
+
+  let error=0;
+  let data={
+      id: $('#txt01_conductor_cisterna_id').val(),
+    
+      lc:$('#txt01_conductor_cisterna_LC').val(),
+      capacidad: $('#txt01_conductor_cisterna_capacidad').val(),
+
+      fecha: $('#txt01_conductor_cisterna_fecha').val(),
+      hora: $('#txt01_conductor_cisterna_hora').val(),
+      placa: $('#txt01_conductor_cisterna_placas').val(),
+
+      km_tracto: $('#txt01_conductor_cisterna_km_tracto').val(),
+      km_cisterna: $('#txt01_conductor_cisterna_km_cisterna').val(),     
+      actividad: $('#txt01_conductor_cisterna_actividad').val(),
+
+      km_inicial: $('#txt01_conductor_km_inicial').val(),
+      km_hora_ini: $('#txt01_conductor_hora_ini').val(),     
+      km_inicial_2: $('#txt01_conductor_km_inicial_2').val(),
+      km_hora_ini_2: $('#txt01_conductor_hora_ini_2').val(),
+
+      checkList1 :$(".checkList2_declaracion_jurada:radio:checked"),
+      checkList2 :$(".checkList2_luces:radio:checked"),
+      checkList3 :$(".checkList2_documentos:radio:checked"),
+      checkList4 :$(".checkList2_general:radio:checked"),
+      checkList5 :$(".checkList2_neumaticos:radio:checked"),
+      checkList6 :$(".checkList2_motor:radio:checked"),
+      checkList7 :$(".checkList2_seguridad:radio:checked"),      
+      checkList8 :$(".checkList2_sistema_recarga:radio:checked"),  
+      
+      firma_conductor: $('#txt_firma_conductor_citerna').val(),
+      firma_supervisor: $('#txt_firma_supervisor_citerna').val(),
+  }
+  $(".error").remove();  
+  if (!data.id.length) {  
+      $('#txt01_conductor_cisterna_id').after('<span class="error">Este campo es requerido</span>');  
+      error=1;
+      }  
+      if (!data.lc.length) {  
+        $('#txt01_conductor_cisterna_LC').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+        }  
+        if (!data.capacidad.length) {  
+          $('#txt01_conductor_cisterna_capacidad').after('<span class="error">Este campo es requerido</span>');  
+          error=1;
+          }  
+        
+      if (!data.hora.length) {  
+        $('#txt01_conductor_cisterna_hora').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+      }  
+      if (!data.placa.length) {  
+        $('#txt01_conductor_cisterna_placas').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+      }  
+      if (!data.km_tracto.length) {  
+        $('#txt01_conductor_cisterna_km_tracto').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+      }  
+
+      if (!data.km_cisterna.length) {  
+        $('#txt01_conductor_cisterna_km_cisterna').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+      }  
+      if (!data.actividad.length) {  
+        $('#txt01_conductor_cisterna_actividad').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+      }  
+      if (!data.km_inicial.length) {  
+        $('#txt01_conductor_km_inicial').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+      }  
+      if (!data.km_hora_ini.length) {  
+        $('#txt01_conductor_hora_ini').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+      }  
+      if (!data.km_inicial_2.length) {  
+        $('#txt01_conductor_km_inicial_2').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+      }  
+      if (!data.km_hora_ini_2.length) {  
+        $('#txt01_conductor_hora_ini_2').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+      }  
+      if (!data.firma_conductor.length) {  
+        $('#txt_firma_conductor_citerna').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+      }   
+      if (!data.firma_supervisor.length) {  
+        $('#txt_firma_supervisor_citerna').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+      }  
+
+
+
+
+
+      if (data.checkList1.length<5) {  
+        $('#declaracion_jurada_cisterna').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
+        error=1;
+      }  
+      if (data.checkList2.length<14) {  
+        $('#cisterna_luces_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
+        error=1;
+      }  
+      if (data.checkList3.length<18) {  
+        $('#cisterna_documentos_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
+        error=1;
+      }  
+      if (data.checkList4.length<17) {  
+        $('#cisterna_general_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
+        error=1;
+      }  
+      if (data.checkList5.length<5) {  
+        $('#cisterna_neumaticos_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
+        error=1;
+      }  
+      if (data.checkList6.length<9) {  
+        $('#cisterna_motor_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
+        error=1;
+      }  
+      if (data.checkList7.length<27) {  
+        $('#cisterna_seguridad_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
+        error=1;
+      }  
+
+      if (data.checkList8.length<9) {  
+        $('#cisterna_sistema_recarga_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
+        error=1;
+      }  
+  return error;
+
+
+}
 function validatecamposchecklistcamioneta(){
 
   let error=0;

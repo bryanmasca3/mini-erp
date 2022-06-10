@@ -258,10 +258,10 @@
                         </div>
                       </div>
                       <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">                    
-                     
-                     <a href="asistance.php" class="btn btn-success" target="_blank">ASISTENCIA</a>                                    
+                      <!--<button type="button" class ="fa fa-copy btn btn-success"onclick="copyToClipboard();"></button>
+                    <a href="asistance.php" class="btn btn-success" targ-et="_blank">ASISTENCIA</a>                                    -->
                    <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->                                                                    
-                 </div>  
+                      </div>  
                   </div>  
                                         
               </div>                         
@@ -310,7 +310,7 @@
                         <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA FINAL</span>
                         <input id="txt_hora_final" type="text" class="form-control" placeholder="..." value="" data-clocklet/>
                         <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TOTAL HORAS</span>
-                        <input id="txt_hora_total" type="text" class="form-control" placeholder="..." value=""/>
+                        <input id="txt_hora_total" type="text" class="form-control" placeholder="..." value="" disabled/>
                       </div>                      
                     </div>   
                     <div class="form-group" style="margin-bottom:5px;">
@@ -699,7 +699,7 @@
                       <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">                    
                      
                      <button type="button" class="btn btn-success" onclick="insert_control();">Guardar</button>                                        
-                    <button type="button" class="btn btn-warning" onclick="pdf_control_fatiga_sonnolencia();">Imprimir</button>                                                                                                                 
+                    <!--<button type="button" class="btn btn-warning" onclick="pdf_control_fatiga_sonnolencia();">Imprimir</button>                                                                 -->                                                
                  </div>  
                     </div>
                   
@@ -864,7 +864,7 @@
                           <!--Grid column-->
                               <div class="col-md-3 mb-4 ">
 
-                              <ul class="nav md-pills pills-secondary d-flex flex-column">
+                              <ul class="nav nav-tabs d-flex flex-column" >
                                 <li class="nav-item">
                                   <a class="nav-link active" data-toggle="tab" href="#panel11" role="tab">Luces</a>
                                 </li>
@@ -1078,7 +1078,7 @@
                               <th scope="row">4</th>
                               <td>Parabrisas y ventanas sin rajaduras</td>
                               <td><input class="form-check-input checkList_category_general" type="radio" name="CK_L_G_4" id="1"> </td>
-                              <td><input class="form-check-input checkList_category_general" type="radio" name="CK_L_G_5" id="0"></td>                               
+                              <td><input class="form-check-input checkList_category_general" type="radio" name="CK_L_G_4" id="0"></td>                               
                               <td><input class="form-check-input checkList_category_general" type="radio" name="CK_L_G_4" id="2"></td>  
                             </tr>    
                             <tr>
@@ -1446,58 +1446,60 @@
                         <div style="display:flex;">                                                                        
                               <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold; width:200px">Conductor</span>
                               <div style="display:flex">
-                                <input id="txt_search_camioneta_conductor" type="text" class="form-control" placeholder="Ingrese DNI" value=""/>
-                                <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;"> <button class="fa fa-search" type="button" onclick="searchConductorEscolta();"></button></span>
+                                <input id="txt_search_cisterna_conductor" type="text" class="form-control" placeholder="Ingrese DNI" value=""/>
+                                <input id="txt01_conductor_cisterna_id" type="hidden" class="form-control" placeholder="" value=""/>
+                                <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;"> <button class="fa fa-search" type="button" onclick="searchConductorEscolta2();"></button></span>
                               </div>                                       
                         </div>
                       </div>                               
                       <div class="form-group" style="margin-bottom:5px;">
                         <div class="input-group">
                           <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDUCTOR</span>
-                          <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value="" disabled/>
+                          <input id="txt01_conductor_cisterna_nombre" type="text" class="form-control" placeholder="..." value="" disabled/>
+                         
                           <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DNI</span>
-                          <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value="" disabled/>  
+                          <input id="txt01_conductor_cisterna_dni" type="text" class="form-control" placeholder="..." value="" disabled/>  
                           <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">L. C #</span>
-                          <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value="" disabled/>                        
+                          <input id="txt01_conductor_cisterna_LC" type="text" class="form-control" placeholder="..." value=""/>                        
                         </div>                      
                       </div>       
                       <div class="form-group" style="margin-bottom:5px;">
                         <div class="input-group">
                           <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CAPACIDAD</span>
-                          <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>
+                          <input id="txt01_conductor_cisterna_capacidad" type="text" class="form-control" placeholder="..." value=""/>
                           <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA</span>
-                          <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>  
+                          <input id="txt01_conductor_cisterna_fecha" type="text" class="form-control" placeholder="..." value=""/>  
                           <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA</span>
-                          <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>                        
+                          <input id="txt01_conductor_cisterna_hora" type="text" class="form-control" placeholder="..." value="" data-clocklet/>                        
                         </div>                      
                       </div>      
                       <div class="form-group" style="margin-bottom:5px;">
                         <div class="input-group">
                           <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PLACAS</span>
-                          <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>
+                          <input id="txt01_conductor_cisterna_placas" type="text" class="form-control" placeholder="..." value=""/>
                           <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">KM TRACTO</span>
-                          <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>  
+                          <input id="txt01_conductor_cisterna_km_tracto" type="number" class="form-control" placeholder="..." value=""/>  
                           <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">KM CISTERNA</span>
-                          <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>                        
+                          <input id="txt01_conductor_cisterna_km_cisterna" type="number" class="form-control" placeholder="..." value=""/>                        
                         </div>                      
                       </div>     
                       <div class="form-group" style="margin-bottom:5px;">
                 
                           <div class="input-group">
                               <span class="input-group-addon" title="Expositor" style="height:100%;background:#EEEEEE;font-weight:bold;padding-right: 52px;">ACTIVIDAD</span>
-                              <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value="" style="height:100%;"/>                                                                      
+                              <input id="txt01_conductor_cisterna_actividad" type="text" class="form-control" placeholder="..." value="" style="height:100%;"/>                                                                      
                           </div>   
                           </div>   
                         <div class="form-group" style="margin-bottom:20px;">                                       
                           <div class="input-group">
                             <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">KILOMETRAJE INICIAL</span>
-                            <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>             
+                            <input id="txt01_conductor_km_inicial" type="number" class="form-control" placeholder="..." value=""/>             
                             <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA</span>
-                            <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>                                                                    
+                            <input id="txt01_conductor_hora_ini" type="text" class="form-control" placeholder="..." value="" data-clocklet/>                                                                    
                             <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">KILOMETRAJE INICIAL</span>
-                            <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>             
+                            <input id="txt01_conductor_km_inicial_2" type="number" class="form-control" placeholder="..." value=""/>             
                             <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA</span>
-                            <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>                                           
+                            <input id="txt01_conductor_hora_ini_2" type="text" class="form-control" placeholder="..." value="" data-clocklet/>                                           
                           </div> 
                        
                                          
@@ -1505,7 +1507,7 @@
                       <div class="box-primary" style="margin-bottom:20px;">
                         <div class="box-header no-padding">
                           <div class="box-body table-responsive no-padding">
-                            <table class="table table-striped table-bordered">
+                            <table class="table table-striped table-bordered" id="declaracion_jurada_cisterna">
                               <thead>
                                 <tr>
                                   <th>N</th>
@@ -1596,7 +1598,7 @@
                     <div class="tab-content pt-0">
                   
                       <div class="tab-pane fade active in" id="panel21" role="tabpanel">
-                           <table class="table table-striped table-bordered">
+                           <table class="table table-striped table-bordered" id="cisterna_luces_table">
                             <thead>
                               <tr>
                                 <th>N</th>
@@ -1708,7 +1710,7 @@
                           </table>
                       </div>               
                       <div class="tab-pane fade" id="panel22" role="tabpanel">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered" id="cisterna_documentos_table">
                           <thead>
                             <tr>
                               <th>N</th>
@@ -1849,7 +1851,7 @@
                       </div>
                                   
                       <div class="tab-pane fade" id="panel23" role="tabpanel">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered" id="cisterna_general_table">
                           <thead>
                             <tr>
                               <th>N</th>
@@ -1982,7 +1984,7 @@
                         </table>
                       </div>                                   
                       <div class="tab-pane fade" id="panel24" role="tabpanel">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered" id="cisterna_neumaticos_table">
                           <thead>
                             <tr>
                               <th>N</th>
@@ -2031,7 +2033,7 @@
                         </table>
                       </div>
                       <div class="tab-pane fade" id="panel25" role="tabpanel">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered" id="cisterna_motor_table">
                           <thead>
                             <tr>
                               <th>N</th>
@@ -2108,7 +2110,7 @@
                         </table>
                       </div>
                       <div class="tab-pane fade" id="panel26" role="tabpanel">
-                        <table class="datatable table table-striped table-bordered">
+                        <table class="datatable table table-striped table-bordered" id="cisterna_seguridad_table">
                           <thead>
                             <tr>
                               <th>N</th>
@@ -2225,7 +2227,7 @@
                             </tr>   
                             <tr>
                               <th scope="row">16</th>
-                              <td>Lllave de ruedas</td>
+                              <td>Llave de ruedas</td>
                               <td><input class="form-check-input checkList2_seguridad" type="radio" name="CK_L2_S_16" id="1"> </td>
                               <td><input class="form-check-input checkList2_seguridad" type="radio" name="CK_L2_S_16" id="0"></td>                               
                               <td><input class="form-check-input checkList2_seguridad" type="radio" name="CK_L2_S_16" id="2"></td>  
@@ -2311,7 +2313,8 @@
                         </table>
                       </div>                       
                       <div class="tab-pane fade" id="panel27" role="tabpanel">
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered"
+                        id="cisterna_sistema_recarga_table">
                           <thead>
                             <tr>
                               <th>N</th>
@@ -2397,26 +2400,24 @@
                       <div class="form-group" style="margin-bottom:20px;">
                         <div class="input-group">
                           <span class="input-group-addon" title="Expositor" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">OBSERVACIONES</span>
-                          <input id="txt01_camioneta_km_actividad" type="text" class="form-control" placeholder="..." value=""/>                                             
+                          <input id="txt01_camioneta_km_observaciones" type="text" class="form-control" placeholder="..." value=""/>                                             
                         </div>                      
                       </div> 
                       <div class="form-group" style="margin-bottom:5px;">                    
                              <div class="col-md-6" style="padding:0px">
                                 <span class="input-group-addon"  style="background:#EEEEEE;font-weight:bold;">FIRMA DEL CONDUCTOR ESCOLTA</span>
-                                <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>
+                                <input id="txt_firma_conductor_citerna" type="text" class="form-control" placeholder="..." value=""/>
                               </div>
                               <div class="col-md-6" style="padding:0px">
                               <span class="input-group-addon" style="background:#EEEEEE;font-weight:bold;">FIRMA DEL SUPERVISOR DE OPERACIONES</span>
-                                <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value=""/>
+                                <input id="txt_firma_supervisor_citerna" type="text" class="form-control" placeholder="..." value=""/>
                               </div>                        
                       </div>   
                                                                                         
                 </div>  
                  <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">                    
                      
-                     <button type="button" class="btn btn-success" onclick="insert_capacitacion();">Guardar</button>                    
-                     <button type="button" class="btn btn-primary"
-                     >Imprimir</button>
+                     <button type="button" class="btn btn-success" onclick="insert_checklist_cisterna();">Guardar</button>                                         
                    <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->                                                                    
                  </div>      
                 </div>                
@@ -2731,9 +2732,7 @@
                                 <th>Id</th>
                                 <th>APELLIDOS Y NOMBRES</th>
                                 <th>DNI</th>                                
-                                <th>CARGO</th>                               
-                                <th>CANTIDAD</th> 
-                                <th></th>                               
+                                <th>CARGO</th>                                                                                                                        
                               </tr>
                             </thead>
                           </table>
@@ -2944,7 +2943,26 @@
     load_field_sintomatologia(value)
     });*/ 
     document.getElementById("txt_hora_final").addEventListener("input", function (event) {
-      $('#txt_hora_total').val($('#txt_hora_final').val()-$('#txt_hora_inicio').val())          
+      let time_first=$('#txt_hora_inicio').val().split(":")
+      let time_last=$('#txt_hora_final').val().split(":")
+
+      let seconds1=parseInt((time_first[0]*60))+parseInt(time_first[1])
+      let seconds2=parseInt((time_last[0]*60))+parseInt(time_last[1])
+
+      let result=seconds2-seconds1;
+
+      $('#txt_hora_total').val((~~(result/60)).toString()+":"+(result%60).toString())          
+    });
+    document.getElementById("txt_hora_inicio").addEventListener("input", function (event) {
+      let time_first=$('#txt_hora_inicio').val().split(":")
+      let time_last=$('#txt_hora_final').val().split(":")
+
+      let seconds1=parseInt((time_first[0]*60))+parseInt(time_first[1])
+      let seconds2=parseInt((time_last[0]*60))+parseInt(time_last[1])
+
+      let result=seconds2-seconds1;
+
+      $('#txt_hora_total').val((~~(result/60)).toString()+":"+(result%60).toString())          
     });
 
     $("#txt_fecha_capacitaciones").datepicker("setDate",moment().format("DD/MM/YYYY"));
@@ -2953,6 +2971,8 @@
     $("#txt_fecha_inicio_pernocte").datepicker("setDate",moment().format("DD/MM/YYYY"));
     $("#txt_fecha_fin_pernocte").datepicker("setDate",moment().format("DD/MM/YYYY"));
     $("#txt01_camioneta_fecha").datepicker("setDate",moment().format("DD/MM/YYYY"));
+    $("#txt01_conductor_cisterna_fecha").datepicker("setDate",moment().format("DD/MM/YYYY"));
+    
     gridPernocte();
     gridThird();
     gridSecond(); 
@@ -2960,3 +2980,4 @@
     gridCheckListPreUso();
   });
 </script>
+

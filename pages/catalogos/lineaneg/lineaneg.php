@@ -40,7 +40,15 @@
         <a href="javascript:appSubmitButton('seguridad',1);" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a></div></div>
   </div>
  
-
+  <div class="row">
+    <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-blue">
+        <div class="inner">
+        <h3><sup style="font-size:20px">Gestión de personas</sup></h3>
+        <p>Gestión de personas</p></div>
+        <div class="icon"><i class="fa fa-truck"></i></div>
+        <a href="javascript:appSubmitButton('personas',1);" class="small-box-footer">Mas info <i class="fa fa-arrow-circle-right"></i></a></div></div>
+  </div>
 </section>
 
 

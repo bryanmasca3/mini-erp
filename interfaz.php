@@ -126,7 +126,7 @@
       case "arbol": $appPage = "pages/catalogos/arbol/arbol.php"; break;
       case "lineaneg": $appPage = "pages/catalogos/lineaneg/lineaneg.php"; break;
       case "logistica": $appPage = "pages/catalogos/logistica/logistica.php"; break;
-      case "asistance": $appPage = "pages/catalogos/Seguridad/asistance.php"; break;
+      case "personas": $appPage = "pages/catalogos/personas/personas.php"; break;
       case "seguridad": $appPage = "pages/catalogos/Seguridad/seguridad.php"; break;
       case "operaciones": $appPage = "pages/catalogos/operaciones/operaciones.php"; break;
       case "catMaestro" :   $menuCat = 'active menu-open'; $menuCatMaestro = 'class="active"'; $appPage = "pages/catalogos/maestro/maestro.php"; break;
