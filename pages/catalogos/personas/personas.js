@@ -6,42 +6,42 @@ function addObservacionespersonas(){
     "</div></td></tr>" )
   }
   function addFichaPersonalProfesion(){
-    $('#table_FichaPersonalProfesion > tbody').append( "<tr id='"+(new Date()).getTime()+"' class=''><td><input type='text' class='form-control'/>"+
-    "</td><td><select id='txt_ficha_personal_profesion_estado' class='form-control'><option value='-1'>Selecciona...</option> <option value='0'>TITULO</option><option value='1'>BACHILLER</option><option value='2'>EGRESADO</option><option value='3'>CURSANDO<option></select></td><td><input type='text' class='form-control'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+    $('#table_FichaPersonalProfesion > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='addFichaPersonalProfesion'><td><input type='text' class='form-control personal_profesional_data'/>"+
+    "</td><td><select id='txt_ficha_personal_profesion_estado' class='form-control personal_profesional_data'><option value='-1'>Selecciona...</option> <option value='0'>TITULO</option><option value='1'>BACHILLER</option><option value='2'>EGRESADO</option><option value='3'>CURSANDO<option></select></td><td><input type='text' class='form-control personal_profesional_data'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
   }
   function addFichaPersonalReferencia(){
-    $('#table_FichaPersonalReferencia > tbody').append( "<tr id='"+(new Date()).getTime()+"' class=''><td><input type='text' class='form-control'/>"+
-    "</td><td><input type='text' class='form-control'/></td><td><input type='text' class='form-control'/></td><td><input type='text' class='form-control'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+    $('#table_FichaPersonalReferencia > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='addFichaPersonalReferencia'><td><input type='text' class='form-control personal_referencia_data'/>"+
+    "</td><td><input type='text' class='form-control personal_referencia_data'/></td><td><input type='text' class='form-control personal_referencia_data'/></td><td><input type='text' class='form-control personal_referencia_data'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
   }
   function addFichaPersonalTecnica(){
-    $('#table_FichaPersonalTecnica > tbody').append( "<tr id='"+(new Date()).getTime()+"' class=''><td><input type='text' class='form-control'/>"+
-    "</td><td><select id='txt_ficha_personal_profesion_estado' class='form-control'><option value='-1'>Selecciona...</option> <option value='0'>TITULO</option><option value='1'>EGRESADO</option><option value='2'>CURSANDO<option></select></td><td><input type='text' class='form-control'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+    $('#table_FichaPersonalTecnica > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='addFichaPersonalTecnica'><td><input type='text' class='form-control personal_tecnica_data'/>"+
+    "</td><td><select id='txt_ficha_personal_profesion_estado' class='form-control personal_tecnica_data'><option value='-1'>Selecciona...</option> <option value='0'>TITULO</option><option value='1'>EGRESADO</option><option value='2'>CURSANDO<option></select></td><td><input type='text' class='form-control personal_tecnica_data'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
   }
   function addFichaPersonalOtrosEstudios(){
-    $('#table_FichaPersonalOtrosEstudios > tbody').append( "<tr id='"+(new Date()).getTime()+"' class=''><td><input type='text' class='form-control'/>"+
+    $('#table_FichaPersonalOtrosEstudios > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='addFichaPersonalOtrosEstudios'><td><input type='text' class='form-control personal_otros_estudios_data'/>"+
     "</td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
   }
   function addFichaPersonalIdiomas(){
-    $('#table_FichaPersonalIdiomas > tbody').append( "<tr id='"+(new Date()).getTime()+"' class=''><td><select  class='form-control'><option value='-1'>Selecciona...</option><option value='0'>ESPAÑOL</option><option value='1'>INGLES</option><option value='2'>PORTUGUES</option> <option value='3'>FRANCES</option></select>"+
-    "</td><td><select class='form-control'><option value='-1'>Selecciona...</option><option value='0'>BASICO</option><option value='1'>INTERMEDIO</option><option value='2'>AVANZADO</option></select></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+    $('#table_FichaPersonalIdiomas > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='addFichaPersonalIdiomas'><td><select  class='form-control personal_idioma_data'><option value='-1'>Selecciona...</option><option value='0'>ESPAÑOL</option><option value='1'>INGLES</option><option value='2'>PORTUGUES</option> <option value='3'>FRANCES</option></select>"+
+    "</td><td><select class='form-control personal_idioma_data'><option value='-1'>Selecciona...</option><option value='0'>BASICO</option><option value='1'>INTERMEDIO</option><option value='2'>AVANZADO</option></select></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
   }
   function addChildren(){
-    $('#table_children_personas > tbody').append( "<tr id='"+(new Date()).getTime()+"' class=''><td><input type='text' class='form-control '/></td>"+
-    "<td><input type='text' class='form-control '/></td>"+
-    "<td><input type='date' class='form-control '/></td>"+
-    "<td><input type='number' class='form-control '/></td>"+
-    "<td><input type='text' class='form-control '/></td>"+
-    "<td><input type='number' class='form-control '/></td>"+
+    $('#table_children_personas > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='addChildren'><td><input type='text' class='form-control personal_hijos_data'/></td>"+
+    "<td><input type='text' class='form-control personal_hijos_data'/></td>"+
+    "<td><input type='date' class='form-control personal_hijos_data'/></td>"+
+    "<td><input type='number' class='form-control personal_hijos_data'/></td>"+
+    "<td><input type='text' class='form-control personal_hijos_data'/></td>"+
+    "<td><input type='number' class='form-control personal_hijos_data'/></td>"+
 
     "<td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
@@ -250,7 +250,7 @@ function insert_registro_entrevistas(){
   
     $("#NuevoRegistroFichaPersonal").hide();
     $("#HistorialFichaPersonal").show();
-
+    gridFichaPersonal();
     $("#link_NuevoRegistroFichaPersonal").removeClass("active");    
     $("#link_HistorialFichaPersonal").addClass("active");    
   }
@@ -262,7 +262,22 @@ function insert_registro_entrevistas(){
     $("#link_HistorialFichaPersonal").removeClass("active");    
     $("#link_NuevoRegistroFichaPersonal").addClass("active");    
   }
+  function HistorialProgramaCapacitacion(){
   
+    $("#NuevoProgramaCapacitacion").hide();
+    $("#HistorialProgramaCapacitacion").show();
+    gridProgramacionCapacitacion();
+    $("#link_NuevoProgramaCapacitacion").removeClass("active");    
+    $("#link_HistorialProgramaCapacitacion").addClass("active");    
+  }
+  function NuevoProgramaCapacitacion(){
+  
+    $("#HistorialProgramaCapacitacion").hide();
+    $("#NuevoProgramaCapacitacion").show();
+
+    $("#link_HistorialProgramaCapacitacion").removeClass("active");    
+    $("#link_NuevoProgramaCapacitacion").addClass("active");    
+  }
   function HistorialEntrevistaPersonas(){
     $("#NuevoRegistroEntrevistaPersonas").hide();
     $("#HistorialEntrevistaPersonas").show();
@@ -292,6 +307,7 @@ function insert_registro_entrevistas(){
     $("#link_NuevoRegistroPersonas").addClass("active");
     //gridFirst();
   }
+  
   function gridReferenciaLaboral(){
     let datos = {
         TipoQuery : '01_gridReferenciaLaboral'
@@ -339,6 +355,1592 @@ function insert_registro_entrevistas(){
       } );   
         }   
       });
+  }
+
+
+  function gridFichaPersonal(){
+    let datos = {
+        TipoQuery : '01_gridFichaPersonal'
+      };
+      var table;   
+      appAjaxQuery(datos,rutaSQL).done(function(resp){
+       
+        if(resp.tabla.length>0){      
+         table= $('#grd01FichaPersonal').DataTable( {         
+            "sPaginationType": "simple",
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+            },
+            
+            data: resp.tabla,
+            destroy: true,
+            columns: 
+            [
+             
+                { data: "id"},          
+                { data: "nombrescandidato" },
+                { data: "dni" },                                                     
+                { data: "dni_fecha_vigencia",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(sData==="0") {   
+                                  
+                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')">');
+                    
+                  }else if(sData==="1") {            
+                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')">');
+                  
+                  }  
+                    else if(sData==="2") {                    
+                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')">');
+                  }  
+                    else{          
+                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')">');        
+                   
+                  }   
+                } },    
+                { data: "licencia_fecha_vigencia",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(sData==="0") {   
+                                  
+                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')">');
+                    
+                  }else if(sData==="1") {            
+                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')">');
+                  
+                  }  
+                    else if(sData==="2") {                    
+                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')">');
+                  }  
+                    else{          
+                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')">');        
+                   
+                  }   
+                }  },    
+                { data: "sctr_fecha_vigencia",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(sData==="0") {   
+                                  
+                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')">');
+                    
+                  }else if(sData==="1") {            
+                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')">');
+                  
+                  }  
+                    else if(sData==="2") {                    
+                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')">');
+                  }  
+                    else{          
+                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')">');        
+                   
+                  }   
+                }  },    
+                { data: "seguro_fecha_vigencia",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(sData==="0") {   
+                                  
+                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')">');
+                    
+                  }else if(sData==="1") {            
+                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')">');
+                  
+                  }  
+                    else if(sData==="2") {                    
+                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')">');
+                  }  
+                    else{          
+                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')">');        
+                   
+                  }   
+                }  },    
+                { data: "policial_fecha_vigencia",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(sData==="0") {   
+                                  
+                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')">');
+                    
+                  }else if(sData==="1") {            
+                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')">');
+                  
+                  }  
+                    else if(sData==="2") {                    
+                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')">');
+                  }  
+                    else{          
+                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')">');        
+                   
+                  }   
+                }  },    
+                { data: "judicial_fecha_vigencia",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(sData==="0") {   
+                                  
+                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')">');
+                    
+                  }else if(sData==="1") {            
+                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')">');
+                  
+                  }  
+                    else if(sData==="2") {                    
+                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')">');
+                  }  
+                    else{          
+                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')">');        
+                   
+                  }   
+                }  },    
+                { data: "penal_fecha_vigencia",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(sData==="0") {   
+                                  
+                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')">');
+                    
+                  }else if(sData==="1") {            
+                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')">');
+                  
+                  }  
+                    else if(sData==="2") {                    
+                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')">');
+                  }  
+                    else{          
+                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')">');        
+                   
+                  }   
+                }  },    
+                { data: "trabajo_fecha_vigencia",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(sData==="0") {   
+                                  
+                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')">');
+                    
+                  }else if(sData==="1") {            
+                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')">');
+                  
+                  }  
+                    else if(sData==="2") {                    
+                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')">');
+                  }  
+                    else{          
+                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')">');        
+                   
+                  }   
+                }  },  
+                { data: "medico_fecha_vigencia",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(sData==="0") {   
+                                  
+                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')">');
+                    
+                  }else if(sData==="1") {            
+                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')">');
+                  
+                  }  
+                    else if(sData==="2") {                    
+                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')">');
+                  }  
+                    else{          
+                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')">');        
+                   
+                  }   
+                }  },    
+                { data: "lice_fecha_vigencia",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  
+                  if(sData==="0") {   
+                                  
+                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')">');
+                    
+                  }else if(sData==="1") {            
+                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')">');
+                  
+                  }  
+                    else if(sData==="2") {                    
+                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')">');
+                  }  
+                    else{          
+                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')">');        
+                   
+                  }   
+                
+                }  },    
+                { data: "id",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(oData.id) {                      
+                      $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print btn btn-success btn-xs" type="button" onclick="pdf_FichaPersonal('+oData.id+')"></button><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="modalDeleteFichaPersonal('+oData.id+')">');
+                  }
+                }
+              }
+            ]
+        }
+         );     
+        
+         table.columns().eq( 0 ).each( function ( colIdx ) {
+           
+          var parent= $("#RegistroReferenciaLaboralSearch");      
+          var child= parent.find("#"+colIdx);    
+          child.on('keyup', function() {          
+                table
+                .column( colIdx )
+                .search(child.val(), false, true)
+                .draw();
+        })   
+  
+      } );   
+        }   
+      });
+  }
+function pdf_FichaPersonal(id){
+  let datos = {
+    TipoQuery : '03_pdf_Ficha_Personal',
+    value:id 
+  }
+ // var hashmap = new Map();
+ appAjaxQuery(datos,rutaSQL).done(function(resp){  
+  
+    if(resp.tabla9.length){
+      var data=[];
+      resp.tabla9.forEach((row)=>{
+        var dataRow = {};
+        dataRow['idioma']=row.idioma;
+     
+        for (let i = 0; i < 3; i++) {
+          if(row.nivel==i){
+            dataRow[i]="X";
+          }else{
+            dataRow[i]="";
+          }
+        }
+        data.push(dataRow);
+
+      })
+      resp.tabla9=data;
+    }
+    
+ var docDefinition = {     
+    content: [
+   
+{
+table: {
+widths: ['15%', '65%', '10%', '10%'],
+// heights: [10,10,10,10,30,10,25],
+ headerRows: 1,
+ body: [
+     [
+       {
+         
+         text: 'LOGO',              
+     
+         fontSize: 8,
+         alignment: 'center',
+         rowSpan:3
+       } , 
+         {
+           text: 'FORMATO',              
+           bold: true,
+           fontSize: 10,
+           alignment: 'center'
+         },
+         { 
+           text: 'CODIGO:',              
+  
+           fontSize: 8,
+           alignment: 'center'
+         },
+         {
+             text: 'SSOMA-F-01',
+             fontSize: 8
+     
+         }
+     ],
+     [
+       {               
+       }, 
+       {
+         text: 'REQUERIMIENTO DE PERSONAL',
+         rowSpan: 2,              
+         bold: true,
+         fontSize: 12,
+         alignment: 'center'
+       },
+       { 
+         text: 'Versión :',              
+      
+         fontSize: 8
+       },
+       {
+           text: '01',
+           fontSize: 8
+     
+       }
+   ],                  
+   [
+     {               
+     }, 
+     {
+   
+     },
+     { 
+       text: 'F. de Aprobn:',              
+       fontSize: 8
+     },
+     {
+         text: '01/02/02',
+         fontSize: 8
+
+     }
+ ],  
+
+
+ ]
+}
+},  
+{           
+  text: 'A) DATOS GENERALES',              
+  fontSize: 10,
+  margin: [ 0, 30, 0, 5 ] ,
+  bold: true
+  }
+  ,
+  
+{
+  table: {
+    widths: ['15%', '20%','15%','20%','15%','15%'],
+     headerRows: 1,
+     body: [
+         [
+           {             
+             text: 'Nombre y Apellidos:',                       
+             fontSize: 8,          
+             bold: true,          
+           } 
+           ,              
+            {  
+              text: resp.tabla1.nombres,                       
+              fontSize: 8,                     
+              colSpan:5                    
+             },{},{},{},{}
+          
+         ],
+         [
+          {             
+            text: 'Fecha y Lugar de Nacimiento:',                       
+            fontSize: 8,          
+            bold: true,          
+          } 
+          ,              
+           {  
+             text: resp.tabla1.fecha_nacimiento+" / "+resp.tabla1.lugar_nacimiento ,                       
+             fontSize: 8,                     
+             colSpan:5                    
+            },{},{},{},{}
+       ],
+       [
+        {             
+          text: 'Distrito:',                       
+          fontSize: 8,          
+          bold: true,          
+        } 
+        ,              
+         {  
+           text: resp.tabla1.distrito,                       
+           fontSize: 8,                                                  
+          },
+          {
+            text: 'Provincia:',                       
+            fontSize: 8,          
+            bold: true,   
+          },
+          {
+            text: resp.tabla1.provincia,                       
+            fontSize: 8, 
+          },
+          {
+            text: 'Dpto:',                       
+            fontSize: 8,          
+            bold: true,  
+          },
+          {
+            text: resp.tabla1.departamento,                       
+            fontSize: 8,
+          }
+     ],
+     [
+      {             
+        text: 'DNI. N°:',                       
+        fontSize: 8,          
+        bold: true,          
+      } 
+      ,              
+       {  
+         text: resp.tabla1.dni,                       
+         fontSize: 8,                                                  
+        },
+        {
+          text: 'Teléf. Fijo:',                       
+          fontSize: 8,          
+          bold: true,   
+        },
+        {
+          text: resp.tabla1.telefono,                       
+          fontSize: 8, 
+        },
+        {
+          text: 'Celular:',                       
+          fontSize: 8,          
+          bold: true,  
+        },
+        {
+          text: resp.tabla1.celular,                       
+          fontSize: 8,
+        }
+   ],
+   /*[
+    {             
+      text: 'Correo Electrónico:',                       
+      fontSize: 8,          
+      bold: true,          
+    } 
+    ,              
+     {  
+       text: '',                       
+       fontSize: 8,                     
+       colSpan:5                    
+      },{},{},{},{}
+  ],  */                  
+  [
+    {             
+      text: 'Domicilio:',                       
+      fontSize: 8,          
+      bold: true,          
+    } 
+    ,              
+     {  
+       text: resp.tabla1.domicilio,                       
+       fontSize: 8,                     
+       colSpan:5                    
+      },{},{},{},{}
+  ],
+  [
+    {             
+      text: 'Urbanización:',                       
+      fontSize: 8,          
+      bold: true,          
+     
+    } 
+    ,{
+      text: resp.tabla1.urbanizacion,                       
+      fontSize: 8,          
+      colSpan:2
+    },{},              
+     {  
+       text: 'Distrito:',                       
+       fontSize: 8,      
+       bold: true,                
+       colSpan:3                    
+      },
+      {
+        text: resp.tabla1.distrito_domicilio,                       
+      fontSize: 8,          
+      colSpan:2
+      },{}
+      ],
+     
+      [
+        {             
+          text: 'Estado Civil:',                       
+          fontSize: 8,          
+          bold: true,          
+        } 
+        ,              
+         {  
+           text: resp.tabla1.estado_civil,                       
+           fontSize: 8,                                                  
+          },
+          {
+            text: 'Edad:',                       
+            fontSize: 8,          
+            bold: true,   
+          },
+          {
+            text: resp.tabla1.edad,                       
+            fontSize: 8, 
+          },
+          {
+            text: 'Nº Hijos:',                       
+            fontSize: 8,          
+            bold: true,  
+          },
+          {
+            text: resp.tabla1.n_hijos,                       
+            fontSize: 8,
+          }
+     ],
+      
+     [
+      {             
+        text: 'Sexo:',                       
+        fontSize: 8,          
+        bold: true,          
+      } 
+      ,              
+       {  
+         text: resp.tabla1.sexo,                       
+         fontSize: 8,                                                  
+        },
+        {
+          text: 'Talla:',                       
+          fontSize: 8,          
+          bold: true,   
+        },
+        {
+          text: resp.tabla1.talla,                       
+          fontSize: 8, 
+        },
+        {
+          text: 'Contextura:',                       
+          fontSize: 8,          
+          bold: true,  
+        },
+        {
+          text: resp.tabla1.contextura,                       
+          fontSize: 8,
+        }
+   ]
+     ]
+  }
+  },
+  
+{           
+  text: 'B) OTROS DATOS',              
+  fontSize: 10,
+  margin: [ 0, 30, 0, 5 ] ,
+  bold: true
+},
+{
+  table: {
+    widths: ['25%', '25%','25%','25%'],
+     headerRows: 1,
+     body: [
+         [
+            {             
+              text: 'RUC:',                       
+              fontSize: 8,          
+              bold: true,          
+            }  
+            ,              
+            {  
+              text: resp.tabla1.ruc,                       
+              fontSize: 8,                                                       
+            },
+            { 
+              text: 'AUTOGENERADO',                       
+              fontSize: 8,          
+              bold: true,  
+            },
+            {
+              text: '',                       
+              fontSize: 8,  
+            }          
+         ],
+         [
+          {             
+            text: 'SSALUD:',                       
+            fontSize: 8,          
+            bold: true,          
+          }  
+          ,              
+          {  
+            text: resp.tabla1.essalud,                       
+            fontSize: 8,  
+            colSpan:3                                                     
+          },
+          {           
+          },
+          {          
+          }          
+       ],
+       [
+        {             
+          text: 'ONP/AFP:',                       
+          fontSize: 8,          
+          bold: true,          
+        }  
+        ,              
+        {  
+          text: resp.tabla1.onp,                       
+          fontSize: 8,  
+          colSpan:3                                                     
+        },
+        {           
+        },
+        {          
+        }          
+     ],
+     [
+      {             
+        text: 'CUSSPP:',                       
+        fontSize: 8,          
+        bold: true,          
+      }  
+      ,              
+      {  
+        text: resp.tabla1.cusp,                       
+        fontSize: 8,                                                       
+      },
+      { 
+        text: 'FECHA AFILIACIÓN',                       
+        fontSize: 8,          
+        bold: true,  
+      },
+      {
+        text: resp.tabla1.fecha_afiliacion,                       
+        fontSize: 8,  
+      }          
+   ],                           
+
+     ]
+  }
+  },
+  {           
+    text: 'C) INSTRUCCIÓN',              
+    fontSize: 10,
+    margin: [ 0, 30, 0, 5 ] ,
+    bold: true
+  },
+  {
+    table: {
+      widths: ['20%', '20%','10%','5%','10%', '5%','10%','5%','10%','5%'],
+       headerRows: 1,
+       body: [
+           [
+              {             
+                text: 'Profesión:',                       
+                fontSize: 8,          
+                bold: true,          
+              }  
+              ,              
+              {  
+                text: 'resp.tabla1.cargo',                       
+                fontSize: 8,                                                       
+              },
+              { 
+                text: 'Título',                       
+                fontSize: 8,          
+                bold: true,  
+              },
+              {
+                text: 'X',                       
+                fontSize: 8,  
+              } ,
+              { 
+                text: 'Bachiller',                       
+                fontSize: 8,          
+                bold: true,  
+              },
+              {
+                text: '',                       
+                fontSize: 8,  
+              } ,
+              { 
+                text: 'Egresado',                       
+                fontSize: 8,          
+                bold: true,  
+              },
+              {
+                text: '',                       
+                fontSize: 8,  
+              } ,
+              { 
+                text: 'Cursando',                       
+                fontSize: 8,          
+                bold: true,  
+              },
+              {
+                text: '',                       
+                fontSize: 8,  
+              }          
+           ],
+           [
+            {             
+              text: 'EducaciónSuperior (Lugar):',                       
+              fontSize: 8,          
+              bold: true,          
+            }  
+            ,              
+            {  
+              text: 'resp.tabla1.cargo',                       
+              fontSize: 8,   
+              colSpan:9,                                                    
+            },
+            { 
+         
+            },
+            {
+             
+            } ,
+            {  
+            },
+            {
+             
+            } ,
+            { 
+               
+            },
+            {
+             
+            } ,
+            { 
+             
+            },
+            {
+          
+            }          
+         ],
+         [
+          {             
+            text: 'Técnica:',                       
+            fontSize: 8,          
+            bold: true,          
+          }  
+          ,              
+          {  
+            text: 'resp.tabla1.cargo',                       
+            fontSize: 8,                                                       
+            colSpan:3,
+          },
+          {
+
+          },
+          {
+
+          },
+          { 
+            text: 'Título',                       
+            fontSize: 8,          
+            bold: true,  
+          },
+          {
+            text: 'X',                       
+            fontSize: 8,  
+          } ,        
+          { 
+            text: 'Egresado',                       
+            fontSize: 8,          
+            bold: true,  
+          },
+          {
+            text: '',                       
+            fontSize: 8,  
+          } ,
+          { 
+            text: 'Cursando',                       
+            fontSize: 8,          
+            bold: true,  
+          },
+          {
+            text: '',                       
+            fontSize: 8,  
+          }          
+       ],
+       [
+        {             
+          text: 'Educación Técnica (Lugar):',                       
+          fontSize: 8,          
+          bold: true,          
+        }  
+        ,              
+        {  
+          text: 'resp.tabla1.cargo',                       
+          fontSize: 8,   
+          colSpan:9,                                                    
+        },
+        { 
+     
+        },
+        {
+         
+        } ,
+        {  
+        },
+        {
+         
+        } ,
+        { 
+           
+        },
+        {
+         
+        } ,
+        { 
+         
+        },
+        {
+      
+        }          
+     ],                       
+     [
+      {             
+        text: 'Otros Estudios:',                       
+        fontSize: 8,          
+        bold: true,          
+      }  
+      ,              
+      {  
+        text: 'response',                       
+        fontSize: 8,   
+        colSpan:9,                                                    
+      },
+      { 
+   
+      },
+      {
+       
+      } ,
+      {  
+      },
+      {
+       
+      } ,
+      { 
+         
+      },
+      {
+       
+      } ,
+      { 
+       
+      },
+      {
+    
+      }          
+   ], 
+       ]
+    }
+    },
+    {           
+      text: 'D) IDIOMAS',              
+      fontSize: 10,
+      margin: [ 0, 30, 0, 5 ] ,
+      bold: true
+    },
+    {
+      table: {
+        widths: ['25%', '25%','25%','25%'],
+         headerRows: 1,
+         body:buildTableBody(['idioma','0','1','2'],resp.tabla9, [
+          { 
+          
+             text: 'IDIOMA',               
+             bold: true,          
+             fontSize: 8,                    
+         },
+         { 
+          
+          text: 'BASICO',               
+          bold: true,          
+          fontSize: 8,                    
+          }
+          ,
+            { 
+
+            text: 'INTERMEDIO',               
+            bold: true,          
+            fontSize: 8,                    
+            },
+            { 
+
+            text: 'AVANZADO',               
+            bold: true,          
+            fontSize: 8,                    
+            }
+                                                                     
+       ])
+         
+      }
+      },
+      {           
+        text: 'E) REFERENCIAS LABORALES',              
+        fontSize: 10,
+        margin: [ 0, 30, 0, 5 ] ,
+        bold: true
+      },
+      {
+        table: {
+          widths: ['25%', '25%','25%','25%'],
+           headerRows: 1,
+           body:buildTableBody(['nombre','cargo','telefono','empresa'],resp.tabla10, [
+            { 
+            
+               text: 'NOMBRE Y APELLIDOS',               
+               bold: true,          
+               fontSize: 8,                    
+           },
+           { 
+            
+            text: 'CARGO',               
+            bold: true,          
+            fontSize: 8,                    
+            },
+              { 
+  
+              text: 'TELEFONO',               
+              bold: true,          
+              fontSize: 8,                    
+              },
+              { 
+  
+              text: 'EMPRESA',               
+              bold: true,          
+              fontSize: 8,                    
+              }
+                                                                       
+         ])
+           
+        }
+        },
+
+        
+        {           
+          text: 'F) DATOS DEL CÓNYUGE O CONVIVIENTE',              
+          fontSize: 10,
+          margin: [ 0, 30, 0, 5 ] ,
+          bold: true
+        },
+        {
+          table: {
+            widths: ['15%', '20%','15%','20%','15%','15%'],
+             headerRows: 1,
+             body: [
+                 [
+                   {             
+                     text: 'Nombre y Apellidos:',                       
+                     fontSize: 8,          
+                     bold: true,          
+                   } 
+                   ,              
+                    {  
+                      text: resp.tabla2.nombres,                       
+                      fontSize: 8,                     
+                      colSpan:5                    
+                     },{},{},{},{}
+                  
+                 ],
+
+                 [
+                  {             
+                    text: 'Fecha y Lugar de Nacimiento:',                       
+                    fontSize: 8,          
+                    bold: true,          
+                  } 
+                  ,              
+                   {  
+                     text: resp.tabla2.fecha+" / "+resp.tabla2.lugar_nacimiento,                       
+                     fontSize: 8,                     
+                     colSpan:3                    
+                    },{},{},
+                    {
+                      text: 'Edad:',                       
+                      fontSize: 8,          
+                      bold: true,  
+                    },
+                    {
+                      text: '28',                       
+                      fontSize: 8,                                           
+                    }
+               ],
+               [
+                {             
+                  text: 'Distrito:',                       
+                  fontSize: 8,          
+                  bold: true,          
+                } 
+                ,              
+                 {  
+                   text: resp.tabla2.distrito,                       
+                   fontSize: 8,                                                  
+                  },
+                  {
+                    text: 'Provincia:',                       
+                    fontSize: 8,          
+                    bold: true,   
+                  },
+                  {
+                    text: resp.tabla2.provincia,                       
+                    fontSize: 8, 
+                  },
+                  {
+                    text: 'Dpto:',                       
+                    fontSize: 8,          
+                    bold: true,  
+                  },
+                  {
+                    text: resp.tabla2.departamento,                       
+                    fontSize: 8,
+                  }
+             ],
+             [
+              {             
+                text: 'DNI. N°:',                       
+                fontSize: 8,          
+                bold: true,          
+              } 
+              ,              
+               {  
+                 text: resp.tabla2.dni,                       
+                 fontSize: 8,                                                  
+                },
+                {
+                  text: 'RUC:',                       
+                  fontSize: 8,          
+                  bold: true,   
+                },
+                {
+                  text: resp.tabla2.ruc,                       
+                  fontSize: 8, 
+                },
+                {
+                  text: 'AUTOGENERADO:',                       
+                  fontSize: 8,          
+                  bold: true,  
+                },
+                {
+                  text: '',                       
+                  fontSize: 8,
+                }
+           ],
+           [
+            {             
+              text: 'Profesión:',                       
+              fontSize: 8,          
+              bold: true,          
+            } 
+            ,  
+            {
+              text: resp.tabla2.profesion,                       
+              fontSize: 8,   
+              colSpan:2
+            },          
+              {},
+             {  
+               text: 'Ocupación',                       
+               fontSize: 8, 
+               bold: true,                                                      
+              },
+              {
+                text: resp.tabla2.ocupacion,                       
+                fontSize: 8,   
+                colSpan:2
+              },{}
+          ],                    
+           [
+            {             
+              text: 'Centro de Trabajo Actual:',                       
+              fontSize: 8,          
+              bold: true,          
+            } 
+            ,              
+             {  
+               text: resp.tabla2.centro_lsboral,                       
+               fontSize: 8,                     
+               colSpan:5                    
+              },{},{},{},{}
+          ],
+         [
+            {             
+              text: 'Dirección:',                       
+              fontSize: 8,          
+              bold: true,          
+             
+            } 
+            ,{
+              text: resp.tabla2.direccion,                       
+              fontSize: 8,          
+              colSpan:5
+            },{},              
+             {                                   
+              },
+              {
+               
+              },{}
+              ],
+             
+              [
+                {             
+                  text: 'Teléfono:',                       
+                  fontSize: 8,          
+                  bold: true,          
+                } 
+                ,              
+                 {  
+                   text: resp.tabla2.telefono,                       
+                   fontSize: 8,                                                  
+                   colSpan:2,  
+                  },{},
+                  {
+                    text: 'Celular:',                       
+                    fontSize: 8,          
+                    bold: true,   
+                  },
+                  {
+                    text: resp.tabla2.celular,                       
+                    fontSize: 8, 
+                    colSpan:2, 
+                  },
+                  {
+                 
+                  }
+                  
+             ],
+                        
+             ]
+          }
+          },
+          
+          {           
+            text: 'G) DATOS DE LOS PADRES',              
+            fontSize: 10,
+            margin: [ 0, 30, 0, 5 ] ,
+            bold: true
+          },
+          {
+            table: {
+              widths: ['25%', '25%','25%','25%'],
+               headerRows: 1,
+               body: [
+                   [
+                     {             
+                       text: 'Nombre y Apellidos (Padre):',                       
+                       fontSize: 8,          
+                       bold: true,          
+                     } 
+                     ,              
+                      {  
+                        text: resp.tabla3.nombres_padre,                       
+                        fontSize: 8,                     
+                        colSpan:3                  
+                       },{},{}
+                    
+                   ],
+                   [
+                    {             
+                      text: 'Centro de Trabajo: ',                       
+                      fontSize: 8,          
+                      bold: true,          
+                    } 
+                    ,              
+                     {  
+                       text:resp.tabla3.trabajo_padre,                       
+                       fontSize: 8,                     
+                                     
+                      },
+                      {
+                        text: 'Ocupación: ',                       
+                        fontSize: 8,          
+                        bold: true,  
+                      },
+                      {
+                        text: resp.tabla3.ocupacion_padre,                       
+                        fontSize: 8, 
+                      }
+                 ],
+                 [
+                  {             
+                    text: 'Dirección: ',                       
+                    fontSize: 8,          
+                    bold: true,          
+                  } 
+                  ,              
+                   {  
+                     text: resp.tabla3.direccion_padre,                       
+                     fontSize: 8,                     
+                      colSpan:3
+                    },
+                    {
+                     
+                    },
+                    {
+                    
+                    }
+               ],
+               [
+                {             
+                  text: 'Teléfono: ',                       
+                  fontSize: 8,          
+                  bold: true,          
+                } 
+                ,              
+                 {  
+                   text: resp.tabla3.telefono_padre,                       
+                   fontSize: 8,                     
+                                 
+                  },
+                  {
+                    text: 'Celular: ',                       
+                    fontSize: 8,          
+                    bold: true,  
+                  },
+                  {
+                    text: resp.tabla3.celular_padre,                       
+                    fontSize: 8, 
+                  }
+             ],
+             [
+              {             
+                text: 'Nombre y Apellidos (Madre):',                       
+                fontSize: 8,          
+                bold: true,          
+              } 
+              ,              
+               {  
+                 text: resp.tabla3.nombres_madre,                       
+                 fontSize: 8,                     
+                 colSpan:3                  
+                },{},{}
+             
+            ],
+            [
+             {             
+               text: 'Centro de Trabajo: ',                       
+               fontSize: 8,          
+               bold: true,          
+             } 
+             ,              
+              {  
+                text: resp.tabla3.trabajo_madre,                       
+                fontSize: 8,                     
+                              
+               },
+               {
+                 text: 'Ocupación: ',                       
+                 fontSize: 8,          
+                 bold: true,  
+               },
+               {
+                 text: resp.tabla3.ocupacion_madre,                       
+                 fontSize: 8, 
+               }
+          ],
+          [
+           {             
+             text: 'Dirección: ',                       
+             fontSize: 8,          
+             bold: true,          
+           } 
+           ,              
+            {  
+              text:  resp.tabla3.direccion_madre,                       
+              fontSize: 8,                     
+               colSpan:3
+             },
+             {
+              
+             },
+             {
+             
+             }
+        ],
+        [
+         {             
+           text: 'Teléfono: ',                       
+           fontSize: 8,          
+           bold: true,          
+         } 
+         ,              
+          {  
+            text:  resp.tabla3.telefono_madre,                       
+            fontSize: 8,                     
+                          
+           },
+           {
+             text: 'Celular: ',                       
+             fontSize: 8,          
+             bold: true,  
+           },
+           {
+             text: resp.tabla3.celular_madre,                       
+             fontSize: 8, 
+           }
+      ],
+            ]
+            }
+            },
+
+            {           
+              text: 'H) DATOS DE LOS HIJOS',              
+              fontSize: 10,
+              margin: [ 0, 30, 0, 5 ] ,
+              bold: true
+            },
+            {
+              table: {
+                widths: ['25%', '25%','15%','15%','20%'],
+                 headerRows: 1,
+                 body:buildTableBody(['nombres','fecha_nacimiento','edad','sexo','dni'],resp.tabla11, [
+                  { 
+                  
+                     text: 'Nombres y Apellidos',               
+                     bold: true,          
+                     fontSize: 8,                    
+                 },
+                 { 
+                  
+                  text: 'Fecha Nacimiento',               
+                  bold: true,          
+                  fontSize: 8,                    
+                  },
+                    { 
+        
+                    text: 'Edad',               
+                    bold: true,          
+                    fontSize: 8,                    
+                    },
+                    { 
+        
+                    text: 'Sexo',               
+                    bold: true,          
+                    fontSize: 8,                    
+                    },
+                    { 
+        
+                      text: 'N° DNI ',               
+                      bold: true,          
+                      fontSize: 8,                    
+                      }
+                                                                             
+               ])
+                 
+              }
+              },
+              {           
+                text: 'I) PERSONA A LLAMAR EN CASO DE EMERGENCIA',              
+                fontSize: 10,
+                margin: [ 0, 30, 0, 5 ] ,
+                bold: true
+              },
+              {
+                table: {
+                  widths: ['25%', '25%','25%','25%'],
+                   headerRows: 1,
+                   body: [
+                       [
+                         {             
+                           text: 'Nombre y Apellidos:',                       
+                           fontSize: 8,          
+                           bold: true,          
+                         } 
+                         ,              
+                          {  
+                            text: resp.tabla4.nombres,                       
+                            fontSize: 8,                     
+                            colSpan:3                  
+                           },{},{}
+                        
+                       ],
+                       [
+                        {             
+                          text: 'Parentesco: ',                       
+                          fontSize: 8,          
+                          bold: true,          
+                        } 
+                        ,              
+                         {  
+                           text: resp.tabla4.parentesco,                       
+                           fontSize: 8,                     
+                                         
+                          },
+                          {
+                            text: 'Teléfonos: ',                       
+                            fontSize: 8,          
+                            bold: true,  
+                          },
+                          {
+                            text: resp.tabla4.telefono,                       
+                            fontSize: 8, 
+                          }
+                     ],                                                                           
+                ]
+                }
+                },
+                {           
+                  text: 'J) MOVILIDAD ',              
+                  fontSize: 10,
+                  margin: [ 0, 30, 0, 5 ] ,
+                  bold: true
+                },
+                {
+                  table: {
+                    widths: ['20%','10%', '5%','10%', '5%','25%','25%'],
+                     headerRows: 1,
+                     body: [
+                         [
+                           {             
+                             text: 'Posee Movilidad Propia:',                       
+                             fontSize: 8,          
+                             bold: true,          
+                           } 
+                           ,              
+                            {  
+                              text: 'SI',                       
+                              fontSize: 8,                                                                    
+                             },
+                             {
+                              text: 'X',                       
+                              fontSize: 8,    
+                             },
+                             {
+                              text: 'NO',                       
+                              fontSize: 8,
+                             },
+                             {
+                              text: '',                       
+                              fontSize: 8,
+                             },
+                             {             
+                              text: 'Nro. De Licencia de Conducir:',                       
+                              fontSize: 8,          
+                              bold: true,          
+                            },
+                            {
+                              text: '',                       
+                              fontSize: 8,
+                            }
+                          
+                         ]
+                        
+                                                                                                 
+                  ]
+                  }
+                  },
+                  {           
+                    text: 'K) ANTECEDENTES: Policiales y/o Penal:',              
+                    fontSize: 10,
+                    margin: [ 0, 30, 0, 5 ] ,
+                    bold: true
+                  },
+                  {
+                    table: {
+                      widths: ['50%','50%'],
+                       headerRows: 1,
+                       body: [
+                           [
+                             {             
+                               text: 'Ha sido detenido y/o enjuiciado en alguna oportunidad:',                       
+                               fontSize: 8,          
+                               bold: true,          
+                             } 
+                             ,              
+                              {  
+                                text: resp.tabla6.O_1,                       
+                                fontSize: 8,                                                                    
+                               }
+                             
+                            
+                           ],
+                           [
+                            {             
+                              text: 'Dependencia Policial donde sufrió la detención: ',                       
+                              fontSize: 8,          
+                              bold: true,          
+                            } 
+                            ,              
+                             {  
+                               text: resp.tabla6.O_2,                       
+                               fontSize: 8,                                                                    
+                              }
+                         ],   [
+                          {             
+                            text: 'Juzgado que vió su caso:',                       
+                            fontSize: 8,          
+                            bold: true,          
+                          } 
+                          ,              
+                           {  
+                             text: resp.tabla6.O_3,                       
+                             fontSize: 8,                                                                    
+                            }
+                       ],
+                       [
+                        {             
+                          text: 'Motivo:',                       
+                          fontSize: 8,          
+                          bold: true,          
+                        } 
+                        ,              
+                         {  
+                           text: resp.tabla6.O_4,                       
+                           fontSize: 8,                                                                    
+                          }
+                     ]                                                                         
+                    ]
+                    }
+                    },
+                    {           
+                      text: 'Afirmo bajo mi responsabilidad que las anotaciones efectuadas en el presente formulario son correctas y que no he omitido intencionalmente ningún dato sobre las preguntas contenidas en el mismo. Si se descubriera posteriormente su inexactitud la empresa se reserva el derecho de prescindir de mis servicios. ',              
+                      fontSize: 8,                      
+                      alignment: 'center',
+                      margin: [ 0, 30, 0, 5 ] ,                      
+                    }
+],
+  defaultStyle: {
+  }
+};
+pdfMake.createPdf(docDefinition).open(); 
+})
+
+}
+
+
+  function pdf_ModalAddControlDateFichaPersonal(id,type){
+    let datos = {
+      TipoQuery : '01_get_pdf_file',
+      value:id,
+      type:type
+    };  
+    var table;   
+    appAjaxQuery(datos,rutaSQL).done(function(resp){
+      
+        $("#txt_id_type_pdf_Ficha_Personal").val(resp.tabla1.id_personal)
+        $("#txt_id_name_pdf_ficha_personal").val(resp.tabla1.nombre); 
+        $("#txt_id_type").val(resp.tabla1.type); 
+        $('#modal_FichaPersonal').modal('show');
+        //$('#modal_ProgramaCapacitacion').modal('hide');
+        
+    } ); 
+ 
+  }
+  function enabledButtonAPenalesJudiciales(value){
+    console.log(value)
+    $("#Ficha_Personal_antecedentes_1").prop( "disabled", value );
+    $("#Ficha_Personal_antecedentes_2").prop( "disabled", value );
+    $("#Ficha_Personal_antecedentes_3").prop( "disabled", value );
+    $("#Ficha_Personal_antecedentes_4").prop( "disabled", value );
+  }
+  function insert_modal_date_Ficha_Personal(){
+    let datos = {
+      TipoQuery : '01_get_insert_values_date',
+      data:{
+        type:$("#txt_id_type").val(),
+        fecha_emi:$("#txt_ficha_Personal_emi_modal").val(),
+        fecha_cadu:$("#txt_ficha_Personal_cadu_modal").val(),
+        id:$("#txt_id_type_pdf_Ficha_Personal").val()
+      }
+    };  
+   
+    console.log(datos)
+    appAjaxQuery(datos,rutaSQL).done(function(resp){
+      gridFichaPersonal();
+      $('#modal_FichaPersonal').modal('hide');
+
+      $("#txt_ficha_Personal_emi_modal").val("");
+      $("#txt_ficha_Personal_cadu_modal").val("");
+      $("#txt_id_name_pdf_ficha_personal").val("");
+
+      swal("Insertado correctamente", {
+        icon: "success",
+      });
+     
+      
+  } ); 
+
   }
 function gridEntrevistas(){
     let datos = {
@@ -912,6 +2514,7 @@ function buildTableBody(header,data, columns) {
 
   return body;
 }
+
 function pdf_ReferenciaLaboral(id){
   let datos = {
     TipoQuery : '03_pdf_referencia_laboral_persona',
@@ -1967,6 +3570,404 @@ pdfMake.createPdf(docDefinition).open();
 })
 
 }
+function pdf_ModalAddProgramaCapacitacion(id,type){
+  let datos = {
+    TipoQuery : '01_get_pdf_file_programa_capacitacion',
+    value:id,
+    type:type
+  };  
+  var table;   
+  appAjaxQuery(datos,rutaSQL).done(function(resp){
+    
+      $("#txt_id_programa_capacitacion").val(resp.tabla1.id)
+      $("#txt_id_modal_programa_capacitacion_name").val(resp.tabla1.nombre); 
+      $("#txt_id_modal_programa_capacitacion_type").val(resp.tabla1.type); 
+     // $('#modal_FichaPersonal').modal('hide');
+      $('#modal_ProgramaCapacitacion').modal('show');
+      
+  } ); 
+}
+function insert_modal_date_Programa_capacitacion(){
+  let datos = {
+    TipoQuery : '01_get_insert_values_date_programa_capacitacion',
+    data:{
+      type:$("#txt_id_modal_programa_capacitacion_type").val(),
+      fecha_emi:$("#txt_programa_capacitacion_emi_modal").val(),
+      fecha_cadu:$("#txt_programa_capacitacion_cadu_modal").val(),
+      id:$("#txt_id_programa_capacitacion").val()
+    }
+  };  
+ 
+  console.log(datos)
+  appAjaxQuery(datos,rutaSQL).done(function(resp){
+    console.log(resp)
+    gridProgramacionCapacitacion();
+    
+
+    $("#txt_id_modal_programa_capacitacion_type").val("");
+    $("#txt_id_programa_capacitacion").val("");
+    $("#txt_programa_capacitacion_cadu_modal").val("");
+    $("#txt_programa_capacitacion_emi_modal").val("");
+    $('#modal_ProgramaCapacitacion').modal('hide');
+    swal("Insertado correctamente", {
+      icon: "success",
+    });
+   
+    
+} ); 
+}
+function gridProgramacionCapacitacion(){
+  let datos = {
+    TipoQuery : '01_gridProgramacionCapacitacion'
+  };
+  var table;   
+  appAjaxQuery(datos,rutaSQL).done(function(resp){
+   
+    if(resp.tabla.length>0){      
+     table= $('#grd01ProgramacionCapacitacion').DataTable( {         
+        "sPaginationType": "simple",
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+        },
+        
+        data: resp.tabla,
+        destroy: true,
+        columns: 
+        [
+         
+            { data: "id"},                                                       
+            { data: "induc_fecha_vigencia",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              if(sData==="0") {   
+                              
+                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"0"+')">');
+                
+              }else if(sData==="1") {            
+                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"0"+')">');
+              
+              }  
+                else if(sData==="2") {                    
+                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"0"+')">');
+              }  
+                else{          
+                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"0"+')">');        
+               
+              }   
+            } },    
+            { data: "defen_fecha_vigencia",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              if(sData==="0") {   
+                              
+                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"1"+')">');
+                
+              }else if(sData==="1") {            
+                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"1"+')">');
+              
+              }  
+                else if(sData==="2") {                    
+                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"1"+')">');
+              }  
+                else{          
+                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"1"+')">');        
+               
+              }   
+            }  },    
+            { data: "peligroso1_fecha_vigencia",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              if(sData==="0") {   
+                              
+                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"2"+')">');
+                
+              }else if(sData==="1") {            
+                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"2"+')">');
+              
+              }  
+                else if(sData==="2") {                    
+                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"2"+')">');
+              }  
+                else{          
+                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"2"+')">');        
+               
+              }   
+            }  },    
+            { data: "peligroso2_fecha_vigencia",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              if(sData==="0") {   
+                              
+                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"3"+')">');
+                
+              }else if(sData==="1") {            
+                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"3"+')">');
+              
+              }  
+                else if(sData==="2") {                    
+                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"3"+')">');
+              }  
+                else{          
+                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"3"+')">');        
+               
+              }   
+            }  },    
+            { data: "peligroso3_fecha_vigencia",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              if(sData==="0") {   
+                              
+                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"4"+')">');
+                
+              }else if(sData==="1") {            
+                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"4"+')">');
+              
+              }  
+                else if(sData==="2") {                    
+                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"4"+')">');
+              }  
+                else{          
+                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"4"+')">');        
+               
+              }   
+            }  },    
+            { data: "auxilio_fecha_vigencia",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              if(sData==="0") {   
+                              
+                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"5"+')">');
+                
+              }else if(sData==="1") {            
+                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"5"+')">');
+              
+              }  
+                else if(sData==="2") {                    
+                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"5"+')">');
+              }  
+                else{          
+                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"5"+')">');        
+               
+              }   
+            }  },    
+            { data: "extintores_fecha_vigencia",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              if(sData==="0") {   
+                              
+                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"6"+')">');
+                
+              }else if(sData==="1") {            
+                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"6"+')">');
+              
+              }  
+                else if(sData==="2") {                    
+                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"6"+')">');
+              }  
+                else{          
+                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"6"+')">');        
+               
+              }   
+            }  },    
+            { data: "trabajo_fecha_vigencia",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              if(sData==="0") {   
+                              
+                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"7"+')">');
+                
+              }else if(sData==="1") {            
+                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"7"+')">');
+              
+              }  
+                else if(sData==="2") {                    
+                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"7"+')">');
+              }  
+                else{          
+                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"7"+')">');        
+               
+              }   
+            }  },  
+            { data: "fatiga_fecha_vigencia",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              if(sData==="0") {   
+                              
+                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"8"+')">');
+                
+              }else if(sData==="1") {            
+                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"8"+')">');
+              
+              }  
+                else if(sData==="2") {                    
+                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"8"+')">');
+              }  
+                else{          
+                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"8"+')">');        
+               
+              }   
+            }  },    
+            { data: "curso_fecha_vigencia",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              
+              if(sData==="0") {   
+                              
+                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"9"+')">');
+                
+              }else if(sData==="1") {            
+                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"9"+')">');
+              
+              }  
+                else if(sData==="2") {                    
+                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"9"+')">');
+              }  
+                else{          
+                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"9"+')">');        
+               
+              }   
+            
+            }  }, { data: "induccion_fecha_vigencia",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              
+              if(sData==="0") {   
+                              
+                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"10"+')">');
+                
+              }else if(sData==="1") {            
+                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"10"+')">');
+              
+              }  
+                else if(sData==="2") {                    
+                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"10"+')">');
+              }  
+                else{          
+                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"10"+')">');        
+               
+              }   
+            
+            }  },    
+            { data: "id",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+              if(oData.id) {                      
+                  $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="modalDeleteProgramaCapacitacion('+oData.id+')">');
+              }
+            }
+          }
+        ]
+    }
+     );     
+    
+     table.columns().eq( 0 ).each( function ( colIdx ) {
+       
+      var parent= $("#RegistroReferenciaLaboralSearch");      
+      var child= parent.find("#"+colIdx);    
+      child.on('keyup', function() {          
+            table
+            .column( colIdx )
+            .search(child.val(), false, true)
+            .draw();
+    })   
+
+  } );   
+    }   
+  });
+}
+function save_programacion_capacitacion(){
+
+  if(validarProgramacionCapacitacion()){
+    swal("Completa todos los campos", {
+      icon: "error",
+     });
+  }else{     
+         var data   = new FormData();
+           
+         var files=$(".input_files_programacion_capacitacion").map(function(index, i){      
+           data.append('file_'+index, this.files[0]);
+           return  this.files[0].name
+         }).get();
+      
+        
+         let datos = {
+           TipoQuery : '03_save_register_programacion_capacitacion',
+           data:{
+             id:(new Date()).getTime(),    
+             files:files         
+           },
+         };        
+         console.log(datos)
+         appAjaxQuery(datos,rutaSQL).done(function(resp){  
+         
+        
+            var xhttp = new XMLHttpRequest();
+           
+           // Set POST method and ajax file path
+           xhttp.open("POST", "pages/catalogos/personas/ajaxfile.php", true);
+     
+           // call on request changes state
+           xhttp.onreadystatechange = function() {
+              if (this.readyState == 4 && this.status == 200) {
+     
+                var response = this.responseText;
+                if(response == 1){
+                 swal("Se ha registrado correctamente", {
+                   icon: "success",
+             });
+                }else{
+                 swal("Ha existido un error", {
+                   icon: "error",
+             });
+                }
+              }
+           };
+     
+         xhttp.send(data);                          
+         resetProgramaCapacitacion();                                      
+         });         
+     }
+
+
+}
+function modalDeleteFichaPersonal(id){
+  swal({
+    title: "¿Estas seguro que deseas eliminar?",
+    text: "Al realizar esta operación se quitarán todos los datos asociados al registro",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {        
+      let datos = {
+        TipoQuery : '01_delete_ficha_personal',
+        value:id
+      };
+
+      appAjaxQuery(datos,rutaSQL).done(function(resp){                
+          gridFichaPersonal();
+          swal("Has eliminado el registro", {
+           icon: "success",
+          });
+      });  
+      
+    }
+  });
+}
+function modalDeleteProgramaCapacitacion(id){
+  swal({
+    title: "¿Estas seguro que deseas eliminar?",
+    text: "Al realizar esta operación se quitarán todos los datos asociados al registro",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {        
+      let datos = {
+        TipoQuery : '01_delete_programa_capacitacion',
+        value:id
+      };
+
+      appAjaxQuery(datos,rutaSQL).done(function(resp){                
+          gridProgramacionCapacitacion();
+          swal("Has eliminado el registro", {
+           icon: "success",
+          });
+      });  
+      
+    }
+  });
+}
 function modalDeleteRequerimientoPersona(id){
     swal({
       title: "¿Estas seguro que deseas eliminar?",
@@ -2130,4 +4131,269 @@ function modalDeleteRequerimientoPersona(id){
           //selected:item.value===value?true:false
       }));
     });
+  }
+  function save_FichaPersonal(){
+
+   
+
+
+ if(validarFichaPersonal()){
+     swal("Completa todos los campos", {
+       icon: "error",
+      });
+   }else{     
+          var data   = new FormData();
+            
+          var files=$(".input_files_ficha_personal").map(function(index, i){      
+            data.append('file_'+index, this.files[0]);
+            return  this.files[0].name
+          }).get();
+          var profesion=$('#table_FichaPersonalProfesion > tbody > tr').map(function(){
+            
+            var children =$(this).children().find('.personal_profesional_data').map(function(){ return $(this).val()}).get();
+              return [children];              
+             }).get();
+
+             var tecnica=$('#table_FichaPersonalTecnica > tbody > tr').map(function(){
+            
+              var children =$(this).children().find('.personal_tecnica_data').map(function(){ return $(this).val()}).get();
+                return [children];              
+               }).get();
+
+               var otrosEstudios=$('#table_FichaPersonalOtrosEstudios > tbody').find(".personal_otros_estudios_data").map(function(){return $(this).val();}).get();   
+
+               var idioma=$('#table_FichaPersonalIdiomas > tbody > tr').map(function(){
+            
+                var children =$(this).children().find('.personal_idioma_data').map(function(){ return $(this).val()}).get();
+                  return [children];              
+                 }).get();
+
+
+               var referencia=$('#table_FichaPersonalReferencia > tbody > tr').map(function(){
+            
+                var children =$(this).children().find('.personal_referencia_data').map(function(){ return $(this).val()}).get();
+                  return [children];              
+                 }).get();
+
+
+                 var hijos=$('#table_children_personas > tbody > tr').map(function(){
+            
+                  var children =$(this).children().find('.personal_hijos_data').map(function(){ return $(this).val()}).get();
+                    return [children];              
+                   }).get();
+
+
+                   var movilidad=$(".check_Ficha_Personal_movilidad:radio:checked").map(function(){return $(this).attr('id');}).get(); 
+                   var id=(new Date()).getTime();
+          let datos = {
+            TipoQuery : '03_save_register_Ficha_Personal',
+            data:{
+              id:id,
+              nombres: $('#txt_ficha_personal_nombres').val(),
+              apellidos: $('#txt_ficha_personal_apellidos').val(),
+              fecha_nacimiento: $('#txt_ficha_personal_nacimiento').val(),
+              lugar_nacimiento:$('#txt_ficha_personal_lugar').val(),      
+              departamento: $('#select_Ficha_Personal_departamento_g').val(),
+              provincia: $('#select_Ficha_Personal_provincia_g').val(),      
+              distrito: $('#select_Ficha_Personal_distrito_g').val(),
+              dni: $('#txt_ficha_personal_dni').val(),
+              telefono: $('#txt_ficha_personal_telefono').val(),
+              celular: $('#txt_ficha_personal_celular').val(),
+              domicilio: $('#txt_ficha_personal_domicilio').val(),
+              urbanizacion: $('#txt_ficha_personal_ubanizacion').val(),
+              distrito: $('#txt_ficha_personal_distrito').val(),
+              civil: $('#txt_ficha_personal_civil').val(),
+              edad: $('#txt_ficha_personal_edad').val(),
+              n_hijos: $('#txt_ficha_personal_n_hijos').val(),
+              sexo: $('#txt_ficha_personal_sexo').val(),
+              talla: $('#txt_ficha_personal_talla').val(),   
+              contextura: $('#txt_ficha_personal_contextura').val(),
+              
+              ruc: $('#txt_ficha_personal_ruc').val(),
+              essalud: $('#txt_ficha_personal_essalud').val(),
+              onp: $('#txt_ficha_personal_onp').val(),   
+              cussp: $('#txt_ficha_personal_cusspp').val(),
+              fecha_afiliacion: $('#txt_ficha_personal_fecha_afiliacion').val(),
+                             
+              nombre_conyuge: $('#txt_ficha_personal_fecha_conyuge_nombre').val(),
+              apellido_conyuge: $('#txt_ficha_personal_fecha_conyuge_apellido').val(),
+              fecha_conyuge: $('#txt_ficha_personal_fecha_conyuge_fecha').val(),
+              lugar_conyuge: $('#txt_ficha_personal_fecha_conyuge_lugar').val(),
+              edad_conyuge: $('#txt_ficha_personal_fecha_conyuge_edad').val(),
+              departamento_conyuge: $('#select_Ficha_Personal_departamento_conyuge_g').val(),
+              provincia_conyuge: $('#select_Ficha_Personal_provincia_conyuge_g').val(),
+              distrito_conyuge: $('#select_Ficha_Personal_distrito_conyuge_g').val(),         
+              dni_conyuge: $('#select_Ficha_Personal_dni_conyuge').val(),
+              ruc_conyuge: $('#select_Ficha_Personal_ruc_conyuge').val(),
+              profesion_conyuge: $('#select_Ficha_Personal_profesion_conyuge').val(),                    
+              ocupacion_conyuge: $('#select_Ficha_Personal_ocupacion_conyuge').val(),
+              centro_conyuge: $('#select_Ficha_Personal_centro_conyuge').val(),
+              direccion_conyuge: $('#select_Ficha_Personal_direccion_conyuge').val(),
+              telefono_conyuge: $('#select_Ficha_Personal_telefono_conyuge').val(),
+              celular_conyuge: $('#select_Ficha_Personal_celular_conyuge').val(),
+    
+              nombre_padre: $('#txt_Ficha_Personal_padre_nombre').val(),
+              apellido_padre: $('#txt_Ficha_Personal_padre_apellido').val(),
+              centro_padre: $('#txt_Ficha_Personal_padre_centro').val(),
+              ocupacion_padre: $('#txt_Ficha_Personal_padre_ocupacion').val(),
+              direccion_padre: $('#txt_Ficha_Personal_padre_direccion').val(),
+              telefono_padre: $('#txt_Ficha_Personal_padre_telefono').val(),
+              celular_padre: $('#txt_Ficha_Personal_padre_celular').val(),
+    
+              nombre_madre: $('#txt_Ficha_Personal_madre_nombres').val(),
+              apellido_madre: $('#txt_Ficha_Personal_madre_apellidos').val(),
+              centro_madre: $('#txt_Ficha_Personal_madre_centro').val(),
+              ocupacion_madre: $('#txt_Ficha_Personal_madre_ocupacion').val(),
+              direccion_madre: $('#txt_Ficha_Personal_madre_direccion').val(),
+              telefono_madre: $('#txt_Ficha_Personal_madre_telefono').val(),
+              celular_madre: $('#txt_Ficha_Personal_madre_celular').val(),
+    
+              nombre_referencia: $('#txt_Ficha_Personal_referencia_nombre').val(),
+              apellido_referencia: $('#txt_Ficha_Personal_referencia_apellido').val(),
+              parentesco_referencia: $('#txt_Ficha_Personal_referencia_parentesco').val(),
+              telefono_referencia: $('#txt_Ficha_Personal_referencia_telefono').val(),
+    
+              licencia: $('#check_Ficha_Personal_licencia').val(),
+              vehiculo: $('#check_Ficha_Personal_tipo_vehiculo').val(),
+              marca: $('#check_Ficha_Personal_tipo_marca').val(),
+              anio: $('#check_Ficha_Personal_tipo_anio').val(),
+              placa: $('#check_Ficha_Personal_tipo_placa').val(), 
+              
+              profesion:profesion,
+              tecnica:tecnica,
+              otrosEstudios:otrosEstudios,
+              idioma:idioma,
+              referencia:referencia,
+              hijos:hijos,
+              movilidad:movilidad,
+              files:files,
+              policia_1:$('#Ficha_Personal_antecedentes_1').val(), 
+              policia_2:$('#Ficha_Personal_antecedentes_2').val(), 
+              policia_3:$('#Ficha_Personal_antecedentes_3').val(), 
+              policia_4:$('#Ficha_Personal_antecedentes_4').val() 
+
+
+            },
+          };        
+          console.log(datos)
+          appAjaxQuery(datos,rutaSQL).done(function(resp){  
+          
+         
+             var xhttp = new XMLHttpRequest();
+            
+            // Set POST method and ajax file path
+            xhttp.open("POST", "pages/catalogos/personas/ajaxfile.php", true);
+      
+            // call on request changes state
+            xhttp.onreadystatechange = function() {
+               if (this.readyState == 4 && this.status == 200) {
+      
+                 var response = this.responseText;
+                 if(response == 1){
+                  swal("Se ha registrado correctamente", {
+                    icon: "success",
+              });
+                 }else{
+                  swal("Ha existido un error", {
+                    icon: "error",
+              });
+                 }
+               }
+            };
+      
+          xhttp.send(data);                          
+          resetFieldsFichaPersonal();                                      
+          });         
+      }
+  }
+  function resetProgramaCapacitacion(){
+    $(".input_files_programacion_capacitacion").val(null);
+  }
+  function resetFieldsFichaPersonal(){
+  
+ 
+    $('#txt_ficha_personal_nombres').val(""),
+    $('#txt_ficha_personal_apellidos').val(""),
+    $('#txt_ficha_personal_nacimiento').val(""),
+    $('#txt_ficha_personal_lugar').val(""),      
+    $('#select_Ficha_Personal_departamento_g').val(""),
+    $('#select_Ficha_Personal_provincia_g').val(""),      
+    $('#select_Ficha_Personal_distrito_g').val(""),
+    $('#txt_ficha_personal_dni').val(""),
+    $('#txt_ficha_personal_telefono').val(""),
+    $('#txt_ficha_personal_celular').val(""),
+    $('#txt_ficha_personal_domicilio').val(""),
+    $('#txt_ficha_personal_ubanizacion').val(""),
+    $('#txt_ficha_personal_distrito').val(""),
+    $('#txt_ficha_personal_civil').val(""),
+    $('#txt_ficha_personal_edad').val(""),
+    $('#txt_ficha_personal_n_hijos').val(""),
+    $('#txt_ficha_personal_sexo').val(""),
+    $('#txt_ficha_personal_talla').val(""),   
+    $('#txt_ficha_personal_contextura').val(""),
+    
+    $('#txt_ficha_personal_ruc').val(""),
+    $('#txt_ficha_personal_essalud').val(""),
+    $('#txt_ficha_personal_onp').val(""),   
+    $('#txt_ficha_personal_cusspp').val(""),
+    $('#txt_ficha_personal_fecha_afiliacion').val(""),
+                   
+    $('#txt_ficha_personal_fecha_conyuge_nombre').val(""),
+    $('#txt_ficha_personal_fecha_conyuge_apellido').val(""),
+    $('#txt_ficha_personal_fecha_conyuge_fecha').val(""),
+    $('#txt_ficha_personal_fecha_conyuge_lugar').val(""),
+    $('#txt_ficha_personal_fecha_conyuge_edad').val(""),
+    $('#select_Ficha_Personal_departamento_conyuge_g').val(""),
+    $('#select_Ficha_Personal_provincia_conyuge_g').val(""),
+    $('#select_Ficha_Personal_distrito_conyuge_g').val(""),         
+    $('#select_Ficha_Personal_dni_conyuge').val(""),
+    $('#select_Ficha_Personal_ruc_conyuge').val(""),
+    $('#select_Ficha_Personal_profesion_conyuge').val(""),                    
+    $('#select_Ficha_Personal_ocupacion_conyuge').val(""),
+    $('#select_Ficha_Personal_centro_conyuge').val(""),
+    $('#select_Ficha_Personal_direccion_conyuge').val(""),
+    $('#select_Ficha_Personal_telefono_conyuge').val(""),
+    $('#select_Ficha_Personal_celular_conyuge').val(""),
+
+    $('#txt_Ficha_Personal_padre_nombre').val(""),
+    $('#txt_Ficha_Personal_padre_apellido').val(""),
+    $('#txt_Ficha_Personal_padre_centro').val(""),
+    $('#txt_Ficha_Personal_padre_ocupacion').val(""),
+    $('#txt_Ficha_Personal_padre_direccion').val(""),
+    $('#txt_Ficha_Personal_padre_telefono').val(""),
+    $('#txt_Ficha_Personal_padre_celular').val(""),
+
+    $('#txt_Ficha_Personal_madre_nombres').val(""),
+    $('#txt_Ficha_Personal_madre_apellidos').val(""),
+    $('#txt_Ficha_Personal_madre_centro').val(""),
+    $('#txt_Ficha_Personal_madre_ocupacion').val(""),
+    $('#txt_Ficha_Personal_madre_direccion').val(""),
+    $('#txt_Ficha_Personal_madre_telefono').val(""),
+    $('#txt_Ficha_Personal_madre_celular').val(""),
+
+    $('#txt_Ficha_Personal_referencia_nombre').val(""),
+    $('#txt_Ficha_Personal_referencia_apellido').val(""),
+    $('#txt_Ficha_Personal_referencia_parentesco').val(""),
+    $('#txt_Ficha_Personal_referencia_telefono').val(""),
+
+    $('#check_Ficha_Personal_licencia').val(""),
+    $('#check_Ficha_Personal_tipo_vehiculo').val(""),
+    $('#check_Ficha_Personal_tipo_marca').val(""),
+    $('#check_Ficha_Personal_tipo_anio').val(""),
+    $('#check_Ficha_Personal_tipo_placa').val("")
+    
+
+    $(".check_Ficha_Personal_movilidad:radio").prop("checked", false);
+    $('#Ficha_Personal_antecedentes_1').val(""), 
+    $('#Ficha_Personal_antecedentes_2').val(""), 
+    $('#Ficha_Personal_antecedentes_3').val(""), 
+    $('#Ficha_Personal_antecedentes_4').val(""), 
+    $(".addFichaPersonalProfesion").remove();
+    $(".addFichaPersonalReferencia").remove();
+    $(".addFichaPersonalTecnica").remove();
+    $(".addFichaPersonalOtrosEstudios").remove();
+    $(".addFichaPersonalIdiomas").remove();
+    $(".input_files_ficha_personal").val(null);
+    $(".addChildren").remove();
+    
   }
