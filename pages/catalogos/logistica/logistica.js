@@ -1,3926 +1,4244 @@
 var rutaSQL = "pages/catalogos/logistica/sql.php";
+var ubigeo = window.ubigeo
 
-function appBotonReset(){
-
+$('#slct_group_GruposClass').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); 
+  console.log(value);
+  chargeCorrelativeGroupClass(value);
   
-
-  let datos = {
-    TipoQuery : "01_datosAlmacen"
-  }
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    appLlenarDataEnComboBox(resp.sede,"#cbo01_Sede",0);
-    appLlenarDataEnComboBox(resp.responsable,"#cbo01_Responsable",0);
-    appLlenarDataEnComboBox(resp.pais,"#cbo01_Pais",0);
-    appLlenarDataEnComboBox(resp.departamento,"#cbo01_Departamento",0);
-    appLlenarDataEnComboBox(resp.moneda,"#cbo03_moneda",0);
-    appLlenarDataEnComboInput(resp.proveedor,"#grupoOptionsProveedor",0);
-    appLlenarDataEnComboInput(resp.proveedor,"#grupoOptionsProveedor10S",0);
-    appLlenarDataEnComboInput(resp.proveedor,"#grupoOptionsProveedor11",0);
-    appLlenarDataEnComboInput(resp.proveedor,"#grupoOptionsProveedorAnt",0);
-    appLlenarDataEnComboInput(resp.proveedor,"#grupoOptionsProveedorAct",0);
-    appLlenarDataEnComboInput(resp.cotizacion,"#grupoOptionsCotizacion",0);
-    appLlenarDataEnComboInput(resp.groupClase,"#grupoOptionsClase",0);
-    appLlenarDataEnComboBox(resp.stockClase,"#cbo03_stock_clase",0);
-    appLlenarDataEnComboBox(resp.stockTipo,"#cbo03_stock_tipo",0);
-    appLlenarDataEnComboBox(resp.tipoUsuario,"#cbo08_Rol",0);
-    appLlenarDataEnComboInput(resp.grupo,"#grupoOptions",0);
-    appLlenarDataEnComboInput(resp.herramienta,"#grupoOptionsHerra",0);
-    appLlenarDataEnComboInput(resp.herramienta,"#grupoOptionsHerraRet",0);
-    appLlenarDataEnComboInput(resp.usuario,"#grupoOptionsUsu",0);
-    appLlenarDataEnComboInput(resp.tarea,"#grupoOptionsTarea",0);
-
-  });
-
-  app01Almacenes();
-  app21GridAll();
-  app22GridAll();
-  app3GridAll();
-  app4GridAll();
-  app6GridAll();
-  app7GridAll();
-  app8GridAll();
-  app9GridAll();
-  app10GridAll();
-  app12GridAll();
-  app13GridAll();
-  app14GridAll();
-
-  $("#txt09_Fecha").datepicker("setDate",moment().format("DD/MM/YYYY"));
-  $("#txt12_Fecha").datepicker("setDate",moment().format("DD/MM/YYYY"));
-}
-
-
-function app00_Tarea(){
-  let datos = {
-    TipoQuery : "01_datosAlmacen"
-  }
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    appLlenarDataEnComboInput(resp.herramienta,"#grupoOptionsHerra",0);
-    appLlenarDataEnComboInput(resp.herramienta,"#grupoOptionsHerraRet",0);
-  });
-}
-
-function app00_Inventario(){
-  let datos = {
-    TipoQuery : "01_datosAlmacen"
-  }
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    appLlenarDataEnComboBox(resp.moneda,"#cbo03_moneda",0);
-    appLlenarDataEnComboInput(resp.proveedor,"#grupoOptionsProveedor",0);
-    appLlenarDataEnComboInput(resp.groupClase,"#grupoOptionsClase",0);
-    appLlenarDataEnComboBox(resp.stockClase,"#cbo03_stock_clase",0);
-    appLlenarDataEnComboBox(resp.stockTipo,"#cbo03_stock_tipo",0);
-  });
-  app3GridAll();
-}
-
-function app00_Retiro(){
-  let datos = {
-    TipoQuery : "01_datosAlmacen"
-  }
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    appLlenarDataEnComboInput(resp.usuario,"#grupoOptionsUsu",0);
-    appLlenarDataEnComboInput(resp.tarea,"#grupoOptionsTarea",0);
-
-  });
-}
-
-function app00_Cotizacion(){
-  let datos = {
-    TipoQuery : "01_datosAlmacen"
-  }
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    appLlenarDataEnComboInput(resp.proveedor,"#grupoOptionsProveedor9S",0);
-    app10GridAll();
-  
-  });
-}
-
-function app00_CotiProveedor(){
-  let datos = {
-    TipoQuery : "01_datosAlmacen"
-  }
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    appLlenarDataEnComboInput(resp.proveedor,"#grupoOptionsProveedor11",0);
-    appLlenarDataEnComboInput(resp.cotizacion,"#grupoOptionsCotizacion",0);
-
-  });
-}
-
-function app00_Req(){
-  app9GridAll();
-}
-
-function app00_Orden(){
-  let datos = {
-    TipoQuery : "01_datosAlmacen"
-  }
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    appLlenarDataEnComboInput(resp.proveedor,"#grupoOptionsProveedorAnt",0);
-    appLlenarDataEnComboInput(resp.proveedor,"#grupoOptionsProveedorAct",0);
-    app12GridAll();
-  });
-}
-
-function app00_OrdenCompra(){
-  app13GridAll();
-}
-function app01Boton_new(){
-    let datos = {
-      TipoQuery : "01_nuevo"
-    }
-  
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-      appLlenarDataEnComboBox(resp.departamento,"#cbo01_Departamento",0);
-      appLlenarDataEnComboBox(resp.provincia,"#cbo01_Provincia",0);
-      appLlenarDataEnComboBox(resp.distrito,"#cbo01_Distrito",0);
-      
-     
-      $("#txt01_Fecha").datepicker("setDate",moment().format("DD/MM/YYYY"));
-      $("#txt01_NroAlmacen").val("");
-      $("#txt01_Descripción").val("");
-      $("#cbo01_Sede").val(1);
-      $("#txt01_Direccion").val("");
-      $("#txt01_Referencia").val("");
-      $("#cbo01_Responsable").val(1);
-      $("#txt01_Telefono").val("");
-      $("#cbo01_Pais").val(1);
-      $("#cbo01_Departamento").val(1);
-      $("#cbo01_Provincia").val(1);
-      $("#cbo01_Distrito").val(1);
-      $("#cbo01_Estado").val("Activo");
-
-    
-      //app02Estado(false);
-      
-      $("#btn01_Cancel").show();
-      $("#btn01_Delete").hide();
-      $("#btn01_Save").show();
-      $("#btn01_New").hide();
-      $("#btn01_Update").hide();
-      
-    });
-  }
-
-
-function app01Boton_cancel(){
-  appBotonReset();
-  $("#btn01_Cancel").hide();
-  $("#btn01_Delete").show();
-  $("#btn01_Save").hide();
-  $("#btn01_New").show();
-  $("#btn01_Update").show();
-}
-
-function app01Boton_delete(){
-  var id = $("#txt01_NroAlmacen").val();
-  if(confirm("¿Esta seguro que desea eliminar el almacen "+id+"?")){
-    let datos = {
-      TipoQuery: "01_save",
-      commandSQL : "DEL",
-      status: 0,
-      almID: id
-    }
-    //console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        app01Boton_cancel();
-        
-        alert("El almacen numero "+id+" fue eliminado!!");
-      }
-    });
-  }
-  else{
-      return false;
-  }
-}
-
-function app01Boton_save(){
-
-  let datos = app01GetDatos_ToDatabase();
-  if(datos!=""){
-    datos.commandSQL = "INS";
-    console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        app01Boton_cancel();
-        alert("El almacen fue creado exitosamente!");
-      }
-    });
-  } else {
-    alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-  }
-
-}
-
-function app01GetDatos_ToDatabase(){
-
-  let EsError = false;
-  let rpta = "";
-
-  $('.box-body .form-group').removeClass('has-error');
-  //if($("#txtDocum_Valor").val()=="") { $("#divDocum_Valor").prop("class","form-group has-error"); EsError = true; }
-
-  if(!EsError){
-   
-
-    rpta = {
-      TipoQuery : '01_save',
-      estado: $("#cbo01_Estado").val(),
-      descripcion: $("#txt01_Descripción").val(),
-      sede:$("#cbo01_Sede").val(),
-      direccion:$("#txt01_Direccion").val(),
-      referencia:$("#txt01_Referencia").val(),
-      responsable:$("#cbo01_Responsable").val(),
-      telefono:$("#txt01_Telefono").val(),
-      departamento:$("#cbo01_Departamento").val(),
-      provincia:$("#cbo01_Provincia").val(),
-      distrito:$("#cbo01_Distrito").val(),
-      status:1,
-      fecha:appConvertToFecha($("#txt01_Fecha").val(),"-")
-    }
-  }
-  return rpta;
-}
-
-
-function app01Boton_update(){
-  let datos = app01GetDatos_ToDatabase();
-  if(datos!=""){
-    datos.commandSQL = "UPD";
-    datos.almID =$("#txt01_NroAlmacen").val(),
-    console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        app01Boton_cancel();
-        
-        alert("El almacen se actualizo!");
-      }
-    });
-  } else {
-    alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-  }
-}
-
-function app01Almacenes(){
-
-  let datos = {
-    TipoQuery : '01_almacen'
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr onclick="javascript:app01Get_almacen('+(parseInt(valor.ID))+')";>'; 
-        fila += '<th scope="row">'+(valor.ID)+'</th>';
-        fila += '<td>'+(valor.descripcion)+'</td>';
-        fila += '</tr>';
-      });
-      $('#alm01DatosBody').html(fila);
-
-      
-      app01Get_almacen(resp.tabla[0].ID);
-
-    }else{
-      $('#alm01DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados </td></tr>');
-    }
-    
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-
-function app01Get_almacen(registro){
-
-  
-  $("#btn01_Cancel").hide();
-  $("#btn01_Delete").show();
-  $("#btn01_Save").hide();
-  $("#btn01_New").show();
-  $("#btn01_Update").show();
-  //alert(registro);
-  let datos = {
-    TipoQuery : '01_getbyid',
-    almacen: registro
-  };
-
-  //var idProv=0, idDis=0, idDep=0, idPais=0;
-  var provincia, distrito, departamento;
-  let distritos=[], provincias=[];
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    $("#txt01_Fecha").datepicker("setDate",moment(resp.tabla[0].fecha).format("DD/MM/YYYY"));
-    $("#txt01_NroAlmacen").val(resp.tabla[0].ID);
-    $("#txt01_Descripción").val(resp.tabla[0].descripcion);
-    $("#cbo01_Sede").val(resp.tabla[0].sede);
-    $("#txt01_Direccion").val(resp.tabla[0].direccion);
-    $("#txt01_Referencia").val(resp.tabla[0].referencia);
-    $("#cbo01_Responsable").val(resp.tabla[0].responsable);
-    $("#txt01_Telefono").val(resp.tabla[0].telefono);
-    $("#cbo01_Departamento").val(resp.tabla[0].departamento);
-    $("#cbo01_Estado").val(resp.tabla[0].estado);
-
-
-    var idProv, idDis;
-    idProv= resp.tabla[0].provincia;
-    idDis= resp.tabla[0].distrito;
-    let datos = {
-      TipoQuery : '01_datosAlmaProv',
-      departamento: resp.tabla[0].departamento
-    };
-
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      appLlenarDataEnComboBox(resp.tabla,"#cbo01_Provincia",0);
-      $("#cbo01_Provincia").val(idProv);
-
+})
+function modalDeleteAlmacen(id){
+  swal({
+    title: "¿Estas seguro que deseas eliminar?",
+    text: "",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {        
       let datos = {
-        TipoQuery : '01_datosAlmaDist',
-        provincia: idProv
+        TipoQuery : 'sql_delete_almacen',
+        value:id
       };
-      appAjaxQuery(datos,rutaSQL).done(function(resp){
-        appLlenarDataEnComboBox(resp.tabla,"#cbo01_Distrito",0);
-        $("#cbo01_Distrito").val(idDis);
+
+      appAjaxQuery(datos,rutaSQL).done(function(resp){                
+        updateGrid("gridAlmacenGrid");
+        swal("Has eliminado el registro", {
+        icon: "success",
       });
 
-    });
-  
-
-    //$("#cbo01_Provincia").val(resp.tabla[0].provincia);
-    //$("#cbo01_Distrito").val(resp.tabla[0].distrito);
-    
-    
-
-    
- 
-    });
-
-}
-
-function app02Group(){
-  
-  $("#grid02_groupClass").hide();
-  $("#grid02_group").show();
-  $("#btn02_New").hide();
-  $("#btn021_New").show();
-  $("#link02_groupClass").removeClass("active");
-  $("#link02_group").addClass("active");
-  app021Boton_cancel();
-  
-
-}
-
-function app02Group_class(){
-  
-  $("#grid02_group").hide();
-  $("#grid02_groupClass").show();
-  $("#btn021_New").hide();
-  $("#btn02_New").show();
-  
-  $("#link02_group").removeClass("active");
-  $("#link02_groupClass").addClass("active");
-
-  app02Boton_cancel();
-
-}
-
-
-function app02Boton_new(){
-  //hide
-  //gruop other
-  //buttons
-  $("#btn021_Cancel").hide();
-  $("#btn021_Save").hide();
-  $("#btn021_Update").hide();
-  $("#btn021_New").hide();
-
-  //edit
-  $("#edit021").hide();
-  //grid
-  $("#grid02_group").hide();
-
-  //hide
-  //group class own
-  //buttons
-  $("#btn02_Update").hide();
-  $("#btn02_New").hide();
-
-  //grid
-  $("#grid02_groupClass").hide();
-
-  //show
-  //group buttons
-  $("#btn02_Cancel").show();
-  $("#btn02_Save").show();
-
-  //group edit
-  $("#edit02").show();
-
-}
-
-function app02Boton_cancel(){
-  //hide
-  //gruop other
-  //buttons
-  $("#btn021_Cancel").hide();
-  $("#btn021_Save").hide();
-  $("#btn021_Update").hide();
-  $("#btn021_New").hide();
-
-  //edit
-  $("#edit021").hide();
-  //grid
-  $("#grid02_group").hide();
-
-  //hide
-  //group class own
-  //buttons
-  $("#btn02_Update").hide();
-  $("#btn02_New").show();
-
-  //grid
-  $("#grid02_groupClass").show();
-
-  //show
-  //group buttons
-  $("#btn02_Cancel").hide();
-  $("#btn02_Save").hide();
-
-  //group edit
-  $("#edit02").hide();
-  $("#txt02_NroGrupo").val("");
-  $("#txt02_Descripcion").val("");
-  $("#txt022_NroClase").val("");
-  $("#txt022_Descripcion").val("");
-  $("#txt022_NroGrupo").val("");
-}
-
-function app021Boton_new(){
-  //hide
-  //gruop class other
-  //buttons
-  $("#btn02_Cancel").hide();
-  $("#btn02_Save").hide();
-  $("#btn02_Update").hide();
-  $("#btn02_New").hide();
-
-  //edit
-  $("#edit02").hide();
-  //grid
-  $("#grid02_groupClass").hide();
-
-  //hide
-  //group  own
-  //buttons
-  $("#btn021_Update").hide();
-  $("#btn021_New").hide();
-
-  //grid
-  $("#grid02_group").hide();
-
-  //show
-  //group buttons
-  $("#btn021_Cancel").show();
-  $("#btn021_Save").show();
-
-  //group edit
-  $("#edit021").show();
-  
-}
-
-function app021Boton_load(){
-  //hide
-  //gruop class other
-  //buttons
-  $("#btn02_Cancel").hide();
-  $("#btn02_Save").hide();
-  $("#btn02_Update").hide();
-  $("#btn02_New").hide();
-
-  //edit
-  $("#edit02").hide();
-  //grid
-  $("#grid02_groupClass").hide();
-
-  //hide
-  //group  own
-  //buttons
-  $("#btn021_Save").hide();
-  $("#btn021_New").hide();
-
-  //grid
-  $("#grid02_group").hide();
-
-  //show
-  //group buttons
-  $("#btn021_Cancel").show();
-  $("#btn021_Save").hide();
-
-  //group edit
-  $("#edit021").show();
-  $("#btn021_Update").show();
-  
-}
-
-function app02Boton_load(){
-  //hide
-  //gruop class other
-  //buttons
-  $("#btn021_Cancel").hide();
-  $("#btn021_Save").hide();
-  $("#btn021_Update").hide();
-  $("#btn021_New").hide();
-
-  //edit
-  $("#edit021").hide();
-  //grid
-  $("#grid02_group").hide();
-
-  //hide
-  //group  own
-  //buttons
-  $("#btn02_Save").hide();
-  $("#btn02_New").hide();
-
-  //grid
-  $("#grid02_groupClass").hide();
-
-  //show
-  //group buttons
-  $("#btn02_Cancel").show();
-  $("#btn02_Save").hide();
-
-  //group edit
-  $("#edit02").show();
-  $("#btn02_Update").show();
-  
-}
-
-function app021Boton_cancel(){
-  $//hide
-  //gruop class other
-  //buttons
-  $("#btn02_Cancel").hide();
-  $("#btn02_Save").hide();
-  $("#btn02_Update").hide();
-  $("#btn02_New").hide();
-
-  //edit
-  $("#edit02").hide();
-  //grid
-  $("#grid02_groupClass").hide();
-
-  //hide
-  //group  own
-  //buttons
-  $("#btn021_Update").hide();
-  $("#btn021_New").show();
-
-  //grid
-  $("#grid02_group").show();
-
-  //show
-  //group buttons
-  $("#btn021_Cancel").hide();
-  $("#btn021_Save").hide();
-
-  //group edit
-  $("#edit021").hide();
-  $("#txt02_NroGrupo").val("");
-  $("#txt02_Descripcion").val("");
-  $("#txt022_NroClase").val("");
-  $("#txt022_Descripcion").val("");
-  $("#txt022_NroGrupo").val("");
-  
-}
-
-function app021Boton_ins(){
-
-  
-  let datos = app021GetDatos_ToDatabase();
-
-  let data={
-    TipoQuery : '02_getgrupo',
-    codigo:datos.codigo
-  }
-
-  appAjaxQuery(data,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      alert("El codigo de grupo ya existe! Ingrese otro...");
-    }else{
-      if(datos!=""){
-        datos.commandSQL = "INS";
-        console.log(datos);
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-          console.log(resp);
-          if(resp.error==0) {
-            alert("El group fue creado exitosamente!");
-            let datos = {
-              TipoQuery : "01_datosGrupo"
-            }
-          
-            appAjaxQuery(datos,rutaSQL).done(function(resp){
-              appLlenarDataEnComboInput(resp.grupo,"#grupoOptions",0);
-            });
-            app021Boton_cancel();
-            app21GridAll();
-            
-          }
-        });
-      } else {
-        alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-      }
+      });  
+      
     }
   });
-  
 }
-
-function app021GetDatos_ToDatabase(){
-
-  let EsError = false;
-  let rpta = "";
-
-  $('.box-body .form-group').removeClass('has-error');
-  //if($("#txtDocum_Valor").val()=="") { $("#divDocum_Valor").prop("class","form-group has-error"); EsError = true; }
-
-  if(!EsError){
-   
-
-    rpta = {
-      TipoQuery : '02_save',
-      ID: $("#txt02_id").val(),
-      codigo: $("#txt02_NroGrupo").val(),
-      descripcion: $("#txt02_Descripcion").val(),
-    }
-  }
-  return rpta;
-}
-
-function app21GridAll(){
-  $('#grd021DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
-  let datos = {
-    TipoQuery : '02_grid'
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-        '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app021_laod('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-        '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app021Boton_delete('+(parseInt(valor.ID))+','+valor.codigo+');"><i class="fa fa-trash"></i></button></td>';
-        
-        fila += '<td>'+(valor.codigo)+'</td>';
-        fila += '<td>'+(valor.descripcion)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd021DatosBody').html(fila);
-    }else{
-      $('#grd021DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-function app021Boton_Search(){
-  $('#grd021DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt021_Buscar_grupo").val();
-  let datos = {
-    TipoQuery : '02_grid_search',
-    search_text : $("#txt021_Buscar_grupo").val()
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-        '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app021Boton_laod('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-        '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app021Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';
-        
-        fila += '<td>'+(valor.codigo)+'</td>';
-        fila += '<td>'+(valor.descripcion)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd021DatosBody').html(fila);
-    }else{
-      $('#grd021DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-//formulario para accion nuevo ST
-function app021_laod($id){
-
-  let datos = {
-    TipoQuery: "022_getbygrupo",
-    grupo:$id
-  }
-  //console.log(datos);
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    if(resp.tabla.length>0){
-      alert("El group no se puede editar ya que tiene group class!");
-    }else{
+function modalDeleteItem(id){
+  swal({
+    title: "¿Estas seguro que deseas eliminar?",
+    text: "",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {        
       let datos = {
-        TipoQuery : "02_getbyid",
-        grupo: $id
-      }
-      appAjaxQuery(datos,rutaSQL).done(function(resp){
-        //$("#txt02_NroActivo").val($("#lbl_ActivoGrupo").html()+' - '+$("#lbl_ActivoNro").html());
-        
-        $("#txt02_id").val(resp.tabla[0].ID);
-        $("#txt02_NroGrupo").val(resp.tabla[0].codigo);
-        $("#txt02_Descripcion").val(resp.tabla[0].descripcion);
-        app021Boton_load();
-        
-          
+        TipoQuery : 'sql_delete_item',
+        value:id
+      };
+
+      appAjaxQuery(datos,rutaSQL).done(function(resp){                
+        updateGrid("gridItemsGrid");
+        swal("Has eliminado el registro", {
+        icon: "success",
       });
-    }
-  });
-  
-}
 
-//progrmación pendiente
-function app021Boton_update(){
-  let datos = app021GetDatos_ToDatabase();
-  let data={
-    TipoQuery : '02_getgrupo',
-    codigo:datos.codigo
-  }
-
-  appAjaxQuery(data,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      alert("El codigo de grupo ya existe! Ingrese otro...");
-    }else{
-      if(datos!=""){
-        datos.commandSQL = "UPD";
-        console.log(datos);
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-          console.log(resp);
-          if(resp.error==0) {
-            alert("El group se actualizo correctamente!");
-    
-            let datos = {
-              TipoQuery : "01_datosGrupo"
-            }
-          
-            appAjaxQuery(datos,rutaSQL).done(function(resp){
-              appLlenarDataEnComboInput(resp.grupo,"#grupoOptions",0);
-            });
-            app021Boton_cancel();
-            app21GridAll();
-          }
-        });
-      } else {
-        alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-      }
-    }
-  });
-  
-}
-
-function app021Boton_delete($id,$codigo){
-
-  if(confirm("¿Esta seguro que desea eliminar el group con código: "+$codigo+"?")){
-
-    let datos = {
-      TipoQuery: "022_getbygrupo",
-      grupo:$id
-    }
-    //console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-     
-      if(resp.tabla.length>0){
-        alert("El group no se puede eliminar ya que tiene group class!");
-      }else{
-        datos = {
-          TipoQuery: "02_save",
-          commandSQL : "DEL",
-          status: 0,
-          ID: $id
-        }
-        //console.log(datos);
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-          console.log(resp);
-          if(resp.error==0) {
-            
-            alert("El group con código "+$codigo+" fue eliminado!");
-            let datos = {
-              TipoQuery : "01_datosGrupo"
-            }
-          
-            appAjaxQuery(datos,rutaSQL).done(function(resp){
-              appLlenarDataEnComboInput(resp.grupo,"#grupoOptions",0);
-            });
-            app021Boton_cancel();
-            app21GridAll();
-          }
-        });
-      }
-    });
-
-    
-  }
-  else{
-      return false;
-  }
-  
-}
-
-
-function app02Boton_ins(){
-
-  let datos = app02GetDatos_ToDatabase();
-  let data={
-    TipoQuery : '022_getclase',
-    codigo:datos.codigo
-  }
-
-  appAjaxQuery(data,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      alert("El codigo de clase ya existe! Ingrese otro...");
-    }else{
-      if(datos!=""){
-        datos.commandSQL = "INS";
-        console.log(datos);
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-          console.log(resp);
-          if(resp.error==0) {
-            alert("El group class fue creado exitosamente!");
-            app02Boton_cancel();
-            app22GridAll();
-            
-          }
-        });
-      } else {
-        alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-      }
-    }
-  });
-  
-}
-
-function app02GetDatos_ToDatabase(){
-
-  let EsError = false;
-  let rpta = "";
-
-  $('.box-body .form-group').removeClass('has-error');
-  //if($("#txtDocum_Valor").val()=="") { $("#divDocum_Valor").prop("class","form-group has-error"); EsError = true; }
-
-  if(!EsError){
-   
-    var grupo = document.getElementById("txt022_NroGrupo").value;
-    var grupoID = document.querySelector("#grupoOptions option[value='"+grupo+"']").dataset.value;
-    //alert(grupoID);
-    rpta = {
-      TipoQuery : '022_save',
-      ID: $("#txt022_id").val(),
-      codigo: $("#txt022_NroGrupo").val()+""+$("#txt022_NroClase").val(),
-      grupo:grupoID,
-      descripcion: $("#txt022_Descripcion").val(),
-    }
-  }
-  return rpta;
-}
-
-
-function app02Boton_Search(){
-  $('#grd022DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt022_Buscar_clase").val();
-  let datos = {
-    TipoQuery : '022_grid_search',
-    search_text : $("#txt022_Buscar_clase").val()
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-        '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app021Boton_laod('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-        '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app021Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';
-        
-        fila += '<td>'+(valor.codigo)+'</td>';
-        fila += '<td>'+(valor.descripcion)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd022DatosBody').html(fila);
-    }else{
-      $('#grd022DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-function app22GridAll(){
-  $('#grd022DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
-  let datos = {
-    TipoQuery : '022_grid'
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-        '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app02laod('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-        '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app02Boton_delete('+(parseInt(valor.ID))+','+valor.codigo+');"><i class="fa fa-trash"></i></button></td>';
-        
-        fila += '<td>'+(valor.codigo)+'</td>';
-        fila += '<td>'+(valor.descripcion)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd022DatosBody').html(fila);
-    }else{
-      $('#grd022DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-function app02laod($id){
-
-
-  let datos = {
-    TipoQuery : "022_getbyid",
-    clase: $id
-  }
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    $("#txt022_id").val(resp.tabla[0].ID);
-    var cod = resp.tabla[0].codigo.substr(2, 3);
-    $("#txt022_NroClase").val(cod);
-    $("#txt022_Descripcion").val(resp.tabla[0].descripcion);
-    let datos={
-      TipoQuery:"02_getbyid",
-      grupo: resp.tabla[0].grupo
-    }
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-      $("#txt022_NroGrupo").val(resp.tabla[0].codigo);
-      app02Boton_load();
-    });
-    
-    
+      });  
       
+    }
   });
-   
+}
+function modalDeleteCategoryProveedor(id){
+  swal({
+    title: "¿Estas seguro que deseas eliminar?",
+    text: "",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {        
+      let datos = {
+        TipoQuery : 'sql_delete_categoryProveedor',
+        value:id
+      };
+
+      appAjaxQuery(datos,rutaSQL).done(function(resp){                
+        updateGrid("gridProveedorCategory");
+        swal("Has eliminado el registro", {
+        icon: "success",
+      });
+
+      });  
+      
+    }
+  });
+}
+function modalDeleteCategoryProveedor(id){
+  swal({
+    title: "¿Estas seguro que deseas eliminar?",
+    text: "Eliminar un proveedor afectara tambien el registro de evaluación y selección de Proveedores",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {        
+      let datos = {
+        TipoQuery : 'sql_delete_proveedor',
+        value:id
+      };
+
+      appAjaxQuery(datos,rutaSQL).done(function(resp){                
+        updateGrid("gridProveedorGrid");
+        swal("Has eliminado el registro", {
+        icon: "success",
+      });
+
+      });  
+      
+    }
+  });
 }
 
-function app02Boton_update(){
-  let datos = app02GetDatos_ToDatabase();
-  let data={
-    TipoQuery : '022_getclase',
-    codigo:datos.codigo
+
+function generatepdfOrdenCompra(id){
+  let datos = {
+    TipoQuery : 'sql_get_orden_compra_by_id',
+    data:id 
   }
 
-  appAjaxQuery(data,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      alert("El codigo de clase ya existe! Ingrese otro...");
-    }else{
-      if(datos!=""){
-        datos.commandSQL = "UPD";
-        console.log(datos);
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-          console.log(resp);
-          if(resp.error==0) {
-          
-            alert("La class fue creado exitosamente!");
-            app02Boton_cancel();
-            app22GridAll();
+  appAjaxQuery(datos,rutaSQL).done(function(resp){  
+    console.log(resp)
+    let mainitems=resp.data.map((item)=>{
+
+      return {'item':item.item,
+      'codigo_parte':item.codigo_parte,
+      'descripcion':item.descripcion,
+      'cantidad':item.cantidad,
+      'centro_costo':item.centro_costo,
+      'unidad_medida':item.unidad_medida,
+      'precio':item.precio,
+      'total':(Number(item.cantidad)*Number(item.precio)).toFixed(2)
           }
-        });
-      } else {
-        alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-      }
-    }
-  });
- 
-}
-
-function app02Boton_delete($id,$codigo){
-
-  if(confirm("¿Esta seguro que desea eliminar el group class con código: "+$codigo+"?")){
-    let datos = {
-      TipoQuery: "022_save",
-      commandSQL : "DEL",
-      status: 0,
-      ID: $id
-    }
-    //console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        alert("El group class con código "+$codigo+" fue eliminado!");
-        app02Boton_cancel();
-        app22GridAll();
-      }
-    });
-  }
-  else{
-      return false;
-  }
-  
-}
-
-//ini item
-function app3GridAll(){
-  $('#grd03DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
-  let datos = {
-    TipoQuery : '03_grid'
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-        '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app03Boton_load('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-        '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app03Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';
-        
-        fila += '<td>'+(valor.ID)+'</td>';
-        fila += '<td>'+(valor.clase)+'</td>';
-        fila += '<td>'+(valor.proveedor)+'</td>';
-        fila += '<td>'+(valor.fabricante)+'</td>';
-        fila += '<td>'+(valor.nombre)+'</td>';
-        fila += '<td>'+(valor.descripcion)+'</td>';
-        fila += '<td>'+(valor.unidad)+'</td>';
-        fila += '<td>'+(valor.stock)+'</td>';
-        fila += '<td>'+(valor.precio)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd03DatosBody').html(fila);
-    }else{
-      $('#grd03DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-function app03Boton_Search(){
-  $('#grd03DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt03_Buscar").val();
-  if(txtBuscar.length>0){
-    let datos = {
-      TipoQuery : '03_getbyclase',
-      ID: txtBuscar
-    };
-  
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.tabla.length>0){
-        let fila = "";
-        $.each(resp.tabla,function(key, valor){
-          fila += '<tr>';
-          fila += '<td>'+
-          '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app03Boton_load('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-          '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app03Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';
-          
-          fila += '<td>'+(valor.ID)+'</td>';
-          fila += '<td>'+(valor.clase)+'</td>';
-          fila += '<td>'+(valor.proveedor)+'</td>';
-          fila += '<td>'+(valor.fabricante)+'</td>';
-          fila += '<td>'+(valor.nombre)+'</td>';
-          fila += '<td>'+(valor.descripcion)+'</td>';
-          fila += '<td>'+(valor.unidad)+'</td>';
-          fila += '<td>'+(valor.stock)+'</td>';
-          fila += '<td>'+(valor.precio)+'</td>';
-          fila += '</tr>';
-        });
-        $('#grd03DatosBody').html(fila);
-      }else{
-        $('#grd03DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-      }
-      //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-    });
-  }else{
-    app3GridAll();
-  }
-  
-}
-function app03Boton_new(){
-  $("#grid03").hide();
-  $("#btn03_New").hide();
-  $("#btn03_Update").hide();
-  $("#edit03").show();
-  $("#btn03_Save").show();
-  $("#btn03_Cancel").show();
-}
-
-function app03Boton_cancel(){
-  app3GridAll();
-  $("#edit03").hide();
-  $("#btn03_Save").hide();
-  $("#btn03_Cancel").hide();
-  $("#btn03_Update").hide();
-  $("#grid03").show();
-  $("#btn03_New").show();
-  $("#txt03_id").val("");
-  $("#cbo03_group_class").val("");
-  $("#txt03_ROP").val("");
-  $("#txt03_ROQ").val("");
-  $("#cbo03_UOI").val("EA");
-  $("#txt03_num_parte").val("");
-  $("#cbo03_moneda").val(1);
-  $("#txt03_precio").val("");
-  $("#cbo03_proveedor").val("");
-  $("#txt03_nombre").val("");
-  $("#txt03_nombre_col").val("");
-  $("#txt03_stock_cod").val("");
-  $("#txt03_stock_num").val("");
-  $("#cbo03_stock_clase").val(1);
-  $("#cbo03_stock_tipo").val(1);
-  $("#txt03_stock_min").val("");
-  $("#txt03_stock").val("");
-  $("#area03_descripcion").val("");
-  $("#cbo03_apl_tipo").val("G");
-  $("#txt03_apl_ref").val("");
-  $("#txt03_apl_cant").val("");
-  $("#txt03_cod_comp").val("");
-}
-
-function app03GetDatos_ToDatabase(){
-
-  let EsError = false;
-  let rpta = "";
-  $('.box-body .form-group').removeClass('has-error');
-  //if($("#txtDocum_Valor").val()=="") { $("#divDocum_Valor").prop("class","form-group has-error"); EsError = true; }
-  var clase = document.getElementById("cbo03_group_class").value;
-  var claseID = document.querySelector("#grupoOptionsClase option[value='"+clase+"']").dataset.value;
-  var proveedor = document.getElementById("cbo03_proveedor").value;
-  var provID = document.querySelector("#grupoOptionsProveedor option[value='"+proveedor+"']").dataset.value;
-  if(!EsError){
-    rpta = {
-      TipoQuery : '03_save',
-      clase: claseID,
-      rop: $("#txt03_ROP").val(),
-      roq: $("#txt03_ROQ").val(),
-      uoi: $("#cbo03_UOI").val(),
-      numParte: $("#txt03_num_parte").val(),
-      moneda: $("#cbo03_moneda").val(),
-      precio: $("#txt03_precio").val(),
-      proveedor: provID,
-      nombre: $("#txt03_nombre").val(),
-      nombreCol: $("#txt03_nombre_col").val(),
-      stockCod: $("#txt03_stock_cod").val(),
-      stockNum: $("#txt03_stock_num").val(),
-      stockClase: $("#cbo03_stock_clase").val(),
-      stockTipo: $("#cbo03_stock_tipo").val(),
-      stockMin: $("#txt03_stock_min").val(),
-      stock: $("#txt03_stock").val(),
-      descripcion: $("#area03_descripcion").val(),
-      apltipo: $("#cbo03_apl_tipo").val(),
-      aplReferencia: $("#txt03_apl_ref").val(),
-      aplCantidad: $("#txt03_apl_cant").val(),
-      componente: $("#txt03_cod_comp").val()
-    }
-  }
-  return rpta;
-}
-
-function app03Boton_save(){
-
-  let datos = app03GetDatos_ToDatabase();
- 
-  if(datos!=""){
-    datos.commandSQL = "INS";
-    console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.error==0) {
-
-        alert("El item fue registrado exitosamente!");
-        app03Boton_cancel();
-      }
-    });
-  } else {
-    alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-  }
-}
-
-function app03_load(){
-  $("#grid03").hide();
-  $("#btn03_New").hide();
-  $("#btn03_Save").hide();
-  $("#edit03").show();
-  $("#btn03_Update").show();
-  $("#btn03_Cancel").show();
-}
-
-function app03Boton_load(id){
-
-  let datos = {
-    TipoQuery : "03_getbyid",
-    ID: id
-  }
-  console.log("id: "+id);
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    //$("#txt02_NroActivo").val($("#lbl_ActivoGrupo").html()+' - '+$("#lbl_ActivoNro").html());
-  
-    $("#txt03_id").val(resp.tabla[0].ID);
-    $("#cbo03_group_class").val($('#grupoOptionsClase [data-value="' + resp.tabla[0].clase + '"]').val());
-    $("#txt03_ROP").val(resp.tabla[0].rop);
-    $("#txt03_ROQ").val(resp.tabla[0].roq);
-    $("#cbo03_UOI").val(resp.tabla[0].unidad);
-    $("#txt03_num_parte").val(resp.tabla[0].numParte);
-    $("#cbo03_moneda").val(resp.tabla[0].moneda);
-    $("#txt03_precio").val(resp.tabla[0].precio);
-    $("#cbo03_proveedor").val($('#grupoOptionsProveedor [data-value="' + resp.tabla[0].proveedor + '"]').val());
-    $("#txt03_nombre").val(resp.tabla[0].nombre);
-    $("#txt03_nombre_col").val(resp.tabla[0].nombreCol);
-    $("#txt03_stock_cod").val(resp.tabla[0].stockCod);
-    $("#txt03_stock_num").val(resp.tabla[0].stockNum);
-    $("#cbo03_stock_clase").val(resp.tabla[0].stockClase);
-    $("#cbo03_stock_tipo").val(resp.tabla[0].stockTipo);
-    $("#txt03_stock_min").val(resp.tabla[0].stockMin);
-    $("#txt03_stock").val(resp.tabla[0].stock);
-    $("#area03_descripcion").val(resp.tabla[0].descripcion);
-    $("#cbo03_apl_tipo").val(resp.tabla[0].aplTipo);
-    $("#txt03_apl_ref").val(resp.tabla[0].aplReferencia);
-    $("#txt03_apl_cant").val(resp.tabla[0].aplCantidad);
-    $("#txt03_cod_comp").val(resp.tabla[0].componente);
-    app03_load(); 
-  });
-
-  
-}
-
-function app03Boton_update(){
-
-  let datos = app03GetDatos_ToDatabase();
-  if(datos!=""){
-    datos.commandSQL = "UPD";
-    datos.ID= $("#txt03_id").val();
-    console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        alert("El item fue actualizado correctamente!");
-
-        app03Boton_cancel();
-        app8GridAll();
-      }
-    });
-  } else {
-    alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-  }
-}
-
-function app03Boton_delete(id){
-
-  if(confirm("¿Esta seguro que desea eliminar el item "+id+"?")){
-    let datos = {
-      TipoQuery: "03_save",
-      commandSQL : "DEL",
-      status: 0,
-      ID: id
-    }
-    //console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        app03Boton_cancel();
-        app3GridAll();
-        alert("El item "+id+" fue eliminado!!");
-      }
-    });
-  }
-  else{
-      return false;
-  }
-}
-//fin item
-
-//ini retiros
-function app4GridAll(){
-  $('#grd04DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
-  let datos = {
-    TipoQuery : '04_grid'
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-        '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app04Boton_load('+(parseInt(valor.ID))+');"><i class="fa fa-eye"></i></button>';
-       /*  '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app04Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>'; */
-        fila += '<td>'+(valor.ID)+'</td>';
-        fila += '<td>'+(valor.fecha)+'</td>';
-        fila += '<td>'+(valor.usuario)+'</td>';
-        fila += '<td>'+(valor.tarea)+'</td>';
-        fila += '<td>'+(valor.estado)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd04DatosBody').html(fila);
-    }else{
-      $('#grd04DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-function app04Boton_Search(){
-  $('#grd04DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt04_Buscar").val();
-  if(txtBuscar>0){
-   
-  let datos = {
-    TipoQuery : '04_getbyid',
-    ID:txtBuscar,
-    estado: "Retirado"
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-        '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app04Boton_load('+(parseInt(valor.ID))+');"><i class="fa fa-eye"></i></button>';
-       /*  '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app04Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>'; */
-        fila += '<td>'+(valor.ID)+'</td>';
-        fila += '<td>'+(valor.fecha)+'</td>';
-        fila += '<td>'+(valor.usuario)+'</td>';
-        fila += '<td>'+(valor.tarea)+'</td>';
-        fila += '<td>'+(valor.estado)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd04DatosBody').html(fila);
-    }else{
-      $('#grd04DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-  }else{
-    app4GridAll();
-  }
-}
-
-function app04Boton_new(){
-  $("#grid04").hide();
-  $("#btn04_New").hide();
-  $("#btn04_Update").hide();
-  $("#edit04").show();
-  $("#btn04_Save").show();
-  $("#btn04_Cancel").show();
-}
-
-/* let herramientasRet=[];
-let herraNombreRet=[];
-let cantidadesRet=[]; */
-let tareaDetalle=[];
-let tareaRetirar=[];
-let tareaObservacion=[];
-function app04Boton_addTarea(){
-  var nombre = document.getElementById("txt04_Tarea").value;
-  var estado =false;
-  if(nombre.length>0){
-    
-    var ID = document.querySelector("#grupoOptionsTarea option[value='"+nombre+"']").dataset.value;
-    console.log("id:"+ID);
-    var id = parseInt(ID);
-
-    let datos={
-      TipoQuery:"07_getDetalles",
-      ID:id
-    }
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-      if(resp.tabla.length>0){
-        let fila = "";
-        $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+(valor.herramientaNombre)+'</td>';
-        fila += '<td>'+(valor.cantidad)+'</td>';
-        fila += '<td><input id="txt04_retirar'+parseInt(valor.ID)+'" type="number" min="0" value="1" class="form-control" placeholder="..."/></td>';
-        fila += '<td><input id="txt04_observacion'+parseInt(valor.ID)+'" type="text" class="form-control" placeholder="..."/></td>';
-        fila += '</tr>';
-        tareaDetalle.push(parseInt(valor.ID));
-        });
-        //console.log("id detalle: "+valor.ID);
-        $('#grd04TareaDatosBody').html(fila);
-       
-      }
-
-    });
-
-  }else{
-    alert("Seleccione una herramienta.");
-  }
-  
-  /* let datos = {
-    TipoQuery : "07_getbyid",
-    grupo: $id
-  }
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    
-  }); */
-
-}
-
-let retiros=[];
-let retiroNom=[];
-let retirosCant=[];
-function app04Boton_addHerra(){
-  var nombre = document.getElementById("txt04_Herramienta").value;
-  var estado =false;
-  if(nombre.length>0){
-    
-    var ID = document.querySelector("#grupoOptionsHerraRet option[value='"+nombre+"']").dataset.value;
-    console.log("id:"+ID);
-    var id = parseInt(ID);
-    retiros.forEach(function(elemento, indice, array) {
-      if(elemento===id){
-        alert("Esta herramienta ya fue agregada. Seleccione otra.");
-        document.getElementById("txt04_Herramienta").value="";
-        estado=true;
-      }
     })
-    if(!estado){
-      
-      let fila = "";
-        fila += '<tr id="tr04_cantidad'+(id)+'">';
-        fila += '<td>'+(nombre)+'</td>';
-        fila += '<td><input id="txt04_cantidad'+(id)+'" type="number" class="form-control" value="1" min="1"/></td>';
-        fila += '<td><button id="#" type="button" class="btn btn-danger" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app04Boton_deleteHerra('+id+');"><i class="fa fa-trash"></i></button></td>';
-        fila += '</tr>';
-      //$('#grd07HerraDatosBody').prepend(fila);
-      $(fila).appendTo('#grd04HerraDatosBody');
-      retiros.push(id);
-      retiroNom.push(nombre);
-      document.getElementById("txt04_Herramienta").value="";
-    }
-    
-  }else{
-    alert("Seleccione una herramienta.");
-  }
   
-  /* let datos = {
-    TipoQuery : "07_getbyid",
-    grupo: $id
-  }
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    
-  }); */
-
-}
-
-function app04Boton_deleteHerra(id){
-  let pos = retiros.indexOf(id);
-  let eliminado=retiros.splice(pos, 1);
-  retiroNom.splice(pos, 1);
-  var td = "tr04_cantidad"+id;
-  console.log("td:"+td);
-  console.log("del: "+eliminado);
-  $('#'+td+'').remove();
-}
-
-function app04GetDatos_ToDatabase(){
-
-  let EsError = false;
-  let rpta = "";
-
-  retiros.forEach(function(elemento, indice, array) {
-    var cant= $('#txt04_cantidad'+elemento).val();
-    retirosCant.push(cant);
-  })
-  
-  tareaDetalle.forEach(function(elemento, indice, array) {
-    var obser= $('#txt04_observacion'+elemento).val();
-    var retirar= $('#txt04_retirar'+elemento).val();
-    tareaObservacion.push(obser);
-    tareaRetirar.push(retirar);
-  })
-  $('.box-body .form-group').removeClass('has-error');
-  //if($("#txtDocum_Valor").val()=="") { $("#divDocum_Valor").prop("class","form-group has-error"); EsError = true; }
-
-  console.log(retiros.toString());
-  console.log(retiroNom.toString());
-  console.log(retirosCant.toString());
-  console.log(tareaDetalle.toString());
-  console.log(tareaRetirar.toString());
-  console.log(tareaObservacion.toString());
-  
-  if(!EsError){
-    var usuario = document.getElementById("txt04_Usuario").value;
-    var usuarioID = document.querySelector("#grupoOptionsUsu option[value='"+usuario+"']").dataset.value;
-    var tarea = document.getElementById("txt04_Tarea").value;
-    var tareaID = document.querySelector("#grupoOptionsTarea option[value='"+tarea+"']").dataset.value;
-    rpta = {
-      TipoQuery : '04_save',
-      usuarioID: usuarioID,
-      tareaID:tareaID,
-      estado: "Retirado"
-    
-    }
-  }
-  return rpta;
-}
-
-function app04Boton_save(){
-
-   let datos = app04GetDatos_ToDatabase();
-   //cantidades=[];
-   if(datos!=""){
-     datos.commandSQL = "INS";
-     console.log(datos);
-     appAjaxQuery(datos,rutaSQL).done(function(resp){
-       if(resp.error==0) {
-         var id = resp.tabla[0].ID;
-         for(i=0; i<retiros.length;i++){
-          let datos={
-            TipoQuery : '04_save',
-            commandSQL:"INS_DET",
-            retiro: id,
-            herraNombre: retiroNom[i],
-            herramienta: retiros[i],
-            cantidad:retirosCant[i]
-           }
-           console.log("herra:"+retiros[i]);
-           appAjaxQuery(datos,rutaSQL).done(function(resp){
-            console.log("detalle agregado");
-            retirosCant=[];
-            retiros=[];
-            retiroNom=[];
-           });
-         }
-         //
-         for(i=0; i<tareaDetalle.length;i++){
-          let datos={
-            TipoQuery : '04_save',
-            commandSQL:"INS_DET_TAR",
-            retiro: id,
-            tareaDetalle: tareaDetalle[i],
-            retiroDes: tareaObservacion[i],
-            retiroCant:tareaRetirar[i]
-           }
-           console.log("herra:"+retiros[i]);
-           appAjaxQuery(datos,rutaSQL).done(function(resp){
-            console.log("detalle tarea agregado");
-            tareaRetirar=[];
-            tareaObservacion=[];
-            tareaDetalle=[];
-           });
-         }
-         //
-         app04Boton_cancel();
-         alert("El retiro fue registrado exitosamente!");
+  var docDefinition = {
+    pageOrientation: 'landscape',
+    content: [
+{
+table: {
+widths: ['15%', '20%', '45%', '20%'],
+// heights: [10,10,10,10,30,10,25],
+ headerRows: 1,
+ body: [
+     [
+       {
          
+         text: 'LOGO',                   
+         fontSize: 8,
+         alignment: 'center',
+         rowSpan:3,
+
+       } , {
+        fontSize: 8,
+        text: 'Sistema de Gestion de Calidad, Seguridad, Salud en el Trabjajo y Medio Ambiente',    
+        colSpan:2,
+        alignment: 'center'
+       },
+       {},
+         {
+           text: 'Codigo: LOG-P10F03',              
+           bold: true,
+           fontSize: 8,      
+
+         }
+     ],
+     [
+      {
          
-       }
-     });
-   } else {
-     alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-   }
-}
-
-function app04Boton_cancel(){
-  app4GridAll();
-  $("#edit04").hide();
-  $("#btn04_Save").hide();
-  $("#btn04_Cancel").hide();
-  $("#btn04_Update").hide();
-  $("#grid04").show();
-  $("#btn04_New").show();
-
-  $("#txt04_Usuario").val("");
-  $("#txt04_Tarea").val("");
-  $("#txt04_Herramienta").val("");
-
-  $("#grd04TareaDatosBody").children("tr").remove();
-  $("#grd04HerraDatosBody").children("tr").remove();
-
-  $("#button04_addTarea").removeAttr("disabled");
-  $("#button04_addHerra").removeAttr("disabled");
-  $("#button04_newHerra").removeAttr("disabled");
-
-/*   $("#button04_addTarea").attr("disabled", false);
-  $("#button04_addHerra").attr("disabled", false);
-  $("#button04_newHerra").attr("disabled", false); */
-  
-}
-
-function app04_load(){
-  $("#grid04").hide();
-  $("#btn04_New").hide();
-  $("#btn04_Save").hide();
-  $("#edit04").show();
-  $("#btn04_Update").show();
-  $("#btn04_Cancel").show();
-}
-
-function app04Boton_load(id){
-  $("#button04_addTarea").attr("disabled", true);
-  $("#button04_addHerra").attr("disabled", true);
-  $("#button04_newHerra").attr("disabled", true);
-  let datos = {
-    TipoQuery : "04_getbyid",
-    ID: id
-  }
-  console.log("id: "+id);
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    //$("#txt02_NroActivo").val($("#lbl_ActivoGrupo").html()+' - '+$("#lbl_ActivoNro").html());
-    
-    $("#txt04_Usuario").val($('#grupoOptionsUsu [data-value="' + resp.tabla[0].usuario + '"]').val());
-    $("#txt04_Tarea").val($('#grupoOptionsTarea [data-value="' + resp.tabla[0].tarea + '"]').val());
-
-    let datos = {
-      TipoQuery : "04_getDetalles",
-      ID: id
-    }
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      for ( detalle of resp.tabla) {
-        let fila = "";
-        fila += '<tr id="tr07_cantidad'+(detalle.herramientaID)+'">';
-        fila += '<td>'+(detalle.herramientaNombre)+'</td>';
-        fila += '<td><input id="txt07_cantidad'+(detalle.herramientaID)+'" type="number" class="form-control" value="'+(detalle.cantidad)+'" min="1"/></td>';
-        fila += '<td><button id="#" type="button" class="btn btn-danger" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app07Boton_deleteHerra('+detalle.herramientaID+');" disabled><i class="fa fa-trash"></i></button></td>';
-        fila += '</tr>';
-       //$('#grd07HerraDatosBody').prepend(fila);
-        $(fila).appendTo('#grd04HerraDatosBody');
-
-      }
-
-    });
-    let data={
-      TipoQuery:"07_getDetalles",
-      ID:resp.tabla[0].tarea
-    }
-    
-
-    //
-    appAjaxQuery(data,rutaSQL).done(function(resp){
-  
-      if(resp.tabla.length>0){
-        let fila = "";
-        $.each(resp.tabla,function(key, valor){
-          var v_valor=valor;
-          let datos={
-            TipoQuery:"07_getDetallesTarea",
-            ID:valor.ID,
-            retiroID: id
-          }
-          appAjaxQuery(datos,rutaSQL).done(function(resp){
-            
-            $.each(resp.tabla,function(key, valor){
-              fila += '<tr>';
-              fila += '<td>'+(v_valor.herramientaNombre)+'</td>';
-              fila += '<td>'+(v_valor.cantidad)+'</td>';
-              fila += '<td><input id="txt04_retirar'+(valor.ID)+'" type="number"  value="'+(valor.retiroCant)+'" class="form-control" placeholder="..."/></td>';
-              fila += '<td><input id="txt04_observacion'+(valor.ID)+'" type="text" value="'+(valor.retiroDes)+'" class="form-control" placeholder="..."/></td>';
-              fila += '</tr>';
-              //$(fila).appendTo('#grd04TareaDatosBody');
-            });
-          
-          $('#grd04TareaDatosBody').html(fila);
-          });
-        
-        });
-      }
-  
-    });
-    //
-    app04_load(); 
-  });
-
-  
-
-  
-}
-
-/* function app04Boton_update(){
-  let datos = app07GetDatos_ToDatabase();
-  if(datos!=""){
-    datos.commandSQL = "UPD";
-    console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        alert("La tarea se actualizo correctamente!");
-
-        app07Boton_cancel();
-        app7GridAll();
-      }
-    });
-  } else {
-    alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-  }
-} */
-//fin retiros
-function app05Boton_Search(){
-  $('#grd05DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt05_Buscar").val();
-  let datos = {
-    TipoQuery : '04_getbyidEstado',
-    ID :txtBuscar,
-    estado: "Retirado"
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-        '<button id="boton05_buscar'+(parseInt(valor.ID))+'" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Agregar" onclick="javascript:app05Boton_load('+(parseInt(valor.ID))+');"><i class="fa fa-plus"></i></button>';
-       /*  '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app04Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>'; */
-        fila += '<td>'+(valor.ID)+'</td>';
-        fila += '<td>'+(valor.fecha)+'</td>';
-        fila += '<td>'+(valor.usuario)+'</td>';
-        fila += '<td>'+(valor.tarea)+'</td>';
-        fila += '<td>'+(valor.estado)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd05DatosBody').html(fila);
-    }else{
-      $('#grd05DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-
-}
-let _tareaDetalle =[];
-let _tareaDevolver =[];
-let _tareaObservacion =[];
-let _tareaRetirado=[];
-function app05Boton_load(id){
-  let datos = {
-    TipoQuery : '04_getbyid',
-    ID :id
-  };
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    $("#label05_codigo").text(" "+resp.tabla[0].ID);
-    $("#label05_fecha").text(" "+resp.tabla[0].fecha);
-    $("#label05_estado").text(" "+resp.tabla[0].estado);
-    let datos = {
-      TipoQuery : '08_getbyid',
-      ID :resp.tabla[0].usuario
-    };
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-      $("#label05_almacenero").text(" "+resp.tabla[0].nombre+" "+resp.tabla[0].apellidos);
-      $("#label05_usuario").text(" "+resp.tabla[0].nombre+" "+resp.tabla[0].apellidos);
-
-    });
-
-    datos = {
-      TipoQuery : '07_getbyid',
-      ID :resp.tabla[0].tarea
-    };
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-      $("#label05_tarea").text(" "+resp.tabla[0].nombre);
-      
-    });
-  
-    let data={
-      TipoQuery:"07_getDetalles",
-      ID:resp.tabla[0].tarea
-    }
-    
-
-    //
-    
-    appAjaxQuery(data,rutaSQL).done(function(resp){
-  
-      if(resp.tabla.length>0){
-        let fila = "";
-        $.each(resp.tabla,function(key, valor){
-          var v_valor=valor;
-          let datos={
-            TipoQuery:"07_getDetallesTarea",
-            ID:valor.ID,
-            retiroID: id
-          }
-          appAjaxQuery(datos,rutaSQL).done(function(resp){
-            
-            $.each(resp.tabla,function(key, valor){
-              fila += '<tr>';
-              fila += '<td>'+(v_valor.herramientaNombre)+'</td>';
-              fila += '<td>'+(valor.retiroCant)+'</td>';
-              fila += '<td>'+(valor.retiroDes)+'</td>';
-              fila += '<td><input id="txt05_devolver'+parseInt(valor.ID)+'" type="number"  min="0" value="1" class="form-control" placeholder="..."/></td>';
-              fila += '<td><input id="txt05_observacion'+parseInt(valor.ID)+'" type="text" class="form-control" placeholder="..."/></td>';
-              fila += '</tr>';
-              //$(fila).appendTo('#grd04TareaDatosBody');
-              _tareaDetalle.push(parseInt(valor.ID));
-              _tareaRetirado.push(parseInt(valor.retiroCant));
-            });
-          
-          $('#grd05DatosDetalleBody').html(fila);
-          });
-        
-        });
-      }
-  
-    });
-    //
-    
-    
-    
-  });
-
-  
-}
-
-function app05GetDatos_ToDatabase(){
-
-  let EsError = false;
-  let rpta = "";
-
-
-  _tareaDetalle.forEach(function(elemento, indice, array) {
-    var obser= $('#txt05_observacion'+elemento).val();
-    var devol= $('#txt05_devolver'+elemento).val();
-    _tareaObservacion[indice]=obser;
-    _tareaDevolver[indice]=devol;
-    /* _tareaObservacion.splice(indice,0,obser);
-    _tareaDevolver.splice(indice,0,parseInt(devol)); */
-  })
-  $('.box-body .form-group').removeClass('has-error');
-  //if($("#txtDocum_Valor").val()=="") { $("#divDocum_Valor").prop("class","form-group has-error"); EsError = true; }
-
-  console.log(_tareaDetalle.toString());
-  console.log(_tareaDevolver.toString());
-  console.log(_tareaObservacion.toString());
-  
-  if(!EsError){
-    //var usuario = document.getElementById("label05_usuario").value;
-    //var tarea = document.getElementById("label05_tarea").value;
-    
-    rpta = {
-      TipoQuery : '04_save',
-      //usuarioID: usuario,
-      //tareaID:tarea,
-      estado: "Devuelto",
-      ID:  $('#label05_codigo').text()
-    }
-  }
-  return rpta;
-}
-
-function app05Boton_save(){
-
-   let datos = app05GetDatos_ToDatabase();
-   //cantidades=[];
-   var menor=false;
-   var observ=false;
-   _tareaDetalle.forEach(function(elemento, indice, array) {
-    if(_tareaDevolver[indice]<_tareaRetirado[indice]){
-      menor = true;
-      var obser= $('#txt05_observacion'+elemento).val();
-      console.log("val:"+obser);
-      console.log("tamanio:"+String(obser).length)
-      if(String(obser).length<=0){
-        observ= true;
-      }
-      
-    }
-   })
-  /* for(i=0; _tareaDevolver.length; i++){
-    if(_tareaDevolver[i]<_tareaRetirado[i]){
-      menor = true;
-    }
-  } */
-   if(menor===false){
-     datos.commandSQL = "UPD";
-     console.log(datos);
-     appAjaxQuery(datos,rutaSQL).done(function(resp){
-       if(resp.error==0) {
        
-         for(i=0; i<_tareaDetalle.length;i++){
-          let datos={
-            TipoQuery : '04_save',
-            commandSQL:"UPD_DET_TAR",
-            ID: _tareaDetalle[i],
-            devolDes: _tareaObservacion[i],
-            devolCant:_tareaDevolver[i]
-           }
+
+      } , {
+       fontSize: 8,
+       text: 'TIPO DE DOCUMENTO:',    
+      
+      },
+      {  text: 'ORDEN DE COMPRA',              
+      bold: true,
+      fontSize: 8,
+      rowSpan:2,
+      alignment: 'center'},
+        {
+          text: 'Fecha de Aprobacion:	8/31/2021',              
+           bold: true,
+           fontSize: 8,          
+  
+        }
+    ],  
+    [
+      {
+                
+      } , {
+       fontSize: 8,
+       text: 'FORMATO',    
+      
+      },
+      {  },
+        {
+          text: 'Versión: 01',              
+           bold: true,
+           fontSize: 8,              
+        }
+    ]
+ ]
+}
+},
+{
+  table: {
+  widths: ['15%','20%','15%','20%','15%','15%'],  
+   headerRows: 1,
+   body: [
+       [
+         {
            
-           appAjaxQuery(datos,rutaSQL).done(function(resp){
-            console.log("detalle actualizado");
-            _tareaDevolver=[];
-            _tareaObservacion=[];
-            _tareaDetalle=[];
-            _tareaRetirado=[];
-           });
-         }
-         //
-        
-         alert("La devolución fue registrado exitosamente!");
-         app05Boton_cancel();
-         
-       }
-     });
-   } else {
-     if(observ===false){
-      datos.commandSQL = "UPD";
-     console.log(datos);
-     appAjaxQuery(datos,rutaSQL).done(function(resp){
-       if(resp.error==0) {
-       
-         for(i=0; i<_tareaDetalle.length;i++){
-          let datos={
-            TipoQuery : '04_save',
-            commandSQL:"UPD_DET_TAR",
-            ID: _tareaDetalle[i],
-            devolDes: _tareaObservacion[i],
-            devolCant:_tareaDevolver[i]
-           }
+           text: 'CORPORACION DE SERVICIOS MOQUEGUA',                     
+           fontSize: 8,
+           colSpan:2, 
+           bold: true,
+         } ,{},{fontSize: 8,
+          text: 'N° OC:',
+          bold: true,
+          colSpan:4  },
+         {      
+         },{},{}
+          
+       ],
+       [
+        {
            
-           appAjaxQuery(datos,rutaSQL).done(function(resp){
-            console.log("detalle actualizado");
-            _tareaDevolver=[];
-            _tareaObservacion=[];
-            _tareaDetalle=[];
-            _tareaRetirado=[];
-           });
-         }
-         //
-        
-         alert("La devolución fue registrado exitosamente!");
-         app05Boton_cancel();
-         
-       }
-     });
-     }else{
-      alert("Debe ingresar una observaciones al devolver una menor cantidad de la retirada.");
-     }
+          text: 'RUC:',                     
+          fontSize: 8,      
+               
+        } ,{
+          text: '20533089292',                     
+          fontSize: 8,
+   
+        },
+        {   fontSize: 8,
+         text: 'FECHA ORDEN:',
      
-   }
+        },
+        {
+          fontSize: 8,
+          text: resp.data[0].fecha_orden_compra,
+   
+        }
+        ,{
+          fontSize: 8,
+          text: 'FECHA ENTREGA: ',
+     
+        },{
+          fontSize: 8,
+          text: '',
+      
+        }
+         
+      ],
+      [
+      
+        {
+           
+          text: 'DIR:',                     
+          fontSize: 8,
+    
+               
+        } ,{
+          text: 'AV. A.A CACERES MZ:L LTE:06 MOQUEGUA',                     
+          fontSize: 8,
+
+        },
+        {   fontSize: 8,
+         text: 'AREA SOLICITANTE:',
+     
+        },
+        {
+          fontSize: 8,
+          text: resp.data[0].area,
+          colSpan:3     
+        }
+        ,{
+        
+        },{
+         
+        }
+          
+      ],
+      [
+         
+        {
+           
+          text: 'CELL:',                     
+          fontSize: 8,
+    
+               
+        } ,{
+          text: '987931289',                     
+          fontSize: 8,
+
+        },
+        {   fontSize: 8,
+         text: 'SOLICITANTE:',
+     
+        },
+        {
+          fontSize: 8,
+          text: resp.data[0].solicitante,
+          colSpan:3     
+        }
+        ,{
+        
+        },{
+         
+        }
+         
+      ],
+      [
+       
+        {
+           
+          text: 'E-MAIL:',                     
+          fontSize: 8,
+    
+               
+        } ,{
+          text: 'cormoquegua@hotmail.com',                     
+          fontSize: 8,
+
+        },
+        {   fontSize: 8,
+         text: 'RESPONSABLE:',
+     
+        },
+        {
+          fontSize: 8,
+          text: '',
+          colSpan:3     
+        }
+        ,{
+        
+        },{
+         
+        }
+         
+      ]
+   ]
+  }
+  },
+  {
+    table: {
+    widths: ['20%', '30%','20%','30%'], 
+     headerRows: 1,
+     body: [
+         [
+           {
+             
+             text: 'PROVEEDOR:',                     
+             fontSize: 8,
+     
+                  
+           } , 
+           {   
+            fontSize: 8,
+            text: '',     
+           
+           },
+           {
+             
+            text: 'RUC:',                     
+            fontSize: 8,
+    
+                 
+          } , 
+          {   
+           fontSize: 8,
+           text: '',     
+          
+          }
+            
+         ],
+         [
+          {
+            
+            text: 'DIRECCION:',                     
+            fontSize: 8,
+    
+                 
+          } , 
+          {   
+           fontSize: 8,
+           text: '',     
+          
+          },
+          {
+            
+           text: 'MONEDA:',                     
+           fontSize: 8,
+   
+                
+         } , 
+         {   
+          fontSize: 8,
+          text: '',     
+         
+         }
+           
+        ],
+        [
+          {
+            
+            text: 'CONDICION:',                     
+            fontSize: 8,
+            
+    
+                 
+          } , 
+          {   
+           fontSize: 8,
+           text: '',     
+           colSpan:3
+          },
+          {
+       
+                
+         } , 
+         {   
+        
+         
+         }
+           
+        ]
+     ]
+    }
+    },
+    {
+      table: {
+      widths: ['15%', '85%'],  
+       headerRows: 1,
+       body: [
+        [
+          {
+            
+            text: 'N°. RQ:',                     
+            fontSize: 8,
+            border: [true, true,false,true]
+                 
+          } , 
+          {   fontSize: 8,
+           text: '',     
+           border: [false, true,true,true]       
+          }
+           
+        ],[
+             {
+               
+               text: 'OBSERVACIONES (*):',                     
+               fontSize: 8,
+               border: [true, true,false,true]
+                    
+             } , 
+             {   fontSize: 8,
+              text: '',     
+              border: [false, true,true,true]       
+             }
+              
+           ]
+       ]
+      }
+      },
+
+
+    {
+      table: {
+        widths: ['5%','10%','30%','5%','10%','10%','15%','15%'],
+        // heights: [10,10,10,10,30,10,25],
+         headerRows: 1,
+         body:buildTableBody(['item','codigo_parte','descripcion','cantidad','centro_costo',
+         'unidad_medida','precio','total'],mainitems, [
+          { 
+              text: 'ITEM',               
+              bold: true,              
+              fontSize: 8,       
+              fillColor: '#44b7ba',     
+              border: [true, false, true, false]
+              
+          },
+        { 
+         
+          text: 'CODIGO',               
+          bold: true,          
+          fontSize: 8,
+          fillColor: '#44b7ba',    
+          border: [true, false, true, false]        
+          }  ,
+          { 
+            
+            text: 'DESCRIPCION',               
+            bold: true,        
+            fillColor: '#44b7ba',    
+            fontSize: 8,  
+            border: [true, false, true, false]        
+        }  ,{ 
+         
+          text: 'CANT.',               
+          bold: true,          
+          fontSize: 8,  
+          fillColor: '#44b7ba',  
+          border: [true, false, true, false]        
+      },
+      { 
+         
+        text: 'CENTRO DE COSTO.',               
+        bold: true,          
+        fontSize: 8,  
+        fillColor: '#44b7ba',  
+        border: [true, false, true, false]        
+    },
+        { 
+            
+          text: 'UM',               
+          bold: true,          
+          fontSize: 8,  
+          fillColor: '#44b7ba', 
+          border: [true, false, true, false]        
+        }    ,
+        { 
+            
+          text: 'PRECIO',               
+          bold: true,          
+          fontSize: 8,
+           fillColor: '#44b7ba',  
+          border: [true, false, true, false]        
+        } , 
+        { 
+            
+          text: 'TOTAL',               
+          bold: true,          
+          fontSize: 8,  
+           fillColor: '#44b7ba', 
+          border: [true, false, true, false]        
+        }           
+      ])
+      }
+      },
+      {
+        table: {
+        widths: ['70%','15%','15%'],  
+         headerRows: 1,
+         body: [
+             [
+               {
+                 
+                 text: '',                     
+                 fontSize: 8,
+                 border: [true, false,true,false]                      
+               },
+               {
+                 
+                text: 'SUB TOTAL',                     
+                fontSize: 8,
+                border: [true, false,true,false]
+                     
+              },
+              {
+                 
+                text: 'S/. '+resp.data[0].subtotal,                     
+                fontSize: 8,
+                border: [true, false,true,false]
+                     
+              }                   
+             ],
+             [
+              {
+                 
+                text: '',                     
+                fontSize: 8,
+                border: [true, false,true,false]                      
+              },
+              {
+                
+               text: 'I.G.V. 18%',                     
+               fontSize: 8,
+               border: [true, false,true,false]
+                    
+             },
+             {
+                
+               text: 'S/. '+(Number(resp.data[0].subtotal)*0.18).toFixed(2),                     
+               fontSize: 8,
+               border: [true, false,true,false]
+                    
+             }                 
+            ],
+            [
+              {
+                 
+                text: '',                     
+                fontSize: 8,
+                border: [true, false,true,true]                      
+              },
+              {
+                
+               text: 'TOTAL',                     
+               fontSize: 8,
+               border: [true, false,true,true]
+                    
+             },
+             {
+                
+               text: 'S/. '+resp.data[0].total,                     
+               fontSize: 8,
+               border: [true, false,true,true]
+                    
+             }                 
+            ]
+         ]
+        }
+        },
+        {
+          table: {
+          widths: ['35%','30%','35%'],  
+           headerRows: 1,
+           body: [
+               [
+                 {
+                   
+                   text: '________________________',                     
+                   fontSize: 8,
+                   alignment: 'center',
+                   border: [true, false,true,false],
+                   margin: [ 0, 50, 0, 0 ]    
+                 }   ,
+                 {
+                   
+                  text: '_________________________',                     
+                  fontSize: 8,
+                  alignment: 'center',
+                  border: [true, false,true,false],
+                  margin: [ 0, 50, 0, 0 ]   
+                       
+                }  ,
+                {
+                   
+                  text: '_________________________',                     
+                  fontSize: 8,
+                  alignment: 'center',
+                  border: [true, false,true,false],
+                  margin: [ 0, 50, 0, 0 ]   
+                       
+                }                
+               ],
+               [
+                {
+                  
+                  text: 'AREA LOGISTICA',                     
+                  fontSize: 8,
+                   alignment: 'center',
+                  border: [true, false,true,true],
+                  margin: [ 0, 0, 0, 8 ]   
+                       
+                } ,
+                {
+                  
+                  text: 'V.B. ADMINISTRACION',                     
+                  fontSize: 8,
+                   alignment: 'center',
+                  border: [true, false,true,true],
+                  margin: [ 0, 0, 0, 8 ]   
+                       
+                },   
+                {
+                  
+                  text: 'V.B.  GERENCIA',                     
+                  fontSize: 8,
+                   alignment: 'center',
+                  border: [true, false,true,true],
+                  margin: [ 0, 0, 0, 8 ]   
+                       
+                }                   
+              ]
+           ]
+          }
+          },
+          {
+            table: {
+            widths: ['100%'],  
+             headerRows: 1,
+             body: [
+                 [
+                   {
+                     
+                     text: 'NOTA:',                     
+                     fontSize: 8,
+                     border: [true, false,true,false]
+                          
+                   }                 
+                 ],
+                 [
+                  {
+                    
+                    text: '1.-PARA ACCESORIOS Y/O RESPUESTOS ENVIAR LAS ESPECIFICACIONES TECNICAS, NECESARIAS PARA RESPALDAR ESTA COMPRA.',                     
+                    fontSize: 8,
+                    border: [true, false,true,false]
+                         
+                  }                 
+                ],
+                [
+                  {
+                    
+                    text: '2.-RESPETAR LA FECHA DE ENTREGA PROGRAMADA PARA EVITAR RECHAZOS.',                     
+                    fontSize: 8,
+                    border: [true, false,true,false]
+                         
+                  }                 
+                ],
+                [
+                  {
+                    
+                    text: '3.-PARA EMISORES DE FACTURAS ELECTRONICAS REMITIR LA FACTURA, ARCHIVO XML Y CDR AL E-MAIL fcentenog@corporacionmoquegua.com',                     
+                    fontSize: 8,
+                    border: [true, false,true,true]
+                         
+                  }                 
+                ]
+             ]
+            }
+            },
+],
+  defaultStyle: {
+  }
+};
+pdfMake.createPdf(docDefinition).open();
+
+})
+
 }
+function generatepdfRequerimiento(id){
 
-function app05Boton_cancel(){
-  $("#txt04_Buscar").val("");
-  $("#label05_codigo").text("");
-  $("#label05_almacenero").text("");
-  $("#label05_usuario").text("");
-  $("#label05_tarea").text("");
-  $("#label05_fecha").text("");
-  $("#label05_estado").text("");
-  //$("#grd05DatosDetalleBody").remove();
-  $("#grd05DatosDetalleBody").children("tr").remove();
-  $("#grd05DatosBody").children("tr").remove();
-  //$("#grd05DatosBody").remove();
-
-}
-
-
-function app6GridAll(){
-  $('#grd06DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
   let datos = {
-    TipoQuery : '06_grid'
-  };
+    TipoQuery : 'sql_get_requerimiento_by_id',
+    data:id 
+  }
 
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-        '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app021Boton_laod('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-        '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app021Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';
-        fila += '<td>'+(valor.nombre)+'</td>';
-        if(valor.consumible=="0"){
-          fila += '<td><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled></div></td>';
+  appAjaxQuery(datos,rutaSQL).done(function(resp){  
+    console.log(resp)
+
+  
+  var docDefinition = {
+    pageOrientation: 'landscape',
+    content: [
+{
+table: {
+widths: ['15%', '45%', '20%', '20%'],
+// heights: [10,10,10,10,30,10,25],
+ headerRows: 1,
+ body: [
+     [
+       {
+         
+         text: 'LOGO',              
+     
+         fontSize: 8,
+         alignment: 'center',
+         rowSpan:3,
+         colSpan:2,
+       } , {},
+         {
+           text: 'REQUERIMIENTO',              
+           bold: true,
+           fontSize: 10,
+           rowSpan:3,
+           alignment: 'center'
+         },
+         { 
+           text: 'CODIGO: LOG-P10F01',              
+  
+           fontSize: 8,       
+         }
+     ],
+     [
+      {   
+                
+      } , {},
+        {
+          
+        },
+        { 
+          text: 'VERSION:',              
+          fontSize: 8         
+        }
+    ],  
+    [
+      {   
+            
+      } , {},
+        {
+          
+        },
+        { 
+          text: 'FECHA:',              
+          fontSize: 8
+        
+        }
+    ]
+ ]
+}
+},
+{
+  table: {
+  widths: ['15%', '35%','15%','35%'],  
+   headerRows: 1,
+   body: [
+       [
+         {
+           
+           text: 'RUC',                     
+           fontSize: 8,
+                
+         } , 
+         {   fontSize: 8,
+          text: '20533089292',
+          colSpan:3     
+         },{},{}
+          
+       ],
+       [
+        {
+          
+          text: 'NOMBRE',                     
+          fontSize: 8,
+                
+        }, 
+        {   fontSize: 8,
+          text: 'CORPORACIÓN DE SERVICIOS MOQUEGUA EIRL',
+          colSpan:3     
+        },{},{}
+         
+      ],
+      [
+        {
+          
+          text: 'SOLICITANTE',                     
+          fontSize: 8,
+                 
+        }, 
+        {   
+          fontSize: 8,
+          text: resp.data[0].solicitante,
+          colSpan:3
+        },{},{}
+         
+      ],
+      [
+        {
+          
+          text: 'FECHA DE EMISIÓN',                     
+          fontSize: 8,
+           
+        }, 
+        {   fontSize: 8,
+          text: resp.data[0].fecha_requerimiento,   
+          colSpan:3  
+        },{},{}
+         
+      ],
+      [
+        {
+          
+          text: 'AREA',                     
+          fontSize: 8,
+           
+        }, 
+        {   
+          fontSize: 8,
+          text: resp.data[0].area             
+        },{             
+        text: 'CENTRO DE COSTO',                     
+        fontSize: 8,
+      },{
+        fontSize: 8,
+        text: resp.data[0].centro_costo
+      }
+         
+      ]
+   ]
+  }
+  },
+  {
+    table: {
+    widths: ['15%', '85%'],  
+     headerRows: 1,
+     body: [
+         [
+           {
+             
+             text: 'OBSERVACIONES (*) :',                     
+             fontSize: 8,
+             border: [true, true,false,true]
+                  
+           } , 
+           {   fontSize: 8,
+            text: '',     
+            border: [false, true,true,true]       
+           }
+            
+         ]
+     ]
+    }
+    },
+    {
+      table: {
+        widths: ['5%','5%','10%','30%','10%','10%','30%'],
+        // heights: [10,10,10,10,30,10,25],
+         headerRows: 1,
+         body:buildTableBody(['item','cantidad','codigo_parte','descripcion',
+         'unidad_medida','prioridad','observacion'],resp.data, [
+          { 
+              text: 'ITEM',               
+              bold: true,              
+              fontSize: 8,       
+              fillColor: '#44b7ba',     
+              border: [true, false, true, false]
+              
+          },{ 
+         
+            text: 'CANT.',               
+            bold: true,          
+            fontSize: 8,  
+            fillColor: '#44b7ba',  
+            border: [true, false, true, false]        
+        },
+        { 
+         
+          text: 'CODIGO',               
+          bold: true,          
+          fontSize: 8,
+          fillColor: '#44b7ba',    
+          border: [true, false, true, false]        
+          }  ,
+          { 
+            
+            text: 'DESCRIPCION',               
+            bold: true,        
+            fillColor: '#44b7ba',    
+            fontSize: 8,  
+            border: [true, false, true, false]        
+        }  ,
+        { 
+            
+          text: 'MEDIDA',               
+          bold: true,          
+          fontSize: 8,  
+          fillColor: '#44b7ba', 
+          border: [true, false, true, false]        
+        }    ,
+        { 
+            
+          text: 'PRIORIDAD',               
+          bold: true,          
+          fontSize: 8,
+           fillColor: '#44b7ba',  
+          border: [true, false, true, false]        
+        } , 
+        { 
+            
+          text: 'OBSERVACIÓN',               
+          bold: true,          
+          fontSize: 8,  
+           fillColor: '#44b7ba', 
+          border: [true, false, true, false]        
+        }           
+      ])
+      },
+      },
+      {
+        table: {
+        widths: ['100%'],  
+         headerRows: 1,
+         body: [
+             [
+               {
+                 
+                 text: '(*) Consignar Placa de la unidad, Km, Area de Trabajo, otros',                     
+                 fontSize: 8,
+                 border: [true, false,true,false]
+                      
+               }                 
+             ],
+             [
+              {
+                
+                text: '(**)Consignar todos los datos necesarios para el servicio',                     
+                fontSize: 8,
+                border: [true, false,true,true]
+                     
+              }                 
+            ]
+         ]
+        }
+        },
+        {
+          table: {
+          widths: ['35%','30%','35%'],  
+           headerRows: 1,
+           body: [
+               [
+                 {
+                   
+                   text: '________________________',                     
+                   fontSize: 8,
+                   alignment: 'center',
+                   border: [true, false,true,false],
+                   margin: [ 0, 50, 0, 0 ]    
+                 }   ,
+                 {
+                   
+                  text: '_________________________',                     
+                  fontSize: 8,
+                  alignment: 'center',
+                  border: [true, false,true,false],
+                  margin: [ 0, 50, 0, 0 ]   
+                       
+                }  ,
+                {
+                   
+                  text: '_________________________',                     
+                  fontSize: 8,
+                  alignment: 'center',
+                  border: [true, false,true,false],
+                  margin: [ 0, 50, 0, 0 ]   
+                       
+                }                
+               ],
+               [
+                {
+                  
+                  text: 'SOLICITANTE',                     
+                  fontSize: 8,
+                   alignment: 'center',
+                  border: [true, false,true,true],
+                  margin: [ 0, 0, 0, 8 ]   
+                       
+                } ,
+                {
+                  
+                  text: 'ALMACEN/COMPRAS',                     
+                  fontSize: 8,
+                   alignment: 'center',
+                  border: [true, false,true,true],
+                  margin: [ 0, 0, 0, 8 ]   
+                       
+                },   
+                {
+                  
+                  text: 'GERENTE',                     
+                  fontSize: 8,
+                   alignment: 'center',
+                  border: [true, false,true,true],
+                  margin: [ 0, 0, 0, 8 ]   
+                       
+                }                   
+              ]
+           ]
+          }
+          },
+          {
+            table: {
+            widths: ['100%'],  
+             headerRows: 1,
+             body: [
+                 [
+                   {
+                     
+                     text: 'Prioridad:',                     
+                     fontSize: 8,
+                     border: [true, false,true,false]
+                          
+                   }                 
+                 ],
+                 [
+                  {
+                    
+                    text: 'Alta = Atendidas dentro de las 48 hrs. de haber ingresado el requerimiento (Suministros críticos).',                     
+                    fontSize: 8,
+                    border: [true, false,true,false]
+                         
+                  }                 
+                ],
+                [
+                  {
+                    
+                    text: 'Media = Atendidas dentro de las 72 horas de haber ingresado el requerimiento. ',                     
+                    fontSize: 8,
+                    border: [true, false,true,false]
+                         
+                  }                 
+                ],
+                [
+                  {
+                    
+                    text: 'Baja = Atendidas dentro de los 7 días de haber ingresado el requerimiento.',                     
+                    fontSize: 8,
+                    border: [true, false,true,true]
+                         
+                  }                 
+                ]
+             ]
+            }
+            },
+],
+  defaultStyle: {
+  }
+};
+pdfMake.createPdf(docDefinition).open();
+
+})
+
+}
+
+
+function buildTableBody(header,data, columns) {
+  var body = [];
+
+  body.push(columns);
+
+  console.log(header)
+  console.log(data)
+  console.log(columns)
+
+  data.forEach(function(row) {
+      var dataRow = [];
+
+      header.forEach(function(column) {
+        if(row[column]){
+          dataRow.push({text:row[column].toString(),bold: false,fontSize: 8});
         }else{
-          fila += '<td><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" checked disabled></div></td>';
+          dataRow.push({text:'',fontSize: 8});
         }
-        fila += '<td>'+(valor.cant_tot)+'</td>';
-        fila += '<td>'+(valor.cant_disp)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd06DatosBody').html(fila);
-    }else{
-      $('#grd06DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
+         
+      })
 
-function app06Boton_Search(){
-  $('#grd06DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt06_Buscar").val();
-  if(txtBuscar.length>0){
-    let datos = {
-      TipoQuery : '06_grid'
-    };
-  
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.tabla.length>0){
-        let fila = "";
-        $.each(resp.tabla,function(key, valor){
-          fila += '<tr>';
-          fila += '<td>'+
-          '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app021Boton_laod('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-          '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app021Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';
-          fila += '<td>'+(valor.nombre)+'</td>';
-          if(valor.consumible=="0"){
-            fila += '<td><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled></div></td>';
-          }else{
-            fila += '<td><div class="form-check"><input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" checked disabled></div></td>';
-          }
-          fila += '<td>'+(valor.cant_tot)+'</td>';
-          fila += '<td>'+(valor.cant_disp)+'</td>';
-          fila += '</tr>';
-        });
-        $('#grd06DatosBody').html(fila);
-      }else{
-        $('#grd06DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-      }
-      //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-    });
-  }else{
-    app6GridAll();
-  }
-}
-
-function app7GridAll(){
-  $('#grd07DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
-  let datos = {
-    TipoQuery : '07_grid'
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        
-        fila += '<td>'+
-        '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app07Boton_load('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-        '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app07Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';    
-        fila += '<td>'+(valor.ID)+'</td>';
-        fila += '<td>'+(valor.nombre)+'</td>';
-        fila += '<td>'+(valor.descripcion)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd07DatosBody').html(fila);
-    }else{
-      $('#grd07DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-function app07Boton_Search(){
-  $('#grd07DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt07_Buscar").val();
-  if(txtBuscar>0){
-    let datos = {
-      TipoQuery : '07_getbyid',
-      ID:txtBuscar
-    };
-  
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.tabla.length>0){
-        let fila = "";
-        $.each(resp.tabla,function(key, valor){
-          fila += '<tr>';
-          
-          fila += '<td>'+
-          '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app07Boton_load('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-          '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app07Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';    
-          fila += '<td>'+(valor.ID)+'</td>';
-          fila += '<td>'+(valor.nombre)+'</td>';
-          fila += '<td>'+(valor.descripcion)+'</td>';
-          fila += '</tr>';
-        });
-        $('#grd07DatosBody').html(fila);
-      }else{
-        $('#grd07DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-      }
-      //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-    });
-
-  }else{
-    app7GridAll();
-  }
-}
-
-
-
-function app07Boton_new(){
-  $("#grid07").hide();
-  $("#btn07_New").hide();
-  $("#btn07_Update").hide();
-  $("#edit07").show();
-  $("#btn07_Save").show();
-  $("#btn07_Cancel").show();
-}
-
-let herramientas=[];
-let herraNombre=[];
-let cantidades=[];
-
-function app07Boton_addHerra(){
-  var nombre = document.getElementById("txt07_Herramienta").value;
-  var estado =false;
-  if(nombre.length>0){
-    
-    var ID = document.querySelector("#grupoOptionsHerra option[value='"+nombre+"']").dataset.value;
-    console.log("id:"+ID);
-    var id = parseInt(ID);
-    herramientas.forEach(function(elemento, indice, array) {
-      if(elemento===id){
-        alert("Esta herramienta/respuesto/material ya fue agregada. Seleccione otro.");
-        document.getElementById("txt07_Herramienta").value="";
-        estado=true;
-      }
-    })
-    if(!estado){
-      
-      let fila = "";
-        fila += '<tr id="tr07_cantidad'+(id)+'">';
-        fila += '<td>'+(nombre)+'</td>';
-        fila += '<td><input id="txt07_cantidad'+(id)+'" type="number" class="form-control" value="1" min="1"/></td>';
-        fila += '<td><button id="#" type="button" class="btn btn-danger" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app07Boton_deleteHerra('+id+');"><i class="fa fa-trash"></i></button></td>';
-        fila += '</tr>';
-      //$('#grd07HerraDatosBody').prepend(fila);
-      $(fila).appendTo('#grd07HerraDatosBody');
-      herramientas.push(id);
-      herraNombre.push(nombre);
-      document.getElementById("txt07_Herramienta").value="";
-    }
-    
-  }else{
-    alert("Seleccione una herramienta/repuesto/material.");
-  }
-  
-  /* let datos = {
-    TipoQuery : "07_getbyid",
-    grupo: $id
-  }
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-    
-  }); */
-
-}
-
-function app07Boton_deleteHerra(id){
-  let pos = herramientas.indexOf(id);
-  let eliminado=herramientas.splice(pos, 1);
-  herraNombre.splice(pos, 1);
-  var td = "tr07_cantidad"+id;
-  console.log("td:"+td);
-  console.log("del: "+eliminado);
-  $('#'+td+'').remove();
-}
-
-function app07GetDatos_ToDatabase(){
-
-  let EsError = false;
-  let rpta = "";
-
-  herramientas.forEach(function(elemento, indice, array) {
-    var cant= $('#txt07_cantidad'+elemento).val();
-    cantidades.push(cant);
-  })
-  $('.box-body .form-group').removeClass('has-error');
-  //if($("#txtDocum_Valor").val()=="") { $("#divDocum_Valor").prop("class","form-group has-error"); EsError = true; }
-
-  console.log(herramientas.toString());
-  console.log(herraNombre.toString());
-  console.log(cantidades.toString());
-  
-  if(!EsError){
-    rpta = {
-      TipoQuery : '07_save',
-      nombre: $("#txt07_Nombre").val(),
-      descripcion: $("#area07_descripcion").val()
-    
-    }
-  }
-  return rpta;
-}
-
-function app07Boton_save(){
-
-   let datos = app07GetDatos_ToDatabase();
-   //cantidades=[];
-   if(datos!=""){
-     datos.commandSQL = "INS";
-     console.log(datos);
-     appAjaxQuery(datos,rutaSQL).done(function(resp){
-       if(resp.error==0) {
-         var id = resp.tabla[0].ID;
-         for(i=0; i<herramientas.length;i++){
-          let datos={
-            TipoQuery : '07_save',
-            commandSQL:"INS_DET",
-            tarea: id,
-            herraNombre: herraNombre[i],
-            herramienta: herramientas[i],
-            cantidad:cantidades[i]
-           }
-           console.log("herra:"+herramientas[i]);
-           appAjaxQuery(datos,rutaSQL).done(function(resp){
-            console.log("detalle agregado");
-           });
-         }
-         app07Boton_cancel();
-         alert("La tarea fue creada exitosamente!");
-         cantidades=[];
-         herramientas=[];
-         herraNombre=[];
-       }
-     });
-   } else {
-     alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-   }
-}
-
-function app07Boton_cancel(){
-  app7GridAll();
-  $("#edit07").hide();
-  $("#btn07_Save").hide();
-  $("#btn07_Cancel").hide();
-  $("#btn07_Update").hide();
-  $("#grid07").show();
-  $("#btn07_New").show();
-  $("#txt07_Nombre").val("");
-  $("#area07_descripcion").val("");
-  $("#grd07HerraDatosBody").children("tr").remove();
-}
-
-function app07_load(){
-  $("#grid07").hide();
-  $("#btn07_New").hide();
-  $("#btn07_Save").hide();
-  $("#edit07").show();
-  $("#btn07_Update").show();
-  $("#btn07_Cancel").show();
-}
-
-function app07Boton_load(id){
-
-  let datos = {
-    TipoQuery : "07_getbyid",
-    ID: id
-  }
-  console.log("id: "+id);
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    //$("#txt02_NroActivo").val($("#lbl_ActivoGrupo").html()+' - '+$("#lbl_ActivoNro").html());
-    
-    $("#txt07_id").val(resp.tabla[0].ID);
-    $("#txt07_Nombre").val(resp.tabla[0].nombre);
-    $("#area07_descripcion").val(resp.tabla[0].descripcion);
-
-    let datos = {
-      TipoQuery : "07_getDetalles",
-      ID: id
-    }
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      for ( detalle of resp.tabla) {
-        let fila = "";
-        fila += '<tr id="tr07_cantidad'+(detalle.herramientaID)+'">';
-        fila += '<td>'+(detalle.herramientaNombre)+'</td>';
-        fila += '<td><input id="txt07_cantidad'+(detalle.herramientaID)+'" type="number" class="form-control" value="'+(detalle.cantidad)+'" min="1"/></td>';
-        fila += '<td><button id="#" type="button" class="btn btn-danger" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app07Boton_deleteHerra('+detalle.herramientaID+');"><i class="fa fa-trash"></i></button></td>';
-        fila += '</tr>';
-       //$('#grd07HerraDatosBody').prepend(fila);
-        $(fila).appendTo('#grd07HerraDatosBody');
-
-      }
-
-    });
-    app07_load(); 
+      body.push(dataRow);
   });
 
-  
+  return body;
 }
-
-function app07Boton_update(){
-  let datos = app07GetDatos_ToDatabase();
-  if(datos!=""){
-    datos.commandSQL = "UPD";
-    console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        alert("La tarea se actualizo correctamente!");
-
-        app07Boton_cancel();
-        app7GridAll();
-      }
-    });
-  } else {
-    alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-  }
+function CalPrice(cantidad,price){  
+  return (Number(cantidad)*Number(price)).toFixed(2);
 }
-
-
-function app8GridAll(){
-  $('#grd08DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
-  let datos = {
-    TipoQuery : '08_grid'
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-        '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app08Boton_load('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-        '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app08Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';    
-        fila += '<td>'+(valor.ID)+'</td>';
-        fila += '<td>'+(valor.nombre)+" "+(valor.apellidos)+'</td>';
-        fila += '<td>'+(valor.dni)+'</td>';
-        fila += '<td>'+(valor.telefono)+'</td>';
-        fila += '<td>'+(valor.correo)+'</td>';
-        fila += '<td>'+(valor.usuario)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd08DatosBody').html(fila);
-    }else{
-      $('#grd08DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-function app08Boton_Search(){
-  $('#grd08DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt08_Buscar").val();
-  if(txtBuscar>0){
-    let datos = {
-      TipoQuery : '08_getbyid',
-      ID:txtBuscar
-    };
-  
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.tabla.length>0){
-        let fila = "";
-        $.each(resp.tabla,function(key, valor){
-          fila += '<tr>';
-          fila += '<td>'+
-          '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app08Boton_load('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-          '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app08Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';    
-          fila += '<td>'+(valor.ID)+'</td>';
-          fila += '<td>'+(valor.nombre)+" "+(valor.apellidos)+'</td>';
-          fila += '<td>'+(valor.dni)+'</td>';
-          fila += '<td>'+(valor.telefono)+'</td>';
-          fila += '<td>'+(valor.correo)+'</td>';
-          fila += '<td>'+(valor.usuario)+'</td>';
-          fila += '</tr>';
-        });
-        $('#grd08DatosBody').html(fila);
-      }else{
-        $('#grd08DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-      }
-      //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-    });
-  }else{
-    app8GridAll();
-  }
-}
-
-function app08Boton_new(){
-  $("#grid08").hide();
-  $("#btn08_New").hide();
-  $("#btn08_Update").hide();
-  $("#edit08").show();
-  $("#btn08_Save").show();
-  $("#btn08_Cancel").show();
-}
-
-function app08Boton_cancel(){
-  app8GridAll();
-  $("#edit08").hide();
-  $("#btn08_Save").hide();
-  $("#btn08_Cancel").hide();
-  $("#btn08_Update").hide();
-  $("#grid08").show();
-  $("#btn08_New").show();
-  $("#txt08_DNI").val("");
-  $("#txt08_Nombre").val("");
-  $("#txt08_Apellidos").val("");
-  $("#txt08_Telefono").val("");
-  $("#cbo08_Rol").val(1);
-  $("#txt08_Correo").val("");
-  $("#txt08_Usuario").val("");
-  $("#txt08_Contrasena").val("");
-  $("#txt08_Contrasena").attr("placeholder", "...").blur();
-
-}
-
-function app08GetDatos_ToDatabase(){
-
-  let EsError = false;
-  let rpta = "";
-  $('.box-body .form-group').removeClass('has-error');
-  //if($("#txtDocum_Valor").val()=="") { $("#divDocum_Valor").prop("class","form-group has-error"); EsError = true; }
-
-  if(!EsError){
-    rpta = {
-      TipoQuery : '08_save',
-      dni: $('#txt08_DNI').val(),
-      nombre: $("#txt08_Nombre").val(),
-      apellidos: $("#txt08_Apellidos").val(),
-      telefono: $("#txt08_Telefono").val(),
-      correo: $("#txt08_Correo").val(),
-      rol: $("#cbo08_Rol").val(),
-      usuario: $("#txt08_Usuario").val(),
-      contrasena: ($("#txt08_Contrasena").val().trim()==="")? 0 : SHA1($("#txt08_Contrasena").val()).toString().toUpperCase()
-    }
-  }
-  return rpta;
-}
-
-function app08Boton_save(){
-
-  let datos = app08GetDatos_ToDatabase();
+function keyCalPriceOrdenCompra(idx){
  
-  if(datos!=""){
-    datos.commandSQL = "INS";
-    console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.error==0) {
+  let cantidad = $("#cantidadordenCompraInputs-"+idx).text();
+  let precio = $("#priceordencomprainputs-"+idx).val();
 
-        alert("El usuario fue registrado exitosamente!");
-        app08Boton_cancel();
-      }
-    });
-  } else {
-    alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-  }
+  $("#PriceTordenCompraInputs-"+idx).text((Number(cantidad) * Number(precio)).toFixed(2));
+ // let subtotal=$(".totalSubTotalPriceOrdenCompra")
+
+  var values = $.map($('.totalSubTotalPriceOrdenCompra') ,function(option) {  
+    console.log(option)          
+    return option.textContent
+});   
+console.log(values)
+let subtotal=(values.reduce((a, b) => Number(a) + Number(b), 0)).toFixed(2)
+let igv=(Number(subtotal)*0.18).toFixed(2);
+let total=(Number(subtotal)+Number(igv)).toFixed(2);
+
+$("#txt_subtotal_orden_compra_moda").val(subtotal)
+$("#txt_igv_orden_compra_modal").val(igv)
+$("#txt_total_orden_compra_modal").val(total)
+
+console.log(subtotal)
+console.log(igv)
+console.log(total)
 }
-
-function app08_load(){
-  $("#grid08").hide();
-  $("#btn08_New").hide();
-  $("#btn08_Save").hide();
-  $("#edit08").show();
-  $("#btn08_Update").show();
-  $("#btn08_Cancel").show();
+$('#txt_estado_orden_comrpa_modal').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val();  
+  if(value==10){
+    changeOpenProviderOC(value);  
+    $('.inputforordenCompra').prop('disabled', false)
+    $('#addbutonMainOrdenCompra').show();
+  
+  }else{
+    $('#addbutonMainOrdenCompra').hide();
+    $("#contentProviderOC").hide();
+    $('.inputforordenCompra').prop('disabled', true)
+  }  
+})
+function changeOpenProviderOC(){
+  $("#contentProviderOC").show();
 }
+$('#slct_departamento_proveedor').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); //to get content of "value" attrib
+  console.log(value)
+  $('#slct_provincia_proveedor option').remove();
+  $('#slct_provincia_proveedor').append($("<option>", {
+      value: "-1",
+      text: "Selecciona...",  
+  }));
+  $.each(ubigeo.provincias[value], function(i, item) {      
+      $('#slct_provincia_proveedor').append($("<option>", {
+          value: item.id_ubigeo,
+          text: item.nombre_ubigeo,
+      }));
+  });
+})
 
-function app08Boton_load(id){
+$('#slct_provincia_proveedor').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); //to get content of "value" attrib
+  $('#slct_distrito_proveedor option').remove();
+  $('#slct_distrito_proveedor').append($("<option>", {
+      value: "-1",
+      text: "Selecciona...",
+  }));
+  $.each(ubigeo.distritos[value], function(i, item) {
+      $('#slct_distrito_proveedor').append($("<option>", {
+          value: item.id_ubigeo,
+          text: item.nombre_ubigeo,    
+      }));
+  });
+})
+
+
+$('#txt_departamento_almacen').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); //to get content of "value" attrib
+  console.log(value)
+  $('#txt_provincia_almacen option').remove();
+  $('#txt_provincia_almacen').append($("<option>", {
+      value: "-1",
+      text: "Selecciona...",  
+  }));
+  $.each(ubigeo.provincias[value], function(i, item) {      
+      $('#txt_provincia_almacen').append($("<option>", {
+          value: item.id_ubigeo,
+          text: item.nombre_ubigeo,
+      }));
+  });
+})
+
+$('#txt_provincia_almacen').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); //to get content of "value" attrib
+  $('#txt_distrito_almacen option').remove();
+  $('#txt_distrito_almacen').append($("<option>", {
+      value: "-1",
+      text: "Selecciona...",
+  }));
+  $.each(ubigeo.distritos[value], function(i, item) {
+      $('#txt_distrito_almacen').append($("<option>", {
+          value: item.id_ubigeo,
+          text: item.nombre_ubigeo,    
+      }));
+  });
+})
+function loadDepartamentos(data,component){
+  var departamentos = data.departamentos  
+
+  $.each(departamentos, function (i, item) {    
+    $('#'+component).append($("<option>", { 
+        value: item.id_ubigeo,
+        text : item.nombre_ubigeo ,       
+    }));
+  });
+}
+$('#slct_grupo_proveedor').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); 
 
   let datos = {
-    TipoQuery : "08_getbyid",
-    ID: id
-  }
-  console.log("id: "+id);
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    //$("#txt02_NroActivo").val($("#lbl_ActivoGrupo").html()+' - '+$("#lbl_ActivoNro").html());
-    
-    $("#txt08_id").val(resp.tabla[0].ID);
-    $("#txt08_DNI").val(resp.tabla[0].dni);
-    $("#txt08_Nombre").val(resp.tabla[0].nombre);
-    $("#txt08_Apellidos").val(resp.tabla[0].apellidos);
-    $("#txt08_Telefono").val(resp.tabla[0].telefono);
-    $("#cbo08_Rol").val(resp.tabla[0].rol);
-    $("#txt08_Correo").val(resp.tabla[0].correo);
-    $("#txt08_Usuario").val(resp.tabla[0].usuario);
-    $("#txt08_Contrasena").attr("placeholder", "Ingresar nueva contraseña").blur();
-    app08_load(); 
-  });
+    TipoQuery : 'sqlGroupClassByGroup',
+    data:value
+  };                
 
-  
-}
-
-function app08Boton_update(){
-
-  let datos = app08GetDatos_ToDatabase();
-  if(datos!=""){
-    datos.commandSQL = "UPD";
-    datos.ID= $("#txt08_id").val();
-    console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        alert("El usuario fue actualizado correctamente!");
-
-        app08Boton_cancel();
-        app8GridAll();
-      }
-    });
-  } else {
-    alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-  }
-}
-
-function app08Boton_delete(id){
-
-  if(confirm("¿Esta seguro que desea eliminar el usuario "+id+"?")){
-    let datos = {
-      TipoQuery: "08_save",
-      commandSQL : "DEL",
-      status: 0,
-      ID: id
-    }
-    //console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        app08Boton_cancel();
-        app8GridAll();
-        alert("El usuario "+id+" fue eliminado!!");
-      }
-    });
-  }
-  else{
-      return false;
-  }
-}
-
-
-function app9GridAll(){
-  
-  $('#grd09DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
-  let datos = {
-    TipoQuery : '03_grid'
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-          '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Q" onclick="javascript:app09Boton_Q('+(parseInt(valor.ID))+');">Q</button>';
-          /* '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app09Boton_S('+(parseInt(valor.ID))+');">S</button>'; */
-        
-        fila += '<td>'+(valor.ID)+'</td>';
-        fila += '<td>'+(valor.clase)+'</td>';
-        fila += '<td>'+(valor.proveedor)+'</td>';
-        fila += '<td>'+(valor.fabricante)+'</td>';
-        fila += '<td>'+(valor.nombre)+'</td>';
-        fila += '<td>'+(valor.descripcion)+'</td>';
-        fila += '<td>'+(valor.unidad)+'</td>';
-        fila += '<td>'+(valor.stock)+'</td>';
-        fila += '<td>'+(valor.precio)+'</td>';
-        fila += '</tr>';
-      });
-      $('#grd09DatosBody').html(fila);
-    }else{
-      $('#grd09DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-function app09Boton_Search(){
-  
-  $('#grd09DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt09_Buscar").val();
-  if(txtBuscar>0){
-    let datos = {
-      TipoQuery : '03_getbyid',
-      ID:txtBuscar
-    };
-  
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.tabla.length>0){
-        let fila = "";
-        $.each(resp.tabla,function(key, valor){
-          fila += '<tr>';
-          fila += '<td>'+
-            '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Q" onclick="javascript:app09Boton_Q('+(parseInt(valor.ID))+');">Q</button>';
-            /* '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app09Boton_S('+(parseInt(valor.ID))+');">S</button>'; */
-          
-          fila += '<td>'+(valor.ID)+'</td>';
-          fila += '<td>'+(valor.clase)+'</td>';
-          fila += '<td>'+(valor.proveedor)+'</td>';
-          fila += '<td>'+(valor.fabricante)+'</td>';
-          fila += '<td>'+(valor.nombre)+'</td>';
-          fila += '<td>'+(valor.descripcion)+'</td>';
-          fila += '<td>'+(valor.unidad)+'</td>';
-          fila += '<td>'+(valor.stock)+'</td>';
-          fila += '<td>'+(valor.precio)+'</td>';
-          fila += '</tr>';
-        });
-        $('#grd09DatosBody').html(fila);
-      }else{
-        $('#grd09DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-      }
-      //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-    });
-  }else{
-    app9GridAll();
-  }
-}
-function app09Boton_Q(id){
-
-  let datos={
-    TipoQuery: "03_getbyid",
-    ID:id
-  }
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    
-    $("#txt09_Numero").val(resp.tabla[0].ID);
-    loadQ();
-  });
-  
-}
-
-function app09Boton_S(id){
-  let datos={
-    TipoQuery: "03_getbyid",
-    ID:id
-  }
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    
-    $("#txt09Q_Numero").val(resp.tabla[0].ID);
-    //$("#area09_descripcion").val(resp.tabla[0].descripcion);
-    loadS();
-  });
-}
-
-function loadQ(){
-  $("#edit09_Q").show();
-  $("#btn09Q_Cancel").show();
-  $("#btn09Q_Save").show();
-  $("#edit09_S").hide();
-  $("#btn09S_Cancel").hide();
-  $("#btn09S_Save").hide();
-  $("#grid09").hide();
-}
-
-function loadS(){
-  $("#edit09_Q").hide();
-
-  $("#btn09Q_Cancel").hide();
-  $("#btn09Q_Save").hide();
-  $("#edit09_S").show();
-  $("#btn09S_Cancel").show();
-  $("#btn09S_Save").show();
-  $("#grid09").hide();
-}
-
-function app09SBoton_cancel(){
-
-  $("#edit09_Q").hide();
-  $("#btn09Q_Cancel").hide();
-  $("#btn09Q_Save").hide();
-  $("#edit09_S").hide();
-  $("#btn09S_Cancel").hide();
-  $("#btn09S_Save").hide();
-  $("#grid09").show();
-  //$("#grd09SDatosProvBody").remove();
-  $("#grd09SDatosProvBody").children("tr").remove();
-  proveedores=[];
-  
-}
-
-function app09QBoton_cancel(){
-  $("#edit09_Q").hide();
-  $("#btn09Q_Cancel").hide();
-  $("#btn09Q_Save").hide();
-  $("#edit09_S").hide();
-  $("#btn09S_Cancel").hide();
-  $("#btn09S_Save").hide();
-  $("#grid09").show();
-}
-
-/* let proveedores=[]; */
-function app09SBoton_addProv(){
-  var nombre = document.getElementById("cbo09S_proveedor").value;
-  var estado =false;
-  if(nombre.length>0){
-    
-    var ID = document.querySelector("#grupoOptionsProveedor9S option[value='"+nombre+"']").dataset.value;
-    console.log("id:"+ID);
-    var id = parseInt(ID);
-    proveedores.forEach(function(elemento, indice, array) {
-      if(elemento===id){
-        alert("Este Proveedor ya fue agregado. Seleccione otro .");
-        document.getElementById("cbo09S_proveedor").value="";
-        estado=true;
-      }
-    })
-    if(estado==false){
-
-      let datos={
-        TipoQuery: "09_getProv",
-        ID:id
-      }
-      appAjaxQuery(datos,rutaSQL).done(function(resp){
-      
-        let fila = "";
-          fila += '<tr>';
-          fila += '<td>'+(resp.tabla[0].codigo)+'</td>';
-          fila += '<td>'+(resp.tabla[0].nombre)+'</td>';
-          fila += '<td>'+(resp.tabla[0].descripcion)+'</td>';
-          fila += '</tr>';
-        //$('#grd07HerraDatosBody').prepend(fila);
-        $(fila).appendTo('#grd09SDatosProvBody');
-        proveedores.push(parseInt(resp.tabla[0].ID));
-        document.getElementById("cbo09S_proveedor").value="";
-        estado=false;
-      });
-      estado=false;
-    }
-    
-  }else{
-    alert("Seleccione un proveedor.");
-  }
-
-}
-
-function app09SBoton_save(){
-  if(proveedores.length>0){
-    if(confirm("Se asignaran los proveedores a este item ¿Continuar?")){
-      
-      
-      proveedores.forEach(function(elemento, indice, array) {
-        let datos={
-          requisicion:$("#txt09Q_Numero").val(),
-          proveedor: elemento,
-          TipoQuery: "09_save",
-          commandSQL: "INS_PROV"
-        }
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-         
-        });
+ appAjaxQuery(datos,rutaSQL).done(function(resp){     
+    $("#slct_clase_proveedor option[value!='-1']").remove();
+      resp.data.forEach((item)=>{
+        $('#slct_clase_proveedor').append($("<option>", { 
+          value: item.id,
+          text : item.description 
+      }));
       })
      
-      app09SBoton_cancel();
-      app9GridAll();
-      alert("Se agregaron los proveedores exitosamente.");
-      
-      
+  }); 
   
-    }else{
-      return false;
-    }
+})
+
+$('#slct_groupClass').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); 
+
+  console.log(value)
+  chargeCorrelativeItems(value);
+  
+})
+
+$('#txt_estado_oc_componenttoVehicle').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); 
+  if(value==1){
+    $("#details_oc_to_componentVehicle").show();
   }else{
-    alert("Debe ingresar al menos 1 proveedor.");
+    $("#details_oc_to_componentVehicle").hide();
   }
-  
-}
 
-
-function app09QBoton_save(){
-  if(confirm("Se creara la RFQ ¿Continuar?")){
-    let datos={
-      fecha: appConvertToFecha($("#txt09_Fecha").val(),"-"),
-      descripcion: $("#area09_descripcion").val(),
-      item: $("#txt09_Numero").val(),
-      TipoQuery: "09_save",
-      commandSQL: "INS"
-    }
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.error==0) {
-        app09QBoton_cancel();
-        app9GridAll();
-        alert("Se creo la RFQ exitosamente.");
-      }
-    });
-
+})
+$('#txt_estado_p_od_pertenece').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); 
+  if(value==1){
+    $("#detailsOC_component").show();
   }else{
-    return false;
+    $("#detailsOC_component").hide();
   }
-}
 
-function app10GridAll(){
-  
-  $('#grd10DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
+})
+
+
+
+
+$('#slct_group_add_items').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); 
+
   let datos = {
-    TipoQuery : '10_grid'
-  };
+    TipoQuery : 'sqlGroupClassByGroup',
+    data:value
+  };                
 
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        
-        let datos={
-          TipoQuery:"03_getbyid",
-          ID: valor.item
-        }
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-          fila += '<tr>';
-         if(valor.estado==0){
-          fila += '<td>'+
-          '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app10Boton_S('+(parseInt(valor.ID))+');" disabled>S</button>';
-         }else{
-          fila += '<td>'+
-          '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app10Boton_S('+(parseInt(valor.ID))+');">S</button>';
-         }
-          fila += '<td>'+(valor.ID)+'</td>';
-          fila += '<td>'+(valor.descripcion)+'</td>';
-          fila += '<td>'+(valor.fecha)+'</td>';
-          fila += '<td>'+(valor.item)+'</td>';
-          fila += '<td>'+(resp.tabla[0].nombre)+'</td>';
-          fila += '<td>'+(resp.tabla[0].stock)+'</td>';
-          
-          fila += '<td>'+(resp.tabla[0].unidad)+'</td>';
-          fila += '<td>'+(resp.tabla[0].precio)+'</td>';
-          fila += '<td>'+(resp.tabla[0].descripcion)+'</td>';
-          
-          fila += '</tr>';
-
-          $('#grd10DatosBody').html(fila);
-        });
-        
-        
-        
-      });
-      
-    }else{
-      $('#grd10DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-function app10Boton_Search(){
-  
-  $('#grd10DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt10_Buscar").val();
-  if(txtBuscar.length>0){
-    let datos = {
-      TipoQuery : '10_getbyid',
-      ID:txtBuscar
-    };
-  
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.tabla.length>0){
-        let fila = "";
-        $.each(resp.tabla,function(key, valor){
-          
-          let datos={
-            TipoQuery:"03_getbyid",
-            ID: valor.item
-          }
-          appAjaxQuery(datos,rutaSQL).done(function(resp){
-            fila += '<tr>';
-           if(valor.estado==0){
-            fila += '<td>'+
-            '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app10Boton_S('+(parseInt(valor.ID))+');" disabled>S</button>';
-           }else{
-            fila += '<td>'+
-            '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app10Boton_S('+(parseInt(valor.ID))+');">S</button>';
-           }
-            fila += '<td>'+(valor.ID)+'</td>';
-            fila += '<td>'+(valor.descripcion)+'</td>';
-            fila += '<td>'+(valor.fecha)+'</td>';
-            fila += '<td>'+(valor.item)+'</td>';
-            fila += '<td>'+(resp.tabla[0].nombre)+'</td>';
-            fila += '<td>'+(resp.tabla[0].stock)+'</td>';
-            
-            fila += '<td>'+(resp.tabla[0].unidad)+'</td>';
-            fila += '<td>'+(resp.tabla[0].precio)+'</td>';
-            fila += '<td>'+(resp.tabla[0].descripcion)+'</td>';
-            
-            fila += '</tr>';
-  
-            $('#grd10DatosBody').html(fila);
-          });
-          
-          
-          
-        });
-        
-      }else{
-        $('#grd10DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-      }
-      //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-    });
-  }else{
-    app10GridAll();
-  }
-}
-
-function app10Boton_S(id){
-  let datos={
-    TipoQuery: "10_getbyid",
-    ID:id
-  }
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    
-    $("#txt10Q_Numero").val(resp.tabla[0].ID);
-    //$("#area09_descripcion").val(resp.tabla[0].descripcion);
-    loadS_10();
-  });
-}
-
-function loadS_10(){
-  $("#edit10_Q").hide();
-
-  $("#btn10Q_Cancel").hide();
-  $("#btn10Q_Save").hide();
-  $("#edit10_S").show();
-  $("#btn10S_Cancel").show();
-  $("#btn10S_Save").show();
-  $("#grid10").hide();
-}
-
-function app10SBoton_cancel(){
-
-
-  $("#edit10_S").hide();
-  $("#btn10S_Cancel").hide();
-  $("#btn10S_Save").hide();
-  $("#grid10").show();
-  //$("#grd09SDatosProvBody").remove();
-  $("#grd10SDatosProvBody").children("tr").remove();
-  proveedores=[];
-  
-}
-
-let proveedores=[];
-function app10SBoton_addProv(){
-  var nombre = document.getElementById("cbo10S_proveedor").value;
-  var estado =false;
-  if(nombre.length>0){
-    
-    var ID = document.querySelector("#grupoOptionsProveedor10S option[value='"+nombre+"']").dataset.value;
-    console.log("id:"+ID);
-    var id = parseInt(ID);
-    proveedores.forEach(function(elemento, indice, array) {
-      if(elemento===id){
-        alert("Este Proveedor ya fue agregado. Seleccione otro .");
-        document.getElementById("cbo10S_proveedor").value="";
-        estado=true;
-      }
-    })
-    if(estado==false){
-
-      let datos={
-        TipoQuery: "09_getProv",
-        ID:id
-      }
-      appAjaxQuery(datos,rutaSQL).done(function(resp){
-      
-        let fila = "";
-          fila += '<tr>';
-          fila += '<td>'+(resp.tabla[0].codigo)+'</td>';
-          fila += '<td>'+(resp.tabla[0].nombre)+'</td>';
-          fila += '<td>'+(resp.tabla[0].descripcion)+'</td>';
-          fila += '</tr>';
-        //$('#grd07HerraDatosBody').prepend(fila);
-        $(fila).appendTo('#grd10SDatosProvBody');
-        proveedores.push(parseInt(resp.tabla[0].ID));
-        document.getElementById("cbo10S_proveedor").value="";
-        estado=false;
-      });
-      estado=false;
-    }
-    
-  }else{
-    alert("Seleccione un proveedor.");
-  }
-
-}
-
-
-function app10SBoton_save(){
-  if(proveedores.length>0){
-    if(confirm("Se asignaran los proveedores a este RFQ¿Continuar?")){
-      
-      
-      proveedores.forEach(function(elemento, indice, array) {
-        let datos={
-          requisicion:$("#txt10Q_Numero").val(),
-          proveedor: elemento,
-          TipoQuery: "09_save",
-          commandSQL: "INS_PROV"
-        }
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-         
-        });
+ appAjaxQuery(datos,rutaSQL).done(function(resp){     
+    $("#slct_groupClass_add_items option[value!='-1']").remove();
+      resp.data.forEach((item)=>{
+        $('#slct_groupClass_add_items').append($("<option>", { 
+          value: item.code+"-"+value,
+          text : item.description 
+      }));
       })
      
-      app10SBoton_cancel();
-      app10GridAll();
-      alert("Se agregaron los proveedores exitosamente.");
-      
-      
+  }); 
   
-    }else{
-      return false;
-    }
-  }else{
-    alert("Debe ingresar al menos 1 proveedor.");
-  }
+})
+
+$('#slct_groupClass_add_items').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); 
+
+  let datos = {
+    TipoQuery : 'sqlGroupClassByGroupAndItems',
+    class:value,
+    group:$("#slct_group_add_items").val()
+  };                
+console.log(datos)
+ appAjaxQuery(datos,rutaSQL).done(function(resp){     
+  console.log(resp)
+    $("#slct_items_add_items option[value!='-1']").remove();
+      resp.data.forEach((item)=>{
+        $('#slct_items_add_items').append($("<option>", { 
+          value: item.id,
+          text : item.description 
+      }));
+      })
+     
+  }); 
   
-}
-
-let cotizaciones=[];
-function app11Boton_searchCot(){
-  var cotizacion = document.getElementById("cbo11_cotizacion").value;
-  var proveedor = document.getElementById("cbo11_proveedor").value;
-  var cotID = document.querySelector("#grupoOptionsCotizacion option[value='"+cotizacion+"']").dataset.value;
-  var provID = document.querySelector("#grupoOptionsProveedor11 option[value='"+proveedor+"']").dataset.value;
-
-  if(cotizacion.length<0 || cotizacion.length<0){
-    alert("Seleccione una cotización y proveedor");
-  }else{
-    let datos={
-      TipoQuery: "11_getCot",
-      cotizacion:cotID,
-      proveedor: provID
-    }
-    let fila = "";
-    var idCot;
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
+})
 
 
-      $.each(resp.tabla,function(key, valor){
+$('#slct_items_add_items').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); 
 
-        let provID=valor.cotizacion;
-        let cotID=valor.proveedor;
+  let datos = {
+    TipoQuery : 'sqlGroupClassByGroupAndItemsDescripcion',
+    data:value  
+  };                
+//console.log(datos)
+ appAjaxQuery(datos,rutaSQL).done(function(resp){     
+  console.log(resp)
+    $("#txt_descripcion_items_add").val(resp.data.description)
+    $("#txt_unidad_medida_items_add").val(resp.data.unidad_medida)
     
-        fila += '<tr>';
-        fila += '<td>'+(valor.ID)+'</td>';
-        fila += '<td>'+(valor.cotizacion)+'</td>';
-        fila += '<td>'+(valor.proveedor)+'</td>';
-        
-        let datos={
-          TipoQuery:"10_getbyid",
-          ID: valor.cotizacion
-        }
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-          let datos={
-            TipoQuery:"03_getbyid",
-            ID: resp.tabla[0].item
-          }
-
-          appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-            fila += '<td>'+(resp.tabla[0].ID)+'</td>';
-            fila += '<td>'+(resp.tabla[0].nombre)+'</td>';
-            fila += '<td>'+(resp.tabla[0].unidad)+'</td>';
-            fila += '<td>'+(resp.tabla[0].stock)+'</td>';
-            fila += '<td>'+(resp.tabla[0].precio)+'</td>';
-            fila += '<td><input id="txt11_precio'+parseInt(valor.ID)+'" type="text" class="form-control" /></td>';
-            fila += '<td><button id="#" type="button" class="btn btn-success" style="margin-left:2px;margin-right:2px;" title="Guardar" onclick="javascript:app11Boton_save('+(parseInt(valor.ID))+','+(parseInt(valor.cotizacion))+');"><i class="fa fa-flash"></i></button></td>';
-            fila += '</tr>';
-          //$('#grd07HerraDatosBody').prepend(fila);
-           // $(fila).appendTo('#grd11DatosCotBody');
-            $('#grd11DatosCotBody').html(fila);
-          });
+  }); 
   
-          
-  
-        });
-      });
+})
 
-      
-    
-      
-      /* proveedores.push(parseInt(resp.tabla[0].ID));
-      document.getElementById("cbo10S_proveedor").value="";
-      estado=false; */
-    });
-  }
 
-}
-
-function app11Boton_save(id, coti){
-
-  var precio = $("#txt11_precio"+id).val();
-  if(precio.length<0){
-    alert("Deben ingresar un precio.");
+$('#slct_group').change(function() {
+  var $option = $(this).find('option:selected');
+  var value = $option.val(); 
+  console.log(value)
+  if(value!=10){
+    $("#buttonforVehicleItem").show();
   }else{
+    $("#buttonforVehicleItem").hide();
+  }
+  let datos = {
+    TipoQuery : 'sqlGroupClassByGroup',
+    data:value
+  };                
 
-    let datos={
-      TipoQuery: "11_save",
-      commandSQL: "UPD",
-      precio: precio,
-      ID: id
+$("#txt_codigo_items").val("");
+ appAjaxQuery(datos,rutaSQL).done(function(resp){     
+    $("#slct_groupClass option[value!='-1']").remove();
+      resp.data.forEach((item)=>{
+        $('#slct_groupClass').append($("<option>", { 
+          value: item.code+"-"+value,
+          text : item.description 
+      }));
+      })
+     
+  }); 
+  
+})
 
+function chargeCorrelativeItems(value){
+  let datos = {
+    TipoQuery : 'sql_getCorrelativeItems',
+    data:{
+      first:value.split("-")[0],
+      second:value.split("-")[1],
     }
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-      let datos={
-        TipoQuery: "09_save",
-        commandSQL: "UPD_EST",
-        estado: 0,
-        ID: coti
-      }
-      appAjaxQuery(datos,rutaSQL).done(function(resp){
-        alert("Se ingreso el precio ofertado para la cotización.");
-        $("#cbo11_cotizacion").val("");
-        $("#cbo11_proveedor").val("");
-        $("#grd11DatosCotBody").children("tr").remove();
-      });
-      
-
-    });
-  }
+  };                
+ console.log(datos);
+ appAjaxQuery(datos,rutaSQL).done(function(resp){   
+      console.log(resp)
+      let newCorrelative=Number(resp.data.correlative)+1;      
+    $("#txt_codigo_items").val(resp.data.grupo+"."+resp.data.code+"."+resp.data.acro+"-"+newCorrelative);
+    //  $("#txt_codigo_items").val(resp.data.acro+"-"+newCorrelative);
+                     
+  }); 
 }
+function OpenModalProveedorSeleccionDetails(id){  
+  let datos = {
+    TipoQuery : 'sql_get_details_seleccion_proveedor',
+    value:id
+  };  
+  var table;   
 
-
-function app12GridAll(){
-  $('#grd12DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
-  let datos={
-    TipoQuery : '12_getbyPre'
-  }
-  let fila="";
   appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      $.each(resp.tabla,function(key, valor){
-        var precio = valor.precio;
-        var preveedor = valor.proveedor;
-        let datos = {
-          TipoQuery : '10_grid',
-          ID: valor.cotizacion
-        }
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-          
-          let datos={
-            TipoQuery:"03_getbyid",
-            ID: resp.tabla[0].item
-          }
-          var cotiza = resp;
-          appAjaxQuery(datos,rutaSQL).done(function(resp){
-            fila += '<tr>';
-            console.log("estado:"+valor.estado);
-            if(valor.estado ==0){
-              fila += '<td>'+
-            '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="Crear Orden" onclick="javascript:app12Boton_I('+(parseInt(valor.ID))+');" disabled>I</button>';
-            }else{
-              fila += '<td>'+
-            '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="Crear Orden" onclick="javascript:app12Boton_I('+(parseInt(valor.ID))+');">I</button>';
-            }
-            
-            fila += '<td>'+(valor.ID)+'</td>';
-            fila += '<td>'+(cotiza.tabla[0].ID)+'</td>';
-            fila += '<td>'+(preveedor)+'</td>';
-            fila += '<td>'+(cotiza.tabla[0].descripcion)+'</td>';
-            fila += '<td>'+(cotiza.tabla[0].fecha)+'</td>';
-            fila += '<td>'+(cotiza.tabla[0].item)+'</td>';
-            fila += '<td>'+(resp.tabla[0].nombre)+'</td>';
-            fila += '<td>'+(resp.tabla[0].stock)+'</td>';
-            
-            fila += '<td>'+(resp.tabla[0].unidad)+'</td>';
-            fila += '<td>'+(resp.tabla[0].precio)+'</td>';
-            fila += '<td>'+(resp.tabla[0].descripcion)+'</td>';
-            fila += '<td>'+(precio)+'</td>';
-            fila += '</tr>';
-  
-            $('#grd12DatosBody').html(fila);
-          });
-        });
-      });
-    }else{
-      $('#grd12DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
+    console.log(resp)
+
+
+    $("#modal_showDetail_seleccionProveedor_tipo").val(resp.data.tipo_servicio);
+    $("#modal_showDetail_seleccionProveedor_fecha").val(resp.data.fecha);
+
+    $("#modal_showDetail_seleccionProveedor_table > tbody").empty();
+    $("#modal_showDetail_seleccionProveedor_table > thead").empty();
+    $("#modal_showDetail_seleccionProveedor_table > tfoot").empty();
+
+    $("#modal_showDetail_seleccionProveedor_table > thead").append("<tr>"+
+        "<th>CRITERIOS DE EVALUACION</th>"+
+        "<th>"+resp.data.proveedor1+"</th>"+
+        "<th>"+resp.data.proveedor2+"</th>"+
+        "<th>"+resp.data.proveedor3+"</th>"+   
+    "</tr>");
+
+    $("#modal_showDetail_seleccionProveedor_table > tfoot").append(
+      "<tr>"+
+      "<th>TOTAL</th>"+
+      "<th>"+resp.data.proveedor1_puntaje+"</th>"+
+      "<th>"+resp.data.proveedor2_puntaje+"</th>"+
+      "<th>"+resp.data.proveedor3_puntaje+"</th>"+  
+    "</tr>"
+    );
+    for (let index = 1; index <= 8; index++) {
+      $("#modal_showDetail_seleccionProveedor_table > tbody").append("<tr>"+
+        "<td>"+(resp.criterios[0]['PR_'+index])+"</td>"+
+        "<td>"+(resp.criterios[0]['PT_'+index])+"</td>"+
+        "<td>"+(resp.criterios[1]['PT_'+index])+"</td>"+
+        "<td>"+(resp.criterios[2]['PT_'+index])+"</td>"+       
+      "</tr>")
+
     }
 
-  })
-
-
+        
+    $('#modal_showDetail_seleccionProveedor').modal('show');
+  } );   
 }
 
-function app12Boton_Search(){
-  $('#grd12DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt12_Buscar").val();
-  if(txtBuscar>0){
-    let datos={
-      TipoQuery : '12_getbyPreId',
-      ID:txtBuscar
+function OpenModalProveedorEvaluacionDetails(id){  
+  let datos = {
+    TipoQuery : 'sql_get_details_evaluacion_proveedor',
+    value:id
+  };  
+  var table;   
+  console.log(id)
+  appAjaxQuery(datos,rutaSQL).done(function(resp){
+    console.log(resp)
+
+
+    $("#modal_showDetail_evaluacionProveedor_fecha").val(resp.data.fecha);
+
+    $("#modal_showDetail_evaluacionProveedor_table > tbody").empty();
+    $("#modal_showDetail_evaluacionProveedor_table > thead").empty();
+    $("#modal_showDetail_evaluacionProveedor_table > tfoot").empty();
+
+    $("#modal_showDetail_evaluacionProveedor_table > thead").append("<tr>"+
+        "<th>CRITERIOS DE EVALUACION</th>"+
+        "<th>"+resp.data.proveedor1+"</th>"+
+        "<th>"+resp.data.proveedor2+"</th>"+
+        "<th>"+resp.data.proveedor3+"</th>"+   
+    "</tr>");
+
+    $("#modal_showDetail_evaluacionProveedor_table > tfoot").append(
+      "<tr>"+
+      "<th>TOTAL</th>"+
+      "<th>"+resp.data.proveedor1_puntaje+"</th>"+
+      "<th>"+resp.data.proveedor2_puntaje+"</th>"+
+      "<th>"+resp.data.proveedor3_puntaje+"</th>"+  
+    "</tr>"
+    );
+    for (let index = 1; index <= 2; index++) {
+      $("#modal_showDetail_evaluacionProveedor_table > tbody").append("<tr>"+
+        "<td>"+(resp.criterios[0]['PR_'+index])+"</td>"+
+        "<td>"+(resp.criterios[0]['PT_'+index])+"</td>"+
+        "<td>"+(resp.criterios[1]['PT_'+index])+"</td>"+
+        "<td>"+(resp.criterios[2]['PT_'+index])+"</td>"+       
+      "</tr>")
+
     }
-    let fila="";
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.tabla.length>0){
-        $.each(resp.tabla,function(key, valor){
-          var precio = valor.precio;
-          var preveedor = valor.proveedor;
-          let datos = {
-            TipoQuery : '10_grid',
-            ID: valor.cotizacion
-          }
-          appAjaxQuery(datos,rutaSQL).done(function(resp){
-            
-            let datos={
-              TipoQuery:"03_getbyid",
-              ID: resp.tabla[0].item
-            }
-            var cotiza = resp;
-            appAjaxQuery(datos,rutaSQL).done(function(resp){
-              fila += '<tr>';
-              fila += '<td>'+
-              '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app12Boton_I('+(parseInt(valor.ID))+');">I</button>';
-              fila += '<td>'+(valor.ID)+'</td>';
-              fila += '<td>'+(cotiza.tabla[0].ID)+'</td>';
-              fila += '<td>'+(preveedor)+'</td>';
-              fila += '<td>'+(cotiza.tabla[0].descripcion)+'</td>';
-              fila += '<td>'+(cotiza.tabla[0].fecha)+'</td>';
-              fila += '<td>'+(cotiza.tabla[0].item)+'</td>';
-              fila += '<td>'+(resp.tabla[0].nombre)+'</td>';
-              fila += '<td>'+(resp.tabla[0].stock)+'</td>';
-              
-              fila += '<td>'+(resp.tabla[0].unidad)+'</td>';
-              fila += '<td>'+(resp.tabla[0].precio)+'</td>';
-              fila += '<td>'+(resp.tabla[0].descripcion)+'</td>';
-              fila += '<td>'+(precio)+'</td>';
-              fila += '</tr>';
+
+        
+    $('#modal_showDetail_evaluacionProveedor').modal('show');
+  } );   
+}
+function chargeCorrelativeGroupClass(value){
+  let datos = {
+    TipoQuery : 'sql_getCorrelativeGroupClass',
+    data:value
+  };                
+
+ appAjaxQuery(datos,rutaSQL).done(function(resp){   
+      let newCorrelative=Number(resp.code)+1;      
+      $("#txt_codigo_GruposClass").val(value+"."+newCorrelative);
+                     
+  }); 
+}
+function HistorialAlmacenes(){
+  
+    $("#NuevoRegistroAlmacen").hide();
+    $("#HistorialAlmacenes").show();
+    updateGrid("gridAlmacenGrid");
+    //updateGrid("gridOperacionTarea");
+    $("#link_NuevoRegistroAlmacen").removeClass("active");
+    $("#link_HistorialAlmacenes").addClass("active");
+  
+  }
+
+  function HistorialRequerimientos(){
+    $("#NuevoRegistroRequerimientos").hide();
+    $("#HistorialRequerimientos").show();
+    updateGrid("gridRequerimientoGrid");
+    $("#link_NuevoRegistroRequerimientos").removeClass("active");
+    $("#link_HistorialRequerimientos").addClass("active");
+  }
+function HistorialOrdenDeCompra(){
+  $("#HistorialOrdenDeCompra").show();
+  updateGrid("gridOrdenCompraGrid");
+  $("#link_HistorialOrdenDeCompra").addClass("active");
+}
+
+  function NuevoRegistroRequerimientos(){
+    $("#HistorialRequerimientos").hide();
+    $("#NuevoRegistroRequerimientos").show();
     
-              $('#grd12DatosBody').html(fila);
-            });
-          });
+    $("#link_HistorialRequerimientos").removeClass("active");
+    $("#link_NuevoRegistroRequerimientos").addClass("active");
+  }
+  loadDepartamentos(ubigeo, "txt_departamento_almacen");
+  function NuevoRegistroAlmacen(){
+    
+    $("#HistorialAlmacenes").hide();
+    $("#NuevoRegistroAlmacen").show();
+    //loadDepartamentos(ubigeo, "txt_departamento_almacen");
+    $("#link_HistorialAlmacenes").removeClass("active");
+  
+    $("#link_NuevoRegistroAlmacen").addClass("active");
+  
+  }
+
+  function HistorialItems(){
+  
+    $("#NuevoRegistroItems").hide();
+    $("#HistorialItems").show();
+    updateGrid("gridItemsGrid");
+    //updateGrid("gridOperacionTarea");
+    $("#link_NuevoRegistroItems").removeClass("active");
+    $("#link_HistorialItems").addClass("active");
+  
+  }
+  loadSelectGroupandGroupClass();
+  function NuevoRegistroItems(){
+    
+    $("#HistorialItems").hide();
+    $("#NuevoRegistroItems").show();
+ 
+    $("#link_HistorialItems").removeClass("active");
+    //loadSelectGroupandGroupClass();
+    $("#link_NuevoRegistroItems").addClass("active");
+  
+  }
+  loadSelectGroupandGroupClassAddItems()
+  function loadSelectGroupandGroupClassAddItems(){
+    let datos = {
+      TipoQuery : 'sqlGroupGrid'
+    };                
+    $('#slct_group_add_items option').remove();
+  $('#slct_group_add_items').append($("<option>", {
+      value: "-1",
+      text: "Selecciona...",  
+  }));
+   appAjaxQuery(datos,rutaSQL).done(function(resp){     
+        resp.data.forEach((item)=>{
+          $('#slct_group_add_items').append($("<option>", { 
+            value: item.code,
+            text : item.description 
+        }));
+        })
+       
+    }); 
+  
+  }
+
+
+  function loadSelectGroupandGroupClass(){
+    let datos = {
+      TipoQuery : 'sqlGroupGrid'
+    };                
+    $('#slct_group option').remove();
+  $('#slct_group').append($("<option>", {
+      value: "-1",
+      text: "Selecciona...",  
+  }));
+   appAjaxQuery(datos,rutaSQL).done(function(resp){     
+        resp.data.forEach((item)=>{
+          $('#slct_group').append($("<option>", { 
+            value: item.code,
+            text : item.description 
+        }));
+        })
+       
+    }); 
+  
+  }
+  function loadProveedorGroup(){
+    let datos = {
+      TipoQuery : 'sqlGroupGrid'
+    };                
+   appAjaxQuery(datos,rutaSQL).done(function(resp){     
+      console.log(resp)
+        resp.data.forEach((item)=>{
+          $('#slct_grupo_proveedor').append($("<option>", { 
+            value: item.code,
+            text : item.description 
+        }));
+        })
+       
+    }); 
+  }
+  function HistorialGrupos(){
+  
+    $("#NuevoRegistroGrupos").hide();
+    $("#HistorialGrupos").show();
+    updateGrid("gridGroupGrid");
+    //updateGrid("gridOperacionTarea");
+    $("#link_NuevoRegistroGrupos").removeClass("active");
+    $("#link_HistorialGrupos").addClass("active");
+  
+  }
+  chargeCorrelativeGroup();
+  function NuevoRegistroGrupos(){
+    
+    $("#HistorialGrupos").hide();
+    $("#NuevoRegistroGrupos").show();
+  
+    $("#link_HistorialGrupos").removeClass("active");
+  
+    $("#link_NuevoRegistroGrupos").addClass("active");
+    
+    //chargeCorrelativeGroup();
+  }
+  function chargeCorrelativeGroup(){
+    let datos = {
+      TipoQuery : 'sql_getCorrelativeGroup'
+    };                
+   appAjaxQuery(datos,rutaSQL).done(function(resp){   
+        let newCorrelative=Number(resp.code)+1;
+        //console.log(newCorrelative);
+        $("#txt_codigo").val(newCorrelative);
+                       
+    }); 
+
+  }
+  function HistorialGruposClass(){
+  
+    $("#NuevoRegistroGruposClass").hide();
+    $("#HistorialGruposClass").show();
+    updateGrid("gridGroupClassGrid");
+    //updateGrid("gridOperacionTarea");
+    $("#link_NuevoRegistroGruposClass").removeClass("active");
+    $("#link_HistorialGruposClass").addClass("active");
+  
+  }
+  function NuevoRegistroGruposClass(){
+    
+    $("#HistorialGruposClass").hide();
+    $("#NuevoRegistroGruposClass").show();  
+    $("#link_HistorialGruposClass").removeClass("active");
+   // loadSelectGroup();
+    $("#link_NuevoRegistroGruposClass").addClass("active");
+  
+  }
+  loadSelectGroup();
+  function loadSelectGroup(){
+    let datos = {
+      TipoQuery : 'sqlGroupGrid'
+    };                
+
+   appAjaxQuery(datos,rutaSQL).done(function(resp){     
+    $('#slct_group_GruposClass option').remove();
+    $('#slct_group_GruposClass').append($("<option>", {
+        value: "-1",
+        text: "Selecciona...",  
+    }));
+        resp.data.forEach((item)=>{
+          $('#slct_group_GruposClass').append($("<option>", { 
+            value: item.code,
+            text : item.description 
+        }));
+        })
+       
+    }); 
+  
+  }
+  function loadSelectProveedorCategory(){
+    let datos = {
+      TipoQuery : 'sqlProveedorGroup'
+    };                
+   appAjaxQuery(datos,rutaSQL).done(function(resp){     
+        resp.data.forEach((item)=>{
+          $('#slct_categoria_proveedor').append($("<option>", { 
+            value: item.id,
+            text : item.description 
+        }));
+        })
+       
+    }); 
+  
+  }
+  function EvaluarEvaluacionProveedor(){
+    let error=0;
+    let Maindata=[
+      {element:"selectProveedorEvaluacion-1",type:"selectArray",status:1,value:"selectArray"},
+      {element:"selectProveedorEvaluacion-2",type:"selectArray",status:1,value:"selectArray"},
+      {element:"selectProveedorEvaluacion-3",type:"selectArray",status:1,value:"selectArray"},
+      {element:"proveedorEvalucion-1",type:"select",status:1,value:"select"},
+      {element:"proveedorEvalucion-2",type:"select",status:1,value:"select"},
+      {element:"proveedorEvalucion-3",type:"select",status:1,value:"select"}    
+    ]
+    if(validateEvaluation(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+      error=1;
+    }else{
+        
+      var SeleccionProveedor1=$('#tableEvaluacionProveedor > tbody').find(".selectProveedorEvaluacion-1").map(function(){return $(this).val();}).get();
+      var SeleccionProveedor2=$('#tableEvaluacionProveedor > tbody').find(".selectProveedorEvaluacion-2").map(function(){return $(this).val();}).get();
+      var SeleccionProveedor3=$('#tableEvaluacionProveedor > tbody').find(".selectProveedorEvaluacion-3").map(function(){return $(this).val();}).get();
+     
+  
+      let totalProveedor1=SeleccionProveedor1.reduce((a, b) => Number(a) + Number(b), 0);
+      let totalProveedor2=SeleccionProveedor2.reduce((a, b) => Number(a) + Number(b), 0);
+      let totalProveedor3=SeleccionProveedor3.reduce((a, b) => Number(a) + Number(b), 0);
+   
+      $("#totalEvalucionProveedor1").val((totalProveedor1/Number(SeleccionProveedor1.length)).toFixed(2));
+      $("#totalEvalucionProveedor2").val((totalProveedor2/Number(SeleccionProveedor2.length)).toFixed(2));
+      $("#totalEvalucionProveedor3").val((totalProveedor3/Number(SeleccionProveedor3.length)).toFixed(2)); 
+      
+      
+      $( ".boxescolors" ).remove();
+      $("#result_evaluacion_1").append(generateBoxCalification($("#totalEvalucionProveedor1").val()));
+      $("#result_evaluacion_2").append(generateBoxCalification($("#totalEvalucionProveedor2").val()));
+      $("#result_evaluacion_3").append(generateBoxCalification($("#totalEvalucionProveedor3").val()));
+
+    }
+
+  return error;
+  }
+  function EvaluarSeleccionProveedor(){
+    let error=0;
+    let Maindata=[
+      {element:"selectProveedorSeleccion-1",type:"selectArray",status:1,value:"selectArray"},
+      {element:"selectProveedorSeleccion-2",type:"selectArray",status:1,value:"selectArray"},
+      {element:"selectProveedorSeleccion-3",type:"selectArray",status:1,value:"selectArray"},
+      {element:"proveedorSeleccion-1",type:"select",status:1,value:"select"},
+      {element:"proveedorSeleccion-2",type:"select",status:1,value:"select"},
+      {element:"proveedorSeleccion-3",type:"select",status:1,value:"select"}    
+    ]
+    if(validateEvaluation(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+      error=1;
+    }else{
+        
+      var SeleccionProveedor1=$('#tableSeleccionProveedor > tbody').find(".selectProveedorSeleccion-1").map(function(){return $(this).val();}).get();
+      var SeleccionProveedor2=$('#tableSeleccionProveedor > tbody').find(".selectProveedorSeleccion-2").map(function(){return $(this).val();}).get();
+      var SeleccionProveedor3=$('#tableSeleccionProveedor > tbody').find(".selectProveedorSeleccion-3").map(function(){return $(this).val();}).get();
+         
+
+      let totalProveedor1=SeleccionProveedor1.reduce((a, b) => Number(a) + Number(b), 0);
+      let totalProveedor2=SeleccionProveedor2.reduce((a, b) => Number(a) + Number(b), 0);
+      let totalProveedor3=SeleccionProveedor3.reduce((a, b) => Number(a) + Number(b), 0);
+  
+      $("#totalSeleccionProveedor1").val((totalProveedor1/Number(SeleccionProveedor1.length)).toFixed(2));
+      $("#totalSeleccionProveedor2").val((totalProveedor2/Number(SeleccionProveedor2.length)).toFixed(2));
+      $("#totalSeleccionProveedor3").val((totalProveedor3/Number(SeleccionProveedor3.length)).toFixed(2)); 
+      
+    
+    $( ".boxescolors" ).remove();
+    $("#result_seleccion_1").append(generateBoxCalification($("#totalSeleccionProveedor1").val()));
+    $("#result_seleccion_2").append(generateBoxCalification($("#totalSeleccionProveedor2").val()));
+    $("#result_seleccion_3").append(generateBoxCalification($("#totalSeleccionProveedor3").val()));
+
+    }
+
+  return error;
+  }
+
+  function generateBoxCalification(val){
+
+    let element=''
+    if(val<2){
+      element='<div class="boxescolors" style="width:30px;height:20px;background-color:red;color:black">PMC</div>'
+    }
+    else if(val>=2.0 && val <=2.25){
+      element='<div class="boxescolors" style="width:30px;height:20px;background-color:yellow;color:black">PAC</div>'
+    }else{
+      element='<div class="boxescolors" style="width:30px;height:20px;background-color:green;color:black">PEX</div>'
+    }
+    return element
+}
+
+  function add_EvaluarEvaluacionProveedor(){
+    let id=(new Date()).getTime();
+    let Maindata=[
+      {title:"id",element:"",type:"text",status:0,value:id},
+      {title:"evaluador",element:"txt_evaluacion_evaluacionProveedor_evaluador2",type:"text",status:1,value:"val"},
+
+      {title:"search",element:"txt_search_evaluador_proveedor_evaluated",type:"text",status:1,value:"val"},
+      {title:"name",element:"txt_solicitante_nombres_evaluador_proveedor",type:"text",status:1,value:"val"},
+      {title:"surname",element:"txt_solicitante_apellidos_evaluador_proveedor",type:"text",status:1,value:"val"},
+
+
+      {title:"proveedor1",element:"proveedorEvalucion-1",type:"select",status:1,value:"selectVal"},
+      {title:"proveedor2",element:"proveedorEvalucion-2",type:"select",status:1,value:"selectVal"},
+      {title:"proveedor3",element:"proveedorEvalucion-3",type:"select",status:1,value:"selectVal"},
+
+      {title:"proveedor1_puntaje",element:"totalEvalucionProveedor1",type:"text",status:1,value:"val"},
+      {title:"proveedor2_puntaje",element:"totalEvalucionProveedor2",type:"text",status:1,value:"val"},
+      {title:"proveedor3_puntaje",element:"totalEvalucionProveedor3",type:"text",status:1,value:"val"},      
+    ]
+    let MaindataSelect=[
+      {element:"selectProveedorEvaluacion-1",type:"selectArray",status:1,value:"selectArray"},
+      {element:"selectProveedorEvaluacion-2",type:"selectArray",status:1,value:"selectArray"},
+      {element:"selectProveedorEvaluacion-3",type:"selectArray",status:1,value:"selectArray"},
+      {element:"proveedorEvalucion-1",type:"select",status:1,value:"select"},
+      {element:"proveedorEvalucion-2",type:"select",status:1,value:"select"},
+      {element:"proveedorEvalucion-3",type:"select",status:1,value:"select"}    
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+
+      let pregunta1=$(".selectProveedorEvaluacion-1").map(function(){return $(this).val();}).get(); 
+      let pregunta2=$(".selectProveedorEvaluacion-2").map(function(){return $(this).val();}).get(); 
+      let pregunta3=$(".selectProveedorEvaluacion-3").map(function(){return $(this).val();}).get(); 
+
+          if(!EvaluarEvaluacionProveedor()){
+            let datos = {
+              TipoQuery : 'sql_saveEvaluacionProveedor',
+              data:generateInsertData(Maindata),
+              criterio:[pregunta1,pregunta2,pregunta3]   
+            };                
+           appAjaxQuery(datos,rutaSQL).done(function(resp){   
+
+            $( ".boxescolors" ).remove();            
+                ResetAndUpdateGrid(Maindata,updateGrid,"gridHistoriaEvaluacionProveedorGrid");
+                ResetAndUpdateGrid(MaindataSelect);
+                swal("Insertado correctamente", {
+                  icon: "success",
+                });   
+                               
+            }); 
+          }                          
+    }
+  }
+  function loadSelectedGestionPersonasMotivo(){
+    let datos = {
+      TipoQuery : '03_selected_gestionPersona_motivo'   
+    };      
+    appAjaxQuery(datos,rutaSQL).done(function(resp){   
+      console.log(resp);
+    $.each(resp[0], function(i, item) {
+      $('#personas_select_motivo').append($("<option>", {
+          value: item.id,
+          text: item.descripcion,    
+      }));
+    });
+  });
+  }
+  function add_EvaluarSeleccionProveedor(){
+    let id=(new Date()).getTime();
+    let Maindata=[
+      {title:"id",element:"",type:"text",status:0,value:id},
+      {title:"tipo_servicio",element:"txt_seleccion_evaluacionProveedor_tipo",type:"text",status:1,value:"val"},
+      {title:"evaluador",element:"txt_seleccion_evaluacionProveedor_evaluador",type:"text",status:1,value:"val"},
+
+      {title:"search",element:"txt_search_evaluador_proveedor_selected",type:"text",status:1,value:"val"},
+      {title:"nombre",element:"txt_solicitante_nombres_seleccion_proveedor",type:"text",status:1,value:"val"},
+      {title:"apellido",element:"txt_solicitante_apellidos_seleccion_proveedor",type:"text",status:1,value:"val"},
+      
+
+      {title:"proveedor1",element:"proveedorSeleccion-1",type:"select",status:1,value:"selectVal"},
+      {title:"proveedor2",element:"proveedorSeleccion-2",type:"select",status:1,value:"selectVal"},
+      {title:"proveedor3",element:"proveedorSeleccion-3",type:"select",status:1,value:"selectVal"},
+
+      {title:"proveedor1_puntaje",element:"totalSeleccionProveedor1",type:"text",status:1,value:"val"},
+      {title:"proveedor2_puntaje",element:"totalSeleccionProveedor2",type:"text",status:1,value:"val"},
+      {title:"proveedor3_puntaje",element:"totalSeleccionProveedor3",type:"text",status:1,value:"val"},      
+    ]
+    let MaindataSelect=[
+      {element:"selectProveedorSeleccion-1",type:"selectArray",status:1,value:"selectArray"},
+      {element:"selectProveedorSeleccion-2",type:"selectArray",status:1,value:"selectArray"},
+      {element:"selectProveedorSeleccion-3",type:"selectArray",status:1,value:"selectArray"},
+      {element:"proveedorSeleccion-1",type:"select",status:1,value:"select"},
+      {element:"proveedorSeleccion-2",type:"select",status:1,value:"select"},
+      {element:"proveedorSeleccion-3",type:"select",status:1,value:"select"}    
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+
+      let pregunta1=$(".selectProveedorSeleccion-1").map(function(){return $(this).val();}).get(); 
+      let pregunta2=$(".selectProveedorSeleccion-2").map(function(){return $(this).val();}).get(); 
+      let pregunta3=$(".selectProveedorSeleccion-3").map(function(){return $(this).val();}).get(); 
+
+      //console.log(d)
+       // console.log(generateInsertData(MaindataSelect))
+          if(!EvaluarSeleccionProveedor()){
+            let datos = {
+              TipoQuery : 'sql_saveSeleccionProveedor',
+              data:generateInsertData(Maindata),
+              criterio:[pregunta1,pregunta2,pregunta3]             
+            };                
+           appAjaxQuery(datos,rutaSQL).done(function(resp){   
+                              
+              $( ".boxescolors" ).remove();
+                ResetAndUpdateGrid(Maindata,updateGrid,"gridHistoriaSeleccionProveedorGrid");
+                ResetAndUpdateGrid(MaindataSelect);
+                swal("Insertado correctamente", {
+                  icon: "success",
+                });   
+                               
+            }); 
+          }       
+    }
+  }
+
+  function loadSelectProveedorFull(){
+    let datos = {
+      TipoQuery : 'sqlProveedorInactives'
+    };                
+   appAjaxQuery(datos,rutaSQL).done(function(resp){     
+    $('.CriterioEvaluacionSelectProveedor option').remove();
+    $('.CriterioEvaluacionSelectProveedor').append($("<option>", {
+        value: "-1",
+        text: "Selecciona...",  
+    }));
+        resp.data.forEach((item)=>{
+          $('.CriterioEvaluacionSelectProveedor').append($("<option>", { 
+            value: item.id,
+            text : item.nombre 
+        }));
+        })
+       
+    }); 
+  
+  }
+  function loadSelectEvaluarProveedorFull(){
+    let datos = {
+      TipoQuery : 'sqlProveedorActives'
+    };                
+   appAjaxQuery(datos,rutaSQL).done(function(resp){     
+    $('.CriterioEvaluacionEvaluarSelectProveedor option').remove();
+    $('.CriterioEvaluacionEvaluarSelectProveedor').append($("<option>", {
+        value: "-1",
+        text: "Selecciona...",  
+    }));
+        resp.data.forEach((item)=>{
+          $('.CriterioEvaluacionEvaluarSelectProveedor').append($("<option>", { 
+            value: item.id,
+            text : item.nombre 
+        }));
+        })
+       
+    }); 
+  
+  }
+  loadSelectProveedorFull();
+  function NuevaSeleccionProveedor(){
+    $("#HistorialProveedor").hide();
+    $("#NuevoRegistroProveedor").hide();
+    $("#NuevaCategoriaProveedor").hide();
+    $("#NuevaSeleccionProveedor").show();
+    $("#NuevaEvaluacionProveedor").hide();
+    //loadSelectProveedorFull();
+    $("#link_HistorialProveedor").removeClass("active");
+    $("#link_NuevaCategoriaProveedor").removeClass("active");
+    $("#link_NuevaSeleccionProveedor").addClass("active");
+    $("#link_NuevaEvaluacionProveedor").removeClass("active");
+    $("#link_NuevoRegistroProveedor").removeClass("active");
+  }
+  function HistorialProveedor(){
+  
+    $("#HistorialProveedor").show();
+    $("#NuevoRegistroProveedor").hide();
+    $("#NuevaCategoriaProveedor").hide();
+    $("#NuevaSeleccionProveedor").hide();
+    $("#NuevaEvaluacionProveedor").hide();
+
+    updateGrid("gridProveedorGrid");
+
+   $("#link_HistorialProveedor").addClass("active");
+   $("#link_NuevaCategoriaProveedor").removeClass("active");
+   $("#link_NuevaSeleccionProveedor").removeClass("active");
+   $("#link_NuevaEvaluacionProveedor").removeClass("active");
+   $("#link_NuevoRegistroProveedor").removeClass("active");
+  }
+  function NuevoRegistroProveedor(){
+    
+    $("#HistorialProveedor").hide();
+    $("#NuevoRegistroProveedor").show();
+    $("#NuevaCategoriaProveedor").hide();
+    $("#NuevaSeleccionProveedor").hide();
+    $("#NuevaEvaluacionProveedor").hide();
+    //loadSelectProveedorCategory();
+    //loadProveedorGroup();
+    //loadDepartamentos(ubigeo, "slct_departamento_proveedor");
+
+    $("#link_HistorialProveedor").removeClass("active");
+    $("#link_NuevaCategoriaProveedor").removeClass("active");
+    $("#link_NuevaSeleccionProveedor").removeClass("active");
+    $("#link_NuevaEvaluacionProveedor").removeClass("active");
+    $("#link_NuevoRegistroProveedor").addClass("active");
+  
+  }
+  loadSelectProveedorCategory();
+  loadProveedorGroup();
+  loadDepartamentos(ubigeo, "slct_departamento_proveedor");
+
+  function NuevaCategoriaProveedor(){
+    $("#HistorialProveedor").hide();
+    $("#NuevoRegistroProveedor").hide();
+    $("#NuevaCategoriaProveedor").show();
+    $("#NuevaSeleccionProveedor").hide();
+    $("#NuevaEvaluacionProveedor").hide();
+
+    updateGrid("gridProveedorCategory");
+
+    $("#link_HistorialProveedor").removeClass("active");
+    $("#link_NuevaCategoriaProveedor").addClass("active");
+    $("#link_NuevaSeleccionProveedor").removeClass("active");
+    $("#link_NuevaEvaluacionProveedor").removeClass("active");
+    $("#link_NuevoRegistroProveedor").removeClass("active");
+  }
+   loadSelectEvaluarProveedorFull();
+  function NuevaEvaluacionProveedor(){
+    $("#HistorialProveedor").hide();
+    $("#NuevoRegistroProveedor").hide();
+    $("#NuevaCategoriaProveedor").hide();
+    $("#NuevaSeleccionProveedor").hide();
+    $("#NuevaEvaluacionProveedor").show();
+   // loadSelectEvaluarProveedorFull();
+    $("#link_HistorialProveedor").removeClass("active");
+    $("#link_NuevaCategoriaProveedor").removeClass("active");
+    $("#link_NuevaSeleccionProveedor").removeClass("active");
+    $("#link_NuevaEvaluacionProveedor").addClass("active");
+    $("#link_NuevoRegistroProveedor").removeClass("active");
+  }
+  function addItemRequerimiento(tableItemRequerimiento){
+    let idx=1;
+    let element =$('#'+tableItemRequerimiento+' > tbody > tr').last();
+    if(element.length){
+      let lastEle=element.find(".txt_item_requerimiento").val()
+      idx=Number(lastEle)+1
+  
+    }
+
+    $('#'+tableItemRequerimiento+' > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='ItemsRemoveRequerimientoRow'>"+
+    "<td><input type='text' class='obligatory-input form-control txt_item_requerimiento' disabled value='"+idx+"'/></td>"+
+    "<td><input type='text' class='form-control txt_codigo_requerimiento' /></td>"+
+    "<td><input type='text' class='form-control txt_n_parte_requerimiento' /></td>"+
+    "<td><input type='text' class='obligatory-input form-control txt_descripcion_requerimiento' /></td>"+
+    "<td><input type='text' class='obligatory-input form-control txt_cantidad_requerimiento' /></td>"+
+    "<td><input type='text' class='obligatory-input form-control txt_unidad_requerimiento' /></td>"+
+    //"<td><input type='text' class='obligatory-input form-control txt_prioridad_requerimiento' /></td>"+
+    "<td><input type='text' class='form-control txt_observacion_requerimiento' /></td>"+
+"<td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash bg-rose-500 py-2 px-2 text-white' onclick='removeComentarios("+(new Date()).getTime()+")'></button>"+ 
+  "</div></td>"+
+"</tr>")
+  }
+  function addComentario(element,classSelect){
+    $('#'+element+' > tbody').append( "<tr id='"+(new Date()).getTime()+"'><td><input type='text' class='form-control' /></td>"+
+    "<td>"+
+    "<select  class='form-control "+classSelect+"-1'>"+
+    "<option value='-1'>Selecciona..."+
+    "</option>"+
+    "<option value='1'>1"+
+    "</option>"+
+    "<option value='2'>2"+
+    "</option>"+
+    "<option value='3'>3"+
+    "</option>"+
+  "</select>"+
+  "</td>"+
+  "<td>"+
+  "<select  class='form-control "+classSelect+"-2'>"+
+  "<option value='-1'>Selecciona..."+
+  "</option>"+
+  "<option value='1'>1"+
+  "</option>"+
+  "<option value='2'>2"+
+  "</option>"+
+  "<option value='3'>3"+
+  "</option>"+
+"</select>"+
+"</td>"+
+"<td>"+
+"<select  class='form-control "+classSelect+"-3'>"+
+"<option value='-1'>Selecciona..."+
+"</option>"+
+"<option value='1'>1"+
+"</option>"+
+"<option value='2'>2"+
+"</option>"+
+"<option value='3'>3"+
+"</option>"+
+"</select>"+
+"</td>"+
+"<td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash bg-rose-500 py-2 px-2 text-white' onclick='removeComentarios("+(new Date()).getTime()+")'></button>"+ 
+  "</div></td>"+
+"</tr>")
+  }
+  
+  function searchSolicitanteReqCompra(){
+    var msn=$('#txt_search_solicitanteReqCompra').val();
+    let datos = {
+      TipoQuery : '02_search_solicitante',
+      value:msn     
+    };      
+    appAjaxQuery(datos,rutaSQL).done(function(resp){    
+      if(resp.error){
+        swal("No se encontro incidencia para el DNI", {
+          icon: "warning",
         });
       }else{
-        $('#grd12DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-      }
-  
-    })
-  }else{
-    app12GridAll();
-  }
-
-
-}
-
-function app12Boton_I(id){
-
-  let datos={
-    TipoQuery : '12_getbyid',
-    ID:id
-  }
-  
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      $.each(resp.tabla,function(key, valor){
-        var precio = valor.precio;
-        var preveedor = valor.proveedor;
-        let datos = {
-          TipoQuery : '10_grid',
-          ID: valor.cotizacion
-        }
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-          
-          let datos={
-            TipoQuery:"03_getbyid",
-            ID: resp.tabla[0].item
-          }
-          var cotiza = resp;
-          appAjaxQuery(datos,rutaSQL).done(function(resp){
-           /*  fila += '<tr>';
-            fila += '<td>'+
-            '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app12Boton_I('+(parseInt(valor.ID))+');">S</button>';
-            fila += '<td>'+(valor.ID)+'</td>';
-            fila += '<td>'+(cotiza.tabla[0].ID)+'</td>';
-            fila += '<td>'+(preveedor)+'</td>';
-            fila += '<td>'+(cotiza.tabla[0].descripcion)+'</td>';
-            fila += '<td>'+(cotiza.tabla[0].fecha)+'</td>';
-            fila += '<td>'+(cotiza.tabla[0].item)+'</td>';
-            fila += '<td>'+(resp.tabla[0].nombre)+'</td>';
-            fila += '<td>'+(resp.tabla[0].stock)+'</td>';
-            
-            fila += '<td>'+(resp.tabla[0].unidad)+'</td>';
-            fila += '<td>'+(resp.tabla[0].precio)+'</td>';
-            fila += '<td>'+(resp.tabla[0].descripcion)+'</td>';
-            fila += '<td>'+(precio)+'</td>';
-            fila += '</tr>'; */
-            
-            $("#txt12_Numero").val(valor.ID);
-            $("#txt12_rfq").val(cotiza.tabla[0].ID);
-            $("#cbo12_proveedorAct").val($('#grupoOptionsProveedorAct [data-value="' + preveedor + '"]').val());
-            $("#txt12_codigoItem").val(cotiza.tabla[0].item);
-            $("#txt12_item").val(resp.tabla[0].nombre);
-            $("#txt12_unidad").val(resp.tabla[0].unidad);
-            $("#txt12_parte").val(resp.tabla[0].numParte);
-            $("#txt12_descripcion").val(resp.tabla[0].descripcion);
-            $("#cbo12_proveedorAnt").val($('#grupoOptionsProveedorAnt [data-value="' + resp.tabla[0].proveedor + '"]').val());
-            $("#txt12_precioOfer").val(precio);
-            $("#txt12_total").val(precio);
-            
-            
-
-            app12Load();
-            
-         
-          });
+        
+        swal("Has seleccionado a: "+resp.tabla.nombres+" "+resp.tabla.apellidos+"", {
+          icon: "success",
         });
-      });
-    }
 
-  })
-
-  
-
-}
-
-function app12Load(){
-
-  $("#edit12").show();
-  $("#grid12").hide();
-  $("#btn12_Cancel").show();
-  $("#btn12_Save").show();
-}
-
-function app12Boton_cancel(){
-  $("#edit12").hide();
-  $("#grid12").show();
-  $("#btn12_Cancel").hide();
-  $("#btn12_Save").hide();
-}
-
-
-function app12Boton_Cantidad(){
-  var cant= $("#txt12_cantidad").val();
-  if(cant.length>0){
-    cant=parseInt(cant);
-    $("#txt12_total").val((cant* parseFloat($("#txt12_precioOfer").val())).toFixed(2));
-  }
-  console.log(cant);
-}
-
-
-function app12Boton_save(){
-
-  var precio = $("#txt12_cantidad").val();
-  if(precio.length<0){
-    alert("Deben ingresar una cantidad.");
-  }else{
-
-    let datos={
-      TipoQuery: "12_save",
-      commandSQL: "INS",
-      cotizacion: $("#txt12_Numero").val(),
-      fecha: appConvertToFecha($("#txt12_Fecha").val(),"-"),
-      cantidad: $("#txt12_cantidad").val(),
-      total: $("#txt12_total").val()
-
-    }
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-      let datos={
-        TipoQuery: "12_save",
-        commandSQL: "UPD_EST",
-        estado: 0,
-        ID: $("#txt12_Numero").val()
+        $("#txt_solicitante_requerimiento").val(resp.tabla.id);
+        $('#txt_solicitante_nombres_reqCompra').val(resp.tabla.nombres);
+        $('#txt_solicitante_apellidos_reqCompra').val(resp.tabla.apellidos);
+       // $('#txt_solicitante_pretencion_salarial').val(resp.tabla.pretencion_salarial);
+      //  $('#txt_solicitante_dni').val(resp.tabla.dni);
       }
-      appAjaxQuery(datos,rutaSQL).done(function(resp){
-        alert("Se genero la orden de compra exitosamente.");
-        app12Boton_cancel();
-        app12GridAll();
-      });
-      
-
     });
   }
-}
+    
+  function searchFuncionForNameAndSurname(inputsearch,sql,inputtext){
+    var msn=$('#'+inputsearch).val();
+    let datos = {
+      TipoQuery : sql,
+      value:msn     
+    };      
+    appAjaxQuery(datos,rutaSQL).done(function(resp){    
+      if(resp.error){
+        swal("No se encontro incidencia para el DNI", {
+          icon: "warning",
+        });
+      }else{
+        
+        swal("Has seleccionado a: "+resp.tabla.nombres+" "+resp.tabla.apellidos+"", {
+          icon: "success",
+        });
 
-function app13GridAll(){
-  $('#grd13DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
-
-  let datos={
-    TipoQuery : '13_grid'
+        $("#"+inputtext[0]).val(resp.tabla.id);
+        $('#'+inputtext[1]).val(resp.tabla.nombres);
+        $('#'+inputtext[2]).val(resp.tabla.apellidos);    
+      }
+    });
   }
-  let fila="";
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    $.each(resp.tabla,function(key, valor_ord){
-      if(resp.tabla.length){
-        let datos={
-          TipoQuery : '12_getbyid',
-          //ID: resp.tabla[0].cotizacion
-          ID:valor_ord.cotizacion
-        }
-      
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-          if(resp.tabla.length>0){
-            $.each(resp.tabla,function(key, valor){
-              var precio = valor.precio;
-              var preveedor = valor.proveedor;
-              let datos = {
-                TipoQuery : '10_grid',
-                ID: valor.cotizacion
-              }
-              appAjaxQuery(datos,rutaSQL).done(function(resp){
-                
-                let datos={
-                  TipoQuery:"03_getbyid",
-                  ID: resp.tabla[0].item
-                }
-                var cotiza = resp;
-                appAjaxQuery(datos,rutaSQL).done(function(resp){
-                  fila += '<tr>';
-                  if(valor_ord.estado==0){
-                    fila += '<td>'+
-                  '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Imprimir" onclick="javascript:app13Boton_Print('+(parseInt(valor_ord.ID))+');"><i class="fa fa-print"></i></button>'+
-                  '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="Aprobar" onclick="javascript:app13Boton_Check('+(parseInt(valor_ord.ID))+');" disabled><i class="fa fa-check"></i></button>';
-                  fila += '<td>'+(valor_ord.ID)+'</td>';
-                  }else{
-                    fila += '<td>'+
-                  '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Imprimir" onclick="javascript:app13Boton_Print('+(parseInt(valor_ord.ID))+');"><i class="fa fa-print"></i></button>'+
-                  '<button id="#" type="button" class="btn btn-success btn-xs" style="margin-left:2px;margin-right:2px;" title="Aprobar" onclick="javascript:app13Boton_Check('+(parseInt(valor_ord.ID))+');"><i class="fa fa-check"></i></button>';
-                  fila += '<td>'+(valor_ord.ID)+'</td>';
+  function searchFuncionForNameAndSurnameOrdenCompra(inputsearch,sql,inputtext,tableId,nameInput){
+    var msn=$('#'+inputsearch).val();
+    
+    let datos = {
+      TipoQuery : sql,
+      value:msn     
+    };      
+  
+    appAjaxQuery(datos,rutaSQL).done(function(resp){    
+      if(resp.error){
+        swal("No se encontro incidencia para el codigo ingresado o aún la Orden Compra no ha sido Emitida", {
+          icon: "warning",
+        });
+      }else{
+        
+        swal("Has seleccionado a: "+resp.tabla.nombres+" "+resp.tabla.apellidos+"", {
+          icon: "success",
+        });
+
+        $("#"+inputtext[0]).val(resp.tabla[0].id);
+        $('#'+inputtext[1]).val(resp.tabla[0].id);
+        $('#'+inputtext[2]).val(resp.tabla[0].descripcion);    
+        
+        $('#'+tableId+' > tbody').empty();
+
+        let tr="";
+        resp.tabla.forEach((ele)=>{  
+            tr+="<tr>"        
+            tr+="<td>"+ele.codigo_parte+"</td>"
+            tr+="<td>"+ele.descripcion+"</td>"
+            tr+="<td>"+ele.prioridad+"</td>"
+            tr+="<td>"+ele.cantidad+"</td>"  
+            tr+="<td>"+ele.cumplidos+"</td>"  
+            tr+="<td><input type='radio' name='"+nameInput+"' id='"+ele.id_item+"'/></td>"           
+            tr+="</tr>"
+        })              
+        $('#'+tableId+' > tbody').append(tr)
+      }
+    });
+  }
+  function searchSolicitante(){
+    var msn=$('#txt_search_solicitante').val();
+    let datos = {
+      TipoQuery : '02_search_solicitante',
+      value:msn     
+    };      
+    appAjaxQuery(datos,rutaSQL).done(function(resp){    
+      if(resp.error){
+        swal("No se encontro incidencia para el DNI", {
+          icon: "warning",
+        });
+      }else{
+        
+        swal("Has seleccionado a: "+resp.tabla.nombres+" "+resp.tabla.apellidos+"", {
+          icon: "success",
+        });
+
+        $("#idsolicitanteHidden").val(resp.tabla.id);
+        $('#txt_solicitante_nombres').val(resp.tabla.nombres);
+        $('#txt_solicitante_apellidos').val(resp.tabla.apellidos);
+       // $('#txt_solicitante_pretencion_salarial').val(resp.tabla.pretencion_salarial);
+       // $('#txt_solicitante_dni').val(resp.tabla.dni);
+      }
+    });
+  }
+  function gridSecondRequerimientos(){
+    let datos = {
+        TipoQuery : '01_gridRequerimientosPersonas',
+        data: 'Logística'
+      };
+      var table;   
+      appAjaxQuery(datos,rutaSQL).done(function(resp){
+       
+        if(resp.tabla.length>0){      
+         table= $('#grd01RequerimientosHistorial').DataTable( {         
+            "sPaginationType": "simple",
+            "language": {
+              "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+            },
+            
+            data: resp.tabla,
+            destroy: true,
+            columns: 
+            [
+             
+                { data: "id"},          
+                { data: "nombres" },
+                { data: "cargo" },                        
+                { data: "area" },
+                { data: "fecha" },
+                { data: "id",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(oData.id) {
+                    
+                    //  $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print bg-indigo-500 py-2 px-2 text-white" type="button" onclick="pdf_requerimientoPersona('+oData.id+')"></button><button class="fa fa-trash bg-rose-500 py-2 px-2 text-white" type="button" onclick="modalDeleteRequerimientoPersona('+oData.id+')">');
+                    $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print bg-indigo-500 py-2 px-2 text-white" type="button" onclick="pdf_requerimientoPersona('+oData.id+')"></button>');
                   }
-                  fila += '<td>'+(valor.ID)+'</td>';
-                  fila += '<td>'+(cotiza.tabla[0].ID)+'</td>';
-                  fila += '<td>'+(preveedor)+'</td>';
-                  /* fila += '<td>'+(cotiza.tabla[0].descripcion)+'</td>'; */
-                  /* fila += '<td>'+(cotiza.tabla[0].fecha)+'</td>'; cierre*/
-                  fila += '<td>'+(cotiza.tabla[0].item)+'</td>';
-                  fila += '<td>'+(resp.tabla[0].nombre)+'</td>';
-                  fila += '<td>'+(resp.tabla[0].stock)+'</td>';
-                  
-                  fila += '<td>'+(resp.tabla[0].unidad)+'</td>';
-                  /* fila += '<td>'+(resp.tabla[0].precio)+'</td>'; item*/
-                  /* fila += '<td>'+(resp.tabla[0].descripcion)+'</td>'; item*/
-                  fila += '<td>'+(precio)+'</td>';
-                  fila += '<td>'+(valor_ord.cantidad)+'</td>';
-                  fila += '<td>'+(valor_ord.total)+'</td>';
-                  fila += '</tr>';
+                }
+              }
+            ]
+        }
+         );     
         
-                  
-                  //$(fila).appendTo('#grd13DatosBody');
-                  $('#grd13DatosBody').html(fila);
-                });
-              });
-            });
-          }else{
-            $('#grd13DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-          }
-      
-        })
-      }else{
-        $('#grd13DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-      }
-    })
-    
-  });
+         table.columns().eq( 0 ).each( function ( colIdx ) {
+           
+          var parent= $("#RegistroRequerimientosPersonasSearch");      
+          var child= parent.find("#"+colIdx);    
+          child.on('keyup', function() {          
+                table
+                .column( colIdx )
+                .search(child.val(), false, true)
+                .draw();
+        })   
   
-
-
-}
-
-function app13Boton_Check(id){
-  if(confirm("Se aprobará la orden de compra numero: "+id+". Se agregará la cantidad al stock del item.¿Continuar?")){
-    let datos = {
-      TipoQuery: "13_aprov",
-      estado: 0,
-      ID: id
-    }
-    //console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      //
-      let datos={
-        TipoQuery : '13_getbyid',
-        ID:id
-      }
-      appAjaxQuery(datos,rutaSQL).done(function(resp){
-        var orden = resp;
-        let datos={
-          TipoQuery : '12_getbyid',
-          //ID: resp.tabla[0].cotizacion
-          ID:resp.tabla[0].cotizacion
-        }
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-          
-          let datos = {
-            TipoQuery : '10_grid',
-            ID: resp.tabla[0].cotizacion
-          }
-          appAjaxQuery(datos,rutaSQL).done(function(resp){
-
-            let datos={
-              TipoQuery:"03_getbyid",
-              ID: resp.tabla[0].item
-            }
-            appAjaxQuery(datos,rutaSQL).done(function(resp){
-              let datos={
-                TipoQuery:"03_save",
-                commandSQL:"UPD_STOCK",
-                ID: resp.tabla[0].ID,
-                stock: parseInt(resp.tabla[0].stock) + parseInt(orden.tabla[0].cantidad)
-              }
-              appAjaxQuery(datos,rutaSQL).done(function(resp){
-                alert("Se aprobo la orden de compra exitosamente.");
-                app13GridAll();
-              })
-            })
-          })
-        })
-      })                  
-      //   
-    })
-  }else{
-    return;
-  }
-}
-
-function app13Boton_Print(id){
-
-  let datos={
-    TipoQuery : '13_getbyid',
-    ID:id
-  }
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    var orden = resp.tabla[0];
-    let datos={
-      TipoQuery : '12_getbyid',
-      //ID: resp.tabla[0].cotizacion
-      ID:resp.tabla[0].cotizacion
-    }
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      var cotiProv = resp.tabla[0];
-      let datos = {
-        TipoQuery : '10_grid',
-        ID: resp.tabla[0].cotizacion
-      }
-      appAjaxQuery(datos,rutaSQL).done(function(resp){
-        var cotiRFQ = resp.tabla[0];
-        let datos={
-          TipoQuery:"03_getbyid",
-          ID: resp.tabla[0].item
-        }
-        appAjaxQuery(datos,rutaSQL).done(function(resp){
-          var item = resp.tabla[0];
-          let datos={
-            TipoQuery:"14_getbyid",
-            ID: cotiProv.proveedor
-          }
-          appAjaxQuery(datos,rutaSQL).done(function(resp){
-            var prov = resp.tabla[0];
-            let datos={
-              TipoQuery:"15_getbyid",
-              ID: 1
-            }
-            appAjaxQuery(datos,rutaSQL).done(function(resp){
-              var emp = resp.tabla[0];
-              let datos={
-                TipoQuery:"16_getbyid",
-                ID: item.moneda
-              }
-              appAjaxQuery(datos,rutaSQL).done(function(resp){
-                var moneda = resp.tabla[0];
-                window.jsPDF = window.jspdf.jsPDF;
-                var ini=110;
-                var det=200;
-
-                var doc = new jsPDF();
-                doc.setFont(undefined, 'bold');
-                doc.text("ORDEN DE COMPRA: "+orden.ID, 105, 75, null, null, "center");
-                doc.setFontSize(11.5);
-                doc.text("Fecha: "+moment(orden.fecha).format("DD/MM/YYYY"),150,55);
-                
-                doc.setFontSize(10.5);
-                doc.setTextColor(128,128,128);
-                doc.text("Información del provedor", 28, 104);
-                doc.setTextColor(0,0,0);
-
-                doc.text("ID del proveedor: ", 20, ini+7);
-                doc.text("Nombre: ", 20, ini+14);
-                doc.text("RUC: ", 20, ini+21);
-                doc.text("Dirección: ", 20, ini+28);
-                doc.text("Telefono: ", 20, ini+35);
-                doc.text("Email: ", 20, ini+42);
-                doc.setTextColor(128,128,128);
-                doc.text("Información de la empresa ", 133, 104);
-                doc.setTextColor(0,0,0);
-
-                doc.text("Fecha de compra: ", 125, ini+7);
-                doc.text("Contacto: ", 125, ini+14);
-                doc.text("Nombre: ", 125, ini+21);
-                doc.text("Telefono: ", 125, ini+28);
-                doc.text("Email: ", 125, ini+35);
-
-                doc.setFont(undefined, 'normal');
-                
-                doc.text(prov.ID, 52, ini+7);
-                doc.text(prov.nombre, 52, ini+14);
-                doc.text(prov.ruc, 52, ini+21);
-                doc.text(prov.direccion, 52, ini+28);
-                doc.text(prov.telefono, 52, ini+35);
-                doc.text(prov.email, 52, ini+42);
-
-                
-                doc.text(moment(orden.fecha).format("DD/MM/YYYY"), 158, ini+7);
-                doc.text(emp.contacto, 158, ini+14);
-                doc.text(emp.nombre, 158, ini+21);
-                doc.text(emp.telefono, 158, ini+28);
-                doc.text(emp.email, 158, ini+35);
-
-
-                /* doc.text("ID del proveedor: ", 55, ini+7,{align: 'center'});
-                doc.text("Nombre: ", 55, ini+14,{align: 'center'});
-                doc.text("RUC: ", 55, ini+21,{align: 'center'});
-                doc.text("Dirección: ", 55, ini+28,{align: 'center'});
-                doc.text("Telefono: ", 55, ini+35,{align: 'center'});
-                doc.text("Email: ", 55, ini+42,{align: 'center'});
-                doc.setTextColor(128,128,128);
-                doc.text("Información de la empresa ", 135, 104);
-                doc.setTextColor(0,0,0);
-
-                doc.text("Fecha de compra: ", 160, ini+7,{align: 'center'});
-                doc.text("Contacto: ", 160, ini+14,{align: 'center'});
-                doc.text("Nombre: ", 160, ini+21,{align: 'center'});
-                doc.text("Telefono: ", 160, ini+28,{align: 'center'});
-                doc.text("Email: ", 160, ini+35,{align: 'center'});
-
-                doc.setFont(undefined, 'normal');
-                
-                doc.text(prov.ID, 55, ini+7,{align: 'center'});
-                doc.text(prov.nombre, 55, ini+14,{align: 'center'});
-                doc.text(prov.ruc, 55, ini+21,{align: 'center'});
-                doc.text(prov.direccion, 55, ini+28,{align: 'center'});
-                doc.text(prov.telefono, 55, ini+35,{align: 'center'});
-                doc.text(prov.email, 55, ini+42,{align: 'center'});
-
-                
-                doc.text(moment(orden.fecha).format("DD/MM/YYYY"), 160, ini+7,{align: 'center'});
-                doc.text(emp.contacto, 160, ini+14,{align: 'center'});
-                doc.text(emp.nombre, 160, ini+21,{align: 'center'});
-                doc.text(emp.telefono, 160, ini+28,{align: 'center'});
-                doc.text(emp.email, 160, ini+35,{align: 'center'}); */
-
-                /* doc.setTextColor(128,128,128);
-                doc.setFont(undefined, 'bold');
-                doc.text("Descripcion", 30, det,{align: 'center'});
-                doc.text("Cantidad", 60, det,{align: 'center'});
-                doc.text("Unidad", 90, det,{align: 'center'});
-                doc.text("Tarifa Unitaria", 120, det,{align: 'center'});
-                doc.text("Moneda", 150, det,{align: 'center'});
-                doc.text("Total", 180, det,{align: 'center'});
-                doc.setTextColor(0,0,0);
-                doc.setFont(undefined, 'normal');
-                doc.text("value", 30, det+7,{align: 'center'});
-                doc.text("value", 60, det+7,{align: 'center'});
-                doc.text("value", 90, det+7,{align: 'center'});
-                doc.text("value", 120, det+7,{align: 'center'});
-                doc.text("value", 150, det+7,{align: 'center'});
-                doc.text("value", 180, det+7,{align: 'center'}); */
-
-                doc.setTextColor(128,128,128);
-                doc.setFont(undefined, 'bold');
-                doc.text("Descripcion", 20, det);
-                doc.text("Cantidad", 80, det);
-                doc.text("Unidad", 100, det);
-                doc.text("Tarifa Unitaria", 120, det);
-                doc.text("Moneda", 150, det);
-                doc.text("Total", 180, det);
-                doc.setTextColor(0,0,0);
-                doc.setFont(undefined, 'normal');
-                doc.text(item.nombre, 20, det+7);
-                doc.text(orden.cantidad, 80, det+7);
-                doc.text(item.unidad, 100, det+7);
-                doc.text(parseFloat(cotiProv.precio).toFixed(2), 120, det+7);
-                doc.text(moneda.nombre, 150, det+7);
-                doc.text(parseFloat(orden.total).toFixed(2), 180, det+7);
-
-                doc.save('Orden '+orden.ID+'.pdf');
-                app13GridAll();
-              })
-
-              
-            })
-          })
-
-        })
-      })
-    })
-  })                  
-  //   
-  
-
-  
-}
-function app14GridAll(){
-  $('#grd14DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txtBuscar").val();
-  let datos = {
-    TipoQuery : '14_grid'
-  };
-
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    if(resp.tabla.length>0){
-      let fila = "";
-      $.each(resp.tabla,function(key, valor){
-        fila += '<tr>';
-        fila += '<td>'+
-        '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app14Boton_load('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-        '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app14Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';    
-        fila += '<td>'+(valor.ID)+'</td>';
-        fila += '<td>'+(valor.codigo)+'</td>';
-        fila += '<td>'+(valor.ruc)+'</td>';
-        fila += '<td>'+(valor.nombre)+'</td>';
-        fila += '<td>'+(valor.descripcion)+'</td>';
-        fila += '</tr>';
+      } );   
+        }   
       });
-      $('#grd14DatosBody').html(fila);
-    }else{
-      $('#grd14DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-    }
-    //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-  });
-}
-
-function app14Boton_Search(){
-  $('#grd14DatosBody').html('<tr><td colspan="2" style="text-align:center;"><br><div class="progress progress-sm active" style=""><div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" style="width:100%"></div></div><br>Un momento, por favor...</td></tr>');
-  let txtBuscar = $("#txt14_Buscar").val();
-  if(txtBuscar>0){
-    let datos = {
-      TipoQuery : '14_getbyid',
-      ID:txtBuscar
-    };
-  
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.tabla.length>0){
-        let fila = "";
-        $.each(resp.tabla,function(key, valor){
-          fila += '<tr>';
-          fila += '<td>'+
-          '<button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="Editar" onclick="javascript:app14Boton_load('+(parseInt(valor.ID))+');"><i class="fa fa-pencil"></i></button>'+
-          '<button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="Eliminar" onclick="javascript:app14Boton_delete('+(parseInt(valor.ID))+');"><i class="fa fa-trash"></i></button></td>';    
-          fila += '<td>'+(valor.ID)+'</td>';
-          fila += '<td>'+(valor.codigo)+'</td>';
-          fila += '<td>'+(valor.ruc)+'</td>';
-          fila += '<td>'+(valor.nombre)+'</td>';
-          fila += '<td>'+(valor.descripcion)+'</td>';
-          fila += '</tr>';
-        });
-        $('#grd14DatosBody').html(fila);
-      }else{
-        $('#grd14DatosBody').html('<tr><td colspan="2" style="text-align:center;color:red;">Sin Resultados '+((txtBuscar=="")?(""):("para "+txtBuscar))+'</td></tr>');
-      }
-      //$('#grdDatosCount').html(resp.tabla.length+"/"+resp.cuenta);
-    });
-  }else{
-    app14GridAll();
-  }
-}
-
-function app14Boton_new(){
-  $("#grid14").hide();
-  $("#btn14_New").hide();
-  $("#btn14_Update").hide();
-  $("#edit14").show();
-  $("#btn14_Save").show();
-  $("#btn14_Cancel").show();
-}
-
-function app14Boton_cancel(){
-  app14GridAll();
-  $("#edit14").hide();
-  $("#btn14_Save").hide();
-  $("#btn14_Cancel").hide();
-  $("#btn14_Update").hide();
-  $("#grid14").show();
-  $("#btn14_New").show();
-  $("#txt14_id").val("");
-  $("#txt14_codigo").val("");
-  $("#txt14_Nombre").val("");
-  $("#txt14_ruc").val("");
-  $("#area14_descripcion").val("");
-  
-
-}
-
-function app14GetDatos_ToDatabase(){
-
-  let EsError = false;
-  let rpta = "";
-  $('.box-body .form-group').removeClass('has-error');
-  //if($("#txtDocum_Valor").val()=="") { $("#divDocum_Valor").prop("class","form-group has-error"); EsError = true; }
-
-  if(!EsError){
-    rpta = {
-      TipoQuery : '14_save',
-      codigo: $('#txt14_codigo').val(),
-      ruc: $("#txt14_ruc").val(),
-      nombre: $("#txt14_Nombre").val(),
-      descripcion: $("#area14_descripcion").val(),
-      telefono: $("#txt14_telefono").val(),
-      email: $("#txt14_email").val(),
-      direccion: $("#txt14_Direccion").val(),
       
-    }
-  }
-  return rpta;
 }
+function validarcamposNuevoRegistroPersonas(){
+    
+  let error=0;
+    let data={
+        id: $('#idsolicitanteHidden').val(),
+        cargo: $('#txt_cargo_personas').val(),
+        vacante: $('#txt_n_vacantes_personas').val(),
 
-function app14Boton_save(){
+        area: $('#personas_select_area').val(),
+        contrato: $('#personas_select_contrato').val(),      
+        motivo: $('#personas_select_motivo').val(),
 
-  let datos = app14GetDatos_ToDatabase();
- 
-  if(datos!=""){
-    datos.commandSQL = "INS";
-    console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      if(resp.error==0) {
+        lugar: $('#personas_select_lugar').val(),
+        duracion: $('#personas_select_duracion').val(),
+        fecha: $('#txt_fecha_g_personas').val(),
 
-        alert("El proveedor fue registrado exitosamente!");
-        app14Boton_cancel();
+        remuneracion: $('#personas_remuneracion').val(),
+     
+    }   
+    $(".error").remove();  
+    if (!data.id.length) {  
+        $('#idsolicitanteHidden').after('<span class="error">Este campo es requerido</span>');  
+        error=1;  
+        }  
+      if (!data.cargo.length) {  
+      $('#txt_cargo_personas').after('<span class="error">Este campo es requerido</span>');  
+      error=1;
+
+      }  
+      if (!data.vacante.length) {  
+      $('#txt_n_vacantes_personas').after('<span class="error">Este campo es requerido</span>');  
+      error=1;
+
+      }  
+    if (data.area=="-1") {  
+      $('#personas_select_area').after('<span class="error">Este campo es requerido</span>');  
+      error=1;
+    }  
+    if (data.contrato=="-1") {  
+      $('#personas_select_contrato').after('<span class="error">Este campo es requerido</span>');  
+      error=1;
+    }  
+    if (data.motivo=="-1") {  
+        $('#personas_select_motivo').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+        }  
+
+    if (data.lugar=="-1") {  
+      $('#personas_select_lugar').after('<span class="error">Este campo es requerido</span>'); 
+      error=1; 
+    }  
+
+
+    if (!data.duracion.length) {  
+        $('#personas_select_duracion').after('<span class="error">Este campo es requerido</span>');  
+        error=1;
+        }  
+    if (!data.remuneracion.length) {  
+      $('#personas_remuneracion').after('<span class="error">Este campo es requerido</span>');  
+      error=1;
+    }  
+  
+    return error;
+  }
+  function UtilLoadSelect(sql,component){
+    let datos = {
+      TipoQuery : sql,
+      data:{
+          param:''
+      }   
+    };      
+    appAjaxQuery(datos,rutaSQL).done(function(resp){   
+    console.log(resp)
+    $.each(resp, function(i, item) {
+      $('#'+component).append($("<option>", {
+          value: item.id,
+          text: item.descripcion,    
+      }));
+    });
+  });
+
+  }
+  function resetCapacitacionFieldsPersonas(){  
+    
+    $("#idsolicitanteHidden").val("");
+    $("#txt_search_solicitante").val("");
+    $("#txt_search_solicitante").val("");
+    $("#txt_cargo_personas").val("");
+    $("#txt_n_vacantes_personas").val("");
+
+    $("#personas_select_area").val("-1");
+    $("#personas_select_contrato").val("-1");
+    $("#personas_select_motivo").val("-1");
+    $("#personas_select_lugar").val("-1");
+
+    $("#personas_select_duracion").val("");
+
+    $("#txt_fecha_g_personas").datepicker("setDate",moment().format("DD/MM/YYYY"));
+    $("#personas_remuneracion").val("");
+
+
+    $("#txt_solicitante_nombres").val("");
+    $("#txt_solicitante_apellidos").val("");
+    $("#txt_solicitante_area").val("");
+    $("#txt_solicitante_cargo").val("");
+
+    $(".class_add_observaciones_personas").remove();
+  
+  }
+  function insert_registro_personas(){
+    let datos = {
+      TipoQuery : 'sql_get_last_requerimiento_personal'      
+    };                
+   appAjaxQuery(datos,rutaSQL).done(function(dat){   
+  
+  //  console.log(dat.tabla.id)
+   // let id=(new Date()).getTime();
+    let id=Number(dat.tabla.id)+1;
+    if(validarcamposNuevoRegistroPersonas()){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{          
+                     
+          var observaciones=$('#table_observaciones_personas > tbody').find(".observaciones_personas").map(function(){return $(this).val();}).get();    
+     
+          let datos = {
+            TipoQuery : '03_save_register_people',
+            data:{
+              id:"RQ-CM-P-2022-"+id,
+              id_personal: $('#idsolicitanteHidden').val(),
+              cargo: $('#txt_cargo_personas').val(),
+              n_vacantes: $('#txt_n_vacantes_personas').val(),
+    
+              area: "5",
+              contrato: $('#personas_select_contrato').val(),      
+              id_motivo: $('#personas_select_motivo').val(),
+    
+              lugar_trabajo: $('#personas_select_lugar').val(),
+              duracion_trabajo: $('#personas_select_duracion').val(),
+              fecha_incorporacion: $('#txt_fecha_g_personas').val(),
+    
+              remuneracion: $('#personas_remuneracion').val(),
+              observaciones:observaciones,
+             
+            },
+          };    
+        console.log(datos)
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+          swal("Se ha registrado correctamente", {
+            icon: "success",
+          });
+          updateGrid("gridRequerimientoPersonalGrid");
+          resetCapacitacionFieldsPersonas();         
+                             
+          });             
+       }
+
+      }); 
+  }
+  function resetCapacitacionFieldsPersonas(){  
+    
+    $("#idsolicitanteHidden").val("");
+    $("#txt_search_solicitante").val("");
+    $("#txt_search_solicitante").val("");
+    $("#txt_cargo_personas").val("");
+    $("#txt_n_vacantes_personas").val("");
+
+    //$("#personas_select_area").val("-1");
+    $("#personas_select_contrato").val("-1");
+    $("#personas_select_motivo").val("-1");
+    $("#personas_select_lugar").val("-1");
+
+    $("#personas_select_duracion").val("");
+
+    $("#txt_fecha_g_personas").datepicker("setDate",moment().format("DD/MM/YYYY"));
+    $("#personas_remuneracion").val("");
+
+
+    $("#txt_solicitante_nombres").val("");
+    $("#txt_solicitante_apellidos").val("");
+    $("#txt_solicitante_area").val("");
+    $("#txt_solicitante_cargo").val("");
+
+    $(".class_add_observaciones_personas").remove();
+  
+  }
+  function addObservacionespersonas(){
+    $('#table_observaciones_personas > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='class_add_observaciones_personas'><td><input type='text' class='form-control observaciones_personas'/>"+
+    "</td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash bg-rose-500  py-2 px-2 text-white' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+   // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
+    "</div></td></tr>" )
+  }
+  function removeComentarios(id){
+    swal({    
+      text: "¿Deseas Eliminar?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        $( "#"+id ).remove();        
       }
     });
-  } else {
-    alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
+  
   }
-}
+  function modalGestionPersonas(id){
+ 
+  
+    let datos = {
+      TipoQuery : '01_gridRequerimientoGestionPersonal',
+      value:id    
+    };  
+       
+    appAjaxQuery(datos,rutaSQL).done(function(resp){
+        console.log(resp)
+  
+        $('#txt-modal-gestion-personas-vacante-search').val();
+        $('#table_gestion_personas_vacante_list > tbody').empty();
+        $('#table_gestion_personas_vacante_list_observaciones > tbody').empty();
+       // $('#button_add_gestion_personas_vacante').hide();
+  
+       $("#txt-modal-gestion-personas-nombre").val(resp.tabla.nombre_solicitante
+        )
+        $("#txt-modal-gestion-personas-apellido").val(resp.tabla.apellido_solicitante); 
+  
+        $("#txt-modal-gestion-personas-area").val(resp.tabla.area); 
+        $("#txt-modal-gestion-personas-cargo").val(resp.tabla.cargo); 
+        $("#txt-modal-gestion-personas-motivo").val(resp.tabla.motivo); 
+        $("#txt-modal-gestion-personas-vacantes").val(resp.tabla.vacantes); 
+        $("#txt-modal-gestion-personas-estado").val(resp.tabla.estado); 
+     
+  
+        
+      let tr="";
 
-function app14_load(){
-  $("#grid14").hide();
-  $("#btn14_New").hide();
-  $("#btn14_Save").hide();
-  $("#edit14").show();
-  $("#btn14_Update").show();
-  $("#btn14_Cancel").show();
-}
+      if(resp.tabla1.length){
+        resp.tabla1.forEach((ele)=>{
+          tr+="<tr id='"+(new Date()).getTime()+"'>"
+          tr+="<td>"+ele.nombre+"</td>"
+          tr+="<td>"+ele.apellido+"</td>"
+          tr+="<td>"+ele.dni+"</td>"
+          tr+="<td>"+ele.cargo+"</td>"  
+          tr+="</tr>"
+      })      
+      }else{
+        tr="<tr><td colspan='5' style='color:red;text-align:center'>No hay personal asociado al requerimiento</td></tr>"
+      }
+    
+ 
+ 
+      $('#table_gestion_personas_vacante_list > tbody').append(tr)
 
-function app14Boton_load(id){
+
+      let tr1="";
+
+      if(resp.tabla2.length){
+        resp.tabla2.forEach((ele)=>{
+          tr1+="<tr id='"+((new Date()).getTime()+1)+"'>"
+          tr1+="<td>"+ele.descripcion+"</td>"    
+          tr1+="</tr>"
+      })
+      }else{
+        tr1="<tr><td colspan='1' style='color:red;text-align:center'>No hay observaciones</td></tr>"
+      }
+    
+      
+ 
+ 
+      $('#table_gestion_personas_vacante_list_observaciones > tbody').append(tr1)
+
+
+    $('#modal_gestionPersonas').modal('show');
+  
+    } ); 
+  }
+
+
+  function ModalAddComponentIntoVehicle(){
+ 
+  
+   // let datos = {
+   //   TipoQuery : '01_gridRequerimientoGestionPersonal',
+   //   value:id    
+   // };  
+       
+  //  appAjaxQuery(datos,rutaSQL).done(function(resp){
+      
+      $('#modalAddComponentIntoVehicle').modal('show');
+  
+  //  } ); 
+  }
+  function updateGrid(grid){
+    switch (grid) {  
+      case "gridRequerimientoPersonalGrid":
+        generateGrid(
+          "01_gridRequerimientosPersonas",
+          "gridRequrimientoPersonalLogisticahtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:1,funct:"modalGestionPersonas"},
+            edit:{state:0,funct:""},
+            delet:{state:0,funct:""},
+          },
+          [
+  
+          ],"searchRequrimientoPersonalLogisticahtml",[            
+            "ID",         
+            "Area",
+            "Cargo",
+            "Estado"
+          ],"1",0
+        );
+      break; 
+      case "gridHistoriaSeleccionProveedorGrid":
+        generateGridProveedores(
+          "sqlSeleccionProveedorGrid",
+          "gridSeleccionProveedorhtml",
+          "seleccion",
+          "searchSeleccionProveedorhtml",[            
+            "ID",         
+            "Proveedor 1",
+            "Proveedor 2",
+            "Proveedor 3"
+          ],"1",0
+        );
+      break; 
+      case "gridHistoriaEvaluacionProveedorGrid":
+        generateGridProveedores(
+          "sqlEvaluacionProveedorGrid",
+          "gridEvaluacionProveedorhtml",
+          "evaluacion",
+         "searchEvaluacionProveedorhtml",[            
+            "Proveedor 1",         
+            "Proveedor 2",
+            "Proveedor 3",
+            "Fecha de Evaluacion"
+          ],"1",0
+        );
+      break; 
+      case "gridOrdenCompraGrid":
+        generateGrid(
+          "sqlOrdenDeCompraGrid",
+          "gridOrdenDeComprahtml",
+          {
+            print:{state:1,funct:"generatepdfOrdenCompra"},
+            view:{state:1,funct:"OpenModalOrdenCompra"},
+            edit:{state:0,funct:""},
+            delet:{state:0,funct:""},
+          },
+          [
+  
+          ],"searchOrdenDeComprahtml",[            
+            "Nº Orden de Compra",         
+            "Nº de Requerimiento",
+            "Fecha",
+            "Estado"
+          ],"1",0
+        );
+      break;  
+      case "gridRequerimientoGrid":
+        generateGrid(
+          "sqlRequerimientosGrid",
+          "gridRequerimientoshtml",
+          {
+            print:{state:1,funct:"generatepdfRequerimiento"},
+            view:{state:1,funct:"OpenModalRequerimiento"},
+            edit:{state:0,funct:""},
+            delet:{state:0,funct:""},
+          },
+          ["Nº Requerimiento",
+          "Area",
+          "Prioridad",
+          "Estado",
+          "Motivo",
+          "Fecha"  
+          ],"searchRequerimientoshtml",[            
+            "Nº Requerimiento",
+            "Area",
+            "Fecha",
+            "Estado"              
+          ],null,1,1
+        );
+      break;   
+      case "gridProveedorCategory":
+        generateGrid(
+          "sqlCategoryProveedorGrid",
+          "gridProveedorCategoryhtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:0,funct:""},
+            edit:{state:0,funct:""},
+            delet:{state:0,funct:"modalDeleteCategoryProveedor"},
+          },
+          [
+  
+          ],"searchProveedorCategoryhtml",[            
+            "Descripción"          
+          ],"1",0
+        );
+      break;   
+      case "gridAlmacenGrid":
+        generateGrid(
+          "sqlAlmacenGrid",
+          "gridAlmacenhtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:0,funct:""},
+            edit:{state:0,funct:""},
+            delet:{state:0,funct:""},
+          },
+          [
+  
+          ],"searchAlmacenhtml",[
+            "N° de Almacen",
+            "Descripción",
+            "Direccion"          
+          ],"1",0
+        );
+      break;        
+      case "gridItemsGrid":
+        generateGrid(
+          "sqlItemsGrid",
+          "gridItemshtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:1,funct:"OpenModalViewItemsDetails"},
+            edit:{state:0,funct:""},
+            delet:{state:0,funct:"modalDeleteItem"},
+          },
+          [
+  
+          ],"searchItemshtml",[
+            "Activo",
+            "Grupo",
+            "Clase",
+            "Fecha de Adquisicion"
+          ],"1",0
+        );
+      break;   
+      case "gridGroupGrid":
+        generateGrid(
+          "sqlGroupGrid",
+          "gridGrouphtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:0,funct:""},
+            edit:{state:0,funct:""},
+            delet:{state:0,funct:""},
+          },
+          [
+  
+          ],"searchGrouphtml",[
+            "Grupo",
+            "Descripcion"         
+          ],"1",0
+        );
+      break;     
+      case "gridGroupClassGrid":
+        generateGrid(
+          "sqlGroupClassGrid",
+          "gridGroupClasshtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:0,funct:""},
+            edit:{state:0,funct:""},
+            delet:{state:0,funct:""},
+          },
+          [
+  
+          ],"searchGroupClasshtml",[
+            "Codigo",
+            "Grupo",
+            "Descripcion"            
+          ],"1",0
+        );
+      break;      
+      case "gridProveedorGrid":
+        generateGrid(
+          "sqlProveedorGrid",
+          "gridProveedorhtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:0,funct:""},
+            edit:{state:0,funct:""},
+            delet:{state:0,funct:"modalDeleteCategoryProveedor"},
+          },
+          [
+  
+          ],"searchProveedorhtml",[
+            "Nombre",
+            "Categoria",
+            "Tipo",
+            "Grupo"
+          ],"1",0
+        );
+      break;    
+      default:
+        break;
+    }
+  }
+  function insert_modal_Orden_compra_2(){
+
+    let Maindata=[      
+      {title:"n_orden_requerimiento",element:"txt_n_requerimiento_oc_modal",type:"text",status:1,value:"val"},   
+      {title:"n_orden_compra",element:"txt_n_orden_compra_modal",type:"text",status:1,value:"val"},
+      {title:"estado",element:"txt_estado_orden_comrpa_modal",type:"select",status:1,value:"selectVal"},
+      {title:"subtotal",element:"txt_subtotal_orden_compra_moda",type:"text",status:1,value:"val"},
+      {title:"total",element:"txt_total_orden_compra_modal",type:"text",status:1,value:"val"},
+      {title:"itemOrdenCompra",element:"tableItemOrdenCompraModalShow",type:"table",status:1,value:"table"},
+
+      {title:"proveedor",element:"txt_proveedor_modal_id_ordencompra",type:"text",status:0,value:"val"},
+      {title:"nombre",element:"txt_proveedor_modal_nombre_ordencompra",type:"text",status:0,value:"val"},
+      {title:"apellido",element:"txt_proveedor_modal_apellido_ordencompra",type:"text",status:0,value:"val"},
+
+      {title:"condicion",element:"txt_proveedor_modal_condicion_ordencompra",type:"text",status:0,value:"val"},
+      {title:"moneda",element:"txt_proveedor_modal_moneda_ordencompra",type:"text",status:0,value:"val"},
+      {title:"fecha_emision",element:"txt_proveedor_modal_fecha_emision_ordencompra",type:"text",status:0,value:"val"},
+      {title:"fecha_atencion",element:"txt_proveedor_modal_fecha_atencion_ordencompra",type:"text",status:0,value:"val"},
+      {title:"tiempo_atencion",element:"txt_proveedor_modal_tiempo_atencion_ordencompra",type:"text",status:0,value:"val"},
+      {title:"tiempo_proveedor",element:"txt_proveedor_modal_tiempo_proveedor_ordencompra",type:"text",status:0,value:"val"},
+    
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+          let test=generateInsertData(Maindata)
+          console.log(test);
+          let datos = {
+            TipoQuery : 'sql_Update_OrdenCompra',
+            data:generateInsertData(Maindata)
+          };              
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+              $('#ModalOpenOrdenCompra').modal('hide');
+              ResetAndUpdateGrid(Maindata,updateGrid,"gridOrdenCompraGrid");
+              $("#contentProviderOC").hide();
+              swal("Insertado correctamente", {
+                icon: "success",
+              });   
+                             
+          }); 
+    }
+  }
+  function insert_modal_orden_compra(){
+
+    let datos = {
+      TipoQuery : 'sql_get_last_orden_compra'      
+    };                
+   appAjaxQuery(datos,rutaSQL).done(function(dat){  
+
+    let id=Number(dat.tabla.id)+1;
+
+    let Maindata=[      
+      {title:"n_orden_compra",element:"",type:"text",status:0,value:"OC-CM-2022-"+id},
+      {title:"n_requerimiento",element:"txt_n_requerimiento_modal",type:"text",status:1,value:"val"},
+      {title:"estado",element:"txt_estado_requerimiento_modal",type:"select",status:1,value:"selectVal"},
+     // {title:"fecha",element:"fecha_orden_compra",type:"text",status:0,value:"none"},
+
+      //{title:"estado",element:"estado",type:"text",status:0,value:"none"},      
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+          //let test=generateInsertData(Maindata)
+         // console.log(test);
+          let datos = {
+            TipoQuery : 'sql_RequerimientosOrdenCompra_Add',
+            data:generateInsertData(Maindata)
+          };                
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+              $('#ModalOpenRequerimiento').modal('hide');
+              ResetAndUpdateGrid(Maindata,updateGrid,"gridRequerimientoGrid");
+              updateGrid("gridOrdenCompraGrid")
+              swal("Insertado correctamente", {
+                icon: "success",
+              });   
+                             
+          }); 
+    }
+  }); 
+  }
+  function generateColumnsGrid(data,ope,Enabledcolumns){
+    let columns=[]
+    let num=[
+    "file1",
+    "file2",
+    "file3",
+    "file4",
+    "file5",
+    "file6",
+    "file7",
+    "file8",
+    "file9",
+    "file10",
+    "file11",
+    "file12",
+    "file13",
+    "file14",
+    "file15",
+    "file16",
+    "file17",
+    "file18"]
+    if(!Enabledcolumns.length){
+      
+      data.forEach((ele)=>{  
+        console.log(ele.key)
+        if(ele.icon==1 &&ele.popup==1){
+          let findElemenet=num.find((it)=>it==ele.key)
+    
+          let val=findElemenet.substring(4)
+          //console.log(val)
+          columns.push({data:ele.key,title:ele.title,
+        fnCreatedCell: function (nTd, sData,oData,iCol) { 
+  
+           if(sData==="0") {   
+                                  
+            $(nTd).html('<span class="badge"style="background:#343a40" onClick="showUpdateDataDocument('+oData.id+','+val+')">&nbsp;</span>');
+            
+          }else if(sData==="1") {            
+            $(nTd).html('<span class="badge"style="background:#28a745">&nbsp;</span>');
+          
+          }  
+            else if(sData==="2") {                    
+              $(nTd).html('<span class="badge"style="background:#ffc107" onClick="showUpdateDataDocumentFiles('+oData.id+','+val+')">&nbsp;</span>');
+          }  
+            else{          
+              $(nTd).html('<span class="badge"style="background:#dc3545" onClick="showUpdateDataDocumentFiles('+oData.id+','+val+')">&nbsp;</span>');                 
+          }          
+        }})
+        }else if(ele.icon==1 &&ele.popup==0){
+          let findElemenet=num.find((it)=>it==ele.key)
+    
+          let val=findElemenet.substring(4)
+          //console.log(val)
+          columns.push({data:ele.key,title:ele.title,
+        fnCreatedCell: function (nTd, sData,oData,iCol) { 
+  
+           if(sData==="0") {   
+                                  
+            $(nTd).html('<span class="badge"style="background:#343a40" >&nbsp;</span>');
+            
+          }else if(sData==="1") {            
+            $(nTd).html('<span class="badge"style="background:#28a745">&nbsp;</span>');
+          
+          }  
+            else if(sData==="2") {                    
+              $(nTd).html('<span class="badge"style="background:#ffc107">&nbsp;</span>');
+          }  
+            else{          
+              $(nTd).html('<span class="badge"style="background:#dc3545">&nbsp;</span>');                 
+          }          
+        }})
+        }  else{
+          columns.push({data:ele.key,title:ele.title})
+        }       
+      })
+    }else{
+      data.forEach((ele)=>{
+        //let val=Enabledcolumns.find("ID");
+        if(Enabledcolumns.findIndex((it)=>it==ele.title)!=-1){
+          console.log(ele.icon)
+          if(ele.icon){
+            columns.push({ddata:ele.key,title:ele.title,
+          fnCreatedCell: function (nTd, sData,oData) { 
+             if(sData==="0") {   
+                                    
+              $(nTd).html('<span class="badge"style="background:#343a40">&nbsp;</span>');
+              
+            }else if(sData==="1") {            
+              $(nTd).html('<span class="badge"style="background:#28a745">&nbsp;</span>');
+            
+            }  
+              else if(sData==="2") {                    
+                $(nTd).html('<span class="badge"style="background:#ffc107">&nbsp;</span>');
+            }  
+              else{          
+                $(nTd).html('<span class="badge"style="background:#dc3545">&nbsp;</span>');        
+             
+            }  
+            
+          }})
+          }else{
+            columns.push({data:ele.key,title:ele.title})
+          }
+          
+        }    
+      })
+    }
+    columns.push({data:'id',title:'',
+    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) { 
+      let dd=sData.toString()
+      let contentOpe="";
+  
+          contentOpe+=ope.print.state?'<button class="fa fa-print bg-indigo-500 py-2 px-2 text-white"'+
+                                      'onclick='+ope.print.funct+'("'+dd+'"); type="button"></button>':''
+          contentOpe+=ope.view.state?'<button class="fa fa-eye bg-cyan-500 py-2 px-2 text-white"'+
+                                      'onclick='+ope.view.funct+'("'+dd+'");  type="button"></button>':''
+          contentOpe+=ope.edit.state?'<button class="fa fa-pencil bg-amber-500 py-2 px-2 text-white"'+
+                                      'onclick='+ope.edit.funct+'("'+dd+'"); type="button"></button>':''
+          contentOpe+=ope.delet.state?'<button class="fa fa-trash bg-rose-500 py-2 px-2 text-white"'+
+                                      'onclick='+ope.delet.funct+'("'+dd+'"); type="button"></button>':''
+  
+          $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;">'+contentOpe+'</div>');
+      
+    }})
+  
+    console.log(columns)
+    return columns
+  }
+  function searchParent(IdparentSearch,dataColumnsEnabled,allCols){   
+    let elements="";
+    allCols.forEach((ele,idx)=>{
+      if(dataColumnsEnabled.findIndex((it)=>it==ele.title)!=-1){
+        elements+='<span class="input-group-addon" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search"></i></span>'+
+        '<input id="'+idx+'" type="text" class="form-control" placeholder="Buscar por '+ele.title+'" />'
+      }      
+    })
+    
+    $("#"+IdparentSearch).html(elements);
+  }
+
+
+
+  function generateGridProveedores(querySQL,IdgridTable,ope,IdparentSearch,searchColumns,params=null,order=1){
+    let datos={
+      TipoQuery : querySQL,
+      value : params,
+    }
+    var table;
+    appAjaxQuery(datos,rutaSQL).done(function(resp){
+      console.log(resp)
+      if(resp.data.length>0){
+       //let dataCols=generateColumnsGrid(resp.column,ope,Enabledcolumns);
+  
+       table= $('#'+IdgridTable).DataTable( {
+          "sPaginationType": "simple",
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+          },
+          data: resp.data,        
+          destroy: true,
+          columns: [
+            //{ data: "id" ,title:""},
+            { data: "proveedor1" ,title:"Proveedor 1"},
+            { data: "proveedor1_puntaje",title:"Puntaje P-1",
+            fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+
+              if(sData<2){
+                $(nTd).html('<div class="boxescolors" style="width:30px;height:20px;background-color:red;color:black">PMC</div>')
+              }
+              else if(sData>=2.0 && sData <=2.25){
+                $(nTd).html('<div class="boxescolors" style="width:30px;height:20px;background-color:yellow;color:black">PAC</div>')
+              }else{
+                $(nTd).html('<div class="boxescolors" style="width:30px;height:20px;background-color:green;color:black">PEX</div>')
+              }             
+            }
+          },
+          { data: "proveedor2" ,title:"Proveedor 2"},
+          { data: "proveedor2_puntaje",title:"Puntaje P-2",
+          fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+
+            if(sData<2){
+              $(nTd).html('<div class="boxescolors" style="width:30px;height:20px;background-color:red;color:black">PMC</div>')
+            }
+            else if(sData>=2.0 && sData <=2.25){
+              $(nTd).html('<div class="boxescolors" style="width:30px;height:20px;background-color:yellow;color:black">PAC</div>')
+            }else{
+              $(nTd).html('<div class="boxescolors" style="width:30px;height:20px;background-color:green;color:black">PEX</div>')
+            }             
+          }
+        },
+        { data: "proveedor3",title:"Proveedor 3" },
+        { data: "proveedor3_puntaje",title:"Puntaje P-3",
+        fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+
+          if(sData<2){
+            $(nTd).html('<div class="boxescolors" style="width:30px;height:20px;background-color:red;color:black">PMC</div>')
+          }
+          else if(sData>=2.0 && sData <=2.25){
+            $(nTd).html('<div class="boxescolors" style="width:30px;height:20px;background-color:yellow;color:black">PAC</div>')
+          }else{
+            $(nTd).html('<div class="boxescolors" style="width:30px;height:20px;background-color:green;color:black">PEX</div>')
+          }             
+        }
+      },
+      { data: "fecha",title:"Fecha de Evalución" },
+      { data: "id",
+      fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+       
+          if(oData.id) {    
+            if(ope==="seleccion"){
+                $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-eye bg-cyan-500 py-2 px-2 text-white" type="button" onclick="OpenModalProveedorSeleccionDetails('+oData.id+')  "></button></div>');
+            }else{
+              $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-eye bg-cyan-500 py-2 px-2 text-white" type="button" onclick="OpenModalProveedorEvaluacionDetails('+oData.id+')  "></button></div>');
+            }  
+
+          }
+            
+      }
+    }
+          ],  
+          columnDefs: [
+            {            
+                className: 'dt-body-center',
+                targets: "_all"
+            }
+          ], 
+          order: [[order, "asc"]]
+      } );    
+          //searchParent(IdparentSearch,searchColumns,dataCols);
+          var parent= $("#"+IdparentSearch);      
+        //  table.columns().eq( 0 ).each( function ( colIdx ) {    
+          var child= parent.find("#0");    
+          child.on('keyup', function() {          
+                table
+                //.columns( [0,2,4] )
+                .search(child.val(), false, true)
+                .draw();
+        })   
+  
+      //} );   
+  
+      }else{
+        $('#'+IdgridTable).empty()
+      }
+    });
+  }
+  function generateGrid(querySQL,IdgridTable,ope,Enabledcolumns,IdparentSearch,searchColumns,params=null,order=1){
+    let datos={
+      TipoQuery : querySQL,
+      value : params,
+    }
+    var table;
+    appAjaxQuery(datos,rutaSQL).done(function(resp){
+      console.log(resp)
+      if(resp.data.length>0){
+       let dataCols=generateColumnsGrid(resp.column,ope,Enabledcolumns);
+  
+       table= $('#'+IdgridTable).DataTable( {
+          "sPaginationType": "simple",
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+          },
+          data: resp.data,        
+          destroy: true,
+          columns: dataCols,  
+          columnDefs: [
+            {            
+                className: 'dt-body-center',
+                targets: "_all"
+            }
+          ], 
+          //order: [[order, "desc"]]
+          order: []
+      } );    
+          searchParent(IdparentSearch,searchColumns,dataCols);
+          var parent= $("#"+IdparentSearch);      
+          table.columns().eq( 0 ).each( function ( colIdx ) {    
+          var child= parent.find("#"+colIdx);    
+          child.on('keyup', function() {          
+                table
+                .column( colIdx )
+                .search(child.val(), false, true)
+                .draw();
+        })   
+  
+      } );   
+  
+      }else{
+        $('#'+IdgridTable).empty()
+      }
+    });
+  }
+
+  function add_GroupClass(){
+    let Maindata=[
+      {title:"grupo",element:"slct_group_GruposClass",type:"select",status:1,value:"selectVal"},
+      {title:"codigo",element:"txt_codigo_GruposClass",type:"text",status:1,value:"val"},
+      {title:"descripcion",element:"txt_descripcion_GruposClass",type:"text",status:1,value:"val"},     
+      {title:"acro",element:"",type:"text",status:0,value:$("#txt_descripcion_GruposClass").val().substring(0,3)}, 
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+          let data=generateInsertData(Maindata)
+          data= { ...data, codigo: data.codigo.split('.')[1]}
+          console.log(data);
+          let datos = {
+            TipoQuery : 'sql_saveGroupClass',
+            data:data
+          };                
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+                             
+              ResetAndUpdateGrid(Maindata,updateGrid,"gridGroupClassGrid");
+              swal("Insertado correctamente", {
+                icon: "success",
+              });   
+                             
+          }); 
+    }
+  }
+
+  function addCantidad_items(){
+    let Maindata=[
+      {title:"grupo",element:"slct_group_add_items",type:"select",status:1,value:"selectVal"},
+      {title:"clase",element:"slct_groupClass_add_items",type:"select",status:1,value:"selectVal"},
+      {title:"item",element:"slct_items_add_items",type:"select",status:1,value:"selectVal"},     
+      {title:"cantidad",element:"txt_cantidad_items_add",type:"text",status:1,value:"val"},
+      {title:"",element:"txt_descripcion_items_add",type:"text",status:0,value:"val"},
+      {title:"",element:"txt_unidad_medida_items_add",type:"text",status:0,value:"val"}
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+     
+          let datos = {
+            TipoQuery : 'addCountItemForInventary',
+            data:generateInsertData(Maindata)
+          };                
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+                             
+              ResetAndUpdateGrid(Maindata,updateGrid,"gridItemsGrid");
+              swal("Insertado correctamente", {
+                icon: "success",
+              });   
+                             
+          }); 
+    }
+  }
+  function validateExistsDescripction(sql,value){
+    let datos = {
+      TipoQuery : sql,
+      data:value
+    };             
+   appAjaxQuery(datos,rutaSQL).done(function(resp){    
+        console.log(resp.error);
+       $("#error-input-general").val(resp.error)
+    }); 
+
+  }
+  function add_Groups(){
+    let Maindata=[
+      {title:"codigo",element:"txt_codigo",type:"text",status:1,value:"val"},
+      {title:"descripcion",element:"txt_descripcion",type:"text",status:1,value:"val"},      
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+          //validateExistsDescripction("sql_checkDuplicity_group",$("#txt_descripcion").val());
+
+         // console.log($("#error-input-general").val())
+          if(!$("#error-input-general").val()){
+            let datos = {
+              TipoQuery : 'sql_saveGroups',
+              data:generateInsertData(Maindata)
+            };                
+           appAjaxQuery(datos,rutaSQL).done(function(resp){   
+                               
+                ResetAndUpdateGrid(Maindata,chargeCorrelativeGroup);
+                loadSelectGroup();
+                loadSelectGroupandGroupClass();
+                updateGrid("gridGroupGrid")
+                swal("Insertado correctamente", {
+                  icon: "success",
+                });   
+                               
+            }); 
+          }else{
+            swal("Error de Duplicidad.", {
+              icon: "error",
+            });   
+          }
+        
+    }
+  }
+  function add_Requerimientos(){
+
+    let datos = {
+      TipoQuery : 'sql_get_last_requerimiento'      
+    };                
+   appAjaxQuery(datos,rutaSQL).done(function(dat){   
+
+    console.log(dat.tabla.id)
+   // let id=(new Date()).getTime();
+    let id=Number(dat.tabla.id)+1;
+    let Maindata=[      
+      {title:"n_requerimiento",element:"",type:"text",status:0,value:"RQ-CM-2022-"+id},
+      {title:"area",element:"slct_area_requerimiento",type:"select",status:1,value:"selectVal"},
+
+      {title:"search",element:"txt_search_solicitanteReqCompra",type:"text",status:1,value:"val"},
+      {title:"name",element:"txt_solicitante_nombres_reqCompra",type:"text",status:1,value:"val"},
+      {title:"surname",element:"txt_solicitante_apellidos_reqCompra",type:"text",status:1,value:"val"},
+
+      {title:"solicitante",element:"txt_solicitante_requerimiento",type:"text",status:1,value:"val"},
+      {title:"fecha_requerimiento",element:"txt_fecha_requerimiento_requerimiento",type:"text",status:1,value:"val"},
+      {title:"centro_costo",element:"txt_centro_costo_requerimiento",type:"text",status:0,value:"val"},
+      {title:"prioridad",element:"slct_prioridad_requerimiento",type:"select",status:1,value:"selectVal"},
+      {title:"motivo",element:"txt_motivo_requerimiento",type:"text",status:1,value:"val"},
+      {title:"itemsRequerimiento",element:"tableItemRequerimiento",type:"table",status:1,value:"table"}      
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+          //let test=generateInsertData(Maindata)
+          //console.log(generateInsertData(Maindata));
+          let datos = {
+            TipoQuery : 'sql_RequerimientosAndItems',
+            data:generateInsertData(Maindata)
+          };                
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+                             
+              ResetAndUpdateGrid(Maindata,updateGrid,"gridRequerimientoGrid");
+              swal("Insertado correctamente", {
+                icon: "success",
+              });   
+                             
+          }); 
+    }
+  }); 
+  }
+  function add_Almacen(){
+    let Maindata=[      
+      {title:"estado",element:"slct_estado_almacen",type:"select",status:1,value:"select"},
+      {title:"descripcion",element:"txt_descripcion_almacen",type:"text",status:1,value:"val"},
+      {title:"sede",element:"txt_sede_almacen",type:"text",status:1,value:"val"},
+      {title:"direccion",element:"txt_direccion_almacen",type:"text",status:1,value:"val"},
+      {title:"referencia",element:"txt_referencia_almacen",type:"text",status:1,value:"val"},
+     /* {title:"responsable",element:"txt_resopnsable_almacen",type:"text",status:1,value:"val"},*/
+      {title:"telefono",element:"txt_telefono_almacen",type:"text",status:1,value:"val"},
+      {title:"departamento",element:"txt_departamento_almacen",type:"select",status:1,value:"select"},
+      {title:"provincia",element:"txt_provincia_almacen",type:"select",status:1,value:"select"},      
+
+      {title:"distrito",element:"txt_distrito_almacen",type:"select",status:1,value:"select"}       
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+    
+          let datos = {
+            TipoQuery : 'sql_saveAlmacen',
+            data:generateInsertData(Maindata)
+          };                
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+                             
+              ResetAndUpdateGrid(Maindata,updateGrid,"gridAlmacenGrid");
+              swal("Insertado correctamente", {
+                icon: "success",
+              });   
+                             
+          }); 
+    }
+  }
+  function add_ProveedorCategoria(){
+    let Maindata=[
+      {title:"description",element:"txt_categoryProveedorNew",type:"text",status:1,value:"val"}      
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+    
+          let datos = {
+            TipoQuery : 'sql_saveProveedorCategory',
+            data:generateInsertData(Maindata)
+          };                
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+                             
+              ResetAndUpdateGrid(Maindata,updateGrid,"gridProveedorCategory");
+              swal("Insertado correctamente", {
+                icon: "success",
+              });   
+                             
+          }); 
+    }
+  }
+  function add_Proveedor(){
+    let Maindata=[
+      {title:"tipo",element:"slct_tipo_proveedor_proveedor",type:"select",status:1,value:"select"},
+      {title:"categoria",element:"slct_categoria_proveedor",type:"select",status:1,value:"val"},
+      {title:"departamento",element:"slct_departamento_proveedor",type:"select",status:1,value:"select"},
+      {title:"provincia",element:"slct_provincia_proveedor",type:"select",status:1,value:"select"},
+      {title:"distrito",element:"slct_distrito_proveedor",type:"select",status:1,value:"select"},
+      {title:"grupo",element:"slct_grupo_proveedor",type:"select",status:1,value:"selectVal"},
+      {title:"clase_grupo",element:"slct_clase_proveedor",type:"select",status:1,value:"selectVal"},
+      {title:"ruc",element:"txt_ruc_proveedor_proveedor",type:"text",status:1,value:"val"},
+      {title:"razon_social",element:"txt_razonSocial_proveedor",type:"text",status:1,value:"val"},      
+
+      {title:"direccion",element:"txt_direccion_proveedor",type:"text",status:1,value:"val"},    
+      {title:"telefono",element:"txt_telefono_proveedor",type:"text",status:1,value:"val"},    
+      {title:"celular",element:"txt_celular_proveedor",type:"text",status:1,value:"val"},    
+      {title:"correo",element:"txt_correo_proveedor",type:"text",status:1,value:"val"},   
+      
+      {title:"n_soles",element:"txt_cSoles_proveedor",type:"text",status:0,value:"val"},    
+      {title:"cci_soles",element:"txt_ccisSoles_proveedor",type:"text",status:0,value:"val"},    
+      {title:"banco_soles",element:"slct_proveedor_banco_soles",type:"select",status:0,value:"select"},  
+      {title:"n_dolares",element:"txt_cdolares_proveedor",type:"text",status:0,value:"val"},    
+      {title:"cci_dolares",element:"txt_cciscdolares_proveedor",type:"text",status:0,value:"val"},    
+      {title:"banco_dolares",element:"slct_proveedor_banco_dolares",type:"select",status:0,value:"select"},  
+      {title:"n_detracciones",element:"txt_detracciones_proveedor",type:"text",status:0,value:"val"}, 
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+    
+          let datos = {
+            TipoQuery : 'sql_saveProveedor',
+            data:generateInsertData(Maindata)
+          };                
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+              loadSelectEvaluarProveedorFull();
+              loadSelectProveedorFull();
+              ResetAndUpdateGrid(Maindata,updateGrid,"gridProveedorGrid");
+              swal("Insertado correctamente", {
+                icon: "success",
+              });   
+                             
+          }); 
+    }
+  }
+  function checkIfisIntoOR(){
+    $("#modaladdItemComponentCheckIfOC").modal();
+  }
+  function add_ItemsIntoVehicle(){
+    let id=(new Date()).getTime();
+    let idxC=(new Date()).getTime()-1;
+
+ 
+
+    let state=$("#txt_estado_oc_componenttoVehicle").val();
+    let Maindata=[
+      {title:"id",element:"",type:"text",status:0,value:id},
+      {title:"id_component",element:"",type:"text",status:0,value:idxC},
+      //{title:"id_item",element:"",type:"text",status:0,value:id},
+      {title:"id_grupo",element:"slct_group",type:"select",status:1,value:"selectVal"},
+      {title:"id_clase",element:"slct_groupClass",type:"select",status:1,value:"selectVal"},
+      {title:"active",element:"txt_codigo_items",type:"text",status:1,value:"val"},
+      {title:"correlative",element:"",type:"text",status:0,value:$("#txt_codigo_items").val().split('-')[1]}, 
+      {title:"date_acquisition",element:"txt_fecha_items",type:"text",status:1,value:"val"},
+      {title:"serie",element:"txt_numero_serie",type:"text",status:0,value:"val"},
+      {title:"parte",element:"txt_numero_parte",type:"text",status:0,value:"val"},
+
+      {title:"descripcion",element:"txt_descripcion_items",type:"text",status:1,value:"val"},
+      {title:"coloquial",element:"txt_descripcion_coloquial",type:"text",status:0,value:"val"},
+
+      {title:"unidad_medida",element:"txt_unidad_medida_item",type:"text",status:1,value:"val"},
+      {title:"marca",element:"txt_marca_item",type:"text",status:1,value:"val"},
+      {title:"precio_unitario",element:"txt_precio_item",type:"text",status:1,value:"val"},
+     // {title:"marca",element:"txt_marca_item",type:"text",status:1,value:"val"},
+     
+     
+     {title:"condicion",element:"slct_tipo_orden_condicion",type:"select",status:1,value:"select"},
+      {title:"garantia",element:"txt_garantia_item",type:"text",status:1,value:"val"},  
+
+      {title:"garantia_inicio",element:"txt_garantia_item_inicio",type:"text",status:1,value:"val"},  
+      {title:"garantia_fin",element:"txt_garantia_item_fin",type:"text",status:.0,value:"val"},  
+
+      {title:"sel",element:"txt_estado_oc_componenttoVehicle",type:"select",status:1,value:"select"},
+      {title:"id_orden_compra",element:"txt_ordencompra_withvehicle_id",type:"text",status:Number(state),value:"val"},           
+      {title:"",element:"txt_ordencompra_withvehicle_search",type:"text",status:0,value:"val"}, 
+      {title:"",element:"txt_ordencompra_withvehicle_name",type:"text",status:0,value:"val"},    
+      {title:"",element:"txt_ordencompra_withvehicle_surname",type:"text",status:0,value:"val"},
+      {title:"id_item",element:"ordencompramodalVehicle",type:"radio",status:Number(state),value:"id"},
+
+      {title:"",element:"txt_ordencompra_vehiclemodal_search",type:"text",status:0,value:"val"},    
+      {title:"id_vehiculo",element:"txt_ordencompra_vehiclemodal_id",type:"text",status:1,value:"val"},
+      {title:"",element:"txt_ordencompra_vehiclemodal_name",type:"radio",status:0,value:"val"},
+      {title:"",element:"txt_ordencompra_vehiclemodal_surname",type:"radio",status:0,value:"val"},
+
+
+      {title:"sistema",element:"tableItemOrdenComprachecksistem",type:"group",status:1,value:"radio",name:'orcom'}        
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+          var data = Array();
+          let config;
+          if(Number(state)){ 
+            $("#griditemsOrdenCompraWithVehicle2 > tbody > tr").each(function(i, v){
+                data[i] = Array();
+                $(this).children('td').each(function(ii, vv){
+                    data[i][ii] = ($(this).text())?$(this).text():$(this).find("input").is(':checked');
+                }); 
+            })
+            let cc=data.map((it)=>{
+              let state='E';
+              if(it[3]===it[4]){
+                state='C';
+              }
+              else if(Number(it[3])===Number(it[4])+1){
+                state='I';
+              }
+              return state;
+            })
+            config={
+                stateChangeOC:cc.filter(i=>i==='C').length==data.length-1 && cc.filter(i=>i==='I').length===1?true:false,
+                stateChangeNumber:Number(data[data.map((it,idx)=>it[5]?idx:-1).findIndex((el)=>el!=-1)][4])+1
+            }
+          }
+          let datos = {
+            TipoQuery : 'sql_saveItems2',
+            data:generateInsertData(Maindata),
+            config:Number(state)?config:{stateChangeOC:null,stateChangeNumber:null}
+          };            
+          console.log(generateInsertData(Maindata))    
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+                             
+              ResetAndUpdateGrid(Maindata,updateGrid,"gridItemsGrid");
+           //   updateGrid("gridOrdenCompraVehicleModal");
+            $("#details_oc_to_componentVehicle").hide();
+            $('#griditemsOrdenCompraWithVehicle2 > tbody').empty();
+
+            $(".checksistemavehicleradio:radio").prop("checked", false);
+
+              $('#modalAddComponentIntoVehicle').modal('hide');
+              swal("Insertado correctamente", {
+                icon: "success",
+              });   
+                             
+          }); 
+    }
+  }
+  function add_Items(){
+    let id=(new Date()).getTime();
+    let idxC=(new Date()).getTime()-1;
+
+   
+    let state=$("#txt_estado_p_od_pertenece").val();
+    let Maindata=[
+      {title:"id",element:"",type:"text",status:0,value:id},
+      {title:"id_component",element:"",type:"text",status:0,value:idxC},
+      {title:"id_item",element:"",type:"text",status:0,value:id},
+      {title:"id_grupo",element:"slct_group",type:"select",status:1,value:"selectVal"},
+      {title:"id_clase",element:"slct_groupClass",type:"select",status:1,value:"selectVal"},
+      {title:"active",element:"txt_codigo_items",type:"text",status:1,value:"val"},
+      {title:"correlative",element:"",type:"text",status:0,value:$("#txt_codigo_items").val().split('-')[1]}, 
+      {title:"date_acquisition",element:"txt_fecha_items",type:"text",status:1,value:"val"},
+      {title:"serie",element:"txt_numero_serie",type:"text",status:0,value:"val"},
+      {title:"parte",element:"txt_numero_parte",type:"text",status:0,value:"val"},
+
+      {title:"descripcion",element:"txt_descripcion_items",type:"text",status:1,value:"val"},
+      {title:"coloquial",element:"txt_descripcion_coloquial",type:"text",status:0,value:"val"},
+
+      {title:"unidad_medida",element:"txt_unidad_medida_item",type:"text",status:1,value:"val"},
+      {title:"marca",element:"txt_marca_item",type:"text",status:1,value:"val"},
+      {title:"precio_unitario",element:"txt_precio_item",type:"text",status:1,value:"val"},
+    //  {title:"placa",element:"txt_numero_placa",type:"text",status:1,value:"val"},
+     // {title:"modelo",element:"txt_modelo_item",type:"text",status:1,value:"val"},
+     // {title:"horometro",element:"txt_numero_horometro",type:"text",status:1,value:"val"},
+     // {title:"marca",element:"txt_marca_item",type:"text",status:1,value:"val"},
+      {title:"condicion",element:"slct_tipo_orden_condicion",type:"select",status:1,value:"select"},
+      {title:"garantia",element:"txt_garantia_item",type:"text",status:1,value:"val"},  
+
+      {title:"inicio_garantia",element:"txt_garantia_item_inicio",type:"text",status:1,value:"val"},  
+      {title:"fin_garantia",element:"txt_garantia_item_fin",type:"text",status:0,value:"val"},  
+
+      {title:"sel",element:"txt_estado_p_od_pertenece",type:"select",status:1,value:"select"},
+      {title:"id_orden_compra",element:"txt_ordencompravehicicle_id",type:"text",status:Number(state),value:"val"},           
+      {title:"",element:"txt_ordencompravehicicle_search",type:"text",status:Number(state),value:"val"},  
+      {title:"",element:"txt_ordencompravehicicle_codigo",type:"text",status:Number(state),value:"val"},    
+      {title:"",element:"txt_ordencompravehicicle_fecha",type:"text",status:Number(state),value:"val"},
+      {title:"id_item",element:"ordencompramodal",type:"radio",status:Number(state),value:"id"}       
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{
+
+      var data = Array();
+      let config;
+      if(Number(state)){
+        $("#griditemsOrdenCompraVehicle > tbody > tr").each(function(i, v){
+          data[i] = Array();
+          $(this).children('td').each(function(ii, vv){
+              data[i][ii] = ($(this).text())?$(this).text():$(this).find("input").is(':checked');
+          }); 
+      })
+        let cc=data.map((it)=>{
+        let state='E';
+        if(it[3]===it[4]){
+          state='C';
+        }
+        else if(Number(it[3])===Number(it[4])+1){
+          state='I';
+        }
+        return state;
+        })
+        config={
+            stateChangeOC:cc.filter(i=>i==='C').length==data.length-1 && cc.filter(i=>i==='I').length===1?true:false,
+            stateChangeNumber:Number(data[data.map((it,idx)=>it[5]?idx:-1).findIndex((el)=>el!=-1)][4])+1
+        }
+      }
+     
+
+
+     
+          let datos = {
+            TipoQuery : 'sql_saveItems',
+            data:generateInsertData(Maindata),
+            config:Number(state)?config:{stateChangeOC:null,stateChangeNumber:null}
+          };                
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+                             
+              ResetAndUpdateGrid(Maindata,updateGrid,"gridItemsGrid");
+              updateGrid("gridOrdenCompraVehicleModal");
+              $("#detailsOC_component").hide();
+              $("#griditemsOrdenCompraVehicle > tbody").empty();
+              $('#modaladdItemComponentCheckIfOC').modal('hide');
+              swal("Insertado correctamente", {
+                icon: "success",
+              });   
+                             
+          }); 
+    }
+  }
+  function generateInsertData(data){
+    let returnData={}
+    data.forEach((it)=>{
+      switch(it.value){
+        case "val":
+          returnData[it.title]=$("#"+it.element).val().trim();
+        break;
+        case "text":
+          returnData[it.title]=$("#"+it.element).text().trim();
+        break;
+        case "file":
+          returnData[it.title]=$("#"+it.element).val().trim();
+        break;
+        case "select":
+          returnData[it.title]=$("#"+it.element+" :selected").text().trim();
+        break;
+        case "selectVal":
+          returnData[it.title]=$("#"+it.element+" :selected").val().trim();
+        break;
+        case "id":{
+          if($('input[name="'+it.element+'"]').length){
+            returnData[it.title]=$('input[name="'+it.element+'"]:checked').attr('id')
+          }else{
+            returnData[it.title]=null
+          }   
+          break;     
+        }                 
+        case "radio":
+          returnData[it.title]=$('input[name="'+it.name+'"]:checked').attr('id')
+        break;
+        case "manyinputs":
+          returnData[it.title]=$('#'+it.element+' > tbody').find("."+it.child).map(function(){return $(this).val();}).get(); 
+        break;
+        case "table":{
+          let matrix=[]
+          let parent=$('#'+it.element).find("tbody > tr");          
+           parent.map(function(){ 
+            let data= $(this).find("td").children();        
+            let row=[]
+            data.map(function(){        
+              row.push($(this).val());
+            })          
+            matrix.push(row);         
+           });   
+          returnData[it.title]=matrix
+        }
+        break;
+        case "none":
+        break;
+        default:
+          returnData[it.title]=it.value
+        break;  
+      }
+    })
+    return returnData;
+  }
+
+  function validateEvaluation(data){
+    let error=0;
+    $(".error").remove(); 
+    data.forEach((it)=>{
+      if(it.status){
+        switch(it.type){
+          case "select":{
+            let ele=$('#'+it.element);
+            if(ele.val()==="-1"){
+              ele.after('<span class="error">Este campo es requerido</span>');  
+              error=1;
+            }
+          }
+          break;
+          case "selectArray":{
+            let Parent=$('.'+it.element);
+            Parent.map(function(){                       
+              if($(this).val()==="-1"){
+                $(this).after('<span class="error">Este campo es requerido</span>');  
+                error=1;
+              }
+            });           
+          }
+          break;    
+          default:
+          break;
+  
+        }     
+        
+      }      
+    })
+    return error;
+  }
+  function validate(data){
+    let error=0;
+    $(".error").remove(); 
+    data.forEach((it)=>{
+      if(it.status){
+        switch(it.type){
+          case "text":{
+            let ele=$('#'+it.element);
+            if(!ele.val().length){
+              ele.after('<span class="error">Este campo es requerido</span>');  
+              error=1;
+            }
+          }
+          break;
+          case "radio":{
+            let ele=$('input[name="'+it.element+'"]:checked')
+            if (ele.length < 1) {
+              $('input[name="'+it.element+'"]').after('<span class="error">Alguno de estos campos es requerido</span>');  
+              error=1;
+            }
+           
+          }
+          break;
+          case "file":{
+            let ele=$('#'+it.element);
+            if(ele.get(0).files.length===0){
+              ele.after('<span class="error">Este campo es requerido</span>');  
+              error=1;
+            }
+          }
+          break;
+          case "select":{
+            let ele=$('#'+it.element);
+            if(ele.val()==="-1"){
+              ele.after('<span class="error">Este campo es requerido</span>');  
+              error=1;
+            }
+          }
+          break;
+          case "table":{
+            let parent=$('#'+it.element).find("tbody > tr");
+           // console.log(parent)
+           if(parent.length){
+            parent.map(function(){ 
+
+            // let data= $(this).find("td").children();
+            let data= $(this).find(".obligatory-input");
+             data.map(function(){        
+              let val=$(this).prop('type');
+            //  console.log(val)
+                switch (val) {
+                  case "text":
+                    if(!$(this).val().length){
+                      $(this).after('<span class="error">Este campo es requerido</span>');  
+                      error=1;
+                    }
+                  break;
+                  case "select-one":
+                    if($(this).val()==="-1"){
+                      $(this).after('<span class="error">Este campo es requerido</span>');  
+                      error=1;
+                    }
+                  break;
+                 /* case "radio":
+                    if(!$(this).is(":checked")){
+                      $(this).after('<span class="error">Este campo es requerido</span>');  
+                      error=1;
+                    }
+                  break;*/
+                  default:
+                    break;
+                }
+             })
+            
+             /* if($(this).val()==="-1"){
+                $(this).after('<span class="error">Este campo es requerido</span>');  
+                error=1;
+              }*/
+            });  
+            }else{
+              $('#'+it.element).after('<span class="error">Este campo es requerido</span>');  
+              error=1;
+            }  
+          }
+          break;
+          case "group":{
+            let parent=$('#'+it.element).find("tbody > tr");
+           // console.log(parent)
+            parent.map(function(){ 
+             let data= $(this).find("td").children();
+             switch (it.value) {
+              case 'radio':
+                if(!data.is(":checked")){
+                  $(this).after('<span class="error">Este campo es requerido</span>');  
+                  error=1;
+                }
+                break;             
+              default:
+                break;
+             }                     
+            });   
+          }
+          break;
+          default:
+          break;
+  
+        }     
+        
+      }      
+    })
+    return error;
+  }
+  function OpenModalOrdenCompra(id){
+    
+
+    $("#txt_subtotal_orden_compra_moda").val("00.00")
+    $("#txt_igv_orden_compra_modal").val("00.00")
+    $("#txt_total_orden_compra_modal").val("00.00")
+
+    $("#tableItemOrdenCompraModalShow > tbody").empty()
+
+      console.log(id)
+      let datos = {
+        TipoQuery : 'sql_get_orden_compra_by_id',
+        data:id
+      };  
+      var table;   
+      appAjaxQuery(datos,rutaSQL).done(function(resp){
+        console.log(resp)       
+        $('#txt_n_requerimiento_oc_modal').val(resp.data[0].n_requerimiento)
+        $('#txt_n_orden_compra_modal').val(resp.data[0].n_orden_compra)
+        $('#txt_area_orden_compra_modal').val(resp.data[0].area)
+        $('#txt_solicitante_orden_compra_modal').val(resp.data[0].solicitante)
+        $('#txt_centro_costo_orden_compra_modal').val(resp.data[0].centro_costo)
+        $('#txt_fecha_orden_comrpa_modal').val(resp.data[0].fecha_requerimiento)
+        $('#txt_prioridad_orden_compra_modal').val(resp.data[0].prioridad)
+        $('#txt_motivo_orden_comrpa_modal').val(resp.data[0].motivo)
+       
+
+        $('#txt_subtotal_orden_compra_moda').val(resp.data[0].subtotal)
+        $('#txt_igv_orden_compra_modal').val((Number(resp.data[0].subtotal)*0.18).toFixed(2))     
+        $('#txt_total_orden_compra_modal').val(resp.data[0].total)     
+
+        $('#txt_estado_orden_comrpa_modal').prop('disabled', resp.data[0].estado_orden_compra==10?true:false)
+        $('#addbutonMainOrdenCompra').hide();
+      
+        //console.log(resp.data[0].estado_orden_compra)
+     // var values = $.map($('#txt_estado_orden_comrpa_modal option') ,function(option) {            
+    //    return option.text
+   // });   
+   // console.log(resp.data[0].estado_orden_compra)
+   // console.log(values)
+   // let val=values.findIndex((it)=>it.trim()===resp.data[0].estado_orden_compra.trim())
+  //  console.log(val)
+    //  $('#txt_estado_orden_comrpa_modal').val(Number(val)-1)     
+
+    if(resp.data[0].estado_orden_compra==10 || resp.data[0].estado_orden_compra==5){
+      resp.data.forEach((it,index)=>{
+        $("#tableItemOrdenCompraModalShow > tbody").append('<tr>'+
+          '<td><input type="text" disabled value="'+it.item+'"/></td>'+
+        '<td>'+it.codigo_parte+'</td>'+
+        '<td>'+it.n_parte+'</td>'+
+        '<td>'+it.descripcion+'</td>'+
+        '<td>'+it.cantidad+'</td>'+
+        '<td>'+it.unidad_medida+'</td>'+
+        '<td>'+it.precio+'</td>'+
+        '<td>'+(CalPrice(it.precio,+it.cantidad))+'</td>'+
+        '</tr>')
+      })
+
+    }else{
+      resp.data.forEach((it,index)=>{
+        $("#tableItemOrdenCompraModalShow > tbody").append('<tr>'+
+          '<td><input type="text" disabled value="'+it.item+'"/></td>'+
+        '<td>'+it.codigo_parte+'</td>'+
+        '<td>'+it.n_parte+'</td>'+
+        '<td>'+it.descripcion+'</td>'+
+        '<td id="cantidadordenCompraInputs-'+index+'">'+it.cantidad+'</td>'+
+        '<td>'+it.unidad_medida+'</td>'+
+        '<td><input type="text" class="form-control inputforordenCompra" id="priceordencomprainputs-'+index+'" onkeyup="keyCalPriceOrdenCompra('+index+')"  /></td>'+
+        '<td  class="totalSubTotalPriceOrdenCompra" id="PriceTordenCompraInputs-'+index+'"></td>'+
+        '</tr>')
+      })
+    }
+      
+        $('#txt_estado_orden_comrpa_modal option[value="5"]').remove();
+        if(resp.data[0].estado_orden_compra==5){         
+          $('#txt_estado_orden_comrpa_modal').append($("<option>", {
+            value: "5",
+            text: "ATENDIDO",  
+        }))
+        $('#txt_estado_orden_comrpa_modal').prop('disabled', true)
+        }
+
+        $('#txt_estado_orden_comrpa_modal').val(resp.data[0].estado_orden_compra)      
+
+        $('.inputforordenCompra').prop('disabled',true)
+        $("#contentProviderOC").hide();
+        $('#ModalOpenOrdenCompra').modal('show');   
+  
+      } );   
+  }
+
+
+
+function OpenModalViewItemsDetails(id){
+
 
   let datos = {
-    TipoQuery : "14_getbyid",
-    ID: id
-  }
-  console.log("id: "+id);
-  appAjaxQuery(datos,rutaSQL).done(function(resp){
-    //$("#txt02_NroActivo").val($("#lbl_ActivoGrupo").html()+' - '+$("#lbl_ActivoNro").html());
-    
-    $("#txt14_id").val(resp.tabla[0].ID);
-    $("#txt14_codigo").val(resp.tabla[0].codigo);
-    $("#txt14_Nombre").val(resp.tabla[0].nombre);
-    $("#txt14_ruc").val(resp.tabla[0].ruc);
-    $("#area14_descripcion").val(resp.tabla[0].descripcion);
-    $("#txt14_telefono").val(resp.tabla[0].telefono);
-    $("#txt14_email").val(resp.tabla[0].email);
-    $("#txt14_Direccion").val(resp.tabla[0].direccion);
-    app14_load(); 
-  });
+    TipoQuery : 'sql_items_get_by_id',
+    value:id
+  };  
+  var table;   
+  
 
+ 
+  appAjaxQuery(datos,rutaSQL).done(function(resp){
+
+    console.log(resp);
+    if(resp.tabla.grupo==10){
+      let datos = {
+        TipoQuery : "01_getMainData",  
+        value:id
+      } 
+      $("#content-seguro-vehiculo").empty();
+      
+      $("#view_descripcion").text("")
+      $("#view_placa").text("")
+      $("#view_odometro").text("")
+      $("#view_estado").text("")
+      $("#view_marca").text("")
+      $("#view_conductor").text("") 
+    
+    
+      $("#det_categoria").text("")
+      $("#det_activo").text("")
+      $("#det_descripcion").text("")
+      $("#det_marca").text("")
+      $("#det_modelo").text("")
+      $("#det_anio").text("")
+      $("#det_odometro").text("")
+      $("#det_propiedad").text("")
+      $("#det_propietario").text("")
+      $("#det_serie").text("")
+      $("#det_motor").text("")
+      $("#det_transmision").text("")
+      $("#com_tipo").text("")
+      $("#com_proveedor").text("")
+      $("#com_fecha").text("")
+      $("#com_cantidad").text("")
+      
+      $("#com_total").text("")
+     
+      $("#pro_proveedor").text("")
+      $("#pro_fecha_compra").text("")
+      $("#pro_precio").text("")
+      $("#pro_fecha_garan").text("")
+      $("#pro_notas").text("")
+      $("#pro_documentos").text("")
+    
+      appAjaxQuery(datos,rutaSQL).done(function(resp){
+    
+    
+      
+   
+    
+    
+        $("#det_categoria").text(resp.tabla1.id)
+        $("#det_activo").text(resp.tabla1.codigo)
+        $("#det_serie").text(resp.tabla1.serie)
+    
+        $("#det_descripcion").text(resp.tabla1.parte)
+        $("#det_marca").text(resp.tabla1.clase)
+        $("#det_modelo").text(resp.tabla1.grupo)
+    
+        $("#det_anio").text(resp.tabla1.condicion)
+        $("#det_odometro").text(resp.tabla1.inicio_garantia)
+        $("#det_propiedad").text(resp.tabla1.fin_garantia)
+       
+          
+        $("#det_unidad_medida").text(resp.tabla1.unidad_medida)
+        $("#det_marca").text(resp.tabla1.marca)
+        $("#det_precio_unitario").text(resp.tabla1.precio_unitario)
+      //  LoadSeguro(resp.tabla5)
+    
+        $("#com_tipo").text(resp.tabla6.tipo)
+        $("#com_proveedor").text(resp.tabla6.proveedor)
+        $("#com_fecha").text(resp.tabla6.fecha)
+        $("#com_cantidad").text(resp.tabla6.cantidad)
+        
+    
+        $("#com_total").text(resp.tabla6.total)
+       
+        
+        $("#pro_proveedor").text(resp.tabla7.proveedor)
+        $("#pro_fecha_compra").text(resp.tabla7.fecha_compra)
+        $("#pro_precio").text(resp.tabla7.precio)
+        $("#pro_fecha_garan").text(resp.tabla7.fecha_garantia)
+        $("#pro_notas").text(resp.tabla7.notas)
+        $("#pro_documentos").text(resp.tabla7.documentos)
+    
+ 
+    
+        chargeTableFlotaIntoVehicle(resp.tabla11,"table_tipo_sistema_11");
+        chargeTableFlotaIntoVehicle(resp.tabla12,"table_tipo_sistema_12");
+        chargeTableFlotaIntoVehicle(resp.tabla13,"table_tipo_sistema_13");
+        chargeTableFlotaIntoVehicle(resp.tabla14,"table_tipo_sistema_14");
+        chargeTableFlotaIntoVehicle(resp.tabla15,"table_tipo_sistema_15");
+        chargeTableFlotaIntoVehicle(resp.tabla16,"table_tipo_sistema_16");
+        chargeTableFlotaIntoVehicle(resp.tabla17,"table_tipo_sistema_17");
+    
+      });
+
+      $('#ModalViewItemsDetails').modal('show');   
+    }else{
+      let datos = {
+        TipoQuery : "01_getMainComponentData",  
+        value:id
+      } 
+   
+   
+      $("#modal_item_component_item_codigo").val("")
+      $("#modal_item_component_item_descripcion").val("")
+      $("#modal_item_component_item_coloquial").val("")
+      $("#modal_item_component_item_cantidad").val("")
+
+      $("#modal_item_component_item_grupo").val("")
+      $("#modal_item_component_item_clase").val("")
+      $("#modal_item_component_item_serie").val("")
+      $("#modal_item_component_item_parte").val("")
+
+      $("#modal_item_component_fecha_adquisicion").val("")
+      $("#modal_item_component_marca").val("")
+      $("#modal_item_component_unidad_medida").val("")
+      $("#modal_item_component_precio_unitario").val("")
+
+      $("#modal_item_component_condicion").val("")
+      $("#modal_item_component_fin_garantia").val("")
+    
+    
+      appAjaxQuery(datos,rutaSQL).done(function(resp){
+    
+        console.log(resp)
+        $("#modal_item_component_item_codigo").val(resp.tabla1.codigo)
+        $("#modal_item_component_item_descripcion").val(resp.tabla1.descripcion)
+        $("#modal_item_component_item_coloquial").val(resp.tabla1.coloquial)
+        $("#modal_item_component_item_cantidad").val(resp.tabla1.cantidad)
+
+        $("#modal_item_component_item_grupo").val(resp.tabla1.grupo)
+        $("#modal_item_component_item_clase").val(resp.tabla1.clase)
+        $("#modal_item_component_item_serie").val(resp.tabla1.serie)
+        $("#modal_item_component_item_parte").val(resp.tabla1.parte)
+
+        $("#modal_item_component_fecha_adquisicion").val(resp.tabla1.fecha_adquisicion)
+        $("#modal_item_component_marca").val(resp.tabla1.marca)
+        $("#modal_item_component_unidad_medida").val(resp.tabla1.unidad_medida)
+        $("#modal_item_component_precio_unitario").val(resp.tabla1.precio_unitario)
+
+        $("#modal_item_component_condicion").val(resp.tabla1.condicion)
+        $("#modal_item_component_fin_garantia").val(resp.tabla1.fin_garantia)   
+    
+    
+      });
+      $('#ModalViewItemsComponentsDetails').modal('show'); 
+
+    }    
+ })
   
 }
 
-function app14Boton_update(){
+function chargeTableFlotaIntoVehicle(data,table){
+  $("#"+ table+"> tbody").empty();
+  data.forEach((it,index)=>{
+    $("#"+ table+"> tbody").append(
+    '<tr style="width:100%">'+
+    '<td>'+it.active+'</td>'+
+    '<td>'+it.clase+'</td>'+
+    '<td>'+it.grupo+'</td>'+     
+    '<td>'+it.condicion+'</td>'+    
+    '<td>'+it.fecha_adquisicion+'</td>'+    
+    '<td>'+it.fin_garantia+'</td>'+    
+    '</tr>')
+  })
 
-  let datos = app14GetDatos_ToDatabase();
-  if(datos!=""){
-    datos.commandSQL = "UPD";
-    datos.ID= $("#txt14_id").val();
-    console.log(datos);
-    appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        alert("El proveedor fue actualizado correctamente!");
-
-        app14Boton_cancel();
-      }
-    });
-  } else {
-    alert("¡¡¡FALTAN LLENAR DATOS o LOS VALORES NO PUEDEN SER CERO!!!");
-  }
 }
 
-function app14Boton_delete(id){
-
-  if(confirm("¿Esta seguro que desea eliminar el proveedor "+id+"?")){
+  function OpenModalRequerimiento(id){
+    console.log(id)
     let datos = {
-      TipoQuery: "14_save",
-      commandSQL : "DEL",
-      status: 0,
-      ID: id
-    }
-    //console.log(datos);
+      TipoQuery : 'sql_get_requerimiento_by_id',
+      data:id
+    };  
+    var table;   
     appAjaxQuery(datos,rutaSQL).done(function(resp){
-      console.log(resp);
-      if(resp.error==0) {
-        app14Boton_cancel();
-        alert("El proveedor "+id+" fue eliminado!!");
+      console.log(resp)       
+      $('#txt_n_requerimiento_modal').val(resp.data[0].n_requerimiento)
+      $('#txt_area_requerimiento_modal').val(resp.data[0].area)
+      $('#txt_solicitante_requerimiento_modal').val(resp.data[0].solicitante)
+      $('#txt_centro_costo_requerimiento_modal').val(resp.data[0].centro_costo)
+      $('#txt_fecha_requerimiento_modal').val(resp.data[0].fecha_requerimiento)
+      $('#txt_prioridad_requerimiento_modal').val(resp.data[0].prioridad_g)
+      $('#txt_motivo_requerimiento_modal').val(resp.data[0].motivo)
+      $('#txt_estado_requerimiento_modal').val(resp.data[0].estado)
+      $('#txt_tiempo_atencion_requerimiento_modal').val(resp.data[0].tiempo_atencion)
+      
+      $("#tableItemRequerimientoModalShow > tbody").empty()
+      resp.data.forEach((it)=>{
+        $("#tableItemRequerimientoModalShow > tbody").append("<tr>"+
+        "<td>"+it.item+"</td>"+
+        "<td>"+it.codigo_parte+"</td>"+
+        "<td>"+it.n_parte+"</td>"+
+        "<td>"+it.descripcion+"</td>"+
+        "<td>"+it.cantidad+"</td>"+
+        "<td>"+it.unidad_medida+"</td>"+
+        "<td>"+it.prioridad+"</td>"+
+        "<td>"+it.observacion+"</td>"+
+        "</tr>")
+      })
+      if(resp.data[0].estado==12){
+        $("#btn-requeriment-save").hide()
+        $('#txt_estado_requerimiento_modal').prop('disabled',true)
+      }else{
+        $("#btn-requeriment-save").show()
+        $('#txt_estado_requerimiento_modal').prop('disabled',false)
       }
-    });
-  }
-  else{
-      return false;
-  }
-}
+      $('#ModalOpenRequerimiento').modal('show');   
 
-
+    } );   
+  }
+  function ResetAndUpdateGrid(data,func=null,id=null){
+    data.forEach((it)=>{
+      if(it.status){
+        switch(it.value){
+          case "val":
+            $("#"+it.element).val("");
+          break;
+          case "text":
+            $("#"+it.element).text("");
+          break;
+          case "file":
+            $("#"+it.element).val(null);
+          break;
+          case "select":
+            $("#"+it.element).val("-1");
+          break;
+          case "selectVal":
+            $("#"+it.element).val("-1");
+          break;
+          case "manyinputs":
+            $("."+it.content).remove();
+          break;
+          case "table":
+            $("#"+it.element).find('tbody').children().remove();
+          break;
+          case "selectArray":
+            $("."+it.element).val("-1");
+          break;
+          case "date":
+            $("#"+it.element).val(new Date().toISOString().slice(0, 10));
+          break; 
+          default:
+          break;
+        }
+  
+        
+      }else{
+        switch(it.value){       
+          case "none":
+            $("#"+it.element).val("");
+          break;
+          case "val":
+            $("#"+it.element).val("");
+          break;
+          case "select":
+            $("#"+it.element).val("-1");
+          break;
+          case "manyinputs":
+            $("."+it.content).remove();
+          break;
+          default:
+          break;
+        }
+      }   
+    })  
+    if(func){
+      func(id);
+    } 
+  }

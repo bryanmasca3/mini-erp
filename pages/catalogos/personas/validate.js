@@ -2,6 +2,9 @@ function validarProgramacionCapacitacion(){
 
   let error=0;
   let data={
+        name:$('#txt_search_name_personal').val(),
+        id:$('#idPersonalHidden').val(),
+        surname:$('#txt_search_apellido_personal').val(),
         formFile_1: $('#formFile_1').get(0).files,
         formFile_2: $('#formFile_2').get(0).files,
         formFile_3: $('#formFile_3').get(0).files,
@@ -15,7 +18,19 @@ function validarProgramacionCapacitacion(){
         formFile_11: $('#formFile_11').get(0).files        
     }
     $(".error").remove(); 
-
+    if(!data.id.length){
+      $('#idPersonalHidden').after('<span class="error">Este campo es requerido</span>');  
+      error=1; 
+    }
+    if(!data.name.length){
+      $('#txt_search_name_personal').after('<span class="error">Este campo es requerido</span>');  
+      error=1; 
+    }
+    if(!data.surname.length){
+      $('#txt_search_apellido_personal').after('<span class="error">Este campo es requerido</span>');  
+      error=1; 
+    }
+/*
     if (data.formFile_1.length === 0) {
       $('#formFile_1').after('<span class="error">Este campo es requerido</span>');  
       error=1; 
@@ -44,6 +59,10 @@ function validarProgramacionCapacitacion(){
         $('#formFile_7').after('<span class="error">Este campo es requerido</span>');  
       error=1; 
       }
+      if (data.formFile_8.length === 0) {
+        $('#formFile_8').after('<span class="error">Este campo es requerido</span>');  
+      error=1; 
+      }
       if (data.formFile_9.length === 0) {
         $('#formFile_9').after('<span class="error">Este campo es requerido</span>');  
       error=1; 
@@ -55,17 +74,17 @@ function validarProgramacionCapacitacion(){
       if (data.formFile_11.length === 0) {
         $('#formFile_11').after('<span class="error">Este campo es requerido</span>');  
       error=1; 
-      }
+      }*/
 
-
+  return error;
 }
 
 function validarcamposNuevoReferenciaLaboral(){
 
   let error=0;
   let data={
-        nombresCandidato: $('#txt_referencia_laboral_candidato_nombres').val(),
-        apellidosCandidato: $('#txt_referencia_laboral_candidato_apellidos').val(),
+        nombresCandidato: $('#txt_search_name_aspirante').val(),
+        apellidosCandidato: $('#txt_search_apellido_aspirante').val(),
         nombresReferente: $('#txt_referencia_laboral_referente_nombres').val(),
         apellidosReferente:$('#txt_referencia_laboral_referente_apellidos').val(),
         
@@ -166,29 +185,36 @@ function validarcamposNuevoReferenciaLaboral(){
 function validarFichaPersonal(){
   let error=0;
     let data={
-          nombres: $('#txt_ficha_personal_nombres').val(),
-          apellidos: $('#txt_ficha_personal_apellidos').val(),
-          fecha_nacimiento: $('#txt_ficha_personal_nacimiento').val(),
+           name: $('#txt_search_name_postulante').val(),
+          apellidos: $('#txt_search_apellido_postulante').val(),
+          dni: $('#txt_search_dni_postulante').val(),
+        //  telefono: $('#txt_search_dni_postulante').val(),
+          telefono: $('#txt_search_telefono_postulante').val(),
           lugar_nacimiento:$('#txt_ficha_personal_lugar').val(),      
           departamento: $('#select_Ficha_Personal_departamento_g').val(),
           provincia: $('#select_Ficha_Personal_provincia_g').val(),      
           distrito: $('#select_Ficha_Personal_distrito_g').val(),
-          dni: $('#txt_ficha_personal_dni').val(),
-          telefono: $('#txt_ficha_personal_telefono').val(),
-          celular: $('#txt_ficha_personal_celular').val(),
+         // dni: $('#txt_ficha_personal_dni').val(),
+         // telefono: $('#txt_ficha_personal_telefono').val(),
+         // celular: $('#txt_ficha_personal_celular').val(),
           domicilio: $('#txt_ficha_personal_domicilio').val(),
           urbanizacion: $('#txt_ficha_personal_ubanizacion').val(),
           distrito: $('#txt_ficha_personal_distrito').val(),
-          civil: $('#txt_ficha_personal_civil').val(),
-          edad: $('#txt_ficha_personal_edad').val(),
-          n_hijos: $('#txt_ficha_personal_n_hijos').val(),
+        //  civil: $('#txt_ficha_personal_civil').val(),
+          //edad: $('#txt_ficha_personal_edad').val(),
+         // n_hijos: $('#txt_ficha_personal_n_hijos').val(),
           sexo: $('#txt_ficha_personal_sexo').val(),
           talla: $('#txt_ficha_personal_talla').val(),   
           contextura: $('#txt_ficha_personal_contextura').val(),
+          state_padre: $('#state_padre').val(),
+          state_madre: $('#state_madre').val(),
+          //profesion:$('#table_FichaPersonalProfesion > tbody').find("tr"),
+         // listReferencia:$('#table_FichaPersonalReferencia > tbody').find("tr"),
           
-          ruc: $('#txt_ficha_personal_ruc').val(),
+          //ruc: $('#txt_ficha_personal_ruc').val(),
           essalud: $('#txt_ficha_personal_essalud').val(),
           onp: $('#txt_ficha_personal_onp').val(),   
+          afp:$('#txt_ficha_personal_afp').val(),             
           cussp: $('#txt_ficha_personal_cusspp').val(),
           fecha_afiliacion: $('#txt_ficha_personal_fecha_afiliacion').val(),
                          
@@ -201,29 +227,30 @@ function validarFichaPersonal(){
           provincia_conyuge: $('#select_Ficha_Personal_provincia_conyuge_g').val(),
           distrito_conyuge: $('#select_Ficha_Personal_distrito_conyuge_g').val(),         
           dni_conyuge: $('#select_Ficha_Personal_dni_conyuge').val(),
-          ruc_conyuge: $('#select_Ficha_Personal_ruc_conyuge').val(),
+          //ruc_conyuge: $('#select_Ficha_Personal_ruc_conyuge').val(),
           profesion_conyuge: $('#select_Ficha_Personal_profesion_conyuge').val(),                    
+          fileDniConyuge:   $('#formFileDniConyuge').get(0).files,        
           ocupacion_conyuge: $('#select_Ficha_Personal_ocupacion_conyuge').val(),
           centro_conyuge: $('#select_Ficha_Personal_centro_conyuge').val(),
           direccion_conyuge: $('#select_Ficha_Personal_direccion_conyuge').val(),
-          telefono_conyuge: $('#select_Ficha_Personal_telefono_conyuge').val(),
-          celular_conyuge: $('#select_Ficha_Personal_celular_conyuge').val(),
+         // telefono_conyuge: $('#select_Ficha_Personal_telefono_conyuge').val(),
+         // celular_conyuge: $('#select_Ficha_Personal_celular_conyuge').val(),
 
           nombre_padre: $('#txt_Ficha_Personal_padre_nombre').val(),
           apellido_padre: $('#txt_Ficha_Personal_padre_apellido').val(),
           centro_padre: $('#txt_Ficha_Personal_padre_centro').val(),
           ocupacion_padre: $('#txt_Ficha_Personal_padre_ocupacion').val(),
           direccion_padre: $('#txt_Ficha_Personal_padre_direccion').val(),
-          telefono_padre: $('#txt_Ficha_Personal_padre_telefono').val(),
-          celular_padre: $('#txt_Ficha_Personal_padre_celular').val(),
+          //telefono_padre: $('#txt_Ficha_Personal_padre_telefono').val(),
+         // celular_padre: $('#txt_Ficha_Personal_padre_celular').val(),
 
           nombre_madre: $('#txt_Ficha_Personal_madre_nombres').val(),
           apellido_madre: $('#txt_Ficha_Personal_madre_apellidos').val(),
           centro_madre: $('#txt_Ficha_Personal_madre_centro').val(),
           ocupacion_madre: $('#txt_Ficha_Personal_madre_ocupacion').val(),
           direccion_madre: $('#txt_Ficha_Personal_madre_direccion').val(),
-          telefono_madre: $('#txt_Ficha_Personal_madre_telefono').val(),
-          celular_madre: $('#txt_Ficha_Personal_madre_celular').val(),
+         // telefono_madre: $('#txt_Ficha_Personal_madre_telefono').val(),
+         // celular_madre: $('#txt_Ficha_Personal_madre_celular').val(),
 
           nombre_referencia: $('#txt_Ficha_Personal_referencia_nombre').val(),
           apellido_referencia: $('#txt_Ficha_Personal_referencia_apellido').val(),
@@ -235,17 +262,146 @@ function validarFichaPersonal(){
           marca: $('#check_Ficha_Personal_tipo_marca').val(),
           tipo: $('#check_Ficha_Personal_tipo_anio').val(),
           placa: $('#check_Ficha_Personal_tipo_placa').val(),
- 
-
+          checkPolicialesPenales :$(".filter_penales_judiciales:radio:checked"),
+          checkMovilidad:$(".check_Ficha_Personal_movilidad:radio:checked"),
+          penalesPoliciales1:$("#Ficha_Personal_antecedentes_1").val(),
+          penalesPoliciales2:$("#Ficha_Personal_antecedentes_2").val(),
+          penalesPoliciales3:$("#Ficha_Personal_antecedentes_3").val(),
+          penalesPoliciales4:$("#Ficha_Personal_antecedentes_4").val(),
+          formFile_1: $('#formFile_personal_1').get(0).files,
+          formFile_2: $('#formFile_personal_2').get(0).files,
+          formFile_3: $('#formFile_personal_3').get(0).files,
+          formFile_4: $('#formFile_personal_4').get(0).files,
+          formFile_5: $('#formFile_personal_5').get(0).files,
+          formFile_6: $('#formFile_personal_6').get(0).files,
+          formFile_7: $('#formFile_personal_7').get(0).files,
+          formFile_8: $('#formFile_personal_8').get(0).files,
+          formFile_9: $('#formFile_personal_9').get(0).files,
+          formFile_10: $('#formFile_personal_10').get(0).files,
+          formFile_11: $('#formFile_personal_11').get(0).files    
       } 
       $(".error").remove();  
-      console.log(data)
-      if (!data.nombres.length) {  
+      //console.log(data)
+     /* if (data.formFile_1.length === 0) {
+        $('#formFile_personal_1').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+        }
+          if (data.formFile_2.length === 0) {
+            $('#formFile_personal_2').after('<span class="error">Este campo es requerido</span>');  
+          error=1; 
+        }
+        if (data.formFile_3.length === 0) {
+          $('#formFile_personal_3').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+        }
+        if (data.formFile_4.length === 0) {
+          $('#formFile_personal_4').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+        }
+        if (data.formFile_5.length === 0) {
+          $('#formFile_personal_5').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+        }
+        if (data.formFile_6.length === 0) {
+          $('#formFile_personal_6').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+        }
+        if (data.formFile_7.length === 0) {
+          $('#formFile_personal_7').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+        }
+        if (data.formFile_8.length === 0) {
+          $('#formFile_personal_8').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+        }
+        if (data.formFile_9.length === 0) {
+          $('#formFile_personal_9').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+        }
+        if (data.formFile_10.length === 0) {
+          $('#formFile_personal_10').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+        }
+        if (data.formFile_11.length === 0) {
+          $('#formFile_personal_11').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+        }*/
+
+      if(!data.checkPolicialesPenales.length){
+        $('.filter_penales_judiciales').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+      }
+      if(!data.checkMovilidad.length){
+        $('.check_Ficha_Personal_movilidad').after('<span class="error">Este campo es requerido</span>');  
+        error=1; 
+      }
+      if(data.checkMovilidad.length && (data.checkMovilidad[0].getAttribute('id')==1)){
+        if(!data.licencia.length) {  
+          $('#check_Ficha_Personal_licencia').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          }  
+          if(!data.vehiculo.length) {  
+          $('#check_Ficha_Personal_tipo_vehiculo').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          }  
+          if (!data.marca.length) {  
+          $('#check_Ficha_Personal_tipo_marca').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          }  
+          if(!data.tipo.length) {  
+          $('#check_Ficha_Personal_tipo_anio').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          }  
+          if(!data.placa.length) {  
+          $('#check_Ficha_Personal_tipo_placa').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          }  
+        
+      }
+      if(data.checkPolicialesPenales.length && (data.checkPolicialesPenales[0].getAttribute('id')==1)){
+        if(!data.penalesPoliciales1.length){
+        
+          $('#Ficha_Personal_antecedentes_1').after('<span class="error">Este campo es requerido. Ingresa al menos una referencia Laboral</span>');  
+          error=1;  
+        }
+        if(!data.penalesPoliciales2.length){
+        
+          $('#Ficha_Personal_antecedentes_2').after('<span class="error">Este campo es requerido. Ingresa al menos una referencia Laboral</span>');  
+          error=1;  
+        }
+        if(!data.penalesPoliciales3.length){
+        
+          $('#Ficha_Personal_antecedentes_3').after('<span class="error">Este campo es requerido. Ingresa al menos una referencia Laboral</span>');  
+          error=1;  
+        }
+        if(!data.penalesPoliciales4.length){
+        
+          $('#Ficha_Personal_antecedentes_4').after('<span class="error">Este campo es requerido. Ingresa al menos una referencia Laboral</span>');  
+          error=1;  
+        }
+      }
+     
+     /* if(!data.listReferencia.length){
+        
+        $('#table_FichaPersonalReferencia').after('<span class="error">Este campo es requerido. Ingresa al menos una referencia Laboral</span>');  
+        error=1;  
+      }*/
+      
+      /*if(!data.profesion.length){
+        
+        $('#table_FichaPersonalProfesion').after('<span class="error">Este campo es requerido. Ingresa al menos un grado de Instrucción</span>');  
+        error=1;  
+      }*/
+      if (!data.dni.length) {  
         $('#txt_ficha_personal_nombres').after('<span class="error">Este campo es requerido</span>');  
         error=1;  
         } 
+        if (!data.telefono.length) {  
+          $('#txt_search_telefono_postulante').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          }    
         if (!data.apellidos.length) {  
-          $('#txt_ficha_personal_apellidos').after('<span class="error">Este campo es requerido</span>');  
+          $('#txt_search_apellido_postulante').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
           }        
           if (!data.lugar_nacimiento.length) {  
@@ -264,18 +420,26 @@ function validarFichaPersonal(){
               $('#select_Ficha_Personal_distrito_g').after('<span class="error">Este campo es requerido</span>');  
               error=1;  
               } 
-          if (!data.dni.length) {  
-          $('#txt_ficha_personal_dni').after('<span class="error">Este campo es requerido</span>');  
+          if (!data.name.length) {  
+          $('#txt_search_name_postulante').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
           } 
-          if (!data.telefono.length) {  
+         /* if (!data.telefono.length) {  
           $('#txt_ficha_personal_telefono').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
           } 
           if (!data.celular.length) {  
           $('#txt_ficha_personal_celular').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
-          } 
+          } */
+          if (!data.dni.length) {  
+            $('#txt_search_dni_postulante').after('<span class="error">Este campo es requerido</span>');  
+            error=1;  
+            } 
+            if (!data.telefono.length) {  
+              $('#txt_search_dni_postulante').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
           if (!data.domicilio.length) {  
           $('#txt_ficha_personal_domicilio').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
@@ -288,18 +452,78 @@ function validarFichaPersonal(){
           $('#txt_ficha_personal_distrito').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
           } 
-          if (data.civil=="-1") {  
+         /* if (data.civil=="-1") {  
           $('#txt_ficha_personal_civil').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
           } 
-          if (!data.edad.length) {  
+          if(data.civil=="0" || data.civil=="4"){
+            if (!data.nombre_conyuge.length) {  
+              $('#txt_ficha_personal_fecha_conyuge_nombre').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+              if(data.fileDniConyuge.length === 0){
+                $('#formFileDniConyuge').after('<span class="error">Este campo es requerido</span>');  
+                error=1; 
+              }
+              if (!data.apellido_conyuge.length) {  
+              $('#txt_ficha_personal_fecha_conyuge_apellido').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+              if (!data.lugar_conyuge.length) {  
+              $('#txt_ficha_personal_fecha_conyuge_lugar').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+              if (!data.edad_conyuge.length) {  
+              $('#txt_ficha_personal_fecha_conyuge_edad').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+              if (data.departamento_conyuge=="-1") {  
+              $('#select_Ficha_Personal_departamento_conyuge_g').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+              if (data.provincia_conyuge=="-1") {  
+              $('#select_Ficha_Personal_provincia_conyuge_g').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+              if (data.distrito_conyuge=="-1") {  
+                $('#select_Ficha_Personal_distrito_conyuge_g').after('<span class="error">Este campo es requerido</span>');  
+                error=1;  
+                } 
+    
+              
+              if (!data.dni_conyuge.length) {  
+              $('#select_Ficha_Personal_dni_conyuge').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+              /*if (!data.ruc_conyuge.length) {  
+              $('#select_Ficha_Personal_ruc_conyuge').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } */
+             /* if (data.profesion_conyuge=="-1") {  
+              $('#select_Ficha_Personal_profesion_conyuge').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+              if (!data.ocupacion_conyuge.length) {  
+              $('#select_Ficha_Personal_ocupacion_conyuge').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+              if (!data.centro_conyuge.length) {  
+              $('#select_Ficha_Personal_centro_conyuge').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+              if (!data.direccion_conyuge.length) {  
+              $('#select_Ficha_Personal_direccion_conyuge').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+          }*/
+         /* if (!data.edad.length) {  
           $('#txt_ficha_personal_edad').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
-          } 
-          if (!data.n_hijos.length) {  
+          } */
+          /*if (!data.n_hijos.length) {  
           $('#txt_ficha_personal_n_hijos').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
-          } 
+          } */
           if (data.sexo=="-1") {  
           $('#txt_ficha_personal_sexo').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
@@ -308,123 +532,46 @@ function validarFichaPersonal(){
             $('#txt_ficha_personal_talla').after('<span class="error">Este campo es requerido</span>');  
             error=1;  
             } 
-        if (!data.contextura.length) {  
+        if (data.contextura=="-1") {  
           $('#txt_ficha_personal_contextura').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
           } 
-
-
-          if (!data.ruc.length) {  
-          $('#txt_ficha_personal_ruc').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.essalud.length) {  
-          $('#txt_ficha_personal_essalud').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.onp.length) {  
-          $('#txt_ficha_personal_onp').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.cussp.length) {  
-          $('#txt_ficha_personal_cusspp').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-         
-
-          if (!data.nombre_conyuge.length) {  
-          $('#txt_ficha_personal_fecha_conyuge_nombre').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.apellido_conyuge.length) {  
-          $('#txt_ficha_personal_fecha_conyuge_apellido').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.lugar_conyuge.length) {  
-          $('#txt_ficha_personal_fecha_conyuge_lugar').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.edad_conyuge.length) {  
-          $('#txt_ficha_personal_fecha_conyuge_edad').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (data.departamento_conyuge=="-1") {  
-          $('#select_Ficha_Personal_departamento_conyuge_g').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (data.provincia_conyuge=="-1") {  
-          $('#select_Ficha_Personal_provincia_conyuge_g').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (data.distrito_conyuge=="-1") {  
-            $('#select_Ficha_Personal_distrito_conyuge_g').after('<span class="error">Este campo es requerido</span>');  
+          if (data.state_padre=="-1") {  
+            $('#state_padre').after('<span class="error">Este campo es requerido</span>');  
             error=1;  
             } 
+            if (data.state_padre=="2") {  
 
-          
-          if (!data.dni_conyuge.length) {  
-          $('#select_Ficha_Personal_dni_conyuge').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.ruc_conyuge.length) {  
-          $('#select_Ficha_Personal_ruc_conyuge').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.profesion_conyuge.length) {  
-          $('#select_Ficha_Personal_profesion_conyuge').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.ocupacion_conyuge.length) {  
-          $('#select_Ficha_Personal_ocupacion_conyuge').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.centro_conyuge.length) {  
-          $('#select_Ficha_Personal_centro_conyuge').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.direccion_conyuge.length) {  
-          $('#select_Ficha_Personal_direccion_conyuge').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.telefono_conyuge.length) {  
-          $('#select_Ficha_Personal_telefono_conyuge').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.celular_conyuge.length) {  
-          $('#select_Ficha_Personal_celular_conyuge').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-        
-          
-          if (!data.nombre_padre.length) {  
-          $('#txt_Ficha_Personal_padre_nombre').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.apellido_padre.length) {  
-          $('#txt_Ficha_Personal_padre_apellido').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.centro_padre.length) {  
-          $('#txt_Ficha_Personal_padre_centro').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.ocupacion_padre.length) {  
-          $('#txt_Ficha_Personal_padre_ocupacion').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.direccion_padre.length) {  
-          $('#txt_Ficha_Personal_padre_direccion').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if (!data.telefono_padre.length) {  
-          $('#txt_Ficha_Personal_padre_telefono').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          } 
-          if(!data.celular_padre.length) {  
-          $('#txt_Ficha_Personal_padre_celular').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          }     
-          
+              if (!data.nombre_padre.length) {  
+                $('#txt_Ficha_Personal_padre_nombre').after('<span class="error">Este campo es requerido</span>');  
+                error=1;  
+                } 
+                if (!data.apellido_padre.length) {  
+                $('#txt_Ficha_Personal_padre_apellido').after('<span class="error">Este campo es requerido</span>');  
+                error=1;  
+                } 
+                if (!data.centro_padre.length) {  
+                $('#txt_Ficha_Personal_padre_centro').after('<span class="error">Este campo es requerido</span>');  
+                error=1;  
+                } 
+                if (!data.ocupacion_padre.length) {  
+                $('#txt_Ficha_Personal_padre_ocupacion').after('<span class="error">Este campo es requerido</span>');  
+                error=1;  
+                } 
+                if (!data.direccion_padre.length) {  
+                $('#txt_Ficha_Personal_padre_direccion').after('<span class="error">Este campo es requerido</span>');  
+                error=1;  
+                } 
+
+
+
+              } 
+
+            if (data.state_madre=="-1") {  
+              $('#state_madre').after('<span class="error">Este campo es requerido</span>');  
+              error=1;  
+              } 
+        if (data.state_madre=="2") {  
 
           if(!data.nombre_madre.length) {  
             $('#txt_Ficha_Personal_madre_nombres').after('<span class="error">Este campo es requerido</span>');  
@@ -446,14 +593,60 @@ function validarFichaPersonal(){
             $('#txt_Ficha_Personal_madre_direccion').after('<span class="error">Este campo es requerido</span>');  
             error=1;  
             } 
-            if(!data.telefono_madre.length) {  
+        }
+        /*  if (!data.ruc.length) {  
+          $('#txt_ficha_personal_ruc').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          } */
+          if (!data.essalud.length) {  
+          $('#txt_ficha_personal_essalud').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          } 
+          if (data.onp=="-1") {  
+          $('#txt_ficha_personal_onp').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          } 
+          if (data.onp=="1" && data.afp=="-1") {              
+            $('#txt_ficha_personal_afp').after('<span class="error">Este campo es requerido</span>');  
+            error=1;  
+          
+            } 
+          if (!data.cussp.length) {  
+          $('#txt_ficha_personal_cusspp').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          } 
+         
+
+       
+        /*  if (!data.telefono_conyuge.length) {  
+          $('#select_Ficha_Personal_telefono_conyuge').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          } 
+          if (!data.celular_conyuge.length) {  
+          $('#select_Ficha_Personal_celular_conyuge').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          } */
+        
+          
+         
+          /*if (!data.telefono_padre.length) {  
+          $('#txt_Ficha_Personal_padre_telefono').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          } 
+          if(!data.celular_padre.length) {  
+          $('#txt_Ficha_Personal_padre_celular').after('<span class="error">Este campo es requerido</span>');  
+          error=1;  
+          }     */
+          
+
+            /*if(!data.telefono_madre.length) {  
             $('#txt_Ficha_Personal_madre_telefono').after('<span class="error">Este campo es requerido</span>');  
             error=1;  
             } 
             if(!data.celular_madre.length) {  
             $('#txt_Ficha_Personal_madre_celular').after('<span class="error">Este campo es requerido</span>');  
             error=1;  
-            }   
+            }   */
 
 
           if(!data.nombre_referencia.length) {  
@@ -477,26 +670,7 @@ function validarFichaPersonal(){
         }   
       
 
-          if(!data.licencia.length) {  
-          $('#check_Ficha_Personal_licencia').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          }  
-          if(!data.vehiculo.length) {  
-          $('#check_Ficha_Personal_tipo_vehiculo').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          }  
-          if (!data.marca.length) {  
-          $('#check_Ficha_Personal_tipo_marca').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          }  
-          if(!data.tipo.length) {  
-          $('#check_Ficha_Personal_tipo_anio').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          }  
-          if(!data.placa.length) {  
-          $('#check_Ficha_Personal_tipo_placa').after('<span class="error">Este campo es requerido</span>');  
-          error=1;  
-          }  
+         
           return error;
       }
 function validarcamposNuevoRegistroEntrevista(){
@@ -509,7 +683,7 @@ function validarcamposNuevoRegistroEntrevista(){
           
           edad: $('#txt_entrevistas_edad').val(),
           fecha: $('#txt_entrevistas_fecha').val(),      
-          civil: $('#txt_entrevistas_civil').val(),
+         // civil: $('#txt_entrevistas_civil').val(),
 
           correo: $('#txt_entrevistas_correo').val(),
           telefono: $('#txt_entrevistas_telefono').val(),
@@ -533,19 +707,20 @@ function validarcamposNuevoRegistroEntrevista(){
             error=1;
     
             } 
-        if (!data.dni.length) {  
-        $('#txt_entrevistas_dni').after('<span class="error">Este campo es requerido</span>');  
+        if (data.dni.length!=8) {  
+        $('#txt_entrevistas_dni').after('<span class="error">Este campo es requerido. Asegurate de tener 8 digitos</span>');  
         error=1;
         }  
+     
         if (!data.edad.length) {  
             $('#txt_entrevistas_edad').after('<span class="error">Este campo es requerido</span>');  
             error=1;
             }  
         
-      if (data.civil=="-1") {  
+    /*  if (data.civil=="-1") {  
         $('#txt_entrevistas_civil').after('<span class="error">Este campo es requerido</span>');  
         error=1;
-      }     
+      }     */
 
       if (!data.correo.length) {  
           $('#txt_entrevistas_correo').after('<span class="error">Este campo es requerido</span>');  
@@ -593,7 +768,7 @@ function validarcamposNuevoRegistroPersonas(){
           $('#idsolicitanteHidden').after('<span class="error">Este campo es requerido</span>');  
           error=1;  
           }  
-        if (!data.cargo.length) {  
+        if (data.cargo=="-1") {  
         $('#txt_cargo_personas').after('<span class="error">Este campo es requerido</span>');  
         error=1;
 

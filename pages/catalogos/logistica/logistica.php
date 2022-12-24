@@ -7,2230 +7,3597 @@
 <script src="libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="libs/moment/min/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/locale/es.js"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="pages/catalogos/logistica/ubigeo.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+.dataTables_filter {
+    display: none;
+}
 
-<!--datetimepicker-->
-<!-- <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
-      rel="stylesheet">
-<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
+.error {
+    color: #ff2424;
+    font-size: 10px;
+}
+</style>
+<div id="error"><input type="hidden" name="" id="error-input-general"></div>
 
 <section class="content-header">
-  
-  <h1><i class="fa fa-tasks"></i> Logística - <span>ALMACEN GENERAL</span></h1>
-  <ol class="breadcrumb">
-    <li><a href="javascript:appChangePage('lineaneg');"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Logística</li>
-  </ol>
+
+    <h2 class="font-bold text-3xl">
+        <box-icon name='bar-chart-square' size="2rem"></box-icon>
+    </h2>
+    <ol class="breadcrumb">
+        <li><a href="javascript:appChangePage('lineaneg');"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Logística</li>
+    </ol>
 </section>
 <section class="content">
-  <div class="row" id="edit">
-    <form class="form-horizontal" id="frmWorker" autocomplete="off">
-      
-      <div class="col-md-12">
-        <div class="nav-tabs-custom">
-          <ul class="nav nav-tabs">
-            <li class="active" title="Almacenes"><a href="#datos01" data-toggle="tab"><i class="fa fa-truck"></i> Almacen</a></li>
-            <li class="" title="Group Class"><a href="#datos02" data-toggle="tab"><i class="fa fa-folder-open"></i> Group Class</a></li>
-            <li role="presentation" class="dropdown">
-              <a href="#" id="myTabDropInventario" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDropInventario-contents"><i class="fa fa-dropbox"></i> Inventario <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="myTabDropInventario" id="myTabDropInventario-contents">
-                <li class="" title="Inventario"><a href="#datos03" data-toggle="tab"  onclick="javascript:app00_Inventario();"><i class="fa fa-dropbox"></i> Items</a></li>
-                <li class="" title="Retiros"><a href="#datos04" data-toggle="tab" onclick="javascript:app00_Tarea();"><i class="fa fa-tags"></i> Retiros</a></li>
-                <li class="" title="Devoluciones"><a href="#datos05" data-toggle="tab"><i class="fa fa-trophy"></i> Devoluciones</a></li>
-              </ul>
-            </li>
-            <!-- <li class="" title="Mantenimiento Preventivo"><a href="#datos06" data-toggle="tab"><i class="fa fa-legal"></i> Herramientas</a></li> -->
-            <li class="" title="Tareas"><a href="#datos07" data-toggle="tab" onclick="javascript:app00_Tarea();"><i class="fa fa-legal" ></i> Tareas</a></li>
-            <li role="presentation" class="dropdown">
-              <a href="#" id="myTabDropPersonal" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDropPersonal-contents"><i class="fa fa-legal"></i> Personal <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="myTabDropPersonal" id="myTabDropPersonal-contents">
-                <!-- <li><a href="#dropdown1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1">@fat</a></li> -->
-                <li class="" title="Usuarios"><a href="#datos08" data-toggle="tab"><i class="fa fa-legal"></i> Usuarios</a></li>
-                <li class="" title="Proveedores"><a href="#datos14" data-toggle="tab"><i class="fa fa-legal" ></i> Proveedores</a></li>
-              </ul>
-            </li>
-            <!-- <li class="" title="Usuarios"><a href="#datos08" data-toggle="tab"><i class="fa fa-legal"></i> Usuarios</a></li> -->
-            <li class="" title="Nueva Cotizacion"><a href="#datos09" data-toggle="tab" onclick="javascript:app00_Req();"><i class="fa fa-legal"></i> Req.Compra</a></li>
-            <li class="" title="Cotizaciones"><a href="#datos10" data-toggle="tab" onclick="javascript:app00_Cotizacion();"><i class="fa fa-legal"></i> RFQ</a></li>
-            <li class="" title="Cotizar proveedor"><a href="#datos11" data-toggle="tab" onclick="javascript:app00_CotiProveedor();"><i class="fa fa-legal"></i> Coti. Proveedor</a></li>
-            <li class="" title="Generar Orden"><a href="#datos12" data-toggle="tab" onclick="javascript:app00_Orden();"><i class="fa fa-legal" ></i> Gen.Orden</a></li>
-            <li class="" title="Ordenes de Compra"><a href="#datos13" data-toggle="tab" onclick="javascript:app00_OrdenCompra();"><i class="fa fa-legal" ></i> Ord.Compra</a></li>
+    <div class="row" id="edit">
+        <form class="form-horizontal" id="frmWorker" autocomplete="off">
 
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane active" id="datos01">
-              <div class="box-body">
-                <div class="col-md-5">
-                <br>
-                  <strong><i class="fa fa-truck margin-r-5"></i> Almancenes</strong>
-                  <br><br>
-                  <div class="box box-primary no-padding">
-                    <div class="box-body">
-                      <table class="table table-hover">
-                        <thead>
-                          <tr>
-                            <th scope="col" style="width:70px;">Codigo</th>
-                            <!-- <th scope="col" style="width:70px;">Sec.</th> -->
-                            <th scope="col">Descripción</th>
-                            
-                          </tr>
-                        </thead>
-                        <tbody id="alm01DatosBody">
-                          
-                        </tbody>
-                      </table>
-                      
+            <div class="col-md-12">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <!--<li role="presentation" class="dropdown active">
+                            <a href="#" id="dropdowngestionpersonas" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="dropdowngestionpersonas-contents"><i class="fa fa-dropbox "></i>Almacen
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdowngestionpersonas"
+                                id="dropdowngestionpersonas-contents">
+                                <li class="active" title="Inventario"><a href="#HistorialAlmacenes" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Almacenes</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevoRegistroAlmacen" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Agregar Almacen</a>
+                                </li>
+                            </ul>
+                        </li>-->
+                        <li role="presentation" class="dropdown">
+                            <a href="#" id="myTabDropInventario" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="myTabDropInventario-contents"><i class="fa fa-dropbox"></i> Gestión de
+                                Inventario
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="myTabDropInventario"
+                                id="myTabDropInventario-contents">
+                                <li class="" title="Inventario"><a href="#HistorialItems" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i> Inventario</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevoRegistroItems" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i> Crear Items</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevoRegistroAgregarItems"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i> Agregar Items</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#HistorialGrupos" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i> Grupo</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevoRegistroGrupos" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i> Agregar Grupo</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#HistorialGruposClass" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i> Grupo de
+                                        Clase</a></li>
+                                <li class="" title="Inventario"><a href="#NuevoRegistroGruposClass" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Agregar Grupo de
+                                        Clase</a>
+                                </li>
+                                <!--<li class="" title="Inventario"><a href="#" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i> Retiro</a></li>
+                                <li class="" title="Inventario"><a href="#" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i> Devoluciones</a></li>-->
+                            </ul>
+                        </li>
+
+                        <li role="presentation" class="dropdown">
+                            <a href="#" id="dropdowngestionpersonas" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="dropdowngestionpersonas-contents"><i
+                                    class="fa fa-dropbox "></i>Proveedores
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdowngestionpersonas"
+                                id="dropdowngestionpersonas-contents">
+                                <li class="" title="Inventario"><a href="#HistorialProveedor" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Registro de Proveedores</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevoRegistroProveedor" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Agregar Proveedor</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevaCategoriaProveedor" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Agregar Categoria</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevaHistorialSeleccionProveedor"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i>Historial de Seleccion de
+                                        Proveedores</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevaSeleccionProveedor" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Seleccion de Proveedores</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevaHistorialEvaluacionProveedor"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i>Historial de Evaluacion de
+                                        Proveedores</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevaEvaluacionProveedor" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Evaluacion de Proveedores</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role="presentation" class="dropdown">
+                            <a href="#" id="dropdowngestionpersonas" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="dropdowngestionpersonas-contents"><i
+                                    class="fa fa-dropbox "></i>Req.Compra
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdowngestionpersonas"
+                                id="dropdowngestionpersonas-contents">
+                                <li class="" title="Inventario"><a href="#HistorialRequerimientos" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Historial de Requerimientos</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevoRegistroRequerimientos"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i>Nuevo Requerimiento</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="" title="Cotizar proveedor"><a href="#reqordcompramenuItem" data-toggle="tab"><i
+                                    class="fa fa-legal"></i> Ord.
+                                Compra</a></li>
+                        <li role="presentation" class="dropdown">
+                            <a href="#" id="dropdowngestionpersonas" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="dropdowngestionpersonas-contents"><i class="fa fa-dropbox "></i> Gestión
+                                de personas
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdowngestionpersonas"
+                                id="dropdowngestionpersonas-contents">
+                                <li class="" title="Inventario"><a href="#HistorialRequerimientosPersonas"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i>Historial de requerimientos</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevoRegistroPersonas" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Nuevo requerimiento</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane" id="HistorialAlmacenes">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchAlmacenhtml">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="gridAlmacenhtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroAlmacen">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ESTADO</span>
+
+                                                <select id="slct_estado_almacen" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="0">ACTIVO
+                                                    </option>
+                                                    <option value="1">INACTIVO
+                                                    </option>
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION</span>
+                                                <input id="txt_descripcion_almacen" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">SEDE</span>
+                                                <input id="txt_sede_almacen" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DIRECCION</span>
+                                                <input id="txt_direccion_almacen" type="text" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">REFERENCIA</span>
+                                                <input id="txt_referencia_almacen" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TELEFONO</span>
+                                                <input id="txt_telefono_almacen" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DEPARTAMENTO</span>
+
+                                                <select id="txt_departamento_almacen" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PROVINCIA</span>
+
+                                                <select id="txt_provincia_almacen" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DISTRITO</span>
+
+                                                <select id="txt_distrito_almacen" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                            onclick="add_Almacen();">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane active" id="HistorialItems">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchItemshtml">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="gridItemshtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroItems">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">GRUPO</span>
+
+                                                <select id="slct_group" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">GRUPO
+                                                    DE CLASE</span>
+
+                                                <select id="slct_groupClass" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CODIGO</span>
+                                                <input id="txt_codigo_items" type="text" class="form-control"
+                                                    placeholder="..." value="" disabled />
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION</span>
+                                                <input id="txt_descripcion_items" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">COLOQUIAL</span>
+                                                <input id="txt_descripcion_coloquial" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                    DE ADQUISICION</span>
+                                                <input id="txt_fecha_items" type="date" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NUMERO
+                                                    DE SERIE</span>
+                                                <input id="txt_numero_serie" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NUMERO
+                                                    DE PARTE</span>
+                                                <input id="txt_numero_parte" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">UNIDAD
+                                                    DE MEDIDA</span>
+                                                <input id="txt_unidad_medida_item" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MARCA</span>
+                                                <input id="txt_marca_item" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRECIO
+                                                    UNITARIO</span>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">S/.</span>
+                                                <input id="txt_precio_item" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PLACA</span>
+                                                <input id="txt_numero_placa" type="text" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HOROMETRO</span>
+                                                <input id="txt_numero_horometro" type="number" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MARCA</span>
+                                                <input id="txt_marca_item" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MODELO</span>
+                                                <input id="txt_modelo_item" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDICION</span>
+                                                <select id="slct_tipo_orden_condicion" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="0">Nuevo
+                                                    </option>
+                                                    <option value="1">Remanufacturado
+                                                    </option>
+                                                    <option value="2">Usado
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group"> <span class="input-group-addon text-xl"
+                                                    title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">INICIO
+                                                    DE GARANTIA</span>
+                                                <input id="txt_garantia_item_inicio" type="date" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIEMPO
+                                                    DE GARANTIA</span>
+                                                <input id="txt_garantia_item" type="number" class="form-control"
+                                                    placeholder="..." value="" />
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MESES</span>
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FIN
+                                                    DE GARANTIA</span>
+                                                <input id="txt_garantia_item_fin" type="date" class="form-control"
+                                                    placeholder="..." value="" disabled />
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                            onclick="checkIfisIntoOR();">Guardar</button>
+                                        <button id="buttonforVehicleItem" style="display:none" type="button"
+                                            class="bg-gray-500 py-4 px-2 text-white"
+                                            onclick="ModalAddComponentIntoVehicle();">Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroAgregarItems">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">GRUPO</span>
+
+                                                <select id="slct_group_add_items" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">GRUPO
+                                                    DE CLASE</span>
+
+                                                <select id="slct_groupClass_add_items" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ITEM</span>
+                                                <select id="slct_items_add_items" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION</span>
+                                                <input id="txt_descripcion_items_add" type="text" class="form-control"
+                                                    placeholder="..." value="" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CANTIDAD</span>
+                                                <input id="txt_cantidad_items_add" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <input id="txt_unidad_medida_items_add" type="text" class="form-control"
+                                                    placeholder="..." value="" disabled/> 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                            onclick="addCantidad_items();">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="HistorialGrupos">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchGrouphtml">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="gridGrouphtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroGrupos">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CODIGO</span>
+                                                <input id="txt_codigo" type="text" class="form-control"
+                                                    placeholder="..." value="" disabled />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION</span>
+                                                <input id="txt_descripcion" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                            onclick="add_Groups();">Guardar</button>
+                                        <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="HistorialGruposClass">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchGroupClasshtml">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="gridGroupClasshtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroGruposClass">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">GRUPO
+                                                </span>
+
+                                                <select id="slct_group_GruposClass" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CODIGO</span>
+                                                <input id="txt_codigo_GruposClass" type="text" class="form-control"
+                                                    placeholder="..." value="" disabled />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION</span>
+                                                <input id="txt_descripcion_GruposClass" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                            onclick="add_GroupClass();">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="HistorialProveedor">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchProveedorhtml">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="gridProveedorhtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroProveedor">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO
+                                                </span>
+
+                                                <select id="slct_tipo_proveedor_proveedor" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="0">A (CRITICO)
+                                                    </option>
+                                                    <option value="1">B (IMPORTANTE)
+                                                    </option>
+                                                    <option value="2">C (NO CRITICO)
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CATEGORIA
+                                                </span>
+
+                                                <select id="slct_categoria_proveedor" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DEPARTAMENTO
+                                                </span>
+
+                                                <select id="slct_departamento_proveedor" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PROVINCIA
+                                                </span>
+
+                                                <select id="slct_provincia_proveedor" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DISTRITO
+                                                </span>
+
+                                                <select id="slct_distrito_proveedor" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">GRUPO
+                                                </span>
+
+                                                <select id="slct_grupo_proveedor" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CLASE
+                                                    DE GRUPO
+                                                </span>
+
+                                                <select id="slct_clase_proveedor" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">RUC</span>
+                                                <input id="txt_ruc_proveedor_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">RAZON
+                                                    SOCIAL</span>
+                                                <input id="txt_razonSocial_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DIRECCION</span>
+                                                <input id="txt_direccion_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TELEFONO</span>
+                                                <input id="txt_telefono_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CELULAR</span>
+                                                <input id="txt_celular_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CORREO</span>
+                                                <input id="txt_correo_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">N°
+                                                    de cuenta En soles</span>
+                                                <input id="txt_cSoles_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CCI
+                                                    cuenta en Soles</span>
+                                                <input id="txt_ccisSoles_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">BANCO</span>
+
+                                                <select id="slct_proveedor_banco_soles" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="0">MIBANCO
+                                                    </option>
+                                                    <option value="1">SCOTIABANK
+                                                    </option>
+                                                    <option value="2">BANCO DE COMERCIO
+                                                    </option>
+                                                    <option value="3">BANCO DE CREDITO
+                                                    </option>
+                                                    <option value="4">NACION
+                                                    </option>
+                                                    <option value="5">BANCO PICHINCHA
+                                                    </option>
+                                                    <option value="6">BANBIF
+                                                    </option>
+                                                    <option value="7">INTERBANK
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">N°
+                                                    de cuenta en dólares</span>
+                                                <input id="txt_cdolares_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CCI
+                                                    cuenta en dólares</span>
+                                                <input id="txt_cciscdolares_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">BANCO</span>
+
+                                                <select id="slct_proveedor_banco_dolares" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="0">MIBANCO
+                                                    </option>
+                                                    <option value="1">SCOTIABANK
+                                                    </option>
+                                                    <option value="2">BANCO DE COMERCIO
+                                                    </option>
+                                                    <option value="3">BANCO DE CREDITO
+                                                    </option>
+                                                    <option value="4">NACION
+                                                    </option>
+                                                    <option value="5">BANCO PICHINCHA
+                                                    </option>
+                                                    <option value="6">BANBIF
+                                                    </option>
+                                                    <option value="7">INTERBANK
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">N°
+                                                    de cuenta de detracciones</span>
+                                                <input id="txt_detracciones_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                            onclick="add_Proveedor();">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevaCategoriaProveedor">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="col-md-6">
+                                        <div class="box box-body">
+                                            <div class="form-group" style="margin-bottom:5px;">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION</span>
+                                                    <input id="txt_categoryProveedorNew" type="text"
+                                                        class="form-control" placeholder="..." value="" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="Basic example"
+                                            style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                            <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                                onclick="add_ProveedorCategoria();">Guardar</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="box box-body">
+                                            <div class="form-group" style="margin-bottom:5px;">
+                                                <div class="input-group" id="searchProveedorCategoryhtml">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="box-primary" style="width:100%">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+                                                    <table style="width:100%"
+                                                        class="datatable table table-striped table-bordered"
+                                                        id="gridProveedorCategoryhtml">
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="Basic example"
+                                            style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevaHistorialSeleccionProveedor">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchSeleccionProveedorhtml">
+                                                <span class="input-group-addon" title="Buscar"
+                                                    style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search"
+                                                        aria-hidden="true"></i></span>
+                                                <input id="0" type="text" class="form-control"
+                                                    placeholder="Buscar por Proveedor" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered text-xl"
+                                                    id="gridSeleccionProveedorhtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevaHistorialEvaluacionProveedor">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchEvaluacionProveedorhtml">
+                                                <span class="input-group-addon" title="Buscar"
+                                                    style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search"
+                                                        aria-hidden="true"></i></span>
+                                                <input id="0" type="text" class="form-control"
+                                                    placeholder="Buscar por Proveedor" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered text-xl"
+                                                    id="gridEvaluacionProveedorhtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevaSeleccionProveedor">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div style="display:flex;">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold; width:200px">EVALUADOR</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_evaluador_proveedor_selected" type="text"
+                                                        class="form-control" placeholder="Buscar por DNI para Ingresar"
+                                                        value="" />
+                                                    <input type="hidden"
+                                                        id="txt_seleccion_evaluacionProveedor_evaluador" name=""
+                                                        value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 30px;">
+                                                        <button type="button" class="fa fa-search" aria-hidden="true"
+                                                            onclick="searchFuncionForNameAndSurname('txt_search_evaluador_proveedor_selected','02_search_solicitante',[
+                                                                'txt_seleccion_evaluacionProveedor_evaluador',
+                                                                'txt_solicitante_nombres_seleccion_proveedor',
+                                                                'txt_solicitante_apellidos_seleccion_proveedor',
+                                                            ]);"></button></span>
+                                                </div>
+                                            </div>
+                                            <div class="input-group" style="margin-top:20px;">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES
+                                                    DEL EVALUADOR</span>
+                                                <input id="txt_solicitante_nombres_seleccion_proveedor" type="text"
+                                                    class="form-control" placeholder="..." value="" disabled />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">APELLIDOS
+                                                    DEL EVALUADOR</span>
+                                                <input id="txt_solicitante_apellidos_seleccion_proveedor" type="text"
+                                                    class="form-control" placeholder="..." value="" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO
+                                                    DE SERVICIO</span>
+                                                <input id="txt_seleccion_evaluacionProveedor_tipo" type="text"
+                                                    class="form-control" placeholder="..." value="" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">LEYENDA</span>
+                                                <table style="width:100%" class="table">
+
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div
+                                                                    style="width:15px;height:15px;background-color:green">
+                                                                </div>
+                                                            </td>
+                                                            <td><strong>PROVEEDOR CON EXCELENTES CARACTERISTICAS
+                                                                    (PEX)</strong> igual o mayor a 2.25</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div
+                                                                    style="width:15px;height:15px;background-color:yellow">
+                                                                </div>
+                                                            </td>
+                                                            <td><strong>PROVEEDOR ACEPTABLE (PAC)</strong> igual o mayor
+                                                                a 2 y menor a 2.25
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div
+                                                                    style="width:15px;height:15px;background-color:red">
+                                                                </div>
+                                                            </td>
+                                                            <td><strong>PROVEEDOR CON MALAS CARACTERISTICAS
+                                                                    (PMC)</strong> menor a 2
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">AGREGAR
+                                                    CRITERIO DE EVALUACION</span>
+                                                <button class="bg-cyan-500 py-4 px-4 text-white" type="button"
+                                                    onclick="addComentario('tableSeleccionProveedor','selectProveedorSeleccion');"><i
+                                                        class="fa fa-plus-circle "></i></button>
+                                            </div>
+                                        </div>-->
+                                        <div class="box-primary">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+
+                                                    <table class="datatable table table-striped table-bordered text-xl"
+                                                        id="tableSeleccionProveedor">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>CRITERIOS A EVALUAR</th>
+                                                                <th>
+                                                                    <select id="proveedorSeleccion-1"
+                                                                        class='form-control CriterioEvaluacionSelectProveedor'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                    </select>
+                                                                </th>
+                                                                <th>
+                                                                    <select id="proveedorSeleccion-2"
+                                                                        class='form-control CriterioEvaluacionSelectProveedor'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                    </select>
+                                                                </th>
+                                                                <th>
+                                                                    <select id="proveedorSeleccion-3"
+                                                                        class='form-control CriterioEvaluacionSelectProveedor'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                    </select>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr id='rowItemSelection1' class=''>
+                                                                <td>Legalmente constituida</td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-1'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-2'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-3'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <!--<td>
+                                                                    <div
+                                                                        style='display:flex;justify-content:center;gap:2rem;'>
+                                                                        <button type='button'
+                                                                            class='fa fa-trash bg-rose-500 py-2 px-2 text-white'
+                                                                            onclick='removeComentarios("rowItemSelection1")'></button>
+                                                                    </div>
+                                                                </td>-->
+                                                            </tr>
+                                                            <tr id='rowItemSelection2' class=''>
+                                                                <td>Experiencia en el mercado (al menos 5años)</td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-1'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-2'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-3'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <!--<td>
+                                                                    <div
+                                                                        style='display:flex;justify-content:center;gap:2rem;'>
+                                                                        <button type='button'
+                                                                            class='fa fa-trash bg-rose-500 py-2 px-2 text-white'
+                                                                            onclick='removeComentarios("rowItemSelection2")'></button>
+                                                                    </div>
+                                                                </td>-->
+                                                            </tr>
+                                                            <tr id='rowItemSelection3' class=''>
+                                                                <td>Equipo de trabajo propio</td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-1'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-2'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-3'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <!--<td>
+                                                                    <div
+                                                                        style='display:flex;justify-content:center;gap:2rem;'>
+                                                                        <button type='button'
+                                                                            class='fa fa-trash bg-rose-500 py-2 px-2 text-white'
+                                                                            onclick='removeComentarios("rowItemSelection3")'></button>
+                                                                    </div>
+                                                                </td>-->
+                                                            </tr>
+                                                            <tr id='rowItemSelection4' class=''>
+                                                                <td>Brindar Garantía en el servicio</td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-1'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-2'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-3'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <!--<td>
+                                                                    <div
+                                                                        style='display:flex;justify-content:center;gap:2rem;'>
+                                                                        <button type='button'
+                                                                            class='fa fa-trash bg-rose-500 py-2 px-2 text-white'
+                                                                            onclick='removeComentarios("rowItemSelection4")'></button>
+                                                                    </div>
+                                                                </td>-->
+                                                            </tr>
+                                                            <tr id='rowItemSelection5' class=''>
+                                                                <td>Tiene recomendaciones (al menos 3)</td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-1'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-2'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-3'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <!--<td>
+                                                                    <div
+                                                                        style='display:flex;justify-content:center;gap:2rem;'>
+                                                                        <button type='button'
+                                                                            class='fa fa-trash bg-rose-500 py-2 px-2 text-white'
+                                                                            onclick='removeComentarios("rowItemSelection5")'></button>
+                                                                    </div>
+                                                                </td>-->
+                                                            </tr>
+                                                            <tr id='rowItemSelection6' class=''>
+                                                                <td>Capacidad de atención</td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-1'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-2'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-3'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <!--<td>
+                                                                    <div
+                                                                        style='display:flex;justify-content:center;gap:2rem;'>
+                                                                        <button type='button'
+                                                                            class='fa fa-trash bg-rose-500 py-2 px-2 text-white'
+                                                                            onclick='removeComentarios("rowItemSelection6")'></button>
+                                                                    </div>
+                                                                </td>-->
+                                                            </tr>
+                                                            <tr id='rowItemSelection7' class=''>
+                                                                <td>Contar con equipos propios</td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-1'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-2'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-3'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <!--<td>
+                                                                    <div
+                                                                        style='display:flex;justify-content:center;gap:2rem;'>
+                                                                        <button type='button'
+                                                                            class='fa fa-trash bg-rose-500 py-2 px-2 text-white'
+                                                                            onclick='removeComentarios("rowItemSelection7")'></button>
+                                                                    </div>
+                                                                </td>-->
+                                                            </tr>
+                                                            <tr id='rowItemSelection8' class=''>
+                                                                <td>Contar con stock de repuestos propios</td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-1'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-2'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorSeleccion-3'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <!--<td>
+                                                                    <div
+                                                                        style='display:flex;justify-content:center;gap:2rem;'>
+                                                                        <button type='button'
+                                                                            class='fa fa-trash bg-rose-500 py-2 px-2 text-white'
+                                                                            onclick='removeComentarios("rowItemSelection8")'></button>
+                                                                    </div>
+                                                                </td>-->
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="box-primary">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+
+                                                    <table class="datatable table table-striped table-bordered" id="">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th width="500"> <span>TOTAL</span></th>
+                                                                <th id="result_seleccion_1">
+                                                                    <input type="text" id="totalSeleccionProveedor1"
+                                                                        disabled />
+                                                                </th>
+                                                                <th id="result_seleccion_2">
+                                                                    <input type="text" id="totalSeleccionProveedor2"
+                                                                        disabled />
+                                                                </th>
+                                                                <th id="result_seleccion_3">
+                                                                    <input type="text" id="totalSeleccionProveedor3"
+                                                                        disabled />
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-cyan-500 py-4 px-2 text-white"
+                                            onclick="EvaluarSeleccionProveedor();">Evaluar</button>
+                                        <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                            onclick="add_EvaluarSeleccionProveedor();">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevaEvaluacionProveedor">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div style="display:flex;">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold; width:200px">EVALUADOR</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_evaluador_proveedor_evaluated" type="text"
+                                                        class="form-control" placeholder="Buscar por DNI para Ingresar"
+                                                        value="" />
+                                                    <input type="hidden"
+                                                        id="txt_evaluacion_evaluacionProveedor_evaluador2" name=""
+                                                        value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 30px;">
+                                                        <button type="button" class="fa fa-search" aria-hidden="true"
+                                                            onclick="searchFuncionForNameAndSurname('txt_search_evaluador_proveedor_evaluated','02_search_solicitante',[
+                                                                'txt_evaluacion_evaluacionProveedor_evaluador2',
+                                                                'txt_solicitante_nombres_evaluador_proveedor',
+                                                                'txt_solicitante_apellidos_evaluador_proveedor',
+                                                            ]);"></button></span>
+                                                </div>
+                                            </div>
+                                            <div class="input-group" style="margin-top:20px;">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES
+                                                    DEL EVALUADOR</span>
+                                                <input id="txt_solicitante_nombres_evaluador_proveedor" type="text"
+                                                    class="form-control" placeholder="..." value="" disabled />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">APELLIDOS
+                                                    DEL EVALUADOR</span>
+                                                <input id="txt_solicitante_apellidos_evaluador_proveedor" type="text"
+                                                    class="form-control" placeholder="..." value="" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">LEYENDA</span>
+                                                <table style="width:100%" class="table">
+
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div
+                                                                    style="width:15px;height:15px;background-color:green">
+                                                                </div>
+                                                            </td>
+                                                            <td><strong>PROVEEDOR CON EXCELENTES CARACTERISTICAS
+                                                                    (PEX)</strong> igual o mayor a 2.25</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div
+                                                                    style="width:15px;height:15px;background-color:yellow">
+                                                                </div>
+                                                            </td>
+                                                            <td><strong>PROVEEDOR ACEPTABLE (PAC)</strong> igual o mayor
+                                                                a 2 y menor a 2.25
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <div
+                                                                    style="width:15px;height:15px;background-color:red">
+                                                                </div>
+                                                            </td>
+                                                            <td><strong>PROVEEDOR CON MALAS CARACTERISTICAS
+                                                                    (PMC)</strong> menor a 2
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">AGREGAR
+                                                    CRITERIO DE EVALUACION</span>
+                                                <button class="bg-cyan-500 py-4 px-4 text-white" type="button"
+                                                    onclick="addComentario('tableEvaluacionProveedor','selectProveedorEvaluacion');"><i
+                                                        class="fa fa-plus-circle"></i></button>
+                                            </div>
+                                        </div>-->
+                                        <div class="box-primary">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+
+                                                    <table class="datatable table table-striped table-bordered text-xl"
+                                                        id="tableEvaluacionProveedor">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>CRITERIOS A EVALUAR</th>
+                                                                <th>
+                                                                    <select id="proveedorEvalucion-1"
+                                                                        class='form-control CriterioEvaluacionEvaluarSelectProveedor'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                    </select>
+                                                                </th>
+                                                                <th>
+                                                                    <select id="proveedorEvalucion-2"
+                                                                        class='form-control CriterioEvaluacionEvaluarSelectProveedor'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                    </select>
+                                                                </th>
+                                                                <th>
+                                                                    <select id="proveedorEvalucion-3"
+                                                                        class='form-control CriterioEvaluacionEvaluarSelectProveedor'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                    </select>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr id='' class=''>
+                                                                <td>Cumple con contrato</td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorEvaluacion-1'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorEvaluacion-2'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorEvaluacion-3'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <!--<td>
+                                                                    <div
+                                                                        style='display:flex;justify-content:center;gap:2rem;'>
+                                                                        <button type='button'
+                                                                            class='fa fa-trash bg-rose-500 py-2 px-2 text-white'
+                                                                            onclick='removeComentarios("+(new Date()).getTime()+")'></button>
+                                                                    </div>
+                                                                </td>-->
+                                                            </tr>
+                                                            <tr id='' class=''>
+                                                                <td>Entrega a tiempo</td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorEvaluacion-1'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorEvaluacion-2'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <select id=''
+                                                                        class='form-control selectProveedorEvaluacion-3'>
+                                                                        <option value='-1'>Selecciona...
+                                                                        </option>
+                                                                        <option value='0'>0
+                                                                        </option>
+                                                                        <option value='1'>1
+                                                                        </option>
+                                                                        <option value='2'>2
+                                                                        </option>
+                                                                        <option value='3'>3
+                                                                        </option>
+                                                                    </select>
+                                                                </td>
+                                                                <!--<td>
+                                                                    <div
+                                                                        style='display:flex;justify-content:center;gap:2rem;'>
+                                                                        <button type='button'
+                                                                            class='fa fa-trash bg-rose-500 py-2 px-2 text-white'
+                                                                            onclick='removeComentarios("+(new Date()).getTime()+")'></button>
+                                                                    </div>
+                                                                </td>-->
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="box-primary">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+
+                                                    <table class="datatable table table-striped table-bordered" id="">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th width="350">TOTAL</th>
+
+                                                                <th id="result_evaluacion_1">
+                                                                    <input type="text" id="totalEvalucionProveedor1"
+                                                                        disabled />
+                                                                </th>
+                                                                <th id="result_evaluacion_2">
+                                                                    <input type="text" id="totalEvalucionProveedor2"
+                                                                        disabled />
+                                                                </th>
+                                                                <th id="result_evaluacion_3">
+                                                                    <input type="text" id="totalEvalucionProveedor3"
+                                                                        disabled />
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-cyan-500 py-4 px-2 text-white"
+                                            onclick="EvaluarEvaluacionProveedor();">Evaluar</button>
+                                        <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                            onclick="add_EvaluarEvaluacionProveedor();">Guardar</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="HistorialRequerimientos">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchRequerimientoshtml">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered text-xl"
+                                                    id="gridRequerimientoshtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroRequerimientos">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div style="display:flex;">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold; width:200px">SOLICITANTE</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_solicitanteReqCompra" type="text"
+                                                        class="form-control" placeholder="Buscar por DNI para Ingresar"
+                                                        value="" />
+                                                    <input type="hidden" id="txt_solicitante_requerimiento" name=""
+                                                        value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 30px;">
+                                                        <button type="button" class="fa fa-search" aria-hidden="true"
+                                                            onclick="searchSolicitanteReqCompra();"></button></span>
+                                                </div>
+                                            </div>
+                                            <div class="input-group" style="margin-top:20px;">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES
+                                                    DEL SOLICITANTE</span>
+                                                <input id="txt_solicitante_nombres_reqCompra" type="text"
+                                                    class="form-control" placeholder="..." value="" disabled />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">APELLIDOS
+                                                    DEL SOLICITANTE</span>
+                                                <input id="txt_solicitante_apellidos_reqCompra" type="text"
+                                                    class="form-control" placeholder="..." value="" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">AREA</span>
+
+                                                <select id="slct_area_requerimiento" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                    DE REQUERIMIENTO</span>
+                                                <input id="txt_fecha_requerimiento_requerimiento" type="date"
+                                                    class="form-control" placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CENTRO
+                                                    DE COSTOS</span>
+                                                <input id="txt_centro_costo_requerimiento" type="text"
+                                                    class="form-control" placeholder="..." value="" />
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRIORIDAD</span>
+                                                <select id="slct_prioridad_requerimiento" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="1">BAJA (Atendidas dentro de los 7 días).
+                                                    </option>
+                                                    <option value="2">MEDIA (Atendidas dentro de las 72).
+
+                                                    </option>
+                                                    <option value="3">ALTA (Atendidas dentro de las 48 hrs. (Suministros
+                                                        críticos)).
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MOTIVO
+                                                    DEL REQUERIMIENTO</span>
+                                                <input id="txt_motivo_requerimiento" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ITEM
+                                                    DE REQUERIMIENTO</span>
+                                                <button class="bg-cyan-500 py-4 px-4 text-white" type="button"
+                                                    onclick="addItemRequerimiento('tableItemRequerimiento');"><i
+                                                        class="fa fa-plus-circle "></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-primary">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+
+                                                    <table class="datatable table table-striped table-bordered text-xl"
+                                                        id="tableItemRequerimiento">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>ITEM</th>
+                                                                <th>CODIGO</th>
+                                                                <th>Nº DE PARTE</th>
+                                                                <th>DESCRIPCION</th>
+                                                                <th>CANTIDAD</th>
+                                                                <th>UNIDAD MEDIDA</th>
+                                                               
+                                                                <th>OBSERVACION</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-2 px-2 text-white"
+                                            onclick="add_Requerimientos();">Guardar</button>
+                                        <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="reqordcompramenuItem">
+
+                            <div class="row">
+                                <div class="col-md-12" id="HistorialOrdenDeCompra">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchOrdenDeComprahtml">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="gridOrdenDeComprahtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="HistorialRequerimientosPersonas">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchRequrimientoPersonalLogisticahtml">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered text-xl"
+                                                    id="gridRequrimientoPersonalLogisticahtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroPersonas">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div style="display:flex;">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold; width:200px">SOLICITANTE</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_solicitante" type="text" class="form-control"
+                                                        placeholder="Buscar por DNI para Ingresar" value="" />
+                                                    <input type="hidden" id="idsolicitanteHidden" name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 30px;">
+                                                        <button type="button" class="fa fa-search" aria-hidden="true"
+                                                            onclick="searchSolicitante();"></button></span>
+                                                </div>
+                                            </div>
+                                            <div class="input-group" style="margin-top:20px;">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES
+                                                    DEL SOLICITANTE</span>
+                                                <input id="txt_solicitante_nombres" type="text" class="form-control"
+                                                    placeholder="..." value="" disabled />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">APELLIDOS
+                                                    DEL SOLICITANTE</span>
+                                                <input id="txt_solicitante_apellidos" type="text" class="form-control"
+                                                    placeholder="..." value="" disabled />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CARGO</span>
+                                                <select id="txt_cargo_personas" class="form-control ">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">N°
+                                                    DE VACANTES</span>
+                                                <input id="txt_n_vacantes_personas" type="number" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <!--<span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">AREA</span>
+                                                <select id="personas_select_area" class="form-control ">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>-->
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                    PLAZO DE CONTRATO</span>
+                                                <select id="personas_select_contrato" class="form-control ">
+                                                    <option value="-1">Selecciona...</option>
+                                                    <option value="0">Permanente</option>
+                                                    <option value="1">Temporal</option>
+                                                    <option value="2">Otro</option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                    MOTIVO DEL PEDIDO</span>
+                                                <select id="personas_select_motivo" class="form-control">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"
+                                            style="margin-bottom:5px;margin-top:10px;margin-bottom:10px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="font-weight:bold;text-align:left;">CONDICIONES DEL
+                                                    PUESTO</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">LUGAR
+                                                    DEL TRABAJO</span>
+                                                <select id="personas_select_lugar" class="form-control selectpicker">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DURACIÓN
+                                                    ESTIMADA</span>
+
+                                                <input id="personas_select_duracion" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">(meses)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                    INCORPORACIÓN</span>
+                                                <input id="txt_fecha_g_personas" type="date" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">REMUNERACIÓN
+                                                    A OFRECER</span>
+                                                <input id="personas_remuneracion" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">OBSERVACIONES</span>
+                                                <button class="bg-cyan-500 py-4 px-4 text-white" type="button"
+                                                    onclick="addObservacionespersonas();"><i
+                                                        class="fa fa-plus-circle "></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-primary">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+                                                    <table class="datatable table table-striped table-bordered text-xl"
+                                                        id="table_observaciones_personas">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>Descripcion</th>
+                                                                <th>Ope</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="Basic example"
+                                            style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                            <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                                onclick="insert_registro_personas();">Guardar</button>
+                                            <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-                  
                 </div>
-                <div class="col-md-4">
-                  <br>
-                  <strong><i class="fa fa-server margin-r-5"></i> Detalles del Almancen</strong>
-                  <div class="box-body">
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        
-                        
-                      </div>
-                    </div>
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 81px;">Estado</span>
-                        <select id="cbo01_Estado" class="form-control selectpicker">
-                          <option value="Activo">Activo</option>
-                          <option value="Inactivo">Inactivo</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Numero de Activo" style="background:#EEEEEE;font-weight:bold;">Almacen principal</span>
-                        <input id="txt01_NroAlmacen" type="text" class="form-control" placeholder="..." readonly="readonly" value="001"/>
-                      </div>
-                    </div>
-                    
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Numero de Activo" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripción</span>
-                        <input id="txt01_Descripción" type="text" class="form-control" placeholder="..." value="ALMACEN PRINCIPAL"/>
-                      </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 93px;">Sede</span>
-                        <select id="cbo01_Sede" class="form-control selectpicker">
-                          
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Numero de Activo" style="background:#EEEEEE;font-weight:bold;padding-right: 67px;">Dirección</span>
-                        <input id="txt01_Direccion" type="text" class="form-control" placeholder="..." value="AV. CANTO GRANDE S/N"/>
-                      </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Numero de Activo" style="background:#EEEEEE;font-weight:bold;padding-right: 57px;">Referencia</span>
-                        <input id="txt01_Referencia" type="text" class="form-control" placeholder="..." value="PARADERO 11"/>
-                      </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 43px;">Responsable</span>
-                        <select id="cbo01_Responsable" class="form-control selectpicker">
-                          
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Numero de Activo" style="background:#EEEEEE;font-weight:bold;padding-right: 23px">Telefono-Anexo</span>
-                        <input id="txt01_Telefono" type="text" class="form-control" placeholder="..." value="PARADERO 11"/>
-                      </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 99px;">Pais</span>
-                        <select id="cbo01_Pais" class="form-control selectpicker">
-                          
-                        </select>
-                      </div>
-                    </div>
-
-              
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 31px;">Departamento</span>
-                        <select id="cbo01_Departamento" class="form-control selectpicker">
-                          
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 67px;">Provincia</span>
-                        <select id="cbo01_Provincia" class="form-control selectpicker">
-                          
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 79px;">Distrito</span>
-                        <select id="cbo01_Distrito" class="form-control selectpicker">
-                          
-                        </select>
-                      </div>
-                    </div>
-
-
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Solicitar por Fecha" style="background:#EEEEEE;font-weight:bold; padding-right:87px;">Fecha</span>
-                        <input id="txt01_Fecha" type="text" class="form-control" style="width:115px;" value="12-12-21"/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-3">
-                  <button id="btn01_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px" onclick="javascript:app01Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn01_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app01Boton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                  
-                  <button id="btn01_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app01Boton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn01_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;" onclick="javascript:app01Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn01_Delete" type="button" class="btn btn-danger btn-xs" style="margin-top:5px" onclick="javascript:app01Boton_delete();"><i class="fa fa-trash"></i> Eliminar</button>
-                </div>
-              </div>
             </div>
+        </form>
+    </div>
+</section>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" id="ModalOpenRequerimiento">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
 
-            <div class="tab-pane" id="datos02">
-              <div class="box-body">
-                <div class="pull-right">
-                  
-                  <button id="btn02_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app02Boton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar gc</button>
-                  <button id="btn02_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app02Boton_ins();"><i class="fa fa-flash"></i> Guardar gc</button>
-                  <button id="btn02_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app02Boton_update();"><i class="fa fa-flash"></i> Actualizar gc </button>
-                  <!-- <button id="div02_Search" type="button" class="btn btn-primary btn-xs" style="margin-top:5px" onclick="javascript:app02Boton_new();"><i class="fa fa-plus"></i> Buscar</button> -->
-                  <button id="btn02_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px" onclick="javascript:app02Boton_new();"><i class="fa fa-plus"></i> Nuevo gc</button>
-
-                  <button id="btn021_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app021Boton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar p</button>
-                  <button id="btn021_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app021Boton_ins();"><i class="fa fa-flash"></i> Guardar p</button>
-                  <button id="btn021_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app021Boton_update();"><i class="fa fa-flash"></i> Actualizar p</button>
-                  <!-- <button id="div02_Search" type="button" class="btn btn-primary btn-xs" style="margin-top:5px" onclick="javascript:app02Boton_new();"><i class="fa fa-plus"></i> Buscar</button> -->
-                  <button id="btn021_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app021Boton_new();"><i class="fa fa-plus"></i> Nuevo p</button>
-                </div>
-              </div>
-
-              <div class="row" id="grid02">
-                <div class="col-md-3">
-                  <div class="list-group">
-                    <a href="#" id="link02_groupClass" class="list-group-item list-group-item-action active" aria-current="true" onclick="app02Group_class();">
-                    <i class="fa fa-folder-open margin-r-5"></i>Group class
-                    </a>
-                    <a href="#" id="link02_group" class="list-group-item list-group-item-action" onclick="app02Group();"><i class="fa fa-folder margin-r-5" ></i>Group</a>
-                  </div>
-                </div>
-
-                <div class="col-md-9" id="grid02_groupClass">
-                  <div class="row" id="div02_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt022_Buscar_clase" type="text" class="form-control" oninput="javascript:app02Boton_Search();" placeholder="Ingrese numero de group class"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd02Datos">
-                          <thead>
-                            <tr>
-                              <th style="width:110px;">Operaciones</th>
-                              <th style="width:150px;">Group class</th>
-                              <th>Descripción </th>
-                            </tr>
-                          </thead>
-                          <tbody id="grd022DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="box-body col-md-9" id="edit02" style="display:none;padding-left:50px;padding-right:50px;">
-                  
-                  
-                  <div class="row">
-                    <strong><i class="fa fa-user margin-r-5"></i> Detalles de Group Class</strong>
-                    <br><br>
-                    <div class="col-md-3" style="margin-right:25px;">
-                      <div class="form-group" style="margin-bottom:5px;">
+                    <div class="form-group" style="margin-bottom:5px;">
                         <div class="input-group">
-                          <span class="input-group-addon" title="Numero de Activo" style="background:#EEEEEE;font-weight:bold;">Nro Group</span>
-                          <!-- <input id="txt02_NroActivo" type="text" class="form-control" placeholder="..." /> -->
-                          <input id="txt022_id" type="hidden" class="form-control" placeholder="..." readonly="readonly" />
-                          <input class="form-control" list="grupoOptions" id="txt022_NroGrupo" placeholder="Buscar group...">
-                          <datalist id="grupoOptions">
-                            <option value="11">
-                            <option value="01">
-                            <option value="21">
-                            <option value="24">
-                            <option value="32">
-                          </datalist>
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nº DE
+                                REQUERIMIENTO</span>
+
+                            <input id="txt_n_requerimiento_modal" type="text" class="form-control" value="" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">AREA</span>
+
+                            <input id="txt_area_requerimiento_modal" type="text" class="form-control" value=""
+                                disabled />
                         </div>
-                      </div>
                     </div>
-                    
-                    <div class="col-md-3" style="margin-right:25px;">
-                      <div class="form-group" style="margin-bottom:5px;">
+                    <div class="form-group" style="margin-bottom:5px;">
                         <div class="input-group">
-                          <span class="input-group-addon" title="Numero de Activo" style="background:#EEEEEE;font-weight:bold;">Nro Group Class</span>
-                          <input id="txt022_NroClase" type="text" class="form-control" placeholder="..." />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">SOLICITANTE</span>
+
+                            <input id="txt_solicitante_requerimiento_modal" type="text" class="form-control"
+                                value="dni.pdf" disabled />
                         </div>
-                      </div>
                     </div>
-                    <div class="col-md-5">
-                      <div class="form-group" style="margin-bottom:5px;">
+                    <div class="form-group" style="margin-bottom:5px;">
                         <div class="input-group">
-                          <span class="input-group-addon" title="Numero de Activo" style="background:#EEEEEE;font-weight:bold;">Descripción</span>
-                          <input id="txt022_Descripcion" type="text" class="form-control" placeholder="..." />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CENTRO DE COSTO</span>
+
+                            <input id="txt_centro_costo_requerimiento_modal" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA DE
+                                REQUERIMIENTO</span>
+
+                            <input id="txt_fecha_requerimiento_modal" type="text" class="form-control" value="dni.pdf"
+                                disabled />
                         </div>
-                      </div>
                     </div>
-                  </div>
-
-                  
- 
-                </div>
-
-                <div class="col-md-9" id="grid02_group" style="display:none;">
-                  <div class="row" id="div02_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt021_Buscar_grupo" type="text" class="form-control" oninput="javascript:app021Boton_Search();" placeholder="Ingrese numero de group"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd02Datos">
-                          <thead>
-                            <tr>
-                              <th style="width:110px;">Operaciones</th>
-                              <th style="width:150px;">Group class</th>
-                              <th>Descripción </th>
-                            </tr>
-                          </thead>
-                          <tbody id="grd021DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="box-body col-md-9" id="edit021" style="display:none; padding-left:50px;padding-right:50px;">
-                  <div class="row">
-                    <strong><i class="fa fa-user margin-r-5"></i> Detalles de Group</strong>
-                    <br><br>
-                    <div class="col-md-3" style="margin-right:25px;">
-                      <div class="form-group" style="margin-bottom:5px;">
+                    <div class="form-group" style="margin-bottom:5px;">
                         <div class="input-group">
-                          <span class="input-group-addon" title="Numero de Activo" style="background:#EEEEEE;font-weight:bold;">Nro Group</span>
-                          <input id="txt02_id" type="hidden" class="form-control" placeholder="..." readonly="readonly" />
-                          <input id="txt02_NroGrupo" type="text" class="form-control" placeholder="..." />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRIORIDAD</span>
+
+                            <input id="txt_prioridad_requerimiento_modal" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MOTIVO</span>
+
+                            <input id="txt_motivo_requerimiento_modal" type="text" class="form-control" value="dni.pdf"
+                                disabled />
                         </div>
-                      </div>
                     </div>
-                  
-          
-                    <div class="col-md-8">
-                      <div class="form-group" style="margin-bottom:5px;">
+                    <div class="form-group" style="margin-bottom:5px;">
                         <div class="input-group">
-                          <span class="input-group-addon" title="Numero de Activo" style="background:#EEEEEE;font-weight:bold;">Descripción</span>
-                          <input id="txt02_Descripcion" type="text" class="form-control" placeholder="..." />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ESTADO</span>
+                            <select id="txt_estado_requerimiento_modal" class="form-control ">
+                                <option value="-1">Selecciona...
+                                </option>
+                                <option value="1">PENDIENTE
+                                </option>
+                                <option value="8">EN EVALUACION
+                                </option>
+                                <option value="12">APROBADA
+                                </option>
+                            </select>
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIEMPO DE
+                                ATENCION</span>
+
+                            <input id="txt_tiempo_atencion_requerimiento_modal" type="text" class="form-control"
+                                value="dni.pdf" disabled />
                         </div>
-                      </div>
                     </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-
-            <div class="tab-pane" id="datos03">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn03_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;;" onclick="javascript:app03Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn03_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app03Boton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn03_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app03Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn03_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app03Boton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                  
-                </div>
-              </div>
-
-              <div class="row" id="grid03">
-                <div class="col-md-12">
-                
-                  <div class="row" id="div03_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt03_Buscar" type="text" class="form-control" oninput="javascript:app03Boton_Search();" placeholder="Ingrese group class del item"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>  
-
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd03Datos">
-                          <thead>
-                            <tr>
-                              <th style="width:110px;">Operaciones</th>
-                              <th style="width:50;">Cod.</th>
-                              <th style="width:50;">Group Class</th>
-                              <th>Prov.</th>
-                              <th>N° Parte</th>
-                              <th>Nombre</th>
-                              <th>Descripcion</th>
-                              <th style="width:50;">Unidad</th>
-                              <th style="width:50;">stock</th>
-                              <th style="width:50;">precio</th>
-                            </tr>
-                          </thead>
-                          <tbody id="grd03DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <div class="box-body" id="edit03" style="display:none;">
-        
-                <div class="row">
-                  <div class="col-md-6">
-                  <strong><i class="fa fa-user margin-r-5"></i> Detalles del item</strong>
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 83px;">Código</span>
-                              <input id="txt03_id"  class="form-control" placeholder="..." readonly="readonly"/>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Group Class</span>
-                          <input class="form-control" list="grupoOptionsClase" id="cbo03_group_class" placeholder="Buscar group class...">
-                              <datalist id="grupoOptionsClase">
-                                <option value="11">
-                                <option value="01">
-                                <option value="21">
-                                <option value="24">
-                                <option value="32">
-                              </datalist>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 99px;">ROP</span>
-                              <input id="txt03_ROP" type="text" class="form-control" placeholder="..."/>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;"> 
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 98px;">ROQ</span>
-                                <input id="txt03_ROQ" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 70px;">UOI/UOP</span>
-                              <select id="cbo03_UOI" class="form-control selectpicker">
-                                <option value="EA">EA</option>
-                                <option value="EA">EA</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 53px;">Num. Parte</span>
-                                <input id="txt03_num_parte" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 73px;">Moneda</span>
-                              <select id="cbo03_moneda" class="form-control selectpicker">
-          
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 86px;">Precio</span>
-                                <input id="txt03_precio" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                     
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 59px;">Proveedor</span>
-                          <input class="form-control" list="grupoOptionsProveedor" id="cbo03_proveedor" placeholder="Buscar proveedor...">
-                              <datalist id="grupoOptionsProveedor">
-                                <option value="11">
-                                <option value="01">
-                                <option value="21">
-                                <option value="24">
-                                <option value="32">
-                              </datalist>
-                        </div>
-                      </div>
-
-                      
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 74px;">Nombre</span>
-                          <input id="txt03_nombre" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;">Nombre Coloquial</span>
-                          <input id="txt03_nombre_col" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                
-                  <div class="col-md-6" >
-                    <strong><i class="fa fa-user  margin-r-5"></i> Stock del item</strong>
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 60px;">Stock Cod.</span>
-                              <input id="txt03_stock_cod" type="text" class="form-control" placeholder="..."/>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 48px;">Stock Num.</span>
-                                <input id="txt03_stock_num" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 54px;">Stock Clase</span>
-                              <select id="cbo03_stock_clase" class="form-control selectpicker">
-                                
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 55px;">Stock Tipo</span>
-                                <select id="cbo03_stock_tipo" class="form-control selectpicker">
-                                  
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 60px;">Stock min.</span>
-                              <input id="txt03_stock_min" type="text" class="form-control" placeholder="..."/>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 86px;">Stock</span>
-                                <input id="txt03_stock" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-                    <strong><i class="fa fa-user"></i> APL del item</strong>
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 70px;">APL Tipo</span>
-                              <select id="cbo03_apl_tipo" class="form-control selectpicker">
-                                  <option value="G">G - Equipo identificador de Grupo</option>
-                                  <option value="E">E - Referencia de Equipo</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 29px;">APL Referencia</span>
-                                <input id="txt03_apl_ref" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 41px;">APL Cantidad</span>
-                              <input id="txt03_apl_cant" type="text" class="form-control" placeholder="..."/>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;">Cod. Componente</span>
-                                <input id="txt03_cod_comp" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-
-                    <strong><i class="fa fa-user"></i> Descripción del item</strong>
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <textarea class="form-control" id="area03_descripcion" rows="4" cols="200"></textarea>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-
-            <div class="tab-pane" id="datos04">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn04_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;;" onclick="javascript:app04Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn04_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app04Boton_cancel();"><i class="fa fa-angle-double-left"></i> Regresar</button>
-                 <!--  <button id="btn04_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app04Boton_update();"><i class="fa fa-flash"></i> Actualizar</button> -->
-                  <button id="btn04_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app04Boton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                </div>
-              </div>
-              <div class="row" id="grid04">
-                <div class="col-md-12">
-                  <div class="row" id="div04_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt04_Buscar" type="text" class="form-control" oninput="javascript:app04Boton_Search();" placeholder="Ingrese codigo de retiro"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>  
-
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd05Datos">
-                          <thead>
-                            <tr>
-                              <th style="width:110px;">Operaciones</th>
-                              <th>Codigo</th>
-                              <th>Fecha</th>
-                              <th>Usuario</th>
-                              <th>Tarea</th>
-                              <th>Estado</th>
-                            </tr>
-                          </thead>
-                          <tbody id="grd04DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <!-- fin -->
-              <div class="box-body" id="edit04" style="display:none;">
-               
-                <div class="row">
-                  <div class="col-md-12">
-                  <strong><i class="fa fa-user margin-r-5"></i> Detalles del retiro</strong>
-                    <div class="box-body">
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          
-                          <input id="txt07_id" type="hidden" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-                      
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 44px;">Usuario</span>
-                          <input class="form-control" list="grupoOptionsUsu" id="txt04_Usuario" placeholder="Buscar usuario...">
-                          <datalist id="grupoOptionsUsu">
-                            <option value="11">
-                            <option value="01">
-                            <option value="21">
-                            <option value="24">
-                            <option value="32">
-                          </datalist>
-                          
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-11">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 58px;">Tarea</span>
-                              <input class="form-control" list="grupoOptionsTarea" id="txt04_Tarea" placeholder="Buscar tarea...">
-                              <datalist id="grupoOptionsTarea">
-                                <option value="11">
-                                <option value="01">
-                                <option value="21">
-                                <option value="24">
-                                <option value="32">
-                              </datalist>
-                              
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-1">
-                          <div style="padding-left:5px;">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <button type="button" class="btn btn-success btn-block" id="button04_addTarea" onclick="javascript:app04Boton_addTarea();">Agregar</button>
-                            <!-- <button type="button" class="btn btn-primary" onclick="javascript:app07Boton_newHerra();">Nuevo</button> -->
-                          </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- <div class="row">
-                        <div class="col-md-10">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;">Herramienta</span>
-                              <input class="form-control" list="grupoOptionsHerraRet" id="txt04_Herramienta" placeholder="Buscar herramienta...">
-                              <datalist id="grupoOptionsHerraRet">
-                                <option value="11">
-                                <option value="01">
-                                <option value="21">
-                                <option value="24">
-                                <option value="32">
-                              </datalist>
-                              
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-2" >
-                          <div style="padding-left:3px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <button type="button" class="btn btn-success" id="button04_addHerra" onclick="javascript:app04Boton_addHerra();">Agregar</button>
-                              <button type="button" class="btn btn-primary" id="button04_newHerra" onclick="javascript:app04Boton_newHerra();">Nuevo</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div> -->
-
- 
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <strong><i class="fa fa-user margin-r-5"></i> Herramientas de la tarea</strong>
-                    <br><br>
-                    <div class="box box-primary">
-                      <div class="box-header no-padding ">
-                        <div class="box-body table-responsive no-padding">
-                          <table class="table table-hover" id="grd03Datos">
-                            <thead>
-                              <tr>
-                                <th>Nombre</th>
-                                <th style="width:140px;">Cantidad disponible</th>
-                                <th style="width:140px;">Cantidad a retirar</th>
-                                <th style="width:340px;">Observaciones</th>
-                              </tr>
-                            </thead>
-                            <tbody id="grd04TareaDatosBody">
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- <div class="col-md-12" style="margin-top:15px;">
-                    <strong><i class="fa fa-user margin-r-5"></i> Nuevas herramientas</strong>
-                    <br><br>
-                    <div class="box box-primary">
-                      <div class="box-header no-padding ">
-                        <div class="box-body table-responsive no-padding">
-                          <table class="table table-hover" id="grd03Datos">
-                            <thead>
-                              <tr>
-                                <th>Nombre</th>
-                                <th style="width:150px;">Cantidad a asignar</th>
-                                <th style="width:50px;">Eliminar</th>
-                              </tr>
-                            </thead>
-                            <tbody id="grd04HerraDatosBody">
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div> -->
-                </div>
-                
-              </div>
-            </div>
-            <div class="tab-pane" id="datos05">
-              <div class="box-body">
-                <div class="pull-right">
-                <button id="btn04_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;" onclick="javascript:app05Boton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn04_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px;" onclick="javascript:app05Boton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                </div>
-              </div>
-              <div class="box-body">
-                <div class="row">
-                  
-                  <div class="col-md-12" id="edit021" style="padding-left:50px;padding-right:50px;">
-                    <div class="row">
-                      <strong><i class="fa fa-user margin-r-5"></i> Devolución</strong>
-                      <br><br>
-                      <div class="row" id="div04_Search">
-                        <div class="col-md-4">
-                          <div class="input-group" style="margin-bottom:20px;">
-                            <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                            <input id="txt05_Buscar" type="text" class="form-control" oninput="javascript:app05Boton_Search();" placeholder="Ingrese codigo de retiro"/>
-                            <!-- <span class="input-group-btn">
-                              <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                            </span> -->
-                          </div>
-                        </div>
-                      </div>
-                      <br> 
-                      <div class="box box-primary">
+                    <div class="box-primary">
                         <div class="box-header no-padding">
-                          <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover" id="grd05Datos">
-                              <thead>
-                                <tr>
-                                  <th style="width:110px;">Operaciones</th>
-                                  <th>Codigo</th>
-                                  <th>Fecha</th>
-                                  <th>Usuario</th>
-                                  <th>Tarea</th>
-                                  <th>Estado</th>
-                                </tr>
-                              </thead>
-                              <tbody id="grd05DatosBody">
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                      <br>
-                      <strong><i class="fa fa-user margin-r-5"></i> Detalles de la Devolución</strong>
-                      <br><br>
-                     
-                        
-                        
-                      <div class="row">
-                        <div class="col-md-6">
-                          <p><label for="">Codigo Entrega: </label><span id="label05_codigo"></span></p>
-                          <p><label for="">Almacenero: </label><span id="label05_almacenero"></span></p>
-                          <p><label for="">Usuario: </label><span id="label05_usuario"></span></p>
-                        </div>
-                        <div class="col-md-6">
-                          <p><label for="">Tarea: </label><span id="label05_tarea"></span></p>
-                          <p><label for="">Fecha de Retiro: </label><span id="label05_fecha"></span></p>
-                          <p><label for="">estado: </label><span id="label05_estado"></span></p>
-                        </div>
-                      </div> 
-                    
-                      <br><br>
-                      <div class="box box-primary">
-                        <div class="box-header no-padding">
-                          <div class="box-body table-responsive no-padding">
-                            <table class="table table-hover" id="grd05Datos">
-                              <thead>
-                                <tr>
-                                  <th style= "width:600px;">Herramienta</th>
-                                  <th style= "width:170px;">Cant. Retirada</th>
-                                  <th>Obser. Retiro</th>
-                                  <th style= "width:170px;">Cant. Devuelta</th>
-                                  <th>Obser. Devolucion</th>
-                                </tr>
-                              </thead>
-                              <tbody id="grd05DatosDetalleBody">
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div class="tab-pane" id="datos06">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn06_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;;" onclick="javascript:app06Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn06_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app06Boton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn06_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app06Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  
-                </div>
-              </div>
+                            <div class="box-body table-responsive no-padding">
 
-              <div class="row" id="grid06">
-                <div class="col-md-12">
-                  <div class="row" id="div06_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt06_Buscar" type="text" class="form-control" oninput="javascript:app06Boton_Search();" placeholder="Ingrese nombre de herramienta"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>  
+                                <table class="datatable table table-striped table-bordered"
+                                    id="tableItemRequerimientoModalShow">
+                                    <thead>
+                                        <tr>
 
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd06Datos">
-                          <thead>
-                            <tr>
-                              <th style="width:110px;">Operaciones</th>
-                              <th>Nombre</th>
-                              <th style="width:50;">Consumible</th>
-                              <th style="width:50;">cant. total</th>
-                              <th style="width:50;">cant. disponible</th>
-                            
-                            </tr>
-                          </thead>
-                          <tbody id="grd06DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
+                                            <th>ITEM</th>
+                                            <th>CODIGO</th>
+                                            <th>Nº DE PARTE</th>
+                                            <th>DESCRIPCION</th>
+                                            <th>CANTIDAD</th>
+                                            <th>UNIDAD MEDIDA</th>
+                                            <th>PRIORIDAD</th>
+                                            <th>OBSERVACION</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                </div>
-              </div>
-              <!-- fin -->
-            </div>
-            <div class="tab-pane" id="datos07">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn07_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;;" onclick="javascript:app07Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn07_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app07Boton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn07_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app07Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn07_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app07Boton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                </div>
-              </div>
-
-              <div class="row" id="grid07">
-                <div class="col-md-12">
-                  <div class="row" id="div07_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt07_Buscar" type="text" class="form-control" oninput="javascript:app07Boton_Search();" placeholder="Ingrese codigo de tarea"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>  
-
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd06Datos">
-                          <thead>
-                            <tr>
-                              <th style="width:110px;">Operaciones</th>
-                              <th style="width:110px;">Código</th>
-                              <th>Nombre</th>
-                              <th>Descripcion</th>
-         
-                            </tr>
-                          </thead>
-                          <tbody id="grd07DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <!-- fin -->
-              <div class="box-body" id="edit07" style="display:none;">
-                <strong><i class="fa fa-user margin-r-5"></i> Detalles de Tarea</strong>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="box-body">
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          
-                          <input id="txt07_id" type="hidden" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-                      
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 41px;">Nombre</span>
-                          <input id="txt07_Nombre" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-10">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;">Herramienta</span>
-                              <input class="form-control" list="grupoOptionsHerra" id="txt07_Herramienta" placeholder="Buscar herramienta(11), respuesto(12), material(13)...">
-                              <datalist id="grupoOptionsHerra">
-                                <option value="11">
-                                <option value="01">
-                                <option value="21">
-                                <option value="24">
-                                <option value="32">
-                              </datalist>
-                              
+                                    </tbody>
+                                </table>
                             </div>
-                          </div>
                         </div>
-                        <div class="col-md-1 text-right">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <button type="button" class="btn btn-success btn-block" onclick="javascript:app07Boton_addHerra();">Agregar</button>
-                              <!-- <button type="button" class="btn btn-primary btn-block" onclick="javascript:app07Boton_newHerra();">Nuevo</button> -->
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-1 text-right" >
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                            <!--  <button type="button" class="btn btn-success btn-block" onclick="javascript:app07Boton_addHerra();">Agregar</button> -->
-                              <button type="button" class="btn btn-primary btn-block" onclick="javascript:app07Boton_newHerra();">Nuevo</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      
-                      <br>
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <strong><i class="fa fa-user margin-r-5"></i> Descripción de Tarea</strong>
-                          <textarea class="form-control" id="area07_descripcion" rows="5" cols="400"></textarea>
-                        </div>
-                      </div>
- 
                     </div>
-                  </div>
-                  <div class="col-md-12" style="margin-top:15px;">
-                    <div class="box box-primary">
-                      <div class="box-header no-padding ">
-                        <div class="box-body table-responsive no-padding">
-                          <table class="table table-hover" id="grd03Datos">
-                            <thead>
-                              <tr>
-                                <th>Nombre</th>
-                                <th style="width:150px;">Cantidad a asignar</th>
-                                <th style="width:50px;">Eliminar</th>
-                              </tr>
-                            </thead>
-                            <tbody id="grd07HerraDatosBody">
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-                
-              </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-emerald-500 py-4 px-2 text-white" id="btn-requeriment-save"
+                        onclick="insert_modal_orden_compra();">Guardar</button>
+                    <button type="button" class="bg-stone-900 py-4 px-2 text-white" data-dismiss="modal"
+                        onclick="$('#ModalOpenRequerimiento').modal('hide')">Cerrar</button>
+                </div>
             </div>
-            <div class="tab-pane" id="datos08">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn08_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;;" onclick="javascript:app08Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn08_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn08_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn08_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app08Boton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                </div>
-              </div>
-
-              <div class="row" id="grid08">
-                <div class="col-md-12">
-                  <div class="row" id="div08_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt08_Buscar" type="text" class="form-control" oninput="javascript:app08Boton_Search();" placeholder="Ingrese numero de usuario"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>  
-
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd08Datos">
-                          <thead>
-                            <tr>
-                              <th style="width:110px;">Operaciones</th>
-                              <th style="width:110px;">Código</th>
-                              <th>Nombre</th>
-                              <th style="width:250px;">DNI</th>
-                              <th style="width:250px;">Telefono</th>
-                              <th style="width:250px;">Correo</th>
-                              <th style="width:250px;">Usuario</th>
-                              
-         
-                            </tr>
-                          </thead>
-                          <tbody id="grd08DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <!-- fin -->
-              <div class="box-body" id="edit08" style="display:none;">
-                <strong><i class="fa fa-user margin-r-5"></i> Detalles del Usuario</strong>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="box-body">
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          
-                          <input id="txt08_id" type="hidden" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 48px;">DNI</span>
-                          <input id="txt08_DNI" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-                      
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;">Nombres</span>
-                          <input id="txt08_Nombre" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 13px;">Apellidos</span>
-                          <input id="txt08_Apellidos" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 16px;">Telefono</span>
-                          <input id="txt08_Telefono" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-                      
-            
-                    </div>
-                  </div>
-                  <div class="col-md-6" style="margin-top:5px;">
-                    <div class="box-body">
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 43px;">Correo</span>
-                          <input id="txt08_Correo" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 65px;">Rol</span>
-                          <select id="cbo08_Rol" class="form-control selectpicker">
-                            
-                          </select>
-                        </div>
-                      </div>
-                      
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 36px;">Usuario</span>
-                          <input id="txt08_Usuario" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;">Contraseña</span>
-                          <input id="txt08_Contrasena" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-            </div>
-            <div class="tab-pane" id="datos09">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn09_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn09S_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app09SBoton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn09_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn09S_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app09SBoton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                  <button id="btn09Q_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app09QBoton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  
-                  <button id="btn09Q_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app09QBoton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                </div>
-              </div>
-
-              <div class="row" id="grid09">
-                <div class="col-md-12">
-                  <div class="row" id="div08_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt09_Buscar" type="text" class="form-control" oninput="javascript:app09Boton_Search();" placeholder="Ingrese codigo de item"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>  
-
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd08Datos">
-                          <thead>
-                            <tr>
-                            
-                              <th style="width:110px;">Operaciones</th>
-                              <th style="width:50;">Cod.</th>
-                              <th style="width:50;">Group Class</th>
-                              <th>Cod.Prov.</th>
-                              <th>N° Parte</th>
-                              <th>Item</th>
-                              <th>Descripcion</th>
-                              <th style="width:50;">Unidad</th>
-                              <th style="width:50;">Stock</th>
-                              <th style="width:50;">Precio</th>
-         
-                            </tr>
-                          </thead>
-                          <tbody id="grd09DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <!-- fin -->
-              <div class="box-body" id="edit09_Q" style="display:none;">
-                
-                <div class="row">
-                
-                  <div class="col-md-12">
-                  <strong><i class="fa fa-user margin-r-5"></i> Datos RFQ</strong>
-                    <div class="box-body">
-                    
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          
-                          <input id="txt09_id" type="hidden" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 48px;">Req. Cod</span>
-                          <input id="txt09_Numero" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 25px;">Fecha Cierre</span>
-                          <input id="txt09_Fecha" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                    </div>
-                    <strong><i class="fa fa-user margin-r-5"></i> Descripción</strong>
-                      <div class="box-body">
-                        <div class="form-group" style="margin-bottom:5px;">
-                          <div class="input-group">
-                            <textarea class="form-control" id="area09_descripcion" rows="4" cols="400" placeholder="Sin descripción"></textarea>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
-                  
-                </div>
-  
-              </div>
-
-              <div class="box-body" id="edit09_S" style="display:none;">
-                <strong><i class="fa fa-user margin-r-5"></i> Datos Proveedores</strong>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="box-body">
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          
-                          <input id="txt0Q_id" type="hidden" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 48px;">Req. Cod</span>
-                          <input id="txt09Q_Numero" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-11">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 37px;">Proveedor</span>
-                              <input class="form-control" list="grupoOptionsProveedor9S" id="cbo09S_proveedor" placeholder="Buscar proveedor...">
-                                  <datalist id="grupoOptionsProveedor9S">
-                                    <option value="11">
-                                    <option value="01">
-                                    <option value="21">
-                                    <option value="24">
-                                    <option value="32">
-                                  </datalist>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-1">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <button type="button" class="btn btn-success btn-block" onclick="javascript:app09SBoton_addProv();">Agregar</button>
-                              <!-- <button type="button" class="btn btn-primary btn-block" onclick="javascript:app07Boton_newHerra();">Nuevo</button> -->
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="box box-primary">
-                      <div class="box-header no-padding">
-                        <div class="box-body table-responsive no-padding">
-                          <table class="table table-hover" id="grd08Datos">
-                            <thead>
-                              <tr>     
-                                <th style="width:110px;">Codigo</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-          
-                              </tr>
-                            </thead>
-                            <tbody id="grd09SDatosProvBody">
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-  
-              </div>
-
-
-            </div>
-            
-            <div class="tab-pane" id="datos10">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn09_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn10S_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app10SBoton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn10_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn10S_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app10SBoton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                  <button id="btn10Q_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app10QBoton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  
-                  <button id="btn10Q_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app10QBoton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                </div>
-              </div>
-
-              <div class="row" id="grid10">
-                <div class="col-md-12">
-                  <div class="row" id="div08_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt10_Buscar" type="text" class="form-control" oninput="javascript:app10Boton_Search();" placeholder="Ingrese codigo de cotizacion"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>  
-
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd08Datos">
-                          <thead>
-                            <tr>
-                              <th style="width:110px;">Operaciones</th>
-                              <th style="width:100;">Cod.RFQ</th>
-                              <th>Descipción</th>
-                              <th >Fecha Cierre</th>
-                              <th style="width:100;">Cod. Item</th>
-                              <th>Item</th>
-                              <th style="width:80;">Stock</th>
-                              <th style="width:80;">Unidad</th>
-                              <th style="width:80;">Precio</th>
-                              <th>Item Descipción</th>
-                              
-         
-                            </tr>
-                          </thead>
-                          <tbody id="grd10DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <!-- fin -->
-              
-
-              <div class="box-body" id="edit10_S" style="display:none;">
-                <strong><i class="fa fa-user margin-r-5"></i> Datos Proveedores</strong>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="box-body">
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          
-                          <input id="txt10Q_id" type="hidden" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 48px;">Req. Cod</span>
-                          <input id="txt10Q_Numero" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-11">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 37px;">Proveedor</span>
-                              <input class="form-control" list="grupoOptionsProveedor10S" id="cbo10S_proveedor" placeholder="Buscar proveedor...">
-                                  <datalist id="grupoOptionsProveedor10S">
-                                    <option value="11">
-                                    <option value="01">
-                                    <option value="21">
-                                    <option value="24">
-                                    <option value="32">
-                                  </datalist>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-1">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <button type="button" class="btn btn-success btn-block" onclick="javascript:app10SBoton_addProv();">Agregar</button>
-                              <!-- <button type="button" class="btn btn-primary btn-block" onclick="javascript:app07Boton_newHerra();">Nuevo</button> -->
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="box box-primary">
-                      <div class="box-header no-padding">
-                        <div class="box-body table-responsive no-padding">
-                          <table class="table table-hover" id="grd08Datos">
-                            <thead>
-                              <tr>     
-                                <th style="width:110px;">Codigo</th>
-                                <th>Nombre</th>
-                                <th>Descripción</th>
-          
-                              </tr>
-                            </thead>
-                            <tbody id="grd10SDatosProvBody">
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-  
-              </div>
-
-            </div>
-
-            <div class="tab-pane" id="datos11">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn09_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn09S_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app09SBoton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn09_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <!-- <button id="btn09S_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px;" onclick="javascript:app11Boton_save();"><i class="fa fa-flash"></i> Guardar</button> -->
-                  <button id="btn09Q_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app09QBoton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  
-                  <button id="btn09Q_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app09QBoton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                </div>
-              </div>
-
-              
-              <div class="box-body" id="edit11" >
-                <strong><i class="fa fa-user margin-r-5"></i>Cotización del proveedor</strong>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="box-body">
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 37px;">Contización</span>
-                        <input class="form-control" list="grupoOptionsCotizacion" id="cbo11_cotizacion" placeholder="Buscar Cotización...">
-                            <datalist id="grupoOptionsCotizacion">
-                              <option value="11">
-                              <option value="01">
-                              <option value="21">
-                              <option value="24">
-                              <option value="32">
-                            </datalist>
-                      </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom:5px;">
-                      <div class="input-group">
-                        <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 44px;">Proveedor</span>
-                        <input class="form-control" list="grupoOptionsProveedor11" id="cbo11_proveedor" placeholder="Buscar proveedor...">
-                            <datalist id="grupoOptionsProveedor11">
-                              <option value="11">
-                              <option value="01">
-                              <option value="21">
-                              <option value="24">
-                              <option value="32">
-                            </datalist>
-                      </div>
-                    </div>
-                    <div class="form-group" style="margin-bottom:5px;">
-                              <button type="button" class="btn btn-success" onclick="javascript:app11Boton_searchCot();">Buscar</button>
-                              <!-- <button type="button" class="btn btn-primary btn-block" onclick="javascript:app07Boton_newHerra();">Nuevo</button> -->
-                            </div>
-
-                    
-
-
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="box box-primary">
-                      <div class="box-header no-padding">
-                        <div class="box-body table-responsive no-padding">
-                          <table class="table table-hover" id="grd08Datos">
-                            <thead>
-                              <tr>     
-                                <th style="width:100px;">Cod.</th>
-                                <th style="width:100px;">Cod. RFQ</th>
-                                <th style="width:100px;">Cod. Proveedor</th>
-                                <th style="width:100px;">Cod. Item</th>
-                                <th>Item</th>
-                                <th style="width:100px;">Unidad</th>
-                                <th style="width:100px;">Stock</th>
-                                <th style="width:100px;">Precio</th>
-                                <th style="width:100px;">Precio Ofer.</th>
-                                <th style="width:100px;">Guardar</th>
-          
-                              </tr>
-                            </thead>
-                            <tbody id="grd11DatosCotBody">
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-  
-              </div>
-
-
-            </div>
-
-            <div class="tab-pane" id="datos12">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn09_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn10S_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app10SBoton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn10_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn10S_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app10SBoton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                  <button id="btn12_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app12Boton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  
-                  <button id="btn12_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app12Boton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                </div>
-              </div>
-
-              <div class="row" id="grid12">
-                <div class="col-md-12">
-                  <div class="row" id="div08_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt12_Buscar" type="text" class="form-control" oninput="javascript:app12Boton_Search();" placeholder="Ingrese codigo de cot. proveedor"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>  
-
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd08Datos">
-                          <thead>
-                            <tr>
-                              <th style="width:110px;">Operaciones</th>
-                              <th style="width:100;">Cod.</th>
-                              <th style="width:100;">Cod.RFQ</th>
-                              <th style="width:100;">Cod.Prov</th>
-                              <th>Descipción</th>
-                              <th >Fecha Cierre</th>
-                              <th style="width:100;">Cod. Item</th>
-                              <th>Item</th>
-                              <th style="width:80;">Stock</th>
-                              <th style="width:80;">Unidad</th>
-                              <th style="width:80;">Precio</th>
-                              <th>Item Descipción</th>
-                              <th style="width:80;">Precio Ofer.</th>
-                              
-         
-                            </tr>
-                          </thead>
-                          <tbody id="grd12DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <!-- fin -->
-              
-
-              <div class="box-body" id="edit12" style="display:none;">
-                <strong><i class="fa fa-user margin-r-5"></i> Detalle de la Orden</strong>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="box-body" style="padding-bottom: 0px;">
-                    <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Solicitar por Fecha" style="background:#EEEEEE;font-weight:bold; padding-right:86px;">Fecha</span>
-                          <input id="txt12_Fecha" type="text" class="form-control" style="width:115px;" value="12-12-21"/>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="box-body" style="padding-top: 0px;">
-                      
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          
-                          <input id="txt10Q_id" type="hidden" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 97px;">Cod.</span>
-                          <input id="txt12_Numero" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 68px;">Cod. RFQ</span>
-                          <input id="txt12_rfq" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 14px;">Proveedor Actual</span>
-                          <input class="form-control" list="grupoOptionsProveedorAct" id="cbo12_proveedorAct" placeholder="Buscar proveedor..." readonly="readonly">
-                              <datalist id="grupoOptionsProveedorAct">
-                                <option value="11">
-                                <option value="01">
-                                <option value="21">
-                                <option value="24">
-                                <option value="32">
-                              </datalist>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 65px;">Cod. Item</span>
-                          <input id="txt12_codigoItem" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 96px;">Item</span>
-                          <input id="txt12_item" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 94px;">UOM</span>
-                          <input id="txt12_unidad" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6" style="margin-top:5px;">
-                    <div class="box-body" style="padding-top: 0px;">
-                    
-                    <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 63px;">Num. Parte</span>
-                          <input id="txt12_parte" type="text" class="form-control" placeholder="..." />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 62px;">Descripcion</span>
-                          <input id="txt12_descripcion" type="text" class="form-control" placeholder="..." />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;">Proveedor Anterior</span>
-                          <input class="form-control" list="grupoOptionsProveedorAnt" id="cbo12_proveedorAnt" placeholder="Buscar proveedor...">
-                              <datalist id="grupoOptionsProveedorAnt">
-                                <option value="11">
-                                <option value="01">
-                                <option value="21">
-                                <option value="24">
-                                <option value="32">
-                              </datalist>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 35px;">Precio Ofertado</span>
-                          <input id="txt12_precioOfer" type="text" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 80px;">Cantidad</span>
-                          <input id="txt12_cantidad" type="number" value="1" class="form-control" placeholder="..." oninput="javascript:app12Boton_Cantidad();"/>
-                        </div>
-                      </div>
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 106px;">Total</span>
-                          <input id="txt12_total" type="number" value="1" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-  
-              </div>
-
-            </div>
-
-            <div class="tab-pane" id="datos13">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn09_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn10S_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app10SBoton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn10_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app08Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn10S_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app10SBoton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                  <button id="btn12_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app12Boton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  
-                  <button id="btn12_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app10QBoton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                </div>
-              </div>
-
-              <div class="row" id="grid13">
-                <div class="col-md-12">
-                  <div class="row" id="div08_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt08_Buscar" type="text" class="form-control" oninput="javascript:app13Boton_Search();" placeholder="Ingrese codigo orden de compra"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>  
-
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd08Datos">
-                          <thead>
-                            <tr>
-                              <th style="width:110px;">Operaciones</th>
-                              <th style="width:100;">Cod.Ord</th>
-                              <th style="width:100;">Cod.CotProv</th>
-                              <th style="width:100;">Cod.RFQ</th>
-                              <th style="width:100;">Cod.Prov</th>
-                              <th style="width:100;">Cod. Item</th>
-                              <th>Item</th>
-                              <th style="width:80;">Stock</th>
-                              <th style="width:80;">Unidad</th>
-                              <th style="width:80;">Precio</th>
-                              <th style="width:80;">Cantidad</th>
-                              <th style="width:80;">Total</th>
-                             <!--  <th style="width:110px;">Operaciones</th>
-                              <th style="width:100;">Cod.</th>
-                              <th style="width:100;">Cod.RFQ</th>
-                              <th style="width:100;">Cod.Prov</th>
-                              <th>Descipción</th>
-                              <th >Fecha Cierre</th>
-                              <th style="width:100;">Cod. Item</th>
-                              <th>Item</th>
-                              <th style="width:80;">Stock</th>
-                              <th style="width:80;">Unidad</th>
-                              <th style="width:80;">Precio</th>
-                              <th>Item Descipción</th>
-                              <th style="width:80;">Precio Ofer.</th>    -->                   
-         
-                            </tr>
-                          </thead>
-                          <tbody id="grd13DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <!-- fin -->
-              
-
-              <!-- <div class="box-body" id="edit12" style="display:none;">
-                <strong><i class="fa fa-user margin-r-5"></i> Detalle de la Orden</strong>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="box-body">
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          
-                          <input id="txt10Q_id" type="hidden" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 97px;">Cod.</span>
-                          <input id="txt12_Numero" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 68px;">Cod. RFQ</span>
-                          <input id="txt12_rfq" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;">Proveedor Actual</span>
-                          <input class="form-control" list="grupoOptionsProveedorAct" id="cbo12_proveedorAct" placeholder="Buscar proveedor..." readonly="readonly">
-                              <datalist id="grupoOptionsProveedorAct">
-                                <option value="11">
-                                <option value="01">
-                                <option value="21">
-                                <option value="24">
-                                <option value="32">
-                              </datalist>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 65px;">Cod. Item</span>
-                          <input id="txt12_codigoItem" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 96px;">Item</span>
-                          <input id="txt12_item" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 94px;">UOM</span>
-                          <input id="txt12_unidad" type="text" class="form-control" placeholder="..." readonly="readonly"/>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                  
-                  <div class="col-md-6" style="margin-top:5px;">
-                    <div class="box-body">
-                    <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 63px;">Num. Parte</span>
-                          <input id="txt12_parte" type="text" class="form-control" placeholder="..." />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 62px;">Descripcion</span>
-                          <input id="txt12_descripcion" type="text" class="form-control" placeholder="..." />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;">Proveedor Anterior</span>
-                          <input class="form-control" list="grupoOptionsProveedorAnt" id="cbo12_proveedorAnt" placeholder="Buscar proveedor...">
-                              <datalist id="grupoOptionsProveedorAnt">
-                                <option value="11">
-                                <option value="01">
-                                <option value="21">
-                                <option value="24">
-                                <option value="32">
-                              </datalist>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 35px;">Precio Ofertado</span>
-                          <input id="txt12_precioOfer" type="text" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 80px;">Cantidad</span>
-                          <input id="txt12_cantidad" type="number" value="1" class="form-control" placeholder="..." oninput="javascript:app12Boton_Cantidad();"/>
-                        </div>
-                      </div>
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 106px;">Total</span>
-                          <input id="txt12_total" type="number" value="1" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-  
-              </div> -->
-
-            </div>
-
-            <div class="tab-pane" id="datos14">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn14_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;;" onclick="javascript:app14Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn14_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app14Boton_cancel();"><i class="fa fa-angle-double-left"></i> Cancelar</button>
-                  <button id="btn14_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app14Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn14_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app14Boton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                </div>
-              </div>
-
-              <div class="row" id="grid14">
-                <div class="col-md-12">
-                  <div class="row" id="div14_Search">
-                    <div class="col-md-4">
-                      <div class="input-group" style="margin-bottom:20px;">
-                        <span class="input-group-addon" title="Buscar" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search" aria-hidden="true"></i></span>
-                        <input id="txt14_Buscar" type="text" class="form-control" oninput="javascript:app14Boton_Search();" placeholder="Ingrese numero de proveedor"/>
-                        <!-- <span class="input-group-btn">
-                          <button type="button" class="btn btn-info btn-flat" onclick="javascript:app02Boton_Search();">IR</button>
-                        </span> -->
-                      </div>
-                    </div>
-                  </div>  
-
-                  <div class="box box-primary">
-                    <div class="box-header no-padding">
-                      <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover" id="grd14Datos">
-                          <thead>
-                            <tr>
-                              <th style="width:110px;">Operaciones</th>
-                              <th style="width:110px;">Numero</th>
-                              <th style="width:110px;">Codigo</th>
-                              <th>RUC</th>
-                              <th>Nombre</th>
-                              <th>Descripción</th>
-                              
-                              
-         
-                            </tr>
-                          </thead>
-                          <tbody id="grd14DatosBody">
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-              <!-- fin -->
-              <div class="box-body" id="edit14" style="display:none;">
-                <strong><i class="fa fa-user margin-r-5"></i> Detalles del Proveedor</strong>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="box-body">
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                        <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 39px;">Numero</span>
-                          <input id="txt14_id" type="text" class="form-control" placeholder="..." readonly="readonly" />
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 48px;">Codigo</span>
-                          <input id="txt14_codigo" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 36px;">Telofono</span>
-                          <input id="txt14_telefono" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 57px;">Email</span>
-                          <input id="txt14_email" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                     
-
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="box-body">
-                    <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 66px;">RUC</span>
-                          <input id="txt14_ruc" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-                      
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 40px;">Nombre</span>
-                          <input id="txt14_Nombre" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 34px;">Dirección</span>
-                          <input id="txt14_Direccion" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                      
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                  <strong><i class="fa fa-user"></i> Descripción del Proveedor</strong>
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <textarea class="form-control" id="area14_descripcion" rows="4" cols="500"></textarea>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div> 
-                </div>
-                
-              </div>
-            </div>
-          </div>
         </div>
     </div>
-    </form>
-  </div>
-</section>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"
+    id="modalAddComponentIntoVehicle">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PERTENECE A ORDEN DE
+                                COMPRA</span>
 
+                            <select id="txt_estado_oc_componenttoVehicle" class="form-control">
+                                <option value="-1">Selecciona...
+                                </option>
+                                <option value="0">NO
+                                </option>
+                                <option value="1">SI
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom:5px;display:none;" id="details_oc_to_componentVehicle">
+                        <div style="display:flex;">
+                            <span class="input-group-addon text-xl" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold; width:200px">ID ORDEN DE COMPRA</span>
+                            <div style="display:flex">
+                                <input id="txt_ordencompra_withvehicle_search" type="text" class="form-control"
+                                    placeholder="Buscar por codigo" value="" />
+                                <input type="hidden" id="txt_ordencompra_withvehicle_id" name="" value="">
+                                <span class="input-group-addon text-xl" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 30px;">
+                                    <button type="button" class="fa fa-search" aria-hidden="true"
+                                        onclick="searchFuncionForNameAndSurnameOrdenCompra('txt_ordencompra_withvehicle_search','sql_ordencompra_vehicle_sql',[
+                                                                'txt_ordencompra_withvehicle_id',
+                                                                'txt_ordencompra_withvehicle_name',
+                                                                'txt_ordencompra_withvehicle_surname',
+                                                            ],'griditemsOrdenCompraWithVehicle2','ordencompramodalVehicle');"></button></span>
+                            </div>
+                        </div>
+                        <div class="input-group" style="margin-top:5px;">
+
+                            <span class="input-group-addon text-xl" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CODIGO</span>
+                            <input id="txt_ordencompra_withvehicle_name" type="text" class="form-control"
+                                placeholder="..." value="" disabled />
+                            <span class="input-group-addon text-xl" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA</span>
+                            <input id="txt_ordencompra_withvehicle_surname" type="text" class="form-control"
+                                placeholder="..." value="" disabled />
+                        </div>
+                        <div class="box-primary" style="width:100%">
+                            <div class="box-header no-padding">
+                                <div class="box-body table-responsive no-padding">
+                                    <table style="width:100%" class="datatable table table-striped table-bordered"
+                                        id="griditemsOrdenCompraWithVehicle2">
+                                        <thead>
+                                            <th>Id</th>
+                                            <th>descripcion</th>
+                                            <th>prioridad</th>
+                                            <th>cantidad</th>
+                                            <th>cumplidos</th>
+                                            <th></th>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div style="display:flex;">
+                            <span class="input-group-addon text-xl" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold; width:200px">VEHICULO</span>
+                            <div style="display:flex">
+                                <input id="txt_ordencompra_vehiclemodal_search" type="text" class="form-control"
+                                    placeholder="Buscar por DNI para Ingresar" value="" />
+                                <input type="hidden" id="txt_ordencompra_vehiclemodal_id" name="" value="">
+                                <span class="input-group-addon text-xl" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 30px;">
+                                    <button type="button" class="fa fa-search" aria-hidden="true" onclick="searchFuncionForNameAndSurname('txt_ordencompra_vehiclemodal_search','sql_search_vechiculo',[
+                                                                'txt_ordencompra_vehiclemodal_id',
+                                                                'txt_ordencompra_vehiclemodal_name',
+                                                                'txt_ordencompra_vehiclemodal_surname',
+                                                            ]);"></button></span>
+                            </div>
+                        </div>
+                        <div class="input-group" style="margin-top:5px;">
+
+                            <span class="input-group-addon text-xl" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ACTIVO</span>
+                            <input id="txt_ordencompra_vehiclemodal_name" type="text" class="form-control"
+                                placeholder="..." value="" disabled />
+                            <span class="input-group-addon text-xl" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CATEGORIA</span>
+                            <input id="txt_ordencompra_vehiclemodal_surname" type="text" class="form-control"
+                                placeholder="..." value="" disabled />
+                        </div>
+                    </div>
+                    <div class="box-primary">
+                        <div class="box-header no-padding">
+                            <div class="box-body table-responsive no-padding">
+
+                                <table class="datatable table table-striped table-bordered"
+                                    id="tableItemOrdenComprachecksistem">
+                                    <thead>
+                                        <tr>
+
+                                            <th>MOTOR</th>
+                                            <th>TREN PRO.</th>
+                                            <th>AROS LLAN. Y TREN.</th>
+                                            <th>SIS. SUSPENSION</th>
+                                            <th>SIS. ELECTRICO</th>
+                                            <th>SIS. HIDRAULICO</th>
+                                            <th>CAR. CHASIS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <td><input type="radio" class="checksistemavehicleradio" name="orcom" id="1" />
+                                        </td>
+                                        <td><input type="radio" class="checksistemavehicleradio" name="orcom" id="2" />
+                                        </td>
+                                        <td><input type="radio" class="checksistemavehicleradio" name="orcom" id="3" />
+                                        </td>
+                                        <td><input type="radio" class="checksistemavehicleradio" name="orcom" id="4" />
+                                        </td>
+                                        <td><input type="radio" class="checksistemavehicleradio" name="orcom" id="5" />
+                                        </td>
+                                        <td><input type="radio" class="checksistemavehicleradio" name="orcom" id="6" />
+                                        </td>
+                                        <td><input type="radio" class="checksistemavehicleradio" name="orcom" id="7" />
+                                        </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                        onclick="add_ItemsIntoVehicle();">Guardar</button>
+                    <button type="button" class="bg-stone-900 py-4 px-2 text-white" data-dismiss="modal"
+                        onclick="$('#modalAddComponentIntoVehicle').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" id="ModalOpenOrdenCompra">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nº DE
+                                ORDEN DE COMPRA</span>
+
+                            <input id="txt_n_orden_compra_modal" type="text" class="form-control" value="" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nº DE
+                                REQUERIMIENTO</span>
+
+                            <input id="txt_n_requerimiento_oc_modal" type="text" class="form-control" value=""
+                                disabled />
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">AREA</span>
+
+                            <input id="txt_area_orden_compra_modal" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">SOLICITANTE</span>
+
+                            <input id="txt_solicitante_orden_compra_modal" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CENTRO DE COSTO</span>
+
+                            <input id="txt_centro_costo_orden_compra_modal" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRIORIDAD</span>
+
+
+                            <input id="txt_prioridad_orden_compra_modal" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MOTIVO</span>
+
+                            <input id="txt_motivo_orden_comrpa_modal" type="text" class="form-control" value="dni.pdf"
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ESTADO</span>
+
+                            <select id="txt_estado_orden_comrpa_modal" class="form-control">
+                                <option value="-1">Selecciona...
+                                </option>
+                                <option value="9">EN COTIZACION
+                                </option>
+                                <option value="10">EMITIDA
+                                </option>
+
+                            </select>
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA DE
+                                CREACION</span>
+
+                            <input id="txt_fecha_orden_comrpa_modal" type="date" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div id="contentProviderOC" style="display:none;">
+                        <div class="form-group" style="margin-bottom:5px;">
+                            <div style="display:flex;">
+                                <span class="input-group-addon text-xl" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold; width:200px">PROVEEDOR</span>
+                                <div style="display:flex">
+                                    <input id="txt_proveedor_modal_search_ordencompra" type="text" class="form-control"
+                                        placeholder="Buscar por DNI para Ingresar" value="" />
+                                    <input type="hidden" id="txt_proveedor_modal_id_ordencompra" name="" value="">
+                                    <span class="input-group-addon text-xl" title="Expositor"
+                                        style="background:#EEEEEE;font-weight:bold;padding-right: 30px;">
+                                        <button type="button" class="fa fa-search" aria-hidden="true" onclick="searchFuncionForNameAndSurname('txt_proveedor_modal_search_ordencompra','sql_proveedor_orden_compra',[
+                                                                'txt_proveedor_modal_id_ordencompra',
+                                                                'txt_proveedor_modal_nombre_ordencompra',
+                                                                'txt_proveedor_modal_apellido_ordencompra',
+                                                            ]);"></button></span>
+                                </div>
+                            </div>
+                            <div class="input-group" style="margin-top:5px;">
+
+                                <span class="input-group-addon text-xl" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES
+                                    DEL PROVEEDOR</span>
+                                <input id="txt_proveedor_modal_nombre_ordencompra" type="text" class="form-control"
+                                    placeholder="..." value="" disabled />
+                                <span class="input-group-addon text-xl" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">APELLIDOS
+                                    DEL PROVEEDOR</span>
+                                <input id="txt_proveedor_modal_apellido_ordencompra" type="text" class="form-control"
+                                    placeholder="..." value="" disabled />
+                            </div>
+                        </div>
+                        <!--<div class="form-group" style="margin-bottom:5px;">
+                            <div class="input-group">
+                                <span class="input-group-addon" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PROVEEDOR</span>
+
+                                <input id="txt_subtotal_orden_compra_modal" type="text" class="form-control" value="" />
+                                <span class="input-group-addon" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">RUC</span>
+
+                                <input id="txt_subtotal_orden_compra_modal" type="text" class="form-control" value="" />
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom:5px;">
+                            <div class="input-group">
+                                <span class="input-group-addon" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DIRECCION</span>
+
+                                <input id="txt_subtotal_orden_compra_modal" type="text" class="form-control" value="" />
+                                <span class="input-group-addon" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONTACTO</span>
+
+                                <input id="txt_subtotal_orden_compra_modal" type="text" class="form-control" value="" />
+                            </div>
+                        </div>-->
+                        <div class="form-group" style="margin-bottom:5px;">
+                            <div class="input-group">
+                                <span class="input-group-addon" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDICION</span>
+
+                                <input id="txt_proveedor_modal_condicion_ordencompra" type="text" class="form-control"
+                                    value="" />
+                                <span class="input-group-addon" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MONEDA</span>
+
+                                <select id="txt_proveedor_modal_moneda_ordencompra" class="form-control ">
+                                    <option value="-1">Selecciona...
+                                    </option>
+                                    <option value="0">SOLES
+                                    </option>
+                                    <option value="1">DOLARES
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom:5px;">
+                            <div class="input-group">
+                                <span class="input-group-addon" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA DE
+                                    EMISION</span>
+
+                                <input id="txt_proveedor_modal_fecha_emision_ordencompra" type="date"
+                                    class="form-control" value="" />
+                                <span class="input-group-addon" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA DE
+                                    ATENCION</span>
+
+                                <input id="txt_proveedor_modal_fecha_atencion_ordencompra" type="date"
+                                    class="form-control" value="" />
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-bottom:5px;">
+                            <div class="input-group">
+
+                                <span class="input-group-addon" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIEMPO DE ATENCION
+                                    DE LA OC</span>
+
+                                <input id="txt_proveedor_modal_tiempo_atencion_ordencompra" type="text"
+                                    class="form-control" value="" />
+                                <span class="input-group-addon" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIEMPO DE ATENCION
+                                    DEL PROVEEDOR</span>
+
+                                <input id="txt_proveedor_modal_tiempo_proveedor_ordencompra" type="text"
+                                    class="form-control" value="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-primary">
+                        <div class="box-header no-padding">
+                            <div class="box-body table-responsive no-padding">
+
+                                <table class="datatable table table-striped table-bordered"
+                                    id="tableItemOrdenCompraModalShow">
+                                    <thead>
+                                        <tr>
+
+                                            <th>ITEM</th>
+                                            <th>CODIGO</th>
+                                            <th>Nº DE PARTE</th>
+                                            <th>DESCRIPCION</th>
+                                            <th>CANTIDAD</th>
+                                            <th>UNIDAD MEDIDA</th>
+                                            <th>PRECIO UNITARIO</th>
+                                            <th>PRECIO TOTAL</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">SUBTOTAL</span>
+
+                            <input id="txt_subtotal_orden_compra_moda" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">I.G.V. 18%</span>
+
+                            <input id="txt_igv_orden_compra_modal" type="text" class="form-control" value="" disabled />
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TOTAL</span>
+
+                            <input id="txt_total_orden_compra_modal" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-emerald-500 py-4 px-2 text-white" id="addbutonMainOrdenCompra"
+                        onclick="insert_modal_Orden_compra_2();">Guardar</button>
+                    <button type="button" class="bg-stone-900 py-4 px-2 text-white" data-dismiss="modal"
+                        onclick="$('#ModalOpenOrdenCompra').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"
+    id="modaladdItemComponentCheckIfOC">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PERTENECE A ORDEN DE
+                                COMPRA</span>
+                            <select id="txt_estado_p_od_pertenece" class="form-control">
+                                <option value="-1">Selecciona...
+                                </option>
+                                <option value="0">NO
+                                </option>
+                                <option value="1">SI
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display:none;" id="detailsOC_component">
+                        <div style="display:flex;">
+                            <span class="input-group-addon text-xl" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold; width:200px">ID ORDEN DE COMPRA</span>
+                            <div style="display:flex">
+                                <input id="txt_ordencompravehicicle_search" type="text" class="form-control"
+                                    placeholder="Buscar por codigo" value="" />
+                                <input type="hidden" id="txt_ordencompravehicicle_id" name="" value="">
+                                <span class="input-group-addon text-xl" title="Expositor"
+                                    style="background:#EEEEEE;font-weight:bold;padding-right: 30px;">
+                                    <button type="button" class="fa fa-search" aria-hidden="true"
+                                        onclick="searchFuncionForNameAndSurnameOrdenCompra('txt_ordencompravehicicle_search','sql_ordencompra_vehicle_sql',[
+                                                                'txt_ordencompravehicicle_id',
+                                                                'txt_ordencompravehicicle_codigo',
+                                                                'txt_ordencompravehicicle_fecha',
+                                                            ],'griditemsOrdenCompraVehicle','ordencompramodal');"></button></span>
+                            </div>
+                        </div>
+                        <div class="input-group" style="margin-top:5px;">
+                            <span class="input-group-addon text-xl" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CODIGO</span>
+                            <input id="txt_ordencompravehicicle_codigo" type="text" class="form-control"
+                                placeholder="..." value="" disabled />
+                            <span class="input-group-addon text-xl" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA</span>
+                            <input id="txt_ordencompravehicicle_fecha" type="text" class="form-control"
+                                placeholder="..." value="" disabled />
+                        </div>
+                        <div class="box-primary" style="width:100%">
+                            <div class="box-header no-padding">
+                                <div class="box-body table-responsive no-padding">
+                                    <table style="width:100%" class="datatable table table-striped table-bordered"
+                                        id="griditemsOrdenCompraVehicle">
+                                        <thead>
+                                            <th>Id</th>
+                                            <th>descripcion</th>
+                                            <th>prioridad</th>
+                                            <th>cantidad</th>
+                                            <th>cumplidos</th>
+                                            <th></th>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                        onclick="add_Items();">Guardar</button>
+                    <button type="button" class="bg-stone-900 py-4 px-2 text-white" data-dismiss="modal"
+                        onclick="$('#modaladdItemComponentCheckIfOC').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+    id="modal_gestionPersonas">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES DEL
+                                SOLICITANTE</span>
+
+                            <input id="txt-modal-gestion-personas-nombre" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">APELLIDOS DEL
+                                SOLICITANTE</span>
+
+                            <input id="txt-modal-gestion-personas-apellido" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">AREA</span>
+
+                            <input id="txt-modal-gestion-personas-area" type="text" class="form-control" value="dni.pdf"
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CARGO
+                                SOLICITADO</span>
+
+                            <input id="txt-modal-gestion-personas-cargo" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MOTIVO</span>
+
+                            <input id="txt-modal-gestion-personas-motivo" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VACANTES</span>
+
+                            <input id="txt-modal-gestion-personas-vacantes" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ESTADO</span>
+
+                            <input id="txt-modal-gestion-personas-estado" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="box-primary" style="margin-bottom:10px">
+                        <div class="box-header no-padding">
+                            <div class="box-body table-responsive no-padding">
+                                <table class="datatable table table-striped table-bordered text-xl"
+                                    id="table_gestion_personas_vacante_list_observaciones">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Observaciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-primary" style="margin-bottom:10px">
+                        <div class="box-header no-padding">
+                            <div class="box-body table-responsive no-padding">
+                                <table class="datatable table table-striped table-bordered text-xl"
+                                    id="table_gestion_personas_vacante_list">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Dni</th>
+                                            <th>Puesto Actual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-gray-500 py-4 px-4 text-white" data-dismiss="modal"
+                        onclick="$('#modal_gestionPersonas').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+    id="modal_showDetail_seleccionProveedor">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-group" style="margin-bottom:5px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" title="Expositor"
+                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO DE SERVICIO</span>
+
+                        <input id="modal_showDetail_seleccionProveedor_tipo" type="text" class="form-control"
+                            value="dni.pdf" disabled />
+                        <span class="input-group-addon" title="Expositor"
+                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA DE EVALUACION</span>
+
+                        <input id="modal_showDetail_seleccionProveedor_fecha" type="text" class="form-control"
+                            value="dni.pdf" disabled />
+                    </div>
+                </div>
+                <div class="box box-body">
+                    <div class="box-header no-padding">
+                        <div class="box-body table-responsive no-padding">
+                            <table class="datatable table table-striped table-bordered text-xl"
+                                id="modal_showDetail_seleccionProveedor_table">
+                                <thead>
+
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-gray-500 py-4 px-4 text-white" data-dismiss="modal"
+                        onclick="$('#modal_showDetail_seleccionProveedor').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+    id="modal_showDetail_evaluacionProveedor">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="form-group" style="margin-bottom:5px;">
+                    <div class="input-group">
+                        <span class="input-group-addon" title="Expositor"
+                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA DE EVALUACION</span>
+
+                        <input id="modal_showDetail_evaluacionProveedor_fecha" type="text" class="form-control"
+                            value="dni.pdf" disabled />
+                    </div>
+                </div>
+                <div class="box box-body">
+                    <div class="box-header no-padding">
+                        <div class="box-body table-responsive no-padding">
+                            <table class="datatable table table-striped table-bordered text-xl"
+                                id="modal_showDetail_evaluacionProveedor_table">
+                                <thead>
+
+                                </thead>
+                                <tbody>
+
+                                </tbody>
+                                <tfoot>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-gray-500 py-4 px-4 text-white" data-dismiss="modal"
+                        onclick="$('#modal_showDetail_evaluacionProveedor').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" id="ModalViewItemsDetails">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
+                    <div class="col-md-12">
+                        <div id="accordion">
+                            <h3>Detalles del Vehiculo</h3>
+                            <div class="h-[250px]">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="panel-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tr>
+                                                        <th>Identificador</th>
+                                                        <td><span id="det_categoria"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Activo</th>
+                                                        <td><span id="det_activo"></span>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <th>Clase</th>
+                                                        <td><span id="det_marca"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Grupo</th>
+                                                        <td><span id="det_modelo"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Condicion</th>
+                                                        <td><span id="det_anio"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Unidad de Medida</th>
+                                                        <td><span id="det_unidad_medida"></span>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="panel-body">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tr>
+                                                        <th>Inicio de Garantia</th>
+                                                        <td><span id="det_odometro"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Fin de Garantia</th>
+                                                        <td><span id="det_propiedad"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Numero de serie</th>
+                                                        <td><span id="det_serie"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Parte</th>
+                                                        <td><span id="det_descripcion"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Marca</th>
+                                                        <td><span id="det_marca"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Precio Unitario</th>
+                                                        <td><span id="det_precio_unitario"></span>
+                                                        </td>
+                                                    </tr>
+                                                    <!--<tr>
+                                                                                    <th>Propietario</th>
+                                                                                    <td><span
+                                                                                            id="det_propietario"></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                
+                                                                                <tr>
+                                                                                    <th>Motor</th>
+                                                                                    <td><span id="det_motor"></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <th>Transmicion</th>
+                                                                                    <td><span
+                                                                                            id="det_transmision"></span>
+                                                                                    </td>
+                                                                                </tr>-->
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>Motor</h3>
+                            <div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table" id="table_tipo_sistema_11">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Activo
+                                                        </th>
+                                                        <th>Clase
+                                                        </th>
+                                                        <th>Grupo
+                                                        </th>
+                                                        <th>Condiciones
+                                                        </th>
+                                                        <th>Fecha Adquisicion
+                                                        </th>
+                                                        <th>Fin Garantia
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>Tren Propulsor</h3>
+                            <div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table" id="table_tipo_sistema_12">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Activo
+                                                        </th>
+                                                        <th>Clase
+                                                        </th>
+                                                        <th>Grupo
+                                                        </th>
+                                                        <th>Condiciones
+                                                        </th>
+                                                        <th>Fecha Adquisicion
+                                                        </th>
+                                                        <th>Fin Garantia
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>Aros Llantas y Trenes</h3>
+                            <div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table" id="table_tipo_sistema_13">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Activo
+                                                        </th>
+                                                        <th>Clase
+                                                        </th>
+                                                        <th>Grupo
+                                                        </th>
+                                                        <th>Condiciones
+                                                        </th>
+                                                        <th>Fecha Adquisicion
+                                                        </th>
+                                                        <th>Fin Garantia
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>Sistema de Suspension</h3>
+                            <div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table" id="table_tipo_sistema_14">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Activo
+                                                        </th>
+                                                        <th>Clase
+                                                        </th>
+                                                        <th>Grupo
+                                                        </th>
+                                                        <th>Condiciones
+                                                        </th>
+                                                        <th>Fecha Adquisicion
+                                                        </th>
+                                                        <th>Fin Garantia
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>Sistema Electrico</h3>
+                            <div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table" id="table_tipo_sistema_15">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Activo
+                                                        </th>
+                                                        <th>Clase
+                                                        </th>
+                                                        <th>Grupo
+                                                        </th>
+                                                        <th>Condiciones
+                                                        </th>
+                                                        <th>Fecha Adquisicion
+                                                        </th>
+                                                        <th>Fin Garantia
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>Sistema Hidraulico</h3>
+                            <div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table" id="table_tipo_sistema_16">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Activo
+                                                        </th>
+                                                        <th>Clase
+                                                        </th>
+                                                        <th>Grupo
+                                                        </th>
+                                                        <th>Condiciones
+                                                        </th>
+                                                        <th>Fecha Adquisicion
+                                                        </th>
+                                                        <th>Fin Garantia
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>Carroceria, Chasis</h3>
+                            <div>
+                                <div class="col-md-12">
+                                    <div class="panel-body">
+                                        <div class="table-responsive">
+                                            <table class="table" id="table_tipo_sistema_17">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Activo
+                                                        </th>
+                                                        <th>Clase
+                                                        </th>
+                                                        <th>Grupo
+                                                        </th>
+                                                        <th>Condiciones
+                                                        </th>
+                                                        <th>Fecha Adquisicion
+                                                        </th>
+                                                        <th>Fin Garantia
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="bg-stone-900 py-4 px-2 text-white" data-dismiss="modal"
+                        onclick="$('#ModalViewItemsDetails').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"
+    id="ModalViewItemsComponentsDetails">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CODIGO</span>
+
+                            <input id="modal_item_component_item_codigo" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION</span>
+
+                            <input id="modal_item_component_item_descripcion" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">COLOQUIAL</span>
+
+                            <input id="modal_item_component_item_coloquial" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CANTIDAD</span>
+
+                            <input id="modal_item_component_item_cantidad" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">GRUPO</span>
+
+                            <input id="modal_item_component_item_grupo" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CLASE</span>
+
+                            <input id="modal_item_component_item_clase" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">SERIE</span>
+
+                            <input id="modal_item_component_item_serie" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PARTE</span>
+
+                            <input id="modal_item_component_item_parte" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA DE ADQUISICION</span>
+
+                            <input id="modal_item_component_fecha_adquisicion" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MARCA</span>
+
+                            <input id="modal_item_component_marca" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">UNIDAD DE MEDIDA</span>
+
+                            <input id="modal_item_component_unidad_medida" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRECIO UNITARIO</span>
+
+                            <input id="modal_item_component_precio_unitario" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDICION</span>
+
+                            <input id="modal_item_component_condicion" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FIN DE GARANTIA</span>
+
+                            <input id="modal_item_component_fin_garantia" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="bg-stone-900 py-4 px-2 text-white" data-dismiss="modal"
+                        onclick="$('#ModalViewItemsComponentsDetails').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="pages/catalogos/logistica/logistica.js"></script>
 <script>
-  $(document).ready(function(){
-    appBotonReset();
-    
-  });
+$(document).ready(function() {
 
-  
+    function addMonths(numOfMonths, date = new Date()) {
+        date.setMonth(date.getMonth() + numOfMonths);
+
+        return date;
+    }
+    $('#txt_fecha_g_personas').val(new Date().toISOString().slice(0, 10));
+    $('#txt_fecha_requerimiento_requerimiento').val(new Date().toISOString().slice(0, 10));
+
+
+
+    $('#txt_garantia_item_inicio').val(new Date().toISOString().slice(0, 10));
+    $('#txt_garantia_item_fin').val(new Date().toISOString().slice(0, 10));
+    $('#txt_fecha_items').val(new Date().toISOString().slice(0, 10));
+
+    updateGrid("gridAlmacenGrid");
+    updateGrid("gridProveedorCategory");
+    updateGrid("gridItemsGrid");
+    updateGrid("gridGroupGrid");
+    updateGrid("gridGroupClassGrid");
+    updateGrid("gridProveedorGrid");
+    updateGrid("gridRequerimientoGrid");
+    updateGrid("gridOrdenCompraGrid");
+
+    updateGrid("gridRequerimientoPersonalGrid");
+
+    updateGrid("gridHistoriaSeleccionProveedorGrid");
+    updateGrid("gridHistoriaEvaluacionProveedorGrid");
+
+    UtilLoadSelect("sql_select_get_cargo", "txt_cargo_personas");
+    UtilLoadSelect("sql_select_get_area", "slct_area_requerimiento");
+    UtilLoadSelect("sql_select_get_lugar_trabajo", "personas_select_lugar");
+
+
+    //gridSecondRequerimientos();
+    loadSelectedGestionPersonasMotivo();
+    $("#accordion").accordion({
+        collapsible: true
+    });
+    Date.isLeapYear = function(year) {
+        return (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0));
+    };
+
+    Date.getDaysInMonth = function(year, month) {
+        return [31, (Date.isLeapYear(year) ? 29 : 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month];
+    };
+
+    Date.prototype.isLeapYear = function() {
+        return Date.isLeapYear(this.getFullYear());
+    };
+
+    Date.prototype.getDaysInMonth = function() {
+        return Date.getDaysInMonth(this.getFullYear(), this.getMonth());
+    };
+
+    Date.prototype.addMonths = function(value) {
+        var n = this.getDate();
+        this.setDate(1);
+        this.setMonth(this.getMonth() + value);
+        this.setDate(Math.min(n, this.getDaysInMonth()));
+        return this;
+    };
+
+
+    $('#txt_garantia_item').keyup(function() {
+        var value = $(this).val();
+        var newDate = new Date($("#txt_garantia_item_inicio").val());
+        var result = new Date(newDate.getTime() + (value * 30) * 24 * 60 * 60 * 1000);
+        $("#txt_garantia_item_fin").val(result.toISOString().slice(0, 10))
+    })
+
+});
 </script>

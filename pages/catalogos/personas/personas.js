@@ -1,37 +1,37 @@
 var rutaSQL = "pages/catalogos/personas/sql.php";
 function addObservacionespersonas(){
     $('#table_observaciones_personas > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='class_add_observaciones_personas'><td><input type='text' class='form-control observaciones_personas'/>"+
-    "</td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+    "</td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash bg-rose-500  py-2 px-2 text-white' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
   }
   function addFichaPersonalProfesion(){
     $('#table_FichaPersonalProfesion > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='addFichaPersonalProfesion'><td><input type='text' class='form-control personal_profesional_data'/>"+
-    "</td><td><select id='txt_ficha_personal_profesion_estado' class='form-control personal_profesional_data'><option value='-1'>Selecciona...</option> <option value='0'>TITULO</option><option value='1'>BACHILLER</option><option value='2'>EGRESADO</option><option value='3'>CURSANDO<option></select></td><td><input type='text' class='form-control personal_profesional_data'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+    "</td><td><select id='txt_ficha_personal_profesion_estado' class='form-control personal_profesional_data'><option value='-1'>Selecciona...</option> <option value='0'>UNIVERSITARIO</option><option value='1'>TÉCNICO</option><option value='2'>OTROS</option></select></td><td><select id='txt_ficha_personal_profesion_estado' class='form-control personal_profesional_data'><option value='-1'>Selecciona...</option> <option value='0'>TITULO</option><option value='1'>BACHILLER</option><option value='2'>EGRESADO</option><option  value='3'>CURSANDO</option></select></td><td><input type='text' class='form-control personal_profesional_data'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash bg-rose-500 py-2 px-2 text-white' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
   }
   function addFichaPersonalReferencia(){
     $('#table_FichaPersonalReferencia > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='addFichaPersonalReferencia'><td><input type='text' class='form-control personal_referencia_data'/>"+
-    "</td><td><input type='text' class='form-control personal_referencia_data'/></td><td><input type='text' class='form-control personal_referencia_data'/></td><td><input type='text' class='form-control personal_referencia_data'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+    "</td><td><input type='text' class='form-control personal_referencia_data'/></td><td><input type='text' class='form-control personal_referencia_data'/></td><td><input type='text' class='form-control personal_referencia_data'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash bg-rose-500 py-2 px-2 text-white' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
   }
   function addFichaPersonalTecnica(){
     $('#table_FichaPersonalTecnica > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='addFichaPersonalTecnica'><td><input type='text' class='form-control personal_tecnica_data'/>"+
-    "</td><td><select id='txt_ficha_personal_profesion_estado' class='form-control personal_tecnica_data'><option value='-1'>Selecciona...</option> <option value='0'>TITULO</option><option value='1'>EGRESADO</option><option value='2'>CURSANDO<option></select></td><td><input type='text' class='form-control personal_tecnica_data'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+    "</td><td><select id='txt_ficha_personal_profesion_estado' class='form-control personal_tecnica_data'><option value='-1'>Selecciona...</option> <option value='0'>TITULO</option><option value='1'>EGRESADO</option><option value='2'>CURSANDO<option></select></td><td><input type='text' class='form-control personal_tecnica_data'/></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash bg-rose-500 py-2 px-2 text-white' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
   }
   function addFichaPersonalOtrosEstudios(){
     $('#table_FichaPersonalOtrosEstudios > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='addFichaPersonalOtrosEstudios'><td><input type='text' class='form-control personal_otros_estudios_data'/>"+
-    "</td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+    "</td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash bg-rose-500 py-2 px-2 text-white' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
   }
   function addFichaPersonalIdiomas(){
     $('#table_FichaPersonalIdiomas > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='addFichaPersonalIdiomas'><td><select  class='form-control personal_idioma_data'><option value='-1'>Selecciona...</option><option value='0'>ESPAÑOL</option><option value='1'>INGLES</option><option value='2'>PORTUGUES</option> <option value='3'>FRANCES</option></select>"+
-    "</td><td><select class='form-control personal_idioma_data'><option value='-1'>Selecciona...</option><option value='0'>BASICO</option><option value='1'>INTERMEDIO</option><option value='2'>AVANZADO</option></select></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+    "</td><td><select class='form-control personal_idioma_data'><option value='-1'>Selecciona...</option><option value='0'>BASICO</option><option value='1'>INTERMEDIO</option><option value='2'>AVANZADO</option></select></td><td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash bg-rose-500 py-2 px-2 text-white' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
   }
@@ -40,12 +40,655 @@ function addObservacionespersonas(){
     "<td><input type='text' class='form-control personal_hijos_data'/></td>"+
     "<td><input type='date' class='form-control personal_hijos_data'/></td>"+
     "<td><input type='number' class='form-control personal_hijos_data'/></td>"+
-    "<td><input type='text' class='form-control personal_hijos_data'/></td>"+
+    "<td><select class='form-control personal_hijos_data'><option value='-1'>Selecciona...</option><option value='0'>Masculino</option> <option value='1'>Femenino</option></select></td>"+
     "<td><input type='number' class='form-control personal_hijos_data'/></td>"+
-
-    "<td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash btn btn-danger btn-xs' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
+    "<td><input type='file' class='form-control input_files_ficha_hijos'/></td>"+
+    "<td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash bg-rose-500 py-2 px-2 text-white' onclick='removeChildFormPasajeros("+(new Date()).getTime()+")'></button>"+
    // "<i class='fa fa-pencil  btn btn-primary btn-xs'></i>"+
     "</div></td></tr>" )
+  }
+  function generateInsertData(data){
+    let returnData={}
+    data.forEach((it)=>{
+      switch(it.value){
+        case "val":
+          returnData[it.title]=$("#"+it.element).val().trim();
+        break;
+        case "text":
+          returnData[it.title]=$("#"+it.element).text().trim();
+        break;
+        case "file":
+          returnData[it.title]=$("#"+it.element).val().trim();
+        break;
+        case "select":
+          returnData[it.title]=$("#"+it.element+" :selected").text().trim();
+        break;
+        case "selectVal":
+          returnData[it.title]=$("#"+it.element+" :selected").val().trim();
+        break;
+        case "manyinputs":
+          returnData[it.title]=$('#'+it.element+' > tbody').find("."+it.child).map(function(){return $(this).val();}).get(); 
+        break;
+        case "table":{
+          let matrix=[]
+          let parent=$('#'+it.element).find("tbody > tr");          
+           parent.map(function(){ 
+            let data= $(this).find("td").children();        
+            let row=[]
+            data.map(function(){        
+              row.push($(this).val());
+            })          
+            matrix.push(row);         
+           });   
+          returnData[it.title]=matrix
+        }
+        break;
+        case "none":
+        break;
+        default:
+          returnData[it.title]=it.value
+        break;  
+      }
+    })
+    return returnData;
+  }
+  function validate(data){
+    let error=0;
+    $(".error").remove(); 
+    data.forEach((it)=>{
+      if(it.status){
+        switch(it.type){
+          case "text":{
+            let ele=$('#'+it.element);
+            if(!ele.val().length){
+              ele.after('<span class="error">Este campo es requerido</span>');  
+              error=1;
+            }
+          }
+          break;
+          case "file":{
+            let ele=$('#'+it.element);
+            if(ele.get(0).files.length===0){
+              ele.after('<span class="error">Este campo es requerido</span>');  
+              error=1;
+            }
+          }
+          break;
+          case "select":{
+            let ele=$('#'+it.element);
+            if(ele.val()==="-1"){
+              ele.after('<span class="error">Este campo es requerido</span>');  
+              error=1;
+            }
+          }
+          break;
+          case "table":{
+            let parent=$('#'+it.element).find("tbody > tr");
+           // console.log(parent)
+           if(parent.length){
+            parent.map(function(){ 
+
+            // let data= $(this).find("td").children();
+            let data= $(this).find(".obligatory-input");
+             data.map(function(){        
+              let val=$(this).prop('type');
+            //  console.log(val)
+                switch (val) {
+                  case "text":
+                    if(!$(this).val().length){
+                      $(this).after('<span class="error">Este campo es requerido</span>');  
+                      error=1;
+                    }
+                  break;
+                  case "select-one":
+                    if($(this).val()==="-1"){
+                      $(this).after('<span class="error">Este campo es requerido</span>');  
+                      error=1;
+                    }
+                  break;
+                 /* case "radio":
+                    if(!$(this).is(":checked")){
+                      $(this).after('<span class="error">Este campo es requerido</span>');  
+                      error=1;
+                    }
+                  break;*/
+                  default:
+                    break;
+                }
+             })
+            
+             /* if($(this).val()==="-1"){
+                $(this).after('<span class="error">Este campo es requerido</span>');  
+                error=1;
+              }*/
+            });  
+            }else{
+              $('#'+it.element).after('<span class="error">Este campo es requerido</span>');  
+              error=1;
+            }  
+          }
+          break;
+          default:
+          break;
+  
+        }     
+        
+      }      
+    })
+    return error;
+  }
+  function ResetAndUpdateGrid(data,func=null,id=null){
+    data.forEach((it)=>{
+      if(it.status){
+        switch(it.value){
+          case "val":
+            $("#"+it.element).val("");
+          break;
+          case "text":
+            $("#"+it.element).text("");
+          break;
+          case "file":
+            $("#"+it.element).val(null);
+          break;
+          case "select":
+            $("#"+it.element).val("-1");
+          break;
+          case "selectVal":
+            $("#"+it.element).val("-1");
+          break;
+          case "manyinputs":
+            $("."+it.content).remove();
+          break;
+          case "table":
+            $("#"+it.element).find('tbody').children().remove();
+          break;
+          case "selectArray":
+            $("."+it.element).val("-1");
+          break;
+          case "date":
+            $("#"+it.element).val(new Date().toISOString().slice(0, 10));
+          break; 
+          default:
+          break;
+        }
+  
+        
+      }else{
+        switch(it.value){       
+          case "none":
+            $("#"+it.element).val("");
+          break;
+          case "manyinputs":
+            $("."+it.content).remove();
+          break;
+          default:
+          break;
+        }
+      }   
+    })  
+    if(func){
+      func(id);
+    } 
+  }
+  function OpenModalRequerimiento(id){
+    //console.log(id)
+    let datos = {
+      TipoQuery : 'sql_get_requerimiento_by_id',
+      data:id
+    };  
+    var table;   
+    appAjaxQuery(datos,rutaSQL).done(function(resp){
+      console.log(resp)       
+      $('#txt_n_requerimiento_modal').val(resp.data[0].n_requerimiento)
+      $('#txt_area_requerimiento_modal').val(resp.data[0].area)
+      $('#txt_solicitante_requerimiento_modal').val(resp.data[0].solicitante)
+      $('#txt_centro_costo_requerimiento_modal').val(resp.data[0].centro_costo)
+      $('#txt_fecha_requerimiento_modal').val(resp.data[0].fecha_requerimiento)
+      $('#txt_prioridad_requerimiento_modal').val(resp.data[0].prioridad)
+      $('#txt_motivo_requerimiento_modal').val(resp.data[0].motivo)
+      $('#txt_estado_requerimiento_modal').val(resp.data[0].estado)
+      $('#txt_tiempo_atencion_requerimiento_modal').val(resp.data[0].tiempo_atencion)
+      
+      $("#tableItemRequerimientoModalShow > tbody").empty()
+      resp.data.forEach((it)=>{
+        $("#tableItemRequerimientoModalShow > tbody").append("<tr>"+
+        "<td>"+it.item+"</td>"+
+        "<td>"+it.codigo_parte+"</td>"+
+        "<td>"+it.n_parte+"</td>"+
+        "<td>"+it.descripcion+"</td>"+
+        "<td>"+it.cantidad+"</td>"+
+        "<td>"+it.unidad_medida+"</td>"+
+       // "<td>"+it.prioridad+"</td>"+
+        "<td>"+it.observacion+"</td>"+
+        "</tr>")
+      })
+      $('#ModalOpenRequerimiento').modal('show');   
+
+    } );   
+  }
+  function generateColumnsGrid(data,ope,Enabledcolumns){
+    let columns=[]
+    let num=[
+    "file1",
+    "file2",
+    "file3",
+    "file4",
+    "file5",
+    "file6",
+    "file7",
+    "file8",
+    "file9",
+    "file10",
+    "file11",
+    "file12",
+    "file13",
+    "file14",
+    "file15",
+    "file16",
+    "file17",
+    "file18"]
+    if(!Enabledcolumns.length){
+      
+      data.forEach((ele)=>{  
+        console.log(ele.key)
+        if(ele.icon==1 &&ele.popup==1){
+          let findElemenet=num.find((it)=>it==ele.key)
+    
+          let val=findElemenet.substring(4)
+          //console.log(val)
+          columns.push({data:ele.key,title:ele.title,
+        fnCreatedCell: function (nTd, sData,oData,iCol) { 
+  
+           if(sData==="0") {   
+                                  
+            $(nTd).html('<span class="badge"style="background:#343a40" onClick="showUpdateDataDocument('+oData.id+','+val+')">&nbsp;</span>');
+            
+          }else if(sData==="1") {            
+            $(nTd).html('<span class="badge"style="background:#28a745">&nbsp;</span>');
+          
+          }  
+            else if(sData==="2") {                    
+              $(nTd).html('<span class="badge"style="background:#ffc107" onClick="showUpdateDataDocumentFiles('+oData.id+','+val+')">&nbsp;</span>');
+          }  
+            else{          
+              $(nTd).html('<span class="badge"style="background:#dc3545" onClick="showUpdateDataDocumentFiles('+oData.id+','+val+')">&nbsp;</span>');                 
+          }          
+        }})
+        }else if(ele.icon==1 &&ele.popup==0){
+          let findElemenet=num.find((it)=>it==ele.key)
+    
+          let val=findElemenet.substring(4)
+          //console.log(val)
+          columns.push({data:ele.key,title:ele.title,
+        fnCreatedCell: function (nTd, sData,oData,iCol) { 
+  
+           if(sData==="0") {   
+                                  
+            $(nTd).html('<span class="badge"style="background:#343a40" >&nbsp;</span>');
+            
+          }else if(sData==="1") {            
+            $(nTd).html('<span class="badge"style="background:#28a745">&nbsp;</span>');
+          
+          }  
+            else if(sData==="2") {                    
+              $(nTd).html('<span class="badge"style="background:#ffc107">&nbsp;</span>');
+          }  
+            else{          
+              $(nTd).html('<span class="badge"style="background:#dc3545">&nbsp;</span>');                 
+          }          
+        }})
+        }  else{
+          columns.push({data:ele.key,title:ele.title})
+        }       
+      })
+    }else{
+      data.forEach((ele)=>{
+        //let val=Enabledcolumns.find("ID");
+        if(Enabledcolumns.findIndex((it)=>it==ele.title)!=-1){
+          console.log(ele.icon)
+          if(ele.icon){
+            columns.push({ddata:ele.key,title:ele.title,
+          fnCreatedCell: function (nTd, sData,oData) { 
+             if(sData==="0") {   
+                                    
+              $(nTd).html('<span class="badge"style="background:#343a40">&nbsp;</span>');
+              
+            }else if(sData==="1") {            
+              $(nTd).html('<span class="badge"style="background:#28a745">&nbsp;</span>');
+            
+            }  
+              else if(sData==="2") {                    
+                $(nTd).html('<span class="badge"style="background:#ffc107">&nbsp;</span>');
+            }  
+              else{          
+                $(nTd).html('<span class="badge"style="background:#dc3545">&nbsp;</span>');        
+             
+            }  
+            
+          }})
+          }else{
+            columns.push({data:ele.key,title:ele.title})
+          }
+          
+        }    
+      })
+    }
+    columns.push({data:'id',title:'',
+    fnCreatedCell: function (nTd, sData, oData, iRow, iCol) { 
+      let dd=sData.toString()
+      let contentOpe="";
+  
+          contentOpe+=ope.print.state?'<button class="fa fa-print btn btn-success btn-xs"'+
+                                      'onclick='+ope.print.funct+'("'+dd+'"); type="button"></button>':''
+          contentOpe+=ope.view.state?'<button class="fa fa-eye bg-cyan-500 py-2 px-2 text-white"'+
+                                      'onclick='+ope.view.funct+'("'+dd+'"); type="button"></button>':''
+          contentOpe+=ope.edit.state?'<button class="fa fa-pencil btn btn-warning btn-xs"'+
+                                      'onclick='+ope.edit.funct+'("'+dd+'"); type="button"></button>':''
+          contentOpe+=ope.delet.state?'<button class="fa fa-trash bg-rose-500 py-2 px-2 text-white"'+
+                                      'onclick='+ope.delet.funct+'("'+dd+'"); type="button"></button>':''
+  
+          $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;">'+contentOpe+'</div>');
+      
+    }})
+  
+    console.log(columns)
+    return columns
+  }
+  function searchParent(IdparentSearch,dataColumnsEnabled,allCols){   
+    let elements="";
+    allCols.forEach((ele,idx)=>{
+      if(dataColumnsEnabled.findIndex((it)=>it==ele.title)!=-1){
+        elements+='<span class="input-group-addon" style="background:#EEEEEE;font-weight:bold;"><i class="fa fa-search"></i></span>'+
+        '<input id="'+idx+'" type="text" class="form-control" placeholder="Buscar por '+ele.title+'" />'
+      }      
+    })
+    
+    $("#"+IdparentSearch).html(elements);
+  }
+  function generateGrid(querySQL,IdgridTable,ope,Enabledcolumns,IdparentSearch,searchColumns,params=null,order=1){
+    let datos={
+      TipoQuery : querySQL,
+      value : params,
+    }
+    var table;
+    appAjaxQuery(datos,rutaSQL).done(function(resp){
+      console.log(resp)
+      if(resp.data.length>0){
+       let dataCols=generateColumnsGrid(resp.column,ope,Enabledcolumns);
+  
+       table= $('#'+IdgridTable).DataTable( {
+          "sPaginationType": "simple",
+          "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
+          },
+          data: resp.data,        
+          destroy: true,
+          columns: dataCols,  
+          columnDefs: [
+            {            
+                className: 'dt-body-center',
+                targets: "_all"
+            }
+          ], 
+          order: [[order, "asc"]]
+      } );    
+          searchParent(IdparentSearch,searchColumns,dataCols);
+          var parent= $("#"+IdparentSearch);      
+          table.columns().eq( 0 ).each( function ( colIdx ) {    
+          var child= parent.find("#"+colIdx);    
+          child.on('keyup', function() {          
+                table
+                .column( colIdx )
+                .search(child.val(), false, true)
+                .draw();
+        })   
+  
+      } );   
+  
+      }else{
+        $('#'+IdgridTable).empty()
+      }
+    });
+  }
+  function updateGrid(grid){
+    switch (grid) {
+      case "gridOrdenCompraGrid":
+        generateGrid(
+          "sqlOrdenDeCompraGrid",
+          "gridOrdenDeComprahtml",
+          {
+            print:{state:1,funct:"generatepdfOrdenCompra"},
+            view:{state:1,funct:"OpenModalOrdenCompra"},
+            edit:{state:1,funct:""},
+            delet:{state:1,funct:""},
+          },
+          [
+  
+          ],"searchOrdenDeComprahtml",[            
+            "Nº Orden de Compra",         
+            "Nº de Requerimiento",
+            "Fecha",
+            "Estado"
+          ],"1",0
+        );
+      break;  
+      case "gridRequerimientoGrid":
+        generateGrid(
+          "sqlRequerimientosGrid",
+          "gridRequerimientoshtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:1,funct:"OpenModalRequerimiento"},
+            edit:{state:0,funct:""},
+            delet:{state:0,funct:""},
+          },
+          ["Nº Requerimiento",
+          "Area",
+          "Prioridad",
+          "Estado",
+          "Motivo",
+          "Fecha"  
+  
+          ],"searchRequerimientoshtml",[            
+            "Nº Requerimiento",
+            "Area",
+            "Fecha",
+            "Estado"              
+          ],null,1,1
+        );
+      break;   
+      case "gridProveedorCategory":
+        generateGrid(
+          "sqlCategoryProveedorGrid",
+          "gridProveedorCategoryhtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:0,funct:""},
+            edit:{state:1,funct:""},
+            delet:{state:1,funct:"modalDeleteCategoryProveedor"},
+          },
+          [
+  
+          ],"searchProveedorCategoryhtml",[            
+            "N",         
+            "area",
+            "prioridad",
+            "estado",
+          ],"1",0
+        );
+      break;   
+      case "gridAlmacenGrid":
+        generateGrid(
+          "sqlAlmacenGrid",
+          "gridAlmacenhtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:0,funct:""},
+            edit:{state:1,funct:""},
+            delet:{state:1,funct:"modalDeleteAlmacen"},
+          },
+          [
+  
+          ],"searchAlmacenhtml",[
+            "N° de Almacen",
+            "Descripción",
+            "Direccion",
+            "Responsable"
+          ],"1",0
+        );
+      break;        
+      case "gridItemsGrid":
+        generateGrid(
+          "sqlItemsGrid",
+          "gridItemshtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:0,funct:""},
+            edit:{state:1,funct:""},
+            delet:{state:1,funct:"modalDeleteItem"},
+          },
+          [
+  
+          ],"searchItemshtml",[
+            "Activo",
+            "Serie",
+            "Fecha de Adquisicion",
+            "Condicion"
+          ],"1",0
+        );
+      break;   
+      case "gridGroupGrid":
+        generateGrid(
+          "sqlGroupGrid",
+          "gridGrouphtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:0,funct:""},
+            edit:{state:1,funct:""},
+            delet:{state:0,funct:""},
+          },
+          [
+  
+          ],"searchGrouphtml",[
+            "Grupo",
+            "Descripcion"         
+          ],"1",0
+        );
+      break;     
+      case "gridGroupClassGrid":
+        generateGrid(
+          "sqlGroupClassGrid",
+          "gridGroupClasshtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:0,funct:""},
+            edit:{state:1,funct:""},
+            delet:{state:0,funct:""},
+          },
+          [
+  
+          ],"searchGroupClasshtml",[
+            "Codigo",
+            "Grupo",
+            "Descripcion"            
+          ],"1",0
+        );
+      break;      
+      case "gridProveedorGrid":
+        generateGrid(
+          "sqlProveedorGrid",
+          "gridProveedorhtml",
+          {
+            print:{state:0,funct:""},
+            view:{state:0,funct:""},
+            edit:{state:1,funct:""},
+            delet:{state:1,funct:"modalDeleteCategoryProveedor"},
+          },
+          [
+  
+          ],"searchProveedorhtml",[
+            "N",
+            "Nombre",
+            "Categoria",
+            "Tipo"
+          ],"1",0
+        );
+      break;    
+      default:
+        break;
+    }
+  }
+  function add_Requerimientos(){
+
+    let datos = {
+      TipoQuery : 'sql_get_last_requerimiento'      
+    };                
+   appAjaxQuery(datos,rutaSQL).done(function(dat){   
+    let id=Number(dat.tabla.id)+1;
+    let Maindata=[      
+      {title:"n_requerimiento",element:"",type:"text",status:0,value:"RQ-CM-2022-"+id},
+      {title:"area",element:"",type:"text",status:0,value:"7"},
+      {title:"solicitante",element:"idrequerimientoCompraHidden",type:"text",status:1,value:"val"},
+      {title:"fecha_requerimiento",element:"txt_fecha_requerimiento_requerimiento",type:"text",status:1,value:"val"},
+      {title:"centro_costo",element:"txt_centro_costo_requerimiento",type:"text",status:0,value:"val"},
+      {title:"prioridad",element:"slct_prioridad_requerimiento",type:"select",status:1,value:"selectVal"},
+      {title:"motivo",element:"txt_motivo_requerimiento",type:"text",status:1,value:"val"},
+
+      {title:"id",element:"idrequerimientoCompraHidden",type:"text",status:1,value:"val"},
+      {title:"search",element:"txt_search_requerimiento_compra",type:"text",status:1,value:"val"},
+      {title:"name",element:"txt_search_name_requerimientoCompra",type:"text",status:1,value:"val"},
+      {title:"surname",element:"txt_search_apellido_requerimientoCompra",type:"text",status:1,value:"val"},
+
+      {title:"itemsRequerimiento",element:"tableItemRequerimiento",type:"table",status:1,value:"table"}      
+    ]
+    if(validate(Maindata)){
+      swal("Completa todos los campos", {
+        icon: "error",
+      });
+    }else{      
+          let datos = {
+            TipoQuery : 'sql_RequerimientosAndItems',
+            data:generateInsertData(Maindata)
+          };                
+         appAjaxQuery(datos,rutaSQL).done(function(resp){   
+                             
+              ResetAndUpdateGrid(Maindata,updateGrid,"gridRequerimientoGrid");
+              swal("Insertado correctamente", {
+                icon: "success",
+              });   
+                             
+          }); 
+    }
+  }); 
+  }
+
+  function loadSelectedGestionPersonasArea(){
+    let datos = {
+      TipoQuery : '03_selected_gestionPersona_area'   
+    };      
+    appAjaxQuery(datos,rutaSQL).done(function(resp){   
+      console.log(resp);
+    $.each(resp[0], function(i, item) {
+      $('#personas_select_area').append($("<option>", {
+          value: item.id,
+          text: item.descripcion,    
+      }));
+    });
+  });
+  }
+  function loadSelectedGestionPersonasMotivo(){
+    let datos = {
+      TipoQuery : '03_selected_gestionPersona_motivo'   
+    };      
+    appAjaxQuery(datos,rutaSQL).done(function(resp){   
+      console.log(resp);
+    $.each(resp[0], function(i, item) {
+      $('#personas_select_motivo').append($("<option>", {
+          value: item.id,
+          text: item.descripcion,    
+      }));
+    });
+  });
   }
   function removeChildFormPasajeros(id){
     swal({    
@@ -61,6 +704,204 @@ function addObservacionespersonas(){
     });
 
   }
+  function search_postulante(){
+
+    var msn=$('#txt_search_postulante').val();
+    let datos = {
+      TipoQuery : '02_search_aspirante_without_personal',
+      value:msn     
+    };      
+    appAjaxQuery(datos,rutaSQL).done(function(resp){    
+      if(resp.error){
+        swal("No se encontro incidencia para el DNI o ya se encuentra registrado en el Personal", {
+          icon: "warning",
+        });
+      }else{
+        
+        swal("Has seleccionado a: "+resp.tabla.nombres+" "+resp.tabla.apellidos+"", {
+          icon: "success",
+        });
+
+        $("#idpostulanteHidden").val(resp.tabla.id);
+        $('#txt_search_name_postulante').val(resp.tabla.nombres);
+        $('#txt_search_apellido_postulante').val(resp.tabla.apellidos);  
+        $('#txt_search_dni_postulante').val(resp.tabla.dni);  
+        $('#txt_search_telefono_postulante').val(resp.tabla.telefono);  
+      }
+    });
+  }
+  function search_personal_reeferencia(){
+
+    var msn=$('#txt_search_aspirante').val();
+    let datos = {
+      TipoQuery : '02_search_aspirante',
+      value:msn     
+    };      
+    console.log(datos)
+    appAjaxQuery(datos,rutaSQL).done(function(resp){    
+      if(resp.error){
+        swal("No se encontro incidencia para el DNI", {
+          icon: "warning",
+        });
+      }else{
+        
+        swal("Has seleccionado a: "+resp.tabla.nombres+" "+resp.tabla.apellidos+"", {
+          icon: "success",
+        });
+
+        $("#idAspiranteHidden").val(resp.tabla.id);
+        $('#txt_search_name_aspirante').val(resp.tabla.nombres);
+        $('#txt_search_apellido_aspirante').val(resp.tabla.apellidos);  
+      }
+    });
+  }
+  function search_personal_orden_compra(){
+
+    var msn=$('#txt_search_requerimiento_compra').val();
+    let datos = {
+      TipoQuery : '02_search_personal_ordencompra',
+      value:msn     
+    };      
+    console.log(datos)
+    appAjaxQuery(datos,rutaSQL).done(function(resp){    
+      if(resp.error){
+        swal("No se encontro incidencia para el DNI", {
+          icon: "warning",
+        });
+      }else{
+        
+        swal("Has seleccionado a: "+resp.tabla.nombres+" "+resp.tabla.apellidos+"", {
+          icon: "success",
+        });
+
+        $("#idrequerimientoCompraHidden").val(resp.tabla.id);
+        $('#txt_search_name_requerimientoCompra').val(resp.tabla.nombres);
+        $('#txt_search_apellido_requerimientoCompra').val(resp.tabla.apellidos);  
+      }
+    });
+  }
+
+  function search_Personal(){
+
+    var msn=$('#txt_search_personal').val();
+    let datos = {
+      TipoQuery : '02_search_personal',
+      value:msn     
+    };      
+    appAjaxQuery(datos,rutaSQL).done(function(resp){    
+      if(resp.error){
+        swal("No se encontro incidencia para el DNI", {
+          icon: "warning",
+        });
+      }else{
+        
+        swal("Has seleccionado a: "+resp.tabla.nombres+" "+resp.tabla.apellidos+"", {
+          icon: "success",
+        });
+
+        $("#idPersonalHidden").val(resp.tabla.id);
+        $('#txt_search_name_personal').val(resp.tabla.nombres);
+        $('#txt_search_apellido_personal').val(resp.tabla.apellidos);  
+      }
+    });
+  }
+
+
+  function searchForGestionPersonalVacante(){
+    var msn=$('#txt-modal-gestion-personas-vacante-search').val();
+    let datos = {
+      TipoQuery : '02_search_vacante_gestion_personas',
+      value:msn,
+      req:$("#txt-modal-gestion-personas-vacante-requerimiento").val()     
+    };          
+    appAjaxQuery(datos,rutaSQL).done(function(resp){    
+      if(resp.error){
+        swal("No se encontro incidencia para el DNI", {
+          icon: "warning",
+        });
+      }else{
+        
+        swal("Has seleccionado correctamente", {
+          icon: "success",
+        });
+        console.log(resp)
+        $('#table_gestion_personas_vacante > tbody').empty();
+        $("#txt-modal-gestion-personas-id-personal").val(resp.tabla1.id)
+        $("#txt-modal-gestion-personas-id-cargo").val(resp.tabla0.id_cargo)
+      
+        let tr="";
+        resp.tabla.forEach((ele)=>{
+            tr+="<tr id='"+(new Date()).getTime()+"'>"
+            tr+="<td>"+ele.nombres+"</td>"
+            tr+="<td>"+ele.apellidos+"</td>"
+            tr+="<td>"+ele.dni+"</td>"
+            tr+="<td>"+ele.puesto_al_postular+"</td>"
+            tr+="<td>"+ele.puesto_actual+"</td>"
+            tr+="</tr>"
+        })
+        
+        if (!tr) {
+          tr="<tr><td colspan='6'><p style='text-align: center'>El registro seleccionado no ocupa ningun puesto actualmente.</p></td></tr>";
+        }
+
+        $('#table_gestion_personas_vacante > tbody').append(tr)
+
+        $('#button_add_gestion_personas_vacante').show()
+
+
+            
+      }
+    });
+  }
+function addvacanteForGestionPersonal(){
+
+  let Maindata=[     
+    {title:"search",element:"txt-modal-gestion-personas-vacante-search",type:"text",status:1,value:"val"}, 
+    {title:"id_personal",element:"txt-modal-gestion-personas-id-personal",type:"text",status:1,value:"val"},
+    {title:"id_cargo",element:"txt-modal-gestion-personas-id-cargo",type:"text",status:1,value:"val"},   
+    {title:"id_requerimiento",element:"txt-modal-gestion-personas-vacante-requerimiento",type:"text",status:1,value:"val"},     
+  ]
+  if(validate(Maindata)){
+    swal("Completa todos los campos", {
+      icon: "error",
+    });
+  }else{      
+    //console.log(Maindata)
+    
+        let datos = {
+          TipoQuery : 'sql_add_vacante_gestion_personal',
+          data:generateInsertData(Maindata)
+        };                
+       appAjaxQuery(datos,rutaSQL).done(function(resp){   
+            
+        let datos = {
+          TipoQuery : 'sql_add_vacante_gestion_personal_update',
+          data:{
+            type:Number(resp.table1.n_vacantes)-1==Number(resp.table1.n_cumplidos)?true:false,
+            req:$("#txt-modal-gestion-personas-vacante-requerimiento").val(),
+            n:resp.table1.n_vacantes,
+            c:Number(resp.table1.n_cumplidos)+1
+          }, 
+        };                
+       appAjaxQuery(datos,rutaSQL).done(function(resp){   
+                           
+            ResetAndUpdateGrid(Maindata);
+            gridSecondRequerimientos();
+            $('#modal_gestionPersonasSearch').modal('hide')     
+            $('#table_gestion_personas_vacante > tbody').empty();
+           // $('#txt-modal-gestion-personas-vacante-requerimiento').val("");
+          
+            swal("Insertado correctamente", {
+              icon: "success",
+            });   
+            
+        }); 
+                           
+        }); 
+  }
+}
+
+
   function searchSolicitante(){
     var msn=$('#txt_search_solicitante').val();
     let datos = {
@@ -81,8 +922,8 @@ function addObservacionespersonas(){
         $("#idsolicitanteHidden").val(resp.tabla.id);
         $('#txt_solicitante_nombres').val(resp.tabla.nombres);
         $('#txt_solicitante_apellidos').val(resp.tabla.apellidos);
-        $('#txt_solicitante_area').val(resp.tabla.area);
-        $('#txt_solicitante_cargo').val(resp.tabla.cargo);
+       // $('#txt_solicitante_pretencion_salarial').val(resp.tabla.pretencion_salarial);
+       // $('#txt_solicitante_dni').val(resp.tabla.dni);
       }
     });
   }
@@ -98,8 +939,8 @@ function insert_registro_referencia_laboral(){
         let datos = {
           TipoQuery : '03_save_register_referencia_laboral',
           data:{
-            nombresCandidato: $('#txt_referencia_laboral_candidato_nombres').val(),
-            apellidosCandidato: $('#txt_referencia_laboral_candidato_apellidos').val(),
+            id:(new Date()).getTime(),
+            id_aspirante: $('#idAspiranteHidden').val(),            
             nombresReferente: $('#txt_referencia_laboral_referente_nombres').val(),
             apellidosReferente:$('#txt_referencia_laboral_referente_apellidos').val(),
             
@@ -107,18 +948,17 @@ function insert_registro_referencia_laboral(){
             cargoReferente: $('#txt_referencia_laboral_referente_cargo').val(),      
             empresaReferente: $('#txt_referencia_laboral_referente_empresa').val(),
 
-            criterio1: $('#ReferenciaLaboralPreguntasCriterio_1').val(),
-            criterio2: $('#ReferenciaLaboralPreguntasCriterio_2').val(),
-            criterio3: $('#ReferenciaLaboralPreguntasCriterio_3').val(),
-            criterio4: $('#ReferenciaLaboralPreguntasCriterio_4').val(),
-            criterio5: $('#ReferenciaLaboralPreguntasCriterio_5').val(),
-            criterio6: $('#ReferenciaLaboralPreguntasCriterio_6').val(),
-            criterio7: $('#ReferenciaLaboralPreguntasCriterio_7').val(),
-            criterio8: $('#ReferenciaLaboralPreguntasCriterio_8').val(),
-            criterio9: $('#ReferenciaLaboralPreguntasCriterio_9').val(),
-            criterio10: $('#ReferenciaLaboralPreguntasCriterio_10').val(),
-
-            checkbox1:checkbox1                                       
+            respuestas:[ $('#ReferenciaLaboralPreguntasCriterio_1').val(),
+             $('#ReferenciaLaboralPreguntasCriterio_2').val(),
+             $('#ReferenciaLaboralPreguntasCriterio_3').val(),
+             $('#ReferenciaLaboralPreguntasCriterio_4').val(),
+             $('#ReferenciaLaboralPreguntasCriterio_5').val(),
+             $('#ReferenciaLaboralPreguntasCriterio_6').val(),
+             $('#ReferenciaLaboralPreguntasCriterio_7').val(),
+             $('#ReferenciaLaboralPreguntasCriterio_8').val(),
+             $('#ReferenciaLaboralPreguntasCriterio_9').val(),
+             $('#ReferenciaLaboralPreguntasCriterio_10').val(),
+            checkbox1[0]]                                       
           },
         };    
       //console.log(datos)
@@ -126,6 +966,7 @@ function insert_registro_referencia_laboral(){
         swal("Se ha registrado correctamente", {
           icon: "success",
         });
+            gridReferenciaLaboral();
             resetCaFieldsReferenciaLaboral();         
                            
         }); 
@@ -134,41 +975,59 @@ function insert_registro_referencia_laboral(){
 }
 
 function insert_registro_entrevistas(){
+   
     if(validarcamposNuevoRegistroEntrevista()){
         swal("Completa todos los campos", {
           icon: "error",
         });
       }else{          
+        $("#button_insert_registro_entrevistas").prop( "disabled", true);
         var checkbox1=$(".check_gestion_entrevista:radio:checked").map(function(){return $(this).attr('id');}).get();    
         var checkbox2=$(".check_otros_entrevistas:radio:checked").map(function(){return $(this).attr('id');}).get();    
 
             let datos = {
               TipoQuery : '03_save_register_entrevista',
               data:{
-                 nombres: $('#txt_entrevistas_nombres').val(),
-                apellidos: $('#txt_entrevistas_apellidos').val(),
+                id:(new Date()).getTime(),  
+                nombre: $('#txt_entrevistas_nombres').val(),
+                apellido: $('#txt_entrevistas_apellidos').val(),
                 dni: $('#txt_entrevistas_dni').val(),
                 puesto:$('#txt_entrevistas_puesto').val(),
                 
                 edad: $('#txt_entrevistas_edad').val(),
-                fecha: $('#txt_entrevistas_fecha').val(),      
-                civil: $('#txt_entrevistas_civil').val(),
+                fecha_nacimiento: $('#txt_entrevistas_fecha').val(),      
+               // estadi_civil: $('#txt_entrevistas_civil').val(),
 
                 correo: $('#txt_entrevistas_correo').val(),
                 telefono: $('#txt_entrevistas_telefono').val(),
-                pretenciones: $('#txt_entrevistas_pretenciones').val(),
-                checkbox1:checkbox1,
-                checkbox2:checkbox2                                   
+                pretencion_salarial	: $('#txt_entrevistas_pretenciones').val(),
+                gestion:{
+                  ids:[1,2,3],//RELACION A LA DB
+                  data:checkbox1},
+                otros:{
+                  ids:[4,5,6],
+                  data:checkbox2}                                   
               },
             };    
-          console.log(datos)
+         
            appAjaxQuery(datos,rutaSQL).done(function(resp){   
-            swal("Se ha registrado correctamente", {
-              icon: "success",
-            });
-                resetCaFieldsPersonasEntrevista();         
-                               
-            });             
+            
+            if(resp.table1 &&resp.table2&&resp.table3){
+              swal("Se ha registrado correctamente", {
+                icon: "success",
+              });                            
+                  resetCaFieldsPersonasEntrevista();      
+                  gridEntrevistas();                                                             
+            }else{
+              swal({
+                title: "No se lograron insertar algunos datos",
+                text: "Comunícate con soporte técnico para recibir ayuda.",
+                icon: "warning",
+                dangerMode: true,
+              })
+            }
+            $("#button_insert_registro_entrevistas").prop( "disabled", false);
+          }); 
          }
   
   }
@@ -186,17 +1045,17 @@ function insert_registro_entrevistas(){
             TipoQuery : '03_save_register_people',
             data:{
               id:(new Date()).getTime(),
-              id_solicitante: $('#idsolicitanteHidden').val(),
+              id_personal: $('#idsolicitanteHidden').val(),
               cargo: $('#txt_cargo_personas').val(),
-              vacante: $('#txt_n_vacantes_personas').val(),
+              n_vacantes: $('#txt_n_vacantes_personas').val(),
     
               area: $('#personas_select_area').val(),
               contrato: $('#personas_select_contrato').val(),      
-              motivo: $('#personas_select_motivo').val(),
+              id_motivo: $('#personas_select_motivo').val(),
     
-              lugar: $('#personas_select_lugar').val(),
-              duracion: $('#personas_select_duracion').val(),
-              fecha: $('#txt_fecha_g_personas').val(),
+              lugar_trabajo: $('#personas_select_lugar').val(),
+              duracion_trabajo: $('#personas_select_duracion').val(),
+              fecha_incorporacion: $('#txt_fecha_g_personas').val(),
     
               remuneracion: $('#personas_remuneracion').val(),
               observaciones:observaciones,
@@ -209,7 +1068,7 @@ function insert_registro_entrevistas(){
             icon: "success",
           });
           resetCapacitacionFieldsPersonas();         
-                             
+          gridSecondRequerimientos();
           });             
        }
 
@@ -312,6 +1171,7 @@ function insert_registro_entrevistas(){
     let datos = {
         TipoQuery : '01_gridReferenciaLaboral'
       };
+      let idx=1;
       var table;   
       appAjaxQuery(datos,rutaSQL).done(function(resp){
        
@@ -327,14 +1187,24 @@ function insert_registro_entrevistas(){
             columns: 
             [
              
-                { data: "id"},          
+              { data: "id", fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                if(oData.id) {                                         
+                      $(nTd).html(idx++);
+                }
+              }},        
                 { data: "nombrescandidato" },
-                { data: "nombresreferente" },                                     
+                { data: "nombresreferente" },     
+                { data: "telefono" },  
+                { data: "empresa" },  
+                //{ data: "cargo" },                                  
                 { data: "id",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                 /* if(oData.id) {                      
+                      $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print bg-indigo-500 py-2 px-2 text-white" type="button" onclick="pdf_ReferenciaLaboral('+oData.id+')"></button><button class="fa fa-trash bg-rose-500 py-2 px-2 text-white" type="button" onclick="modalDeleteReferenciaLaboral('+oData.id+')">');
+                  }*/
                   if(oData.id) {                      
-                      $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print btn btn-success btn-xs" type="button" onclick="pdf_ReferenciaLaboral('+oData.id+')"></button><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="modalDeleteReferenciaLaboral('+oData.id+')">');
-                  }
+                    $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print bg-indigo-500 py-2 px-2 text-white" type="button" onclick="pdf_ReferenciaLaboral('+oData.id+')"></button>');
+                }
                 }
               }
             ]
@@ -368,6 +1238,7 @@ function insert_registro_entrevistas(){
         if(resp.tabla.length>0){      
          table= $('#grd01FichaPersonal').DataTable( {         
             "sPaginationType": "simple",
+        
             "language": {
               "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
             },
@@ -377,195 +1248,278 @@ function insert_registro_entrevistas(){
             columns: 
             [
              
-                { data: "id"},          
+                //{ data: "id"},          
                 { data: "nombrescandidato" },
                 { data: "dni" },                                                     
                 { data: "dni_fecha_vigencia",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                 if(oData.dni_file_name){
                   if(sData==="0") {   
                                   
-                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')">');
+                    $(nTd).html('<span class="badge"style="margin:auto;display:block;width:20px;height:20px;background:#343a40" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')"></span>');
                     
                   }else if(sData==="1") {            
-                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')">');
+                    $(nTd).html('<span class="badge"style="margin:auto;display:block;width:20px;height:20px;background:#28a745" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')"></span>');
                   
                   }  
                     else if(sData==="2") {                    
-                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')">');
+                      $(nTd).html('<span class="badge"style="margin:auto;display:block;width:20px;height:20px;background:#ffc107" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')"></span>');
                   }  
                     else{          
-                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')">');        
+                      $(nTd).html('<span class="badge"style="margin:auto;display:block;width:20px;height:20px;background:#dc3545" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"0"+')"></span>');        
                    
-                  }   
+                  }  
+                 }else{
+                  $(nTd).html('<div></div>')
+                }
+             
+
                 } },    
                 { data: "licencia_fecha_vigencia",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                 if(oData.licencia_file_name){
                   if(sData==="0") {   
                                   
-                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')">');
+                    $(nTd).html('<span class="badge"style="margin:auto; display:block;width:20px;height:20px;background:#343a40" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')"></span>');
                     
                   }else if(sData==="1") {            
-                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')">');
+                    $(nTd).html('<span class="badge"style="margin:auto; display:block;width:20px;height:20px;background:#28a745" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')"></span>');
                   
                   }  
                     else if(sData==="2") {                    
-                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')">');
+                      $(nTd).html('<span class="badge"style="margin:auto; display:block;width:20px;height:20px;background:#ffc107" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')"></span>');
                   }  
                     else{          
-                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')">');        
+                      $(nTd).html('<span class="badge"style="margin:auto; display:block;width:20px;height:20px;background:#dc3545" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"1"+')"></span>');        
                    
-                  }   
+                  } 
+                 }else{
+                  $(nTd).html('<div></div>')
+                }
+                 
+
                 }  },    
+                { data: "licencia_esp_fecha_vigencia",
+                fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(oData.licencia_esp_file_name){
+                    if(sData==="0") {   
+                                  
+                      $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')"></span>');
+                      
+                    }else if(sData==="1") {            
+                      $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')"></span>');
+                    
+                    }  
+                      else if(sData==="2") {                    
+                        $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')"></span>');
+                    }  
+                      else{          
+                        $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')"></span>');        
+                     
+                    } 
+                  }else{
+                    $(nTd).html('<div></div>')
+                  }
+                    
+                }  },   
                 { data: "sctr_fecha_vigencia",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                  if(sData==="0") {   
+                    if(oData.sctr_file_name){
+                      if(sData==="0") {   
                                   
-                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')">');
-                    
-                  }else if(sData==="1") {            
-                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')">');
-                  
-                  }  
-                    else if(sData==="2") {                    
-                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')">');
-                  }  
-                    else{          
-                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"2"+')">');        
-                   
-                  }   
+                        $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')"></span>');
+                        
+                      }else if(sData==="1") {            
+                        $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')"></span> ');
+                      
+                      }  
+                        else if(sData==="2") {                    
+                          $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')"></span> ');
+                      }  
+                        else{          
+                          $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')"></span> ');        
+                       
+                      }   
+                    }else{
+                      $(nTd).html('<div></div>')
+                    }
+                
+
                 }  },    
                 { data: "seguro_fecha_vigencia",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                  if(sData==="0") {   
+                      if(oData.seguro_file_name){
+                        if(sData==="0") {   
                                   
-                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')">');
-                    
-                  }else if(sData==="1") {            
-                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')">');
-                  
-                  }  
-                    else if(sData==="2") {                    
-                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')">');
-                  }  
-                    else{          
-                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"3"+')">');        
-                   
-                  }   
+                          $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')"></span>');
+                          
+                        }else if(sData==="1") {            
+                          $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')"></span>');
+                        
+                        }  
+                          else if(sData==="2") {                    
+                            $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')"></span>');
+                        }  
+                          else{          
+                            $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')"></span>');        
+                         
+                        }   
+                      }else{
+                        $(nTd).html('<div></div>')
+                      }
+           
+
                 }  },    
                 { data: "policial_fecha_vigencia",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                  if(sData==="0") {   
+                    if(oData.policial_file_name){
+                      if(sData==="0") {   
                                   
-                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')">');
-                    
-                  }else if(sData==="1") {            
-                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')">');
-                  
-                  }  
-                    else if(sData==="2") {                    
-                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')">');
-                  }  
-                    else{          
-                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"4"+')">');        
-                   
-                  }   
+                        $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')"></span>');
+                        
+                      }else if(sData==="1") {            
+                        $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')"></span>');
+                      
+                      }  
+                        else if(sData==="2") {                    
+                          $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')"></span>');
+                      }  
+                        else{          
+                          $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')"></span>');        
+                       
+                      }   
+                    }else{
+                      $(nTd).html('<div></div>')
+                    }
+              
+
+
                 }  },    
                 { data: "judicial_fecha_vigencia",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                  if(sData==="0") {   
+                  if(oData.judicial_file_name){
+                    if(sData==="0") {   
                                   
-                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')">');
+                      $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')"></span>');
+                      
+                    }else if(sData==="1") {            
+                      $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')"></span>');
                     
-                  }else if(sData==="1") {            
-                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')">');
-                  
-                  }  
-                    else if(sData==="2") {                    
-                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')">');
-                  }  
-                    else{          
-                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"5"+')">');        
-                   
-                  }   
+                    }  
+                      else if(sData==="2") {                    
+                        $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')"></span>');
+                    }  
+                      else{          
+                        $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')"></span>');        
+                     
+                    }  
+                  }else{
+                    $(nTd).html('<div></div>')
+                  }
+                 
+
                 }  },    
                 { data: "penal_fecha_vigencia",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                  if(sData==="0") {   
+                    if(oData.penal_file_name){
+                      if(sData==="0") {   
                                   
-                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')">');
-                    
-                  }else if(sData==="1") {            
-                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')">');
-                  
-                  }  
-                    else if(sData==="2") {                    
-                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')">');
-                  }  
-                    else{          
-                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"6"+')">');        
-                   
-                  }   
+                        $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')"></span>');
+                        
+                      }else if(sData==="1") {            
+                        $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')"></span>');
+                      
+                      }  
+                        else if(sData==="2") {                    
+                          $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')"></span>');
+                      }  
+                        else{          
+                          $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')"></span>');        
+                       
+                      }   
+                    }else{
+                      $(nTd).html('<div></div>')
+                    }
+                
+
                 }  },    
                 { data: "trabajo_fecha_vigencia",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                  if(sData==="0") {   
+                  if(oData.trabajo_file_name){
+                    if(sData==="0") {   
                                   
-                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')">');
+                      $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')"></span>');
+                      
+                    }else if(sData==="1") {            
+                      $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')"></span>');
                     
-                  }else if(sData==="1") {            
-                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')">');
-                  
-                  }  
-                    else if(sData==="2") {                    
-                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')">');
-                  }  
-                    else{          
-                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"7"+')">');        
-                   
-                  }   
+                    }  
+                      else if(sData==="2") {                    
+                        $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')"></span>');
+                    }  
+                      else{          
+                        $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')"></span>');        
+                     
+                    }   
+                  }else{
+                    $(nTd).html('<div></div>')
+                  }
+           
+
                 }  },  
                 { data: "medico_fecha_vigencia",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                  if(sData==="0") {   
+                  if(oData.medico_file_name){
+                    if(sData==="0") {   
                                   
-                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')">');
+                      $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')"></span>');
+                      
+                    }else if(sData==="1") {            
+                      $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')"></span>');
                     
-                  }else if(sData==="1") {            
-                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')">');
-                  
-                  }  
-                    else if(sData==="2") {                    
-                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')">');
-                  }  
-                    else{          
-                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"8"+')">');        
-                   
-                  }   
+                    }  
+                      else if(sData==="2") {                    
+                        $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')"></span>');
+                    }  
+                      else{          
+                        $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')"></span>');        
+                     
+                    } 
+                  }else{
+                    $(nTd).html('<div></div>')
+                  }
+               
+
                 }  },    
                 { data: "lice_fecha_vigencia",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-                  
-                  if(sData==="0") {   
+                  if(oData.lice_file_name){
+                    if(sData==="0") {   
                                   
-                    $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')">');
+                      $(nTd).html('<span class="badge" style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"10"+')"></span>');
+                      
+                    }else if(sData==="1") {            
+                      $(nTd).html('<span class="badge" style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"10"+')"></span>');
                     
-                  }else if(sData==="1") {            
-                    $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')">');
-                  
-                  }  
-                    else if(sData==="2") {                    
-                      $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')">');
-                  }  
-                    else{          
-                      $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"9"+')">');        
-                   
-                  }   
+                    }  
+                      else if(sData==="2") {                    
+                        $(nTd).html('<span class="badge" style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"10"+')"></span>');
+                    }  
+                      else{          
+                        $(nTd).html('<span class="badge" style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddControlDateFichaPersonal('+oData.id+','+"10"+')"></span>');        
+                     
+                    }   
+                  }else{
+                    $(nTd).html('<div></div>')
+                  }
+               
                 
                 }  },    
                 { data: "id",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                   if(oData.id) {                      
-                      $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print btn btn-success btn-xs" type="button" onclick="pdf_FichaPersonal('+oData.id+')"></button><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="modalDeleteFichaPersonal('+oData.id+')">');
+                      /*$(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print bg-indigo-500 py-2 px-2 text-white" type="button" onclick="pdf_FichaPersonal('+oData.id+')"></button><button class="fa fa-trash bg-rose-500 py-2 px-2 text-white" type="button" onclick="modalDeleteFichaPersonal('+oData.id+')">');*/
+                      $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print bg-indigo-500 py-2 px-2 text-white" type="button" onclick="pdf_FichaPersonal('+oData.id+')"></button>');
                   }
                 }
               }
@@ -575,7 +1529,7 @@ function insert_registro_entrevistas(){
         
          table.columns().eq( 0 ).each( function ( colIdx ) {
            
-          var parent= $("#RegistroReferenciaLaboralSearch");      
+          var parent= $("#HistorialFichaPersonal");      
           var child= parent.find("#"+colIdx);    
           child.on('keyup', function() {          
                 table
@@ -589,13 +1543,14 @@ function insert_registro_entrevistas(){
       });
   }
 function pdf_FichaPersonal(id){
+  console.log(id);
   let datos = {
     TipoQuery : '03_pdf_Ficha_Personal',
     value:id 
   }
  // var hashmap = new Map();
  appAjaxQuery(datos,rutaSQL).done(function(resp){  
-  
+    console.log(resp)
     if(resp.tabla9.length){
       var data=[];
       resp.tabla9.forEach((row)=>{
@@ -614,7 +1569,7 @@ function pdf_FichaPersonal(id){
       })
       resp.tabla9=data;
     }
-    
+    console.log(resp)
  var docDefinition = {     
     content: [
    
@@ -714,7 +1669,7 @@ widths: ['15%', '65%', '10%', '10%'],
            } 
            ,              
             {  
-              text: resp.tabla1.nombres,                       
+              text: resp.tabla1[0].nombres,                       
               fontSize: 8,                     
               colSpan:5                    
              },{},{},{},{}
@@ -728,7 +1683,7 @@ widths: ['15%', '65%', '10%', '10%'],
           } 
           ,              
            {  
-             text: resp.tabla1.fecha_nacimiento+" / "+resp.tabla1.lugar_nacimiento ,                       
+             text: resp.tabla1[0].fecha_nacimiento+" / "+resp.tabla1[0].lugar_nacimiento ,                       
              fontSize: 8,                     
              colSpan:5                    
             },{},{},{},{}
@@ -741,7 +1696,7 @@ widths: ['15%', '65%', '10%', '10%'],
         } 
         ,              
          {  
-           text: resp.tabla1.distrito,                       
+           text: resp.tabla1[0].distrito,                       
            fontSize: 8,                                                  
           },
           {
@@ -750,7 +1705,7 @@ widths: ['15%', '65%', '10%', '10%'],
             bold: true,   
           },
           {
-            text: resp.tabla1.provincia,                       
+            text: resp.tabla1[0].provincia,                       
             fontSize: 8, 
           },
           {
@@ -759,7 +1714,7 @@ widths: ['15%', '65%', '10%', '10%'],
             bold: true,  
           },
           {
-            text: resp.tabla1.departamento,                       
+            text: resp.tabla1[0].departamento,                       
             fontSize: 8,
           }
      ],
@@ -771,7 +1726,7 @@ widths: ['15%', '65%', '10%', '10%'],
       } 
       ,              
        {  
-         text: resp.tabla1.dni,                       
+         text: resp.tabla1[0].dni,                       
          fontSize: 8,                                                  
         },
         {
@@ -780,7 +1735,7 @@ widths: ['15%', '65%', '10%', '10%'],
           bold: true,   
         },
         {
-          text: resp.tabla1.telefono,                       
+          text: resp.tabla1[0].telefono,                       
           fontSize: 8, 
         },
         {
@@ -789,7 +1744,7 @@ widths: ['15%', '65%', '10%', '10%'],
           bold: true,  
         },
         {
-          text: resp.tabla1.celular,                       
+          text: resp.tabla1[0].celular,                       
           fontSize: 8,
         }
    ],
@@ -814,7 +1769,7 @@ widths: ['15%', '65%', '10%', '10%'],
     } 
     ,              
      {  
-       text: resp.tabla1.domicilio,                       
+       text: resp.tabla1[0].domicilio,                       
        fontSize: 8,                     
        colSpan:5                    
       },{},{},{},{}
@@ -827,7 +1782,7 @@ widths: ['15%', '65%', '10%', '10%'],
      
     } 
     ,{
-      text: resp.tabla1.urbanizacion,                       
+      text: resp.tabla1[0].urbanizacion,                       
       fontSize: 8,          
       colSpan:2
     },{},              
@@ -838,7 +1793,7 @@ widths: ['15%', '65%', '10%', '10%'],
        colSpan:3                    
       },
       {
-        text: resp.tabla1.distrito_domicilio,                       
+        text: resp.tabla1[0].distrito_domicilio,                       
       fontSize: 8,          
       colSpan:2
       },{}
@@ -852,7 +1807,7 @@ widths: ['15%', '65%', '10%', '10%'],
         } 
         ,              
          {  
-           text: resp.tabla1.estado_civil,                       
+           text: resp.tabla1[0].estado_civil,                       
            fontSize: 8,                                                  
           },
           {
@@ -861,7 +1816,7 @@ widths: ['15%', '65%', '10%', '10%'],
             bold: true,   
           },
           {
-            text: resp.tabla1.edad,                       
+            text: resp.tabla1[0].edad,                       
             fontSize: 8, 
           },
           {
@@ -870,7 +1825,7 @@ widths: ['15%', '65%', '10%', '10%'],
             bold: true,  
           },
           {
-            text: resp.tabla1.n_hijos,                       
+            text: '',                       
             fontSize: 8,
           }
      ],
@@ -883,7 +1838,7 @@ widths: ['15%', '65%', '10%', '10%'],
       } 
       ,              
        {  
-         text: resp.tabla1.sexo,                       
+         text: resp.tabla1[0].sexo,                       
          fontSize: 8,                                                  
         },
         {
@@ -892,7 +1847,7 @@ widths: ['15%', '65%', '10%', '10%'],
           bold: true,   
         },
         {
-          text: resp.tabla1.talla,                       
+          text: resp.tabla1[0].talla,                       
           fontSize: 8, 
         },
         {
@@ -901,7 +1856,7 @@ widths: ['15%', '65%', '10%', '10%'],
           bold: true,  
         },
         {
-          text: resp.tabla1.contextura,                       
+          text: resp.tabla1[0].contextura,                       
           fontSize: 8,
         }
    ]
@@ -928,7 +1883,7 @@ widths: ['15%', '65%', '10%', '10%'],
             }  
             ,              
             {  
-              text: resp.tabla1.ruc,                       
+              text: resp.tabla1[0].ruc,                       
               fontSize: 8,                                                       
             },
             { 
@@ -949,7 +1904,7 @@ widths: ['15%', '65%', '10%', '10%'],
           }  
           ,              
           {  
-            text: resp.tabla1.essalud,                       
+            text: resp.tabla1[0].essalud,                       
             fontSize: 8,  
             colSpan:3                                                     
           },
@@ -966,7 +1921,7 @@ widths: ['15%', '65%', '10%', '10%'],
         }  
         ,              
         {  
-          text: resp.tabla1.onp,                       
+          text: resp.tabla1[0].onp,                       
           fontSize: 8,  
           colSpan:3                                                     
         },
@@ -983,7 +1938,7 @@ widths: ['15%', '65%', '10%', '10%'],
       }  
       ,              
       {  
-        text: resp.tabla1.cusp,                       
+        text: resp.tabla1[0].cusp,                       
         fontSize: 8,                                                       
       },
       { 
@@ -992,7 +1947,7 @@ widths: ['15%', '65%', '10%', '10%'],
         bold: true,  
       },
       {
-        text: resp.tabla1.fecha_afiliacion,                       
+        text: resp.tabla1[0].fecha_afiliacion,                       
         fontSize: 8,  
       }          
    ],                           
@@ -1008,212 +1963,37 @@ widths: ['15%', '65%', '10%', '10%'],
   },
   {
     table: {
-      widths: ['20%', '20%','10%','5%','10%', '5%','10%','5%','10%','5%'],
+      widths: ['25%', '25%','25%','25%'],
        headerRows: 1,
-       body: [
-           [
-              {             
-                text: 'Profesión:',                       
-                fontSize: 8,          
-                bold: true,          
-              }  
-              ,              
-              {  
-                text: 'resp.tabla1.cargo',                       
-                fontSize: 8,                                                       
-              },
-              { 
-                text: 'Título',                       
-                fontSize: 8,          
-                bold: true,  
-              },
-              {
-                text: 'X',                       
-                fontSize: 8,  
-              } ,
-              { 
-                text: 'Bachiller',                       
-                fontSize: 8,          
-                bold: true,  
-              },
-              {
-                text: '',                       
-                fontSize: 8,  
-              } ,
-              { 
-                text: 'Egresado',                       
-                fontSize: 8,          
-                bold: true,  
-              },
-              {
-                text: '',                       
-                fontSize: 8,  
-              } ,
-              { 
-                text: 'Cursando',                       
-                fontSize: 8,          
-                bold: true,  
-              },
-              {
-                text: '',                       
-                fontSize: 8,  
-              }          
-           ],
-           [
-            {             
-              text: 'EducaciónSuperior (Lugar):',                       
-              fontSize: 8,          
-              bold: true,          
-            }  
-            ,              
-            {  
-              text: 'resp.tabla1.cargo',                       
-              fontSize: 8,   
-              colSpan:9,                                                    
-            },
-            { 
-         
-            },
-            {
-             
-            } ,
-            {  
-            },
-            {
-             
-            } ,
-            { 
-               
-            },
-            {
-             
-            } ,
-            { 
-             
-            },
-            {
-          
-            }          
-         ],
-         [
-          {             
-            text: 'Técnica:',                       
-            fontSize: 8,          
-            bold: true,          
-          }  
-          ,              
-          {  
-            text: 'resp.tabla1.cargo',                       
-            fontSize: 8,                                                       
-            colSpan:3,
-          },
-          {
-
-          },
-          {
-
-          },
-          { 
-            text: 'Título',                       
-            fontSize: 8,          
-            bold: true,  
-          },
-          {
-            text: 'X',                       
-            fontSize: 8,  
-          } ,        
-          { 
-            text: 'Egresado',                       
-            fontSize: 8,          
-            bold: true,  
-          },
-          {
-            text: '',                       
-            fontSize: 8,  
-          } ,
-          { 
-            text: 'Cursando',                       
-            fontSize: 8,          
-            bold: true,  
-          },
-          {
-            text: '',                       
-            fontSize: 8,  
-          }          
-       ],
-       [
-        {             
-          text: 'Educación Técnica (Lugar):',                       
-          fontSize: 8,          
-          bold: true,          
-        }  
-        ,              
-        {  
-          text: 'resp.tabla1.cargo',                       
-          fontSize: 8,   
-          colSpan:9,                                                    
-        },
+       body: buildTableBody(['descripcion','tipo','estado','lugar'],resp.tabla7, [
         { 
-     
-        },
-        {
-         
-        } ,
-        {  
-        },
-        {
-         
-        } ,
-        { 
-           
-        },
-        {
-         
-        } ,
-        { 
-         
-        },
-        {
-      
-        }          
-     ],                       
-     [
-      {             
-        text: 'Otros Estudios:',                       
-        fontSize: 8,          
+        
+           text: 'PROFESION',               
+           bold: true,          
+           fontSize: 8,                    
+       },
+       { 
+        
+        text: 'NIVEL',               
         bold: true,          
-      }  
-      ,              
-      {  
-        text: 'response',                       
-        fontSize: 8,   
-        colSpan:9,                                                    
-      },
-      { 
-   
-      },
-      {
-       
-      } ,
-      {  
-      },
-      {
-       
-      } ,
-      { 
-         
-      },
-      {
-       
-      } ,
-      { 
-       
-      },
-      {
-    
-      }          
-   ], 
-       ]
+        fontSize: 8,                    
+        }
+        ,
+          { 
+
+          text: 'ESTADO',               
+          bold: true,          
+          fontSize: 8,                    
+          },
+          { 
+
+          text: 'LUGAR',               
+          bold: true,          
+          fontSize: 8,                    
+          }
+                                                                   
+     ])
+      
     }
     },
     {           
@@ -1318,7 +2098,7 @@ widths: ['15%', '65%', '10%', '10%'],
                    } 
                    ,              
                     {  
-                      text: resp.tabla2.nombres,                       
+                      text: resp.tabla2.length?resp.tabla2[0].nombres:"",                       
                       fontSize: 8,                     
                       colSpan:5                    
                      },{},{},{},{}
@@ -1333,7 +2113,7 @@ widths: ['15%', '65%', '10%', '10%'],
                   } 
                   ,              
                    {  
-                     text: resp.tabla2.fecha+" / "+resp.tabla2.lugar_nacimiento,                       
+                     text: resp.tabla2.length?resp.tabla2[0].fecha+" / "+resp.tabla2[0].lugar_nacimiento:"",                       
                      fontSize: 8,                     
                      colSpan:3                    
                     },{},{},
@@ -1343,7 +2123,7 @@ widths: ['15%', '65%', '10%', '10%'],
                       bold: true,  
                     },
                     {
-                      text: '28',                       
+                      text: '',                       
                       fontSize: 8,                                           
                     }
                ],
@@ -1355,7 +2135,7 @@ widths: ['15%', '65%', '10%', '10%'],
                 } 
                 ,              
                  {  
-                   text: resp.tabla2.distrito,                       
+                   text: resp.tabla2.length?resp.tabla2[0].distrito:"",                       
                    fontSize: 8,                                                  
                   },
                   {
@@ -1364,7 +2144,7 @@ widths: ['15%', '65%', '10%', '10%'],
                     bold: true,   
                   },
                   {
-                    text: resp.tabla2.provincia,                       
+                    text: resp.tabla2.length?resp.tabla2[0].provincia:"",                       
                     fontSize: 8, 
                   },
                   {
@@ -1373,7 +2153,7 @@ widths: ['15%', '65%', '10%', '10%'],
                     bold: true,  
                   },
                   {
-                    text: resp.tabla2.departamento,                       
+                    text: resp.tabla2.length?resp.tabla2[0].departamento:"",                       
                     fontSize: 8,
                   }
              ],
@@ -1385,7 +2165,7 @@ widths: ['15%', '65%', '10%', '10%'],
               } 
               ,              
                {  
-                 text: resp.tabla2.dni,                       
+                 text: resp.tabla2.length?resp.tabla2[0].dni:"",                       
                  fontSize: 8,                                                  
                 },
                 {
@@ -1394,7 +2174,7 @@ widths: ['15%', '65%', '10%', '10%'],
                   bold: true,   
                 },
                 {
-                  text: resp.tabla2.ruc,                       
+                  text: resp.tabla2.length?resp.tabla2[0].ruc:"",                       
                   fontSize: 8, 
                 },
                 {
@@ -1415,7 +2195,7 @@ widths: ['15%', '65%', '10%', '10%'],
             } 
             ,  
             {
-              text: resp.tabla2.profesion,                       
+              text: resp.tabla2.length?resp.tabla2[0].profesion:"",                       
               fontSize: 8,   
               colSpan:2
             },          
@@ -1426,7 +2206,7 @@ widths: ['15%', '65%', '10%', '10%'],
                bold: true,                                                      
               },
               {
-                text: resp.tabla2.ocupacion,                       
+                text: resp.tabla2.length?resp.tabla2[0].ocupacion:"",                       
                 fontSize: 8,   
                 colSpan:2
               },{}
@@ -1439,7 +2219,7 @@ widths: ['15%', '65%', '10%', '10%'],
             } 
             ,              
              {  
-               text: resp.tabla2.centro_lsboral,                       
+               text: resp.tabla2.length?resp.tabla2[0].centro_lsboral:"",                       
                fontSize: 8,                     
                colSpan:5                    
               },{},{},{},{}
@@ -1452,7 +2232,7 @@ widths: ['15%', '65%', '10%', '10%'],
              
             } 
             ,{
-              text: resp.tabla2.direccion,                       
+              text: resp.tabla2.length?resp.tabla2[0].direccion:"",                       
               fontSize: 8,          
               colSpan:5
             },{},              
@@ -1471,7 +2251,7 @@ widths: ['15%', '65%', '10%', '10%'],
                 } 
                 ,              
                  {  
-                   text: resp.tabla2.telefono,                       
+                   text: resp.tabla2.length?resp.tabla2[0].telefono:"",                       
                    fontSize: 8,                                                  
                    colSpan:2,  
                   },{},
@@ -1481,7 +2261,7 @@ widths: ['15%', '65%', '10%', '10%'],
                     bold: true,   
                   },
                   {
-                    text: resp.tabla2.celular,                       
+                    text: resp.tabla2.length?resp.tabla2[0].celular:"",                       
                     fontSize: 8, 
                     colSpan:2, 
                   },
@@ -1514,7 +2294,7 @@ widths: ['15%', '65%', '10%', '10%'],
                      } 
                      ,              
                       {  
-                        text: resp.tabla3.nombres_padre,                       
+                        text: resp.tabla3.length?resp.tabla3[0].nombres_padre:"",                       
                         fontSize: 8,                     
                         colSpan:3                  
                        },{},{}
@@ -1528,7 +2308,7 @@ widths: ['15%', '65%', '10%', '10%'],
                     } 
                     ,              
                      {  
-                       text:resp.tabla3.trabajo_padre,                       
+                       text:resp.tabla3.length?resp.tabla3.trabajo_padre:"",                       
                        fontSize: 8,                     
                                      
                       },
@@ -1538,7 +2318,7 @@ widths: ['15%', '65%', '10%', '10%'],
                         bold: true,  
                       },
                       {
-                        text: resp.tabla3.ocupacion_padre,                       
+                        text: resp.tabla3.length?resp.tabla3.ocupacion_padre:"",                       
                         fontSize: 8, 
                       }
                  ],
@@ -1550,7 +2330,7 @@ widths: ['15%', '65%', '10%', '10%'],
                   } 
                   ,              
                    {  
-                     text: resp.tabla3.direccion_padre,                       
+                     text: resp.tabla3.length?resp.tabla3.direccion_padre:"",                       
                      fontSize: 8,                     
                       colSpan:3
                     },
@@ -1569,7 +2349,7 @@ widths: ['15%', '65%', '10%', '10%'],
                 } 
                 ,              
                  {  
-                   text: resp.tabla3.telefono_padre,                       
+                   text: resp.tabla3.length?resp.tabla3.telefono_padre:"",                       
                    fontSize: 8,                     
                                  
                   },
@@ -1579,7 +2359,7 @@ widths: ['15%', '65%', '10%', '10%'],
                     bold: true,  
                   },
                   {
-                    text: resp.tabla3.celular_padre,                       
+                    text: resp.tabla3.length?resp.tabla3.celular_padre:"",                       
                     fontSize: 8, 
                   }
              ],
@@ -1591,7 +2371,7 @@ widths: ['15%', '65%', '10%', '10%'],
               } 
               ,              
                {  
-                 text: resp.tabla3.nombres_madre,                       
+                 text: resp.tabla3.length?resp.tabla3.nombres_madre:"",                       
                  fontSize: 8,                     
                  colSpan:3                  
                 },{},{}
@@ -1605,7 +2385,7 @@ widths: ['15%', '65%', '10%', '10%'],
              } 
              ,              
               {  
-                text: resp.tabla3.trabajo_madre,                       
+                text: resp.tabla3.length?resp.tabla3.trabajo_madre:"",                       
                 fontSize: 8,                     
                               
                },
@@ -1615,7 +2395,7 @@ widths: ['15%', '65%', '10%', '10%'],
                  bold: true,  
                },
                {
-                 text: resp.tabla3.ocupacion_madre,                       
+                 text: resp.tabla3.length?resp.tabla3.ocupacion_madre:"",                       
                  fontSize: 8, 
                }
           ],
@@ -1627,7 +2407,7 @@ widths: ['15%', '65%', '10%', '10%'],
            } 
            ,              
             {  
-              text:  resp.tabla3.direccion_madre,                       
+              text:  resp.tabla3.length?resp.tabla3.direccion_madre:"",                       
               fontSize: 8,                     
                colSpan:3
              },
@@ -1646,7 +2426,7 @@ widths: ['15%', '65%', '10%', '10%'],
          } 
          ,              
           {  
-            text:  resp.tabla3.telefono_madre,                       
+            text:  resp.tabla3.length?resp.tabla3.telefono_madre:"",                       
             fontSize: 8,                     
                           
            },
@@ -1656,7 +2436,7 @@ widths: ['15%', '65%', '10%', '10%'],
              bold: true,  
            },
            {
-             text: resp.tabla3.celular_madre,                       
+             text: resp.tabla3.length?resp.tabla3.celular_madre:"",                       
              fontSize: 8, 
            }
       ],
@@ -1729,7 +2509,7 @@ widths: ['15%', '65%', '10%', '10%'],
                          } 
                          ,              
                           {  
-                            text: resp.tabla4.nombres,                       
+                            text: resp.tabla4.length?resp.tabla4.nombres:"",                       
                             fontSize: 8,                     
                             colSpan:3                  
                            },{},{}
@@ -1743,7 +2523,7 @@ widths: ['15%', '65%', '10%', '10%'],
                         } 
                         ,              
                          {  
-                           text: resp.tabla4.parentesco,                       
+                           text: resp.tabla4.length?resp.tabla4.parentesco:"",                       
                            fontSize: 8,                     
                                          
                           },
@@ -1753,7 +2533,7 @@ widths: ['15%', '65%', '10%', '10%'],
                             bold: true,  
                           },
                           {
-                            text: resp.tabla4.telefono,                       
+                            text: resp.tabla4.length?resp.tabla4.telefono:"",                       
                             fontSize: 8, 
                           }
                      ],                                                                           
@@ -1768,7 +2548,7 @@ widths: ['15%', '65%', '10%', '10%'],
                 },
                 {
                   table: {
-                    widths: ['20%','10%', '5%','10%', '5%','25%','25%'],
+                    widths: ['20%','10%', '10%','10%', '5%','20%','15%','10%'],
                      headerRows: 1,
                      body: [
                          [
@@ -1783,7 +2563,7 @@ widths: ['15%', '65%', '10%', '10%'],
                               fontSize: 8,                                                                    
                              },
                              {
-                              text: 'X',                       
+                              text: resp.tabla5.length?resp.tabla5[0].movilidad=="1"?'X':"":"",                       
                               fontSize: 8,    
                              },
                              {
@@ -1791,7 +2571,7 @@ widths: ['15%', '65%', '10%', '10%'],
                               fontSize: 8,
                              },
                              {
-                              text: '',                       
+                              text: resp.tabla5.length?resp.tabla5[0].movilidad=="0"?'X':"":"",                       
                               fontSize: 8,
                              },
                              {             
@@ -1800,11 +2580,50 @@ widths: ['15%', '65%', '10%', '10%'],
                               bold: true,          
                             },
                             {
-                              text: '',                       
+                              text: resp.tabla5.length?resp.tabla5[0].licencia_conducir:'',                       
                               fontSize: 8,
-                            }
+                              colSpan:2
+                            },{}
                           
-                         ]
+                         ],
+                         [
+                          {             
+                            text: 'Tipo de vehículo:',                       
+                            fontSize: 8,          
+                            bold: true,          
+                          } 
+                          ,              
+                           {  
+                             text: resp.tabla5.length?resp.tabla5[0].tipo_vehiculo:'',                       
+                             fontSize: 8,                                                                    
+                            },
+                            {
+                             text: 'Marca',                       
+                             fontSize: 8,    
+                            },
+                            {
+                             text: resp.tabla5.length?resp.tabla5[0].marca:'',                       
+                             fontSize: 8,
+                            },
+                            {
+                             text: 'Año',                       
+                             fontSize: 8,
+                            },
+                            {             
+                             text: resp.tabla5.length?resp.tabla5[0].anio:'',                       
+                             fontSize: 8,          
+                             bold: true,          
+                           },
+                           {
+                             text: 'Placa',                       
+                             fontSize: 8,
+                           },
+                           {
+                            text: resp.tabla5.length?resp.tabla5[0].placa:'',                       
+                            fontSize: 8,
+                          }
+                         
+                        ]
                         
                                                                                                  
                   ]
@@ -1829,7 +2648,7 @@ widths: ['15%', '65%', '10%', '10%'],
                              } 
                              ,              
                               {  
-                                text: resp.tabla6.O_1,                       
+                                text: resp.tabla6.length?resp.tabla6[0].O_1:"",                       
                                 fontSize: 8,                                                                    
                                }
                              
@@ -1843,7 +2662,7 @@ widths: ['15%', '65%', '10%', '10%'],
                             } 
                             ,              
                              {  
-                               text: resp.tabla6.O_2,                       
+                               text: resp.tabla6.length?resp.tabla6[0].O_2:"",                       
                                fontSize: 8,                                                                    
                               }
                          ],   [
@@ -1854,7 +2673,7 @@ widths: ['15%', '65%', '10%', '10%'],
                           } 
                           ,              
                            {  
-                             text: resp.tabla6.O_3,                       
+                             text: resp.tabla6.length?resp.tabla6[0].O_3:"",                       
                              fontSize: 8,                                                                    
                             }
                        ],
@@ -1866,7 +2685,7 @@ widths: ['15%', '65%', '10%', '10%'],
                         } 
                         ,              
                          {  
-                           text: resp.tabla6.O_4,                       
+                           text: resp.tabla6.length?resp.tabla6[0].O_4:"",                       
                            fontSize: 8,                                                                    
                           }
                      ]                                                                         
@@ -1897,7 +2716,7 @@ pdfMake.createPdf(docDefinition).open();
     };  
     var table;   
     appAjaxQuery(datos,rutaSQL).done(function(resp){
-      
+      console.log(resp)
         $("#txt_id_type_pdf_Ficha_Personal").val(resp.tabla1.id_personal)
         $("#txt_id_name_pdf_ficha_personal").val(resp.tabla1.nombre); 
         $("#txt_id_type").val(resp.tabla1.type); 
@@ -1906,6 +2725,66 @@ pdfMake.createPdf(docDefinition).open();
         
     } ); 
  
+  }
+  function enabledStatePadres(state,padre=0,madre=0){
+    if(!state){
+      $(".forDisabledStatusPadre").addClass("disabled");
+    }else{
+      if(padre=="1"){
+        $("#txt_Ficha_Personal_padre_nombre").prop( "disabled", true );
+        $("#txt_Ficha_Personal_padre_apellido").prop( "disabled", true );
+        $("#txt_Ficha_Personal_padre_centro").prop( "disabled", true );
+        $("#txt_Ficha_Personal_padre_ocupacion").prop( "disabled", true );
+        $("#txt_Ficha_Personal_padre_direccion").prop( "disabled", true );
+        $("#txt_Ficha_Personal_padre_telefono").prop( "disabled", true );
+        $("#txt_Ficha_Personal_padre_celular").prop( "disabled", true );
+      }else{
+        $("#txt_Ficha_Personal_padre_nombre").prop( "disabled", false );
+        $("#txt_Ficha_Personal_padre_apellido").prop( "disabled", false );
+        $("#txt_Ficha_Personal_padre_centro").prop( "disabled", false );
+        $("#txt_Ficha_Personal_padre_ocupacion").prop( "disabled", false );
+        $("#txt_Ficha_Personal_padre_direccion").prop( "disabled", false );
+        $("#txt_Ficha_Personal_padre_telefono").prop( "disabled", false );
+        $("#txt_Ficha_Personal_padre_celular").prop( "disabled", false );
+      }
+      if(madre=="1"){
+        $("#txt_Ficha_Personal_madre_nombres").prop( "disabled", true );
+        $("#txt_Ficha_Personal_madre_apellidos").prop( "disabled", true );
+        $("#txt_Ficha_Personal_madre_centro").prop( "disabled", true );
+        $("#txt_Ficha_Personal_madre_ocupacion").prop( "disabled", true );
+        $("#txt_Ficha_Personal_madre_direccion").prop( "disabled", true );
+        $("#txt_Ficha_Personal_madre_telefono").prop( "disabled", true );
+        $("#txt_Ficha_Personal_madre_celular").prop( "disabled", true );
+      }else{
+        $("#txt_Ficha_Personal_madre_nombres").prop( "disabled", false );
+        $("#txt_Ficha_Personal_madre_apellidos").prop( "disabled", false );
+        $("#txt_Ficha_Personal_madre_centro").prop( "disabled", false );
+        $("#txt_Ficha_Personal_madre_ocupacion").prop( "disabled", false );
+        $("#txt_Ficha_Personal_madre_direccion").prop( "disabled", false );
+        $("#txt_Ficha_Personal_madre_telefono").prop( "disabled", false );
+        $("#txt_Ficha_Personal_madre_celular").prop( "disabled", false );
+      }
+      $(".forDisabledStatusPadre").removeClass("disabled");
+    }
+
+  }
+  function enabledButtonConyuge(value){
+    if(value){
+      $(".forDisabled").removeClass("disabled");
+      
+    }else{
+      $(".forDisabled").addClass("disabled");
+      
+    }
+    
+  }
+  function enabledButtonMovilidad(value){
+    console.log(value)
+    $("#check_Ficha_Personal_licencia").prop( "disabled", value );
+    $("#check_Ficha_Personal_tipo_vehiculo").prop( "disabled", value );
+    $("#check_Ficha_Personal_tipo_marca").prop( "disabled", value );
+    $("#check_Ficha_Personal_tipo_anio").prop( "disabled", value );
+    $("#check_Ficha_Personal_tipo_placa").prop( "disabled", value );
   }
   function enabledButtonAPenalesJudiciales(value){
     console.log(value)
@@ -1946,11 +2825,12 @@ function gridEntrevistas(){
     let datos = {
         TipoQuery : '01_gridEntrevistasPersonas'
       };
+      let idx=1;
       var table;   
       appAjaxQuery(datos,rutaSQL).done(function(resp){
        
         if(resp.tabla.length>0){      
-         table= $('#grd01EntrevistaHistorial').DataTable( {         
+         table= $('#grd01EntrevistaHistorial').DataTable({         
             "sPaginationType": "simple",
             "language": {
               "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json"
@@ -1961,14 +2841,19 @@ function gridEntrevistas(){
             columns: 
             [
              
-                { data: "id"},          
+                { data: "id", fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  if(oData.id) {                                         
+                        $(nTd).html(idx++);
+                  }
+                }},          
                 { data: "nombres" },
                 { data: "dni" },                
-                { data: "fecha" },            
+                { data: "estado" },            
                 { data: "id",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
                   if(oData.id) {                      
-                      $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print btn btn-success btn-xs" type="button" onclick="pdf_EntrevsitasPersona('+oData.id+')"></button><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="modalDeleteEntrevistaPersona('+oData.id+')">');
+                   
+                        $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print bg-indigo-500 py-2 px-2 text-white" type="button" onclick="pdf_EntrevsitasPersona('+oData.id+')"></button>');
                   }
                 }
               }
@@ -1989,6 +2874,7 @@ function gridEntrevistas(){
   
       } );   
         }   
+       // idx++;
       });
   }
 function gridSecondRequerimientos(){
@@ -1997,7 +2883,7 @@ function gridSecondRequerimientos(){
       };
       var table;   
       appAjaxQuery(datos,rutaSQL).done(function(resp){
-       
+        console.log(resp)
         if(resp.tabla.length>0){      
          table= $('#grd01RequerimientosHistorial').DataTable( {         
             "sPaginationType": "simple",
@@ -2010,17 +2896,20 @@ function gridSecondRequerimientos(){
             columns: 
             [
              
-                { data: "id"},          
-                { data: "nombres" },
-                { data: "vacantes" },
-                { data: "cargo" },
-                { data: "fecha" },
+                //{ data: "id"},          
                 { data: "area" },
+                { data: "cargo" },                        
+                { data: "vacantes" },
+                { data: "cumplidos" },
+                { data: "motivo" },
+                { data: "estado" },
                 { data: "id",
                 fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+                  console.log(oData.estado_id)
                   if(oData.id) {
-                      console.log(oData.id)
-                      $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print btn btn-success btn-xs" type="button" onclick="pdf_requerimientoPersona('+oData.id+')"></button><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="modalDeleteRequerimientoPersona('+oData.id+')">');
+                    
+                    //  $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-print bg-indigo-500 py-2 px-2 text-white" type="button" onclick="pdf_requerimientoPersona('+oData.id+')"></button><button class="fa fa-trash bg-rose-500 py-2 px-2 text-white" type="button" onclick="modalDeleteRequerimientoPersona('+oData.id+')">');
+                    $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-hand-pointer-o bg-violet-500 py-2 px-2 text-white" type="button" '+(oData.estado_id==5?"disabled":"")+' onclick="modalGestionPersonasSearchAdd('+oData.id+')"></button><button class="fa fa-eye bg-cyan-500 py-2 px-2 text-white" type="button" onclick="modalGestionPersonas('+oData.id+')"></button><button class="fa fa-print bg-indigo-500 py-2 px-2 text-white" type="button" onclick="pdf_requerimientoPersona('+oData.id+')"></button>');
                   }
                 }
               }
@@ -2050,6 +2939,7 @@ function pdf_requerimientoPersona(id){
       TipoQuery : '03_pdf_requerimiento_persona',
       id:id 
     }
+    console.log(id)
    // var hashmap = new Map();
     appAjaxQuery(datos,rutaSQL).done(function(resp){  
       console.log(resp)  
@@ -2523,7 +3413,14 @@ function pdf_ReferenciaLaboral(id){
  // var hashmap = new Map();
   appAjaxQuery(datos,rutaSQL).done(function(resp){  
     console.log(resp)  
-  
+    let dataResponde={
+      "nombresCandidato":resp.tabla1[0].nombresCandidato,
+      "nombresReferente":resp.tabla1[0].nombresReferente,
+      "telefono":resp.tabla1[0].telefono,
+      "cargo":resp.tabla1[0].cargo,
+      "empresa":resp.tabla1[0].empresa,     
+      "respuesta": resp.tabla1.map((it,idx)=>(it.respuesta))
+    }
   var docDefinition = {     
     content: [
    
@@ -2618,7 +3515,7 @@ table: {
          } 
          ,              
           {  
-            text: resp.tabla1.nombresCandidato,                       
+            text: dataResponde.nombresCandidato,                       
             fontSize: 8,                     
             colSpan:3                    
            },{},{}
@@ -2632,14 +3529,14 @@ table: {
         } 
         ,              
          {  
-           text:  resp.tabla1.nombresReferente,                       
+           text:  dataResponde.nombresReferente,                       
            fontSize: 8                                                
           },{
             text: 'Teléfono : ',                       
             fontSize: 8,          
             bold: true,  
           },{
-            text:  resp.tabla1.telefono,                       
+            text:  dataResponde.telefono,                       
             fontSize: 8 
           }
      ],   [
@@ -2650,14 +3547,14 @@ table: {
       } 
       ,              
        {  
-         text:  resp.tabla1.cargo,                       
+         text:  dataResponde.cargo,                       
          fontSize: 8                                                
         },{
           text: 'Empresa : ',                       
           fontSize: 8,          
           bold: true,  
         },{
-          text:  resp.tabla1.empresa,                       
+          text:  dataResponde.empresa,                       
           fontSize: 8 
         }
    ]                
@@ -2706,7 +3603,7 @@ table: {
           margin: [ 0, 10, 0, 0 ]                                   
         } ,
         {             
-          text:  resp.tabla1.criterio1,
+          text:  dataResponde.respuesta[0],
           fontSize: 8,
           margin: [ 0, 10, 0, 0 ]                                 
         }               
@@ -2728,7 +3625,7 @@ table: {
           margin: [ 0, 10, 0, 0 ]                                   
         } ,
         {             
-          text: resp.tabla1.criterio2,
+          text: dataResponde.respuesta[1],
           fontSize: 8,
           margin: [ 0, 10, 0, 0 ]                                 
         }               
@@ -2750,7 +3647,7 @@ table: {
           margin: [ 0, 10, 0, 0 ]                                   
         } ,
         {             
-          text: resp.tabla1.criterio3,
+          text: dataResponde.respuesta[2],
           fontSize: 8,
           margin: [ 0, 10, 0, 0 ]                                 
         }               
@@ -2772,7 +3669,7 @@ table: {
           margin: [ 0, 10, 0, 0 ]                                   
         } ,
         {             
-          text: resp.tabla1.criterio4,
+          text: dataResponde.respuesta[3],
           fontSize: 8,
           margin: [ 0, 10, 0, 0 ]                                 
         }               
@@ -2794,7 +3691,7 @@ table: {
           margin: [ 0, 10, 0, 0 ]                                   
         } ,
         {             
-          text: resp.tabla1.criterio5,
+          text: dataResponde.respuesta[4],
           fontSize: 8,
           margin: [ 0, 10, 0, 0 ]                                 
         }               
@@ -2818,7 +3715,7 @@ table: {
           margin: [ 0, 10, 0, 0 ]                                   
         } ,
         {             
-          text: resp.tabla1.criterio6,
+          text: dataResponde.respuesta[5],
           fontSize: 8,
           margin: [ 0, 10, 0, 0 ]                                 
         }               
@@ -2842,7 +3739,7 @@ table: {
           margin: [ 0, 10, 0, 0 ]                                   
         } ,
         {             
-          text: resp.tabla1.criterio7,
+          text: dataResponde.respuesta[6],
           fontSize: 8,
           margin: [ 0, 10, 0, 0 ]                                 
         }               
@@ -2866,7 +3763,7 @@ table: {
           margin: [ 0, 10, 0, 0 ]                                   
         } ,
         {             
-          text: resp.tabla1.criterio8,
+          text: dataResponde.respuesta[7],
           fontSize: 8,
           margin: [ 0, 10, 0, 0 ]                                 
         }               
@@ -2890,7 +3787,7 @@ table: {
           margin: [ 0, 10, 0, 0 ]                                   
         } ,
         {             
-          text: resp.tabla1.criterio9,
+          text: dataResponde.respuesta[8],
           fontSize: 8,
           margin: [ 0, 10, 0, 0 ]                                 
         }               
@@ -2914,7 +3811,7 @@ table: {
           margin: [ 0, 10, 0, 0 ]                                   
         } ,
         {             
-          text: resp.tabla1.criterio10,
+          text: dataResponde.respuesta[9],
           fontSize: 8,
           margin: [ 0, 10, 0, 0 ]                                 
         }               
@@ -2940,7 +3837,7 @@ table: {
             border: [true, false, true, true],   
             },
             {
-              text: resp.tabla1.recomendacion=="1"?'X':'',                       
+              text:  dataResponde.respuesta[10]=="1"?'X':'',                       
               fontSize: 8,
             border: [true, false, true, true],    
             },
@@ -2950,7 +3847,7 @@ table: {
              border: [true, false, true, true],    
             },
             {
-              text: resp.tabla1.recomendacion=="0"?'X':'',                       
+              text:  dataResponde.respuesta[10]=="0"?'X':'',                       
               fontSize: 8,
              border: [true, false, true, true],    
             }
@@ -3023,9 +3920,24 @@ function pdf_EntrevsitasPersona(id){
     id:id 
   }
  // var hashmap = new Map();
+  console.log(id)
   appAjaxQuery(datos,rutaSQL).done(function(resp){  
     console.log(resp)  
-  
+    let dataResponde={
+      "nombres":resp.tabla1[0].nombres,
+      "dni":resp.tabla1[0].dni,
+      "edad":resp.tabla1[0].edad,
+      "fecha":resp.tabla1[0].fecha,
+     // "civil":resp.tabla1[0].civil,
+      "correo":resp.tabla1[0].correo,
+      "telefono":resp.tabla1[0].telefono,
+      "puesto":resp.tabla1[0].puesto,
+      "pretenciones":resp.tabla1[0].pretenciones,      
+      "preguntas": resp.tabla1.map((it,idx)=>(it.respuesta))
+    }
+
+
+
   var docDefinition = {     
     content: [
    
@@ -3133,7 +4045,7 @@ table: {
          } 
          ,              
           {  
-            text:resp.tabla1.nombres,                       
+            text:dataResponde.nombres,                       
             fontSize: 8,                     
             colSpan:3                    
            },{},{}
@@ -3147,14 +4059,14 @@ table: {
         } 
         ,              
          {  
-           text: resp.tabla1.dni,                       
+           text: dataResponde.dni,                       
            fontSize: 8                                                
           },{
             text: 'EDAD: ',                       
             fontSize: 8,          
             bold: true,  
           },{
-            text: resp.tabla1.edad,                       
+            text: dataResponde.edad,                       
             fontSize: 8 
           }
      ],   [
@@ -3165,16 +4077,18 @@ table: {
       } 
       ,              
        {  
-         text: resp.tabla1.fecha,                       
-         fontSize: 8                                                
-        },{
+         text: dataResponde.fecha,                       
+         fontSize: 8,   
+         colSpan:  3                                           
+        }
+        /*,{
           text: 'ESTADO CIVIL : ',                       
           fontSize: 8,          
           bold: true,  
         },{
-          text: resp.tabla1.civil,                       
+          text: dataResponde.civil,                       
           fontSize: 8 
-        }
+        }*/
    ], [
     {             
       text: 'CORREO ELECTRONICO : ',                       
@@ -3183,14 +4097,14 @@ table: {
     } 
     ,              
      {  
-       text:resp.tabla1.correo,                       
+       text:dataResponde.correo,                       
        fontSize: 8                                                
       },{
         text: 'TELEFONO : ',                       
         fontSize: 8,          
         bold: true,  
       },{
-        text: resp.tabla1.telefono,                       
+        text: dataResponde.telefono,                       
         fontSize: 8 
       }
  ] ,
@@ -3203,7 +4117,7 @@ table: {
   } 
   ,              
    {  
-     text: resp.tabla1.puesto,                       
+     text: dataResponde.puesto,                       
      fontSize: 8 , 
      border: [true, true, true, false],                                               
     },{
@@ -3212,7 +4126,7 @@ table: {
       bold: true,  
       border: [true, true, true, false], 
     },{
-      text: 'S/. '+resp.tabla1.presenciones,                       
+      text: 'S/. '+dataResponde.pretenciones,                       
       fontSize: 8, 
       border: [true, true, true, false], 
     }
@@ -3285,14 +4199,14 @@ table: {
           bold: true,                 
         } 
         ,              
-         {text: resp.tabla1.O_1=="3"?'X':'',                       
+         {text: dataResponde.preguntas[0]=="3"?'X':'',                       
          fontSize: 8,                   
         },{
-          text:  resp.tabla1.O_1=="2"?'X':'',                       
+          text:  dataResponde.preguntas[0]=="2"?'X':'',                       
           fontSize: 8,          
         
          },{
-          text:  resp.tabla1.O_1=="1"?'X':'',                       
+          text:  dataResponde.preguntas[0]=="1"?'X':'',                       
           fontSize: 8,                    
          }
        
@@ -3304,14 +4218,14 @@ table: {
           bold: true,                 
         } 
         ,              
-         {text:  resp.tabla1.O_2=="3"?'X':'',                       
+         {text:  dataResponde.preguntas[1]=="3"?'X':'',                       
          fontSize: 8,                   
         },{
-          text:  resp.tabla1.O_2=="2"?'X':'',                       
+          text:  dataResponde.preguntas[1]=="2"?'X':'',                       
           fontSize: 8,          
         
          },{
-          text:  resp.tabla1.O_2=="1"?'X':'',                       
+          text:  dataResponde.preguntas[1]=="1"?'X':'',                       
           fontSize: 8,                    
          }
        
@@ -3323,14 +4237,14 @@ table: {
           bold: true,                 
         } 
         ,              
-         {text:  resp.tabla1.O_3=="3"?'X':'',                       
+         {text:  dataResponde.preguntas[2]=="3"?'X':'',                       
          fontSize: 8,                   
         },{
-          text:  resp.tabla1.O_3=="2"?'X':'',                       
+          text:  dataResponde.preguntas[2]=="2"?'X':'',                       
           fontSize: 8,          
         
          },{
-          text:  resp.tabla1.O_3=="1"?'X':'',                       
+          text:  dataResponde.preguntas[2]=="1"?'X':'',                       
           fontSize: 8,                    
          }
        
@@ -3345,7 +4259,7 @@ table: {
         } 
         ,              
          {  
-          text: (Number(resp.tabla1.O_3)+Number(resp.tabla1.O_2)+Number(resp.tabla1.O_1))/3,                       
+          text: (Number(dataResponde.preguntas[0])+Number(dataResponde.preguntas[1])+Number(dataResponde.preguntas[2]))/3,                       
           fontSize: 8,         
           border: [true, true, true, false],  
           colSpan:3                  
@@ -3412,14 +4326,14 @@ table: {
             bold: true,                 
           } 
           ,              
-           {text:  resp.tabla1.S_1=="3"?'X':'',                       
+           {text:  dataResponde.preguntas[3]=="3"?'X':'',                       
            fontSize: 8,                   
           },{
-            text:  resp.tabla1.S_1=="2"?'X':'',                       
+            text:  dataResponde.preguntas[3]=="2"?'X':'',                       
             fontSize: 8,          
           
            },{
-            text:  resp.tabla1.S_1=="1"?'X':'',                       
+            text:  dataResponde.preguntas[3]=="1"?'X':'',                       
             fontSize: 8,                    
            }
          
@@ -3431,14 +4345,14 @@ table: {
             bold: true,                 
           } 
           ,              
-           {text:  resp.tabla1.S_2=="3"?'X':'',                       
+           {text:  dataResponde.preguntas[4]=="3"?'X':'',                       
            fontSize: 8,                   
           },{
-            text:  resp.tabla1.S_2=="2"?'X':'',                       
+            text:  dataResponde.preguntas[4]=="2"?'X':'',                       
             fontSize: 8,          
           
            },{
-            text:  resp.tabla1.S_2=="1"?'X':'',                       
+            text:  dataResponde.preguntas[4]=="1"?'X':'',                       
             fontSize: 8,                    
            }
          
@@ -3450,14 +4364,14 @@ table: {
             bold: true,                 
           } 
           ,              
-           {text:  resp.tabla1.S_1=="3"?'X':'',                       
+           {text:  dataResponde.preguntas[5]=="3"?'X':'',                       
            fontSize: 8,                   
           },{
-            text:  resp.tabla1.S_1=="2"?'X':'',                       
+            text:  dataResponde.preguntas[5]=="2"?'X':'',                       
             fontSize: 8,          
           
            },{
-            text:  resp.tabla1.S_1=="1"?'X':'',                       
+            text:  dataResponde.preguntas[5]=="1"?'X':'',                       
             fontSize: 8,                    
            }
          
@@ -3471,7 +4385,7 @@ table: {
           } 
           ,              
            {   
-            text: (Number(resp.tabla1.S_3)+Number(resp.tabla1.S_2)+Number(resp.tabla1.S_1))/3,                       
+            text: (Number(dataResponde.preguntas[3])+Number(dataResponde.preguntas[4])+Number(dataResponde.preguntas[5]))/3,                       
             fontSize: 8,        
             border: [true, true, true, false],   
             colSpan:3                 
@@ -3570,6 +4484,87 @@ pdfMake.createPdf(docDefinition).open();
 })
 
 }
+
+function modalGestionPersonasSearchAdd(id){
+   
+     
+  ///appAjaxQuery(datos,rutaSQL).done(function(resp){
+     
+    $('#txt-modal-gestion-personas-vacante-requerimiento').val(id)
+    $('#modal_gestionPersonasSearch').modal('show');
+
+ // } ); 
+}
+function modalGestionPersonas(id){
+ 
+  
+  let datos = {
+    TipoQuery : '01_gridRequerimientoGestionPersonal',
+    value:id    
+  };  
+     
+  appAjaxQuery(datos,rutaSQL).done(function(resp){
+      console.log(resp)
+
+      $('#txt-modal-gestion-personas-vacante-search').val();
+      $('#table_gestion_personas_vacante_list > tbody').empty();
+      $('#table_gestion_personas_vacante_list_observaciones > tbody').empty();
+     // $('#button_add_gestion_personas_vacante').hide();
+
+     $("#txt-modal-gestion-personas-nombre").val(resp.tabla.nombre_solicitante
+      )
+      $("#txt-modal-gestion-personas-apellido").val(resp.tabla.apellido_solicitante); 
+
+      $("#txt-modal-gestion-personas-area").val(resp.tabla.area); 
+      $("#txt-modal-gestion-personas-cargo").val(resp.tabla.cargo); 
+      $("#txt-modal-gestion-personas-motivo").val(resp.tabla.motivo); 
+      $("#txt-modal-gestion-personas-vacantes").val(resp.tabla.vacantes); 
+      $("#txt-modal-gestion-personas-estado").val(resp.tabla.estado); 
+   
+
+      let tr="";
+
+      if(resp.tabla1.length){
+        resp.tabla1.forEach((ele)=>{
+          tr+="<tr id='"+(new Date()).getTime()+"'>"
+          tr+="<td>"+ele.nombre+"</td>"
+          tr+="<td>"+ele.apellido+"</td>"
+          tr+="<td>"+ele.dni+"</td>"
+          tr+="<td>"+ele.cargo+"</td>"  
+          tr+="</tr>"
+      })      
+      }else{
+        tr="<tr><td colspan='5' style='color:red;text-align:center'>No hay personal asociado al requerimiento</td></tr>"
+      }
+    
+ 
+ 
+      $('#table_gestion_personas_vacante_list > tbody').append(tr)
+
+
+      let tr1="";
+
+      if(resp.tabla2.length){
+        resp.tabla2.forEach((ele)=>{
+          tr1+="<tr id='"+((new Date()).getTime()+1)+"'>"
+          tr1+="<td>"+ele.descripcion+"</td>"    
+          tr1+="</tr>"
+      })
+      }else{
+        tr1="<tr><td colspan='1' style='color:red;text-align:center'>No hay observaciones</td></tr>"
+      }
+    
+      
+ 
+ 
+      $('#table_gestion_personas_vacante_list_observaciones > tbody').append(tr1)
+
+
+    $('#modal_gestionPersonas').modal('show');
+
+  } ); 
+}
+
 function pdf_ModalAddProgramaCapacitacion(id,type){
   let datos = {
     TipoQuery : '01_get_pdf_file_programa_capacitacion',
@@ -3578,11 +4573,13 @@ function pdf_ModalAddProgramaCapacitacion(id,type){
   };  
   var table;   
   appAjaxQuery(datos,rutaSQL).done(function(resp){
+    console.log(resp)
     
       $("#txt_id_programa_capacitacion").val(resp.tabla1.id)
       $("#txt_id_modal_programa_capacitacion_name").val(resp.tabla1.nombre); 
       $("#txt_id_modal_programa_capacitacion_type").val(resp.tabla1.type); 
      // $('#modal_FichaPersonal').modal('hide');
+     
       $('#modal_ProgramaCapacitacion').modal('show');
       
   } ); 
@@ -3616,6 +4613,27 @@ function insert_modal_date_Programa_capacitacion(){
     
 } ); 
 }
+function addItemRequerimiento(tableItemRequerimiento){
+  let idx=1;
+  let element =$('#'+tableItemRequerimiento+' > tbody > tr').last();
+  if(element.length){
+    let lastEle=element.find(".txt_item_requerimiento").val()
+    idx=Number(lastEle)+1
+
+  }
+  $('#'+tableItemRequerimiento+' > tbody').append( "<tr id='"+(new Date()).getTime()+"' class='ItemsRemoveRequerimientoRow'>"+
+  "<td><input type='text' class='obligatory-input form-control txt_item_requerimiento' disabled value='"+idx+"'/></td>"+
+  "<td><input type='text' class='form-control txt_codigo_requerimiento' /></td>"+
+  "<td><input type='text' class='form-control txt_n_parte_requerimiento' /></td>"+
+  "<td><input type='text' class='obligatory-input form-control txt_descripcion_requerimiento' /></td>"+
+  "<td><input type='text' class='obligatory-input form-control txt_cantidad_requerimiento' /></td>"+
+  "<td><input type='text' class='obligatory-input form-control txt_unidad_requerimiento' /></td>"+
+ // "<td><input type='text' class='obligatory-input form-control txt_prioridad_requerimiento' /></td>"+
+  "<td><input type='text' class='form-control txt_observacion_requerimiento' /></td>"+
+"<td><div style='display:flex;justify-content:center;gap:2rem;'><button type='button' class='fa fa-trash bg-rose-500  py-2 px-2 text-white' onclick='removeComentarios("+(new Date()).getTime()+")'></button>"+ 
+"</div></td>"+
+"</tr>")
+}
 function gridProgramacionCapacitacion(){
   let datos = {
     TipoQuery : '01_gridProgramacionCapacitacion'
@@ -3635,222 +4653,269 @@ function gridProgramacionCapacitacion(){
         columns: 
         [
          
-            { data: "id"},                                                       
+          { data: "nombrescandidato" },
+          { data: "dni" },                                                          
             { data: "induc_fecha_vigencia",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-              if(sData==="0") {   
+
+              if(oData.induc_file_name){
+                if(sData==="0") {   
                               
-                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"0"+')">');
+                  $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"0"+')"></span>');
+                  
+                }else if(sData==="1") {            
+                  $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"0"+')"></span>');
                 
-              }else if(sData==="1") {            
-                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"0"+')">');
+                }  
+                  else if(sData==="2") {                    
+                    $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"0"+')"></span>');
+                }  
+                  else{          
+                    $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"0"+')"></span>');        
+                 
+                }  
+              }else{
+                $(nTd).html('<div></div>')
+              }
               
-              }  
-                else if(sData==="2") {                    
-                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"0"+')">');
-              }  
-                else{          
-                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"0"+')">');        
-               
-              }   
             } },    
             { data: "defen_fecha_vigencia",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+             if(oData.defen_file_name){
               if(sData==="0") {   
                               
-                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"1"+')">');
+                $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"1"+')"></span>');
                 
               }else if(sData==="1") {            
-                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"1"+')">');
+                $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"1"+')"></span>');
               
               }  
                 else if(sData==="2") {                    
-                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"1"+')">');
+                  $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"1"+')"></span>');
               }  
                 else{          
-                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"1"+')">');        
+                  $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"1"+')"></span>');        
                
               }   
+             }else{
+              $(nTd).html('<div></div>')
+            }
             }  },    
             { data: "peligroso1_fecha_vigencia",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+            if(oData.peligroso1_file_name){
               if(sData==="0") {   
                               
-                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"2"+')">');
+                $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"2"+')"></span>');
                 
               }else if(sData==="1") {            
-                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"2"+')">');
+                $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"2"+')"></span>');
               
               }  
                 else if(sData==="2") {                    
-                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"2"+')">');
+                  $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"2"+')"></span>');
               }  
                 else{          
-                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"2"+')">');        
+                  $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"2"+')"></span>');        
                
               }   
+            }else{
+              $(nTd).html('<div></div>')
+            }
             }  },    
             { data: "peligroso2_fecha_vigencia",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+            if(oData.peligroso2_file_name){
               if(sData==="0") {   
                               
-                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"3"+')">');
+                $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"3"+')"></span>');
                 
               }else if(sData==="1") {            
-                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"3"+')">');
+                $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"3"+')"></span>');
               
               }  
                 else if(sData==="2") {                    
-                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"3"+')">');
+                  $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"3"+')"></span>');
               }  
                 else{          
-                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"3"+')">');        
+                  $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"3"+')"></span>');        
                
-              }   
+              }  
+            } else{
+              $(nTd).html('<div></div>')
+            }
             }  },    
             { data: "peligroso3_fecha_vigencia",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-              if(sData==="0") {   
+           if(oData.peligroso3_file_name){
+            if(sData==="0") {   
                               
-                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"4"+')">');
-                
-              }else if(sData==="1") {            
-                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"4"+')">');
+              $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"4"+')"></span>');
               
-              }  
-                else if(sData==="2") {                    
-                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"4"+')">');
-              }  
-                else{          
-                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"4"+')">');        
-               
-              }   
+            }else if(sData==="1") {            
+              $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"4"+')"></span>');
+            
+            }  
+              else if(sData==="2") {                    
+                $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"4"+')"></span>');
+            }  
+              else{          
+                $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"4"+')"></span>');        
+             
+            }   
+           }else{
+            $(nTd).html('<div></div>')
+          }
             }  },    
             { data: "auxilio_fecha_vigencia",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+            if(oData.auxilio_file_name){
               if(sData==="0") {   
                               
-                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"5"+')">');
+                $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"5"+')"></span> ');
                 
               }else if(sData==="1") {            
-                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"5"+')">');
+                $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"5"+')"></span> ');
               
               }  
                 else if(sData==="2") {                    
-                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"5"+')">');
+                  $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"5"+')"></span> ');
               }  
                 else{          
-                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"5"+')">');        
+                  $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"5"+')"></span> ');        
                
               }   
+            }else{
+              $(nTd).html('<div></div>')
+            }
             }  },    
             { data: "extintores_fecha_vigencia",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
-              if(sData==="0") {   
+           if(oData.extintores_file_name){
+            if(sData==="0") {   
                               
-                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"6"+')">');
-                
-              }else if(sData==="1") {            
-                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"6"+')">');
+              $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"6"+')"></span> ');
               
-              }  
-                else if(sData==="2") {                    
-                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"6"+')">');
-              }  
-                else{          
-                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"6"+')">');        
-               
-              }   
+            }else if(sData==="1") {            
+              $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"6"+')"></span> ');
+            
+            }  
+              else if(sData==="2") {                    
+                $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"6"+')"></span> ');
+            }  
+              else{          
+                $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"6"+')"></span> ');        
+             
+            }  
+           } else{
+            $(nTd).html('<div></div>')
+          }
             }  },    
             { data: "trabajo_fecha_vigencia",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+             if(oData.trabajo_file_name){
               if(sData==="0") {   
                               
-                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"7"+')">');
+                $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"7"+')"></span> ');
                 
               }else if(sData==="1") {            
-                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"7"+')">');
+                $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"7"+')"></span> ');
               
               }  
                 else if(sData==="2") {                    
-                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"7"+')">');
+                  $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"7"+')"></span> ');
               }  
                 else{          
-                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"7"+')">');        
+                  $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"7"+')"></span> ');        
                
-              }   
+              }  
+             } else{
+              $(nTd).html('<div></div>')
+            }
             }  },  
             { data: "fatiga_fecha_vigencia",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
+             if(oData.fatiga_file_name){
               if(sData==="0") {   
                               
-                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"8"+')">');
+                $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"8"+')"></span> ');
                 
               }else if(sData==="1") {            
-                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"8"+')">');
+                $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"8"+')"></span> ');
               
               }  
                 else if(sData==="2") {                    
-                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"8"+')">');
+                  $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"8"+')"></span> ');
               }  
                 else{          
-                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"8"+')">');        
+                  $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"8"+')"></span> ');        
                
               }   
+             }else{
+              $(nTd).html('<div></div>')
+            }
             }  },    
             { data: "curso_fecha_vigencia",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
               
+             if(oData.curso_file_name){
               if(sData==="0") {   
                               
-                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"9"+')">');
+                $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"9"+')"></span> ');
                 
               }else if(sData==="1") {            
-                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"9"+')">');
+                $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"9"+')"></span> ');
               
               }  
                 else if(sData==="2") {                    
-                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"9"+')">');
+                  $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"9"+')"></span>');
               }  
                 else{          
-                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"9"+')">');        
+                  $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"9"+')"></span>');        
                
               }   
+             }else{
+              $(nTd).html('<div></div>')
+            }
             
             }  }, { data: "induccion_fecha_vigencia",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
               
+             if(oData.induccion_file_name){
               if(sData==="0") {   
                               
-                $(nTd).html('<span class="badge"style="background:#343a40">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"10"+')">');
+                $(nTd).html('<span class="badge"style="background:#343a40;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"10"+')"></span> ');
                 
               }else if(sData==="1") {            
-                $(nTd).html('<span class="badge"style="background:#28a745">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"10"+')">');
+                $(nTd).html('<span class="badge"style="background:#28a745;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"10"+')"></span> ');
               
               }  
                 else if(sData==="2") {                    
-                  $(nTd).html('<span class="badge"style="background:#ffc107">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"10"+')">');
+                  $(nTd).html('<span class="badge"style="background:#ffc107;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"10"+')"></span> ');
               }  
                 else{          
-                  $(nTd).html('<span class="badge"style="background:#dc3545">o</span><button class="fa fa-pencil btn btn-info btn-xs" type="button" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id+','+"10"+')">');        
+                  $(nTd).html('<span class="badge"style="background:#dc3545;display:block;width:20px;height:20px;margin:auto" onclick="pdf_ModalAddProgramaCapacitacion('+oData.id_personal+','+"10"+')"></span> ');        
                
-              }   
+              }  
+             } else{
+              $(nTd).html('<div></div>')
+            }
             
             }  },    
-            { data: "id",
+           /* { data: "id",
             fnCreatedCell: function (nTd, sData, oData, iRow, iCol) {
               if(oData.id) {                      
-                  $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-trash btn btn-danger btn-xs" type="button" onclick="modalDeleteProgramaCapacitacion('+oData.id+')">');
+                  $(nTd).html('<div style="display:flex;justify-content:center;gap:2rem;"><button class="fa fa-trash bg-rose-500 py-2 px-2 text-white" type="button" onclick="modalDeleteProgramaCapacitacion('+oData.id+')">');
               }
             }
-          }
+          }*/
         ]
     }
      );     
     
      table.columns().eq( 0 ).each( function ( colIdx ) {
        
-      var parent= $("#RegistroReferenciaLaboralSearch");      
+      var parent= $("#ProgramaCapacitacionSearch");      
       var child= parent.find("#"+colIdx);    
       child.on('keyup', function() {          
             table
@@ -3874,32 +4939,35 @@ function save_programacion_capacitacion(){
            
          var files=$(".input_files_programacion_capacitacion").map(function(index, i){      
            data.append('file_'+index, this.files[0]);
-           return  this.files[0].name
+           let dd="";
+           if(this.files[0]){
+             dd=this.files[0].name
+           }
+           return  dd
          }).get();
       
         
          let datos = {
            TipoQuery : '03_save_register_programacion_capacitacion',
            data:{
-             id:(new Date()).getTime(),    
+             id:(new Date()).getTime(),  
+             id_personal:  $("#idPersonalHidden").val(),
              files:files         
            },
          };        
          console.log(datos)
          appAjaxQuery(datos,rutaSQL).done(function(resp){  
          
-        
-            var xhttp = new XMLHttpRequest();
-           
-           // Set POST method and ajax file path
-           xhttp.open("POST", "pages/catalogos/personas/ajaxfile.php", true);
-     
-           // call on request changes state
+        /*
+            var xhttp = new XMLHttpRequest();                 
+           xhttp.open("POST", "pages/catalogos/personas/ajaxfile.php", true);            
            xhttp.onreadystatechange = function() {
               if (this.readyState == 4 && this.status == 200) {
      
                 var response = this.responseText;
                 if(response == 1){
+                  gridProgramacionCapacitacion();
+                   
                  swal("Se ha registrado correctamente", {
                    icon: "success",
              });
@@ -3909,10 +4977,15 @@ function save_programacion_capacitacion(){
              });
                 }
               }
-           };
-     
+           };     
          xhttp.send(data);                          
-         resetProgramaCapacitacion();                                      
+         resetProgramaCapacitacion();*/
+         gridProgramacionCapacitacion();
+         resetProgramaCapacitacion();
+
+            swal("Se ha registrado correctamente", {
+                  icon: "success",
+            });
          });         
      }
 
@@ -3944,6 +5017,7 @@ function modalDeleteFichaPersonal(id){
   });
 }
 function modalDeleteProgramaCapacitacion(id){
+  console.log(id)
   swal({
     title: "¿Estas seguro que deseas eliminar?",
     text: "Al realizar esta operación se quitarán todos los datos asociados al registro",
@@ -4034,10 +5108,12 @@ function modalDeleteRequerimientoPersona(id){
         };
 
         appAjaxQuery(datos,rutaSQL).done(function(resp){                
-          gridReferenciaLaboral();
+ 
             swal("Has eliminado el registro", {
              icon: "success",
             });
+
+            gridReferenciaLaboral();
         });  
         
       }
@@ -4077,9 +5153,9 @@ function modalDeleteRequerimientoPersona(id){
 
     $("#txt_entrevistas_dni").val("");
     $("#txt_entrevistas_edad").val("");
-    $("#txt_entrevistas_fecha").datepicker("setDate",moment().format("DD/MM/YYYY"));
+    $("#txt_entrevistas_fecha").val(new Date().toISOString().slice(0, 10));
 
-    $("#txt_entrevistas_civil").val("-1");
+    //$("#txt_entrevistas_civil").val("-1");
 
     $("#txt_entrevistas_correo").val("");
     $("#txt_entrevistas_telefono").val("");
@@ -4132,35 +5208,83 @@ function modalDeleteRequerimientoPersona(id){
       }));
     });
   }
+  function UtilLoadSelect(sql,component){
+    let datos = {
+      TipoQuery : sql,
+      data:{
+          param:''
+      }   
+    };      
+    appAjaxQuery(datos,rutaSQL).done(function(resp){   
+    console.log(resp)
+    $.each(resp, function(i, item) {
+      $('#'+component).append($("<option>", {
+          value: item.id,
+          text: item.descripcion,    
+      }));
+    });
+  });
+
+  }
   function save_FichaPersonal(){
 
    
-
-
  if(validarFichaPersonal()){
      swal("Completa todos los campos", {
        icon: "error",
       });
    }else{     
-          var data   = new FormData();
-            
-          var files=$(".input_files_ficha_personal").map(function(index, i){      
-            data.append('file_'+index, this.files[0]);
-            return  this.files[0].name
+          var data   = new FormData();      
+          var files;
+          var files2;
+          var files3;
+
+          let i=0;
+          var stateChilds=$('#table_children_personas > tbody').find("tr");
+          var fileDniConyuge=  $('#formFileDniConyuge').get(0).files;
+
+            files=$(".input_files_ficha_personal").map(function(){      
+              data.append('file_'+i, this.files[0]);
+              i++;
+              let dd="";
+              if(this.files[0]){
+                dd=this.files[0].name
+              }
+
+            return  dd
           }).get();
+
+          if(fileDniConyuge.length){
+              files2=$(".input_files_ficha_personal_conyuge").map(function(){      
+                data.append('file_'+i, this.files[0]);
+                i++;
+              return  this.files[0].name
+            }).get();
+  
+          }
+        
+          if(stateChilds.length){
+              files3=$(".input_files_ficha_hijos").map(function(){      
+                data.append('file_'+i, this.files[0]);
+                i++;
+              return  this.files[0].name
+            }).get();
+          }
+         
+
           var profesion=$('#table_FichaPersonalProfesion > tbody > tr').map(function(){
             
             var children =$(this).children().find('.personal_profesional_data').map(function(){ return $(this).val()}).get();
               return [children];              
              }).get();
 
-             var tecnica=$('#table_FichaPersonalTecnica > tbody > tr').map(function(){
+           /*  var tecnica=$('#table_FichaPersonalTecnica > tbody > tr').map(function(){
             
               var children =$(this).children().find('.personal_tecnica_data').map(function(){ return $(this).val()}).get();
                 return [children];              
                }).get();
 
-               var otrosEstudios=$('#table_FichaPersonalOtrosEstudios > tbody').find(".personal_otros_estudios_data").map(function(){return $(this).val();}).get();   
+               var otrosEstudios=$('#table_FichaPersonalOtrosEstudios > tbody').find(".personal_otros_estudios_data").map(function(){return $(this).val();}).get();   */
 
                var idioma=$('#table_FichaPersonalIdiomas > tbody > tr').map(function(){
             
@@ -4184,54 +5308,61 @@ function modalDeleteRequerimientoPersona(id){
 
 
                    var movilidad=$(".check_Ficha_Personal_movilidad:radio:checked").map(function(){return $(this).attr('id');}).get(); 
+
                    var id=(new Date()).getTime();
           let datos = {
             TipoQuery : '03_save_register_Ficha_Personal',
             data:{
               id:id,
-              nombres: $('#txt_ficha_personal_nombres').val(),
-              apellidos: $('#txt_ficha_personal_apellidos').val(),
-              fecha_nacimiento: $('#txt_ficha_personal_nacimiento').val(),
+              id_aspirante: $('#idpostulanteHidden').val(),
+            //  apellidos: $('#txt_ficha_personal_apellidos').val(),
+              //fecha_nacimiento: $('#txt_ficha_personal_nacimiento').val(),
               lugar_nacimiento:$('#txt_ficha_personal_lugar').val(),      
-              departamento: $('#select_Ficha_Personal_departamento_g').val(),
-              provincia: $('#select_Ficha_Personal_provincia_g').val(),      
-              distrito: $('#select_Ficha_Personal_distrito_g').val(),
-              dni: $('#txt_ficha_personal_dni').val(),
-              telefono: $('#txt_ficha_personal_telefono').val(),
-              celular: $('#txt_ficha_personal_celular').val(),
+              civil:$('#txt_ficha_personal_civil :selected').text(),     
+              departamento: $('#select_Ficha_Personal_departamento_g :selected').text(),
+              provincia: $('#select_Ficha_Personal_provincia_g :selected').text(),      
+              distrito: $('#select_Ficha_Personal_distrito_g :selected').text(),
+              //dni: $('#txt_ficha_personal_dni').val(),
+              //telefono: $('#txt_ficha_personal_telefono').val(),
+              //celular: $('#txt_ficha_personal_celular').val(),
               domicilio: $('#txt_ficha_personal_domicilio').val(),
               urbanizacion: $('#txt_ficha_personal_ubanizacion').val(),
-              distrito: $('#txt_ficha_personal_distrito').val(),
-              civil: $('#txt_ficha_personal_civil').val(),
-              edad: $('#txt_ficha_personal_edad').val(),
-              n_hijos: $('#txt_ficha_personal_n_hijos').val(),
-              sexo: $('#txt_ficha_personal_sexo').val(),
+              distrito_domicilio: $('#txt_ficha_personal_distrito').val(),
+              //civil: $('#txt_ficha_personal_civil :selected').text(),
+              //edad: $('#txt_ficha_personal_edad').val(),
+            //  n_hijos: $('#txt_ficha_personal_n_hijos').val(),
+              sexo: $('#txt_ficha_personal_sexo :selected').text(),
               talla: $('#txt_ficha_personal_talla').val(),   
-              contextura: $('#txt_ficha_personal_contextura').val(),
+              contextura: $('#txt_ficha_personal_contextura :selected').text(),
               
               ruc: $('#txt_ficha_personal_ruc').val(),
               essalud: $('#txt_ficha_personal_essalud').val(),
-              onp: $('#txt_ficha_personal_onp').val(),   
+              onp: $('#txt_ficha_personal_onp').val()=="0"?$('#txt_ficha_personal_onp :selected').text():$('#txt_ficha_personal_onp :selected').text()+"/"+$('#txt_ficha_personal_afp :selected').text(),   
               cussp: $('#txt_ficha_personal_cusspp').val(),
               fecha_afiliacion: $('#txt_ficha_personal_fecha_afiliacion').val(),
-                             
+              
+              
+              stateconyuge: $('#txt_ficha_personal_civil').val(),
               nombre_conyuge: $('#txt_ficha_personal_fecha_conyuge_nombre').val(),
               apellido_conyuge: $('#txt_ficha_personal_fecha_conyuge_apellido').val(),
               fecha_conyuge: $('#txt_ficha_personal_fecha_conyuge_fecha').val(),
               lugar_conyuge: $('#txt_ficha_personal_fecha_conyuge_lugar').val(),
               edad_conyuge: $('#txt_ficha_personal_fecha_conyuge_edad').val(),
-              departamento_conyuge: $('#select_Ficha_Personal_departamento_conyuge_g').val(),
-              provincia_conyuge: $('#select_Ficha_Personal_provincia_conyuge_g').val(),
-              distrito_conyuge: $('#select_Ficha_Personal_distrito_conyuge_g').val(),         
+              
+              departamento_conyuge: $('#select_Ficha_Personal_departamento_conyuge_g :selected').text(),
+              provincia_conyuge: $('#select_Ficha_Personal_provincia_conyuge_g :selected').text(),
+              distrito_conyuge: $('#select_Ficha_Personal_distrito_conyuge_g :selected').text(),         
               dni_conyuge: $('#select_Ficha_Personal_dni_conyuge').val(),
               ruc_conyuge: $('#select_Ficha_Personal_ruc_conyuge').val(),
-              profesion_conyuge: $('#select_Ficha_Personal_profesion_conyuge').val(),                    
+              profesion_conyuge: $('#select_Ficha_Personal_profesion_conyuge :selected').text(),                    
               ocupacion_conyuge: $('#select_Ficha_Personal_ocupacion_conyuge').val(),
               centro_conyuge: $('#select_Ficha_Personal_centro_conyuge').val(),
               direccion_conyuge: $('#select_Ficha_Personal_direccion_conyuge').val(),
               telefono_conyuge: $('#select_Ficha_Personal_telefono_conyuge').val(),
               celular_conyuge: $('#select_Ficha_Personal_celular_conyuge').val(),
     
+              state_padre:$('#state_padre').val(),
+
               nombre_padre: $('#txt_Ficha_Personal_padre_nombre').val(),
               apellido_padre: $('#txt_Ficha_Personal_padre_apellido').val(),
               centro_padre: $('#txt_Ficha_Personal_padre_centro').val(),
@@ -4239,7 +5370,9 @@ function modalDeleteRequerimientoPersona(id){
               direccion_padre: $('#txt_Ficha_Personal_padre_direccion').val(),
               telefono_padre: $('#txt_Ficha_Personal_padre_telefono').val(),
               celular_padre: $('#txt_Ficha_Personal_padre_celular').val(),
-    
+
+             
+              state_madre: $('#state_madre').val(),
               nombre_madre: $('#txt_Ficha_Personal_madre_nombres').val(),
               apellido_madre: $('#txt_Ficha_Personal_madre_apellidos').val(),
               centro_madre: $('#txt_Ficha_Personal_madre_centro').val(),
@@ -4247,49 +5380,60 @@ function modalDeleteRequerimientoPersona(id){
               direccion_madre: $('#txt_Ficha_Personal_madre_direccion').val(),
               telefono_madre: $('#txt_Ficha_Personal_madre_telefono').val(),
               celular_madre: $('#txt_Ficha_Personal_madre_celular').val(),
-    
-              nombre_referencia: $('#txt_Ficha_Personal_referencia_nombre').val(),
-              apellido_referencia: $('#txt_Ficha_Personal_referencia_apellido').val(),
-              parentesco_referencia: $('#txt_Ficha_Personal_referencia_parentesco').val(),
-              telefono_referencia: $('#txt_Ficha_Personal_referencia_telefono').val(),
-    
+
+              checkMovilidad:$(".check_Ficha_Personal_movilidad:radio:checked")[0].getAttribute('id'),
               licencia: $('#check_Ficha_Personal_licencia').val(),
               vehiculo: $('#check_Ficha_Personal_tipo_vehiculo').val(),
               marca: $('#check_Ficha_Personal_tipo_marca').val(),
               anio: $('#check_Ficha_Personal_tipo_anio').val(),
               placa: $('#check_Ficha_Personal_tipo_placa').val(), 
+
+              checkPolicialesPenales :$(".filter_penales_judiciales:radio:checked")[0].getAttribute('id'),
+              antecedente_policial:[
+                $('#Ficha_Personal_antecedentes_1').val(), 
+                $('#Ficha_Personal_antecedentes_2').val(), 
+                $('#Ficha_Personal_antecedentes_3').val(), 
+                $('#Ficha_Personal_antecedentes_4').val(),
+              ],
+           
+
+              nombre_referencia: $('#txt_Ficha_Personal_referencia_nombre').val(),
+              apellido_referencia: $('#txt_Ficha_Personal_referencia_apellido').val(),
+              parentesco_referencia: $('#txt_Ficha_Personal_referencia_parentesco').val(),
+              telefono_referencia: $('#txt_Ficha_Personal_referencia_telefono').val(),
+    
+            
               
               profesion:profesion,
-              tecnica:tecnica,
-              otrosEstudios:otrosEstudios,
+              //tecnica:tecnica,
+             // otrosEstudios:otrosEstudios,
               idioma:idioma,
               referencia:referencia,
               hijos:hijos,
               movilidad:movilidad,
               files:files,
-              policia_1:$('#Ficha_Personal_antecedentes_1').val(), 
-              policia_2:$('#Ficha_Personal_antecedentes_2').val(), 
-              policia_3:$('#Ficha_Personal_antecedentes_3').val(), 
-              policia_4:$('#Ficha_Personal_antecedentes_4').val() 
-
-
+              files2:files2,
+              files3:files3
             },
           };        
           console.log(datos)
           appAjaxQuery(datos,rutaSQL).done(function(resp){  
-          
-         
+            gridFichaPersonal();
+             resetFieldsFichaPersonal();    
+             swal("Se ha registrado correctamente", {
+              icon: "success",
+        });
+         /*
              var xhttp = new XMLHttpRequest();
-            
-            // Set POST method and ajax file path
-            xhttp.open("POST", "pages/catalogos/personas/ajaxfile.php", true);
-      
-            // call on request changes state
+                        
+            xhttp.open("POST", "pages/catalogos/personas/ajaxfile.php", true);                  
             xhttp.onreadystatechange = function() {
                if (this.readyState == 4 && this.status == 200) {
       
                  var response = this.responseText;
                  if(response == 1){
+
+                  gridFichaPersonal();
                   swal("Se ha registrado correctamente", {
                     icon: "success",
               });
@@ -4301,13 +5445,18 @@ function modalDeleteRequerimientoPersona(id){
                }
             };
       
-          xhttp.send(data);                          
-          resetFieldsFichaPersonal();                                      
-          });         
+          xhttp.send(data);                                   
+          resetFieldsFichaPersonal();    
+*/
+          });       
       }
   }
   function resetProgramaCapacitacion(){
     $(".input_files_programacion_capacitacion").val(null);
+    $("#idPersonalHidden").val("");
+    $('#txt_search_name_personal').val("");
+    $('#txt_search_apellido_personal').val(""); 
+    $('#txt_search_personal').val("");
   }
   function resetFieldsFichaPersonal(){
   
@@ -4316,26 +5465,28 @@ function modalDeleteRequerimientoPersona(id){
     $('#txt_ficha_personal_apellidos').val(""),
     $('#txt_ficha_personal_nacimiento').val(""),
     $('#txt_ficha_personal_lugar').val(""),      
-    $('#select_Ficha_Personal_departamento_g').val(""),
-    $('#select_Ficha_Personal_provincia_g').val(""),      
-    $('#select_Ficha_Personal_distrito_g').val(""),
+    $('#select_Ficha_Personal_departamento_g').val("-1"),
+    $('#select_Ficha_Personal_provincia_g').val("-1"),      
+    $('#select_Ficha_Personal_distrito_g').val("-1"),
     $('#txt_ficha_personal_dni').val(""),
     $('#txt_ficha_personal_telefono').val(""),
+    $('#txt_ficha_personal_civil').val("-1"),
     $('#txt_ficha_personal_celular').val(""),
     $('#txt_ficha_personal_domicilio').val(""),
     $('#txt_ficha_personal_ubanizacion').val(""),
     $('#txt_ficha_personal_distrito').val(""),
-    $('#txt_ficha_personal_civil').val(""),
+    $('#txt_ficha_personal_civil').val("-1"),
     $('#txt_ficha_personal_edad').val(""),
-    $('#txt_ficha_personal_n_hijos').val(""),
-    $('#txt_ficha_personal_sexo').val(""),
+  //  $('#txt_ficha_personal_n_hijos').val(""),
+    $('#txt_ficha_personal_sexo').val("-1"),
     $('#txt_ficha_personal_talla').val(""),   
-    $('#txt_ficha_personal_contextura').val(""),
+    $('#txt_ficha_personal_contextura').val("-1"),
     
     $('#txt_ficha_personal_ruc').val(""),
     $('#txt_ficha_personal_essalud').val(""),
-    $('#txt_ficha_personal_onp').val(""),   
+    $('#txt_ficha_personal_onp').val("-1"),   
     $('#txt_ficha_personal_cusspp').val(""),
+    $('#txt_ficha_personal_afp').val("-1"),
     $('#txt_ficha_personal_fecha_afiliacion').val(""),
                    
     $('#txt_ficha_personal_fecha_conyuge_nombre').val(""),
@@ -4343,12 +5494,12 @@ function modalDeleteRequerimientoPersona(id){
     $('#txt_ficha_personal_fecha_conyuge_fecha').val(""),
     $('#txt_ficha_personal_fecha_conyuge_lugar').val(""),
     $('#txt_ficha_personal_fecha_conyuge_edad').val(""),
-    $('#select_Ficha_Personal_departamento_conyuge_g').val(""),
-    $('#select_Ficha_Personal_provincia_conyuge_g').val(""),
-    $('#select_Ficha_Personal_distrito_conyuge_g').val(""),         
+    $('#select_Ficha_Personal_departamento_conyuge_g').val("-1"),
+    $('#select_Ficha_Personal_provincia_conyuge_g').val("-1"),
+    $('#select_Ficha_Personal_distrito_conyuge_g').val("-1"),         
     $('#select_Ficha_Personal_dni_conyuge').val(""),
     $('#select_Ficha_Personal_ruc_conyuge').val(""),
-    $('#select_Ficha_Personal_profesion_conyuge').val(""),                    
+    $('#select_Ficha_Personal_profesion_conyuge').val("-1"),                    
     $('#select_Ficha_Personal_ocupacion_conyuge').val(""),
     $('#select_Ficha_Personal_centro_conyuge').val(""),
     $('#select_Ficha_Personal_direccion_conyuge').val(""),
@@ -4384,16 +5535,20 @@ function modalDeleteRequerimientoPersona(id){
     
 
     $(".check_Ficha_Personal_movilidad:radio").prop("checked", false);
+    $(".filter_penales_judiciales:radio").prop("checked", false);
     $('#Ficha_Personal_antecedentes_1').val(""), 
     $('#Ficha_Personal_antecedentes_2').val(""), 
     $('#Ficha_Personal_antecedentes_3').val(""), 
     $('#Ficha_Personal_antecedentes_4').val(""), 
+
     $(".addFichaPersonalProfesion").remove();
     $(".addFichaPersonalReferencia").remove();
-    $(".addFichaPersonalTecnica").remove();
-    $(".addFichaPersonalOtrosEstudios").remove();
+   // $(".addFichaPersonalTecnica").remove();
+    //$(".addFichaPersonalOtrosEstudios").remove();
     $(".addFichaPersonalIdiomas").remove();
     $(".input_files_ficha_personal").val(null);
+    $(".input_files_ficha_personal_conyuge").val(null);
+    $(".input_files_ficha_hijos").val(null);
     $(".addChildren").remove();
     
   }

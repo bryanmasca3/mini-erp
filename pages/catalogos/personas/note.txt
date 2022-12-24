@@ -1,0 +1,12 @@
+1) Fixed print button into GESTION DE PERSONAS
+2) Add Function for Management:
+    -Change state (PENDING,COMPLETED,IMCOMPLETED)
+    -Add CARGO into table cargo for each PERSONAL on FICHA PERSONAL
+3) REQUERIMIENTO COMPRA, add index for ITEM
+4) ckeck FICHA PERSONAL and SEG. Y PROG. DE CAPACITACION colors
+4) LOGO into PDFs
+-----------------------------------------------------------------
+Ficha Personal
+    no deberia poder buscar DNI de alguien que ya e personal
+Seg. y prog. de CAPACITACION
+    No se puede cambiar la fecha de los documentos

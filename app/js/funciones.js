@@ -63,15 +63,32 @@ function appLlenarDataEnComboBox(data,miComboBox,valorSelect){
 //llama a la funcion AJAX para obtener los datos
 function appAjaxQuery(datos,ruta){
   //let uri = (ruta==undefined) ? ("includes/sql_select.php") : (ruta);
+  //console.log(datos)
+  //console.log(ruta)
   let rpta = $.ajax({
-    url : ruta,
     type : 'POST',
-    dataType : 'json',
-    data : {"appSQL":JSON.stringify(datos)}
+    dataType : 'json',    
+    url : ruta,      
+    data : {appSQL : JSON.stringify(datos)}
   })
-  .fail(function(resp){
-    console.log("fail:.... "+resp.responseText);
-  });
+  .done( function(data) {
+
+   // console.log(JSON.stringify(data));
+    //return 
+})
+  .fail(function(xhr, status, error) {
+    //Ajax request failed.
+    swal({
+      title: "Se ha producido un error inesperado",
+      text: "Comunícate con soporte técnico para recibir ayuda.",
+      icon: "error",
+      dangerMode: true,
+    })
+    //var errorMessage = xhr.status + ': ' + xhr.statusText
+    //console.log('Error - ' + errorMessage);
+    //console.log('Error - ' + status);
+    //console.log('Error - ' + error);
+});
   return rpta;
 }
 

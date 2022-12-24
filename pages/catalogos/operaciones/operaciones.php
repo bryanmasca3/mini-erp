@@ -4,9 +4,21 @@
 
 <!-- bootstrap datepicker -->
 <link rel="stylesheet" href="libs/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
-<script src="libs/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+
+<style>
+.dataTables_filter {
+    display: none;
+}
+
+.error {
+    color: #ff2424;
+    font-size: 10px;
+}
+</style>
+
 <script src="libs/moment/min/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.2/locale/es.js"></script>
+<script src="pages/catalogos/operaciones/validate.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> -->
 
 <!--datetimepicker-->
@@ -15,1977 +27,5311 @@
 <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
 
 <section class="content-header">
-  
-  <h1><i class="fa fa-tasks"></i> Operaciones</h1>
-  <ol class="breadcrumb">
-    <li><a href="javascript:appChangePage('lineaneg');"><i class="fa fa-dashboard"></i> Home</a></li>
-    <li class="active">Operaciones</li>
-  </ol>
+
+
+    <h1><i class="fa fa-tasks"></i> </h1>
+    <ol class="breadcrumb">
+        <li><a href="javascript:appChangePage('lineaneg');"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Operaciones</li>
+    </ol>
 </section>
 <section class="content">
-  <div class="row" id="edit">
-    <form class="form-horizontal" id="frmWorker" autocomplete="off">
-      
-      <div class="col-md-12">
-        <div class="nav-tabs-custom">
-          <ul class="nav nav-tabs">
-            <li class="active" title="Almacenes"><a href="#datos01" data-toggle="tab"><i class="fa fa-truck"></i> Resumen</a></li>
-            <li role="presentation" class="dropdown">
-              <a href="#" id="myTabDropInventario" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDropInventario-contents"><i class="fa fa-dropbox"></i> Reportes <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="myTabDropInventario" id="myTabDropInventario-contents">
-                <li class="" title="Tareas"><a href="#datos02" data-toggle="tab"><i class="fa fa-dropbox"></i> Infracciones</a></li>
-                <li class="" title="Combustible"><a href="#" data-toggle="tab" ><i class="fa fa-dropbox"></i> Combustible</a></li>
-                <li class="" title="Mantenimiento"><a href="#" data-toggle="tab" ><i class="fa fa-dropbox"></i> Mantenimiento</a></li>
-                <li class="" title="Gastos"><a href="#" data-toggle="tab" ><i class="fa fa-dropbox"></i> Gastos</a></li>
-                <li class="" title="Operativos totales"><a href="#" data-toggle="tab" ><i class="fa fa-dropbox"></i> Operativos totales</a></li>
-                <li class="" title="Histórico de estados"><a href="#" data-toggle="tab" ><i class="fa fa-dropbox"></i> Histórico de estados</a></li>
-              </ul>
-            </li>
-            <li role="presentation" class="dropdown">
-              <a href="#" id="myTabDropInventario" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDropInventario-contents"><i class="fa fa-dropbox"></i> Operación <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="myTabDropInventario" id="myTabDropInventario-contents">
-                <li class="" title="Tareas"><a href=".datos04" data-toggle="tab" onclick="javascript:app04GridAll();"><i class="fa fa-dropbox"></i> Tareas</a></li>
-                <li class="" title="Combustible"><a href="#" data-toggle="tab" ><i class="fa fa-dropbox"></i> Combustible</a></li>
-                <li class="" title="Mantenimiento"><a href="#" data-toggle="tab" ><i class="fa fa-dropbox"></i> Mantenimiento</a></li>
-              </ul>
-            </li>
-            
-            <li role="test2" class="dropdown">
-              <a href="#" id="myTabDropInventario3" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDropInventario3-contents"><i class="fa fa-dropbox"></i> Flota <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="myTabDropInventario3" id="myTabDropInventario3-contents">
-                <li class="" title="Vehiculos"><a href=".datos02" data-toggle="tab"  onclick="javascript:app01GridAll();"><i class="fa fa-dropbox"></i> Vehiculos</a></li>
-                <li class="" title="Conductores"><a href=".datos03" data-toggle="tab"  onclick="javascript:app03GridAll();"><i class="fa fa-dropbox"></i> Conductores</a></li>
-              </ul>
-            </li>
-            
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane fade in active" id="datos01" >
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Estado de la flota</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <p><i class="fa fa-taxi"></i>  &nbsp; &nbsp;Asignados:  &nbsp;1  &nbsp; &nbsp; Sin asignar:  &nbsp;2</p>
-                          </div>
-                          <hr>
-                          <div class="col-md-12">
-                            <div class="row">
-                              <div class="col-md-12">
-                               
-                                <table class="table">
-                                  <tr>
-                                    <th>Vehiculos de la flota</th>
-                                    <th></th>
-                                    <th>Porcentaje de Flota</th>
-                                  </tr>
-                                  <tr>
-                                    <th>Totales:</th>
-                                    <td>30</td>
-                                    <td width="40%">
-                                      <div class="progress">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                          <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th>Activo:</th>
-                                    <td>20</td>
-                                    <td width="40%">
-                                      <div class="progress">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
-                                          <span class="sr-only">10% Complete (success)</span>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th>Inactivo:</th>
-                                    <td>0</td>
-                                    <td width="40%">
-                                      <div class="progress">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                          <span class="sr-only">20% Complete (success)</span>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th>En el taller:</th>
-                                    <td>3</td>
-                                    <td width="40%">
-                                      <div class="progress">
-                                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                          <span class="sr-only">60% Complete (success)</span>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                  <tr>
-                                    <th>Baja:</th>
-                                    <td>2</td>
-                                    <td width="40%">
-                                      <div class="progress">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
-                                          <span class="sr-only">90% Complete (success)</span>
-                                        </div>
-                                      </div>
-                                    </td>
-                                  </tr>
-                                </table>
-                              </div>
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Alertas</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <p>1 &nbsp; &nbsp;Alertas Vencidas&nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp;Por vencer en los proximos 0 días</p>
-                          </div>
-                          <br><br><br>
-                          <div class="col-md-12">
-                            <p><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;&nbsp; La tarea <a href="">Entregar reporte TCO para gerencia</a> esta próxima a vencer.</p> 
-                            <p style="font-size:10px;"><span style="color:gray;">Fecha limite: 20/04/2022</span></p>
-                          </div>
-                          <br><br><br><br><br><br>
-                          <div class="col-md-12">
-                            <p><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;&nbsp; La tarea <a href="">Entregar reporte TCO para gerencia</a> esta próxima a vencer.</p> 
-                            <p style="font-size:10px;"><span style="color:gray;">Fecha limite: 20/04/2022</span></p>
-                          </div>
-                          <br><br><br><br><br>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Tareas</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <p>2 &nbsp; &nbsp;Vencidas&nbsp; &nbsp; &nbsp; 0&nbsp; &nbsp;Vencen en 12 días</p>
-                          </div>
-                        </div>
-                        <br><br>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <p><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;&nbsp; Renovación de licencia para el conductor <a href="">Juan Conductor</a></p> 
-                            <p style="font-size:10px;"><span style="color:gray;">Fecha limite: 20/04/2022</span></p>
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <p><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;&nbsp; Renovación de licencia para el conductor <a href="">Juan Conductor</a></p> 
-                            <p style="font-size:10px;"><span style="color:gray;">Fecha limite: 20/04/2022</span></p>
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <p><i class="fa fa-bars" aria-hidden="true"></i>&nbsp;&nbsp; Renovación de licencia para el conductor <a href="">Juan Conductor</a></p> 
-                            <p style="font-size:10px;"><span style="color:gray;">Fecha limite: 20/04/2022</span></p>
-                          </div>
-                        </div>
-                        <br><br>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Costos de combustible</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                              <div id="dashboardChart01"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Costos operativos totales</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                              <div id="dashboardChart02"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Costos de mantenimientos</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-12">
-                              <div id="dashboardChart03"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+    <div class="row" id="edit">
+        <form class="form-horizontal" id="frmWorker" autocomplete="off">
 
-                </div>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Conductores</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-6">
-                            <p>3</p>
-                            <a href="#datos02">
-                              <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                  <span class="sr-only">40% Complete (success)</span>
-                                </div>
-                              </div>
-                            </a>
-                            <p style="font-size:10px;">asignados</p>
-                          </div>
-                          <div class="col-md-6">
-                            <p>1</p>
-                            <a href="#datos02">
-                              <div class="progress">
-                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                  <span class="sr-only">40% Complete (success)</span>
-                                </div>
-                              </div>
-                            </a>
-                            
-                            <p style="font-size:10px;">sin asignar</p>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <p>4</p>
-                            <div class="progress">
-                              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                <span class="sr-only">40% Complete (success)</span>
-                              </div>
-                            </div>
-                            <p style="font-size:10px;">activos</p>
-                          </div>
-                          <div class="col-md-6">
-                            <p>0</p>
-                            <div class="progress">
-                              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                                <span class="sr-only">40% Complete (success)</span>
-                              </div>
-                            </div>
-                            <p style="font-size:10px;">inactivos</p>
-                          </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <p><b>Destacados</b></p>
-                            <p><b>0</b>&nbsp;&nbsp; con licencia vencida</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Mantenimientos</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-6" >
-                            <div class="panel panel-default">
-                              <div class="panel-body">
-                                <center>
-                                  <h3>4</h3>
-                                  <p style="font-size:10px;">Programados para los proximos 10 días</p>
-                                </center>
-                              </div>
-                            </div>
-                              
-                          </div>
+            <div class="col-md-12">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active" title="Almacenes"><a href="#datos01" data-toggle="tab"
+                                onClick="resumenEstadoFlota();resumenAsignacionFlota();"><i class="fa fa-truck"></i>
+                                Resumen</a></li>
+                        <li role="presentation" class="dropdown">
+                            <a href="#" id="myTabDropInventario" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="myTabDropInventario-contents"><i class="fa fa-dropbox"></i> Reportes
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="myTabDropInventario"
+                                id="myTabDropInventario-contents">
 
-                          <div class="col-md-6" >
-                            <div class="panel panel-default">
-                              <div class="panel-body">
-                                <center>
-                                  <h3>3</h3>
-                                  <p style="font-size:10px;">En proceso</p>
-                                </center>
-                              </div>
-                            </div>
-                              
-                          </div>
-
-                          <div class="col-md-6" >
-                            <div class="panel panel-default">
-                              <div class="panel-body">
-                                <center>
-                                  <h3>1</h3>
-                                  <p style="font-size:10px;">Realizados en los últimos 10 días</p>
-                                </center>
-                              </div>
-                            </div>
-                              
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-					  <!--fin-->
-            <div class="tab-pane fade datos02" id="">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn01_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;;" onclick="javascript:app01Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn01_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app01Boton_cancel();"><i class="fa fa-angle-double-left"></i> Regresar</button>
-                  <button id="btn01_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app01Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn01_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app01Boton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                  
-                </div>
-              </div>
-              <br>
-              <div class="container">
-                <div class="row" id="grid01">
-                  <div class="col-md-12">
-
-                    <div class=" box-primary">
-                      <div class="box-header no-padding">
-                        <div class="box-body table-responsive no-padding">
-                          <table class="datatable table table-striped table-bordered" id="grd03Datos">
-                            <thead>
-                              <tr>
-                              <th>Ope.</th>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Placa</th>
-                                <th>Serie</th>
-                                <th>Estado</th>
-                                <th>Tipo</th>
-                                <th>Grupo</th>
-                                <th>Conductor</th>
-                                <th>Odometro</th>
-                                <th>Marca</th>
-                                <th>Modelo</th>
-                                <th>Año</th>
-                                <th>Propiedad</th>
-                                <th>Arren. Ini</th>
-                                <th>Arren. Fin</th>
-                                <th>Arren. Total</th>
-
-                              </tr>
-                            </thead>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-              <div class="box-body" id="edit01" style="display:none;">
-        
-                <div class="row">
-                  <div class="col-md-6">
-                  <strong><i class="fa fa-user margin-r-5"></i> Detalles del item</strong>
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 83px;">Código</span>
-                              <input id="txt03_id"  class="form-control" placeholder="..." readonly="readonly"/>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Group Class</span>
-                          <input class="form-control" list="grupoOptionsClase" id="cbo03_group_class" placeholder="Buscar group class...">
-                              <datalist id="grupoOptionsClase">
-                                <option value="11">
-                                <option value="01">
-                                <option value="21">
-                                <option value="24">
-                                <option value="32">
-                              </datalist>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 99px;">ROP</span>
-                              <input id="txt03_ROP" type="text" class="form-control" placeholder="..."/>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;"> 
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 98px;">ROQ</span>
-                                <input id="txt03_ROQ" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 70px;">UOI/UOP</span>
-                              <select id="cbo03_UOI" class="form-control selectpicker">
-                                <option value="EA">EA</option>
-                                <option value="EA">EA</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 53px;">Num. Parte</span>
-                                <input id="txt03_num_parte" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 73px;">Moneda</span>
-                              <select id="cbo03_moneda" class="form-control selectpicker">
-          
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 86px;">Precio</span>
-                                <input id="txt03_precio" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                     
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 59px;">Proveedor</span>
-                          <input class="form-control" list="grupoOptionsProveedor" id="cbo03_proveedor" placeholder="Buscar proveedor...">
-                              <datalist id="grupoOptionsProveedor">
-                                <option value="11">
-                                <option value="01">
-                                <option value="21">
-                                <option value="24">
-                                <option value="32">
-                              </datalist>
-                        </div>
-                      </div>
-
-                      
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 74px;">Nombre</span>
-                          <input id="txt03_nombre" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                      <div class="form-group" style="margin-bottom:5px;">
-                        <div class="input-group">
-                          <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;">Nombre Coloquial</span>
-                          <input id="txt03_nombre_col" type="text" class="form-control" placeholder="..."/>
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
-                
-                  <div class="col-md-6" >
-                    <strong><i class="fa fa-user  margin-r-5"></i> Stock del item</strong>
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 60px;">Stock Cod.</span>
-                              <input id="txt03_stock_cod" type="text" class="form-control" placeholder="..."/>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 48px;">Stock Num.</span>
-                                <input id="txt03_stock_num" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 54px;">Stock Clase</span>
-                              <select id="cbo03_stock_clase" class="form-control selectpicker">
-                                
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 55px;">Stock Tipo</span>
-                                <select id="cbo03_stock_tipo" class="form-control selectpicker">
-                                  
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 60px;">Stock min.</span>
-                              <input id="txt03_stock_min" type="text" class="form-control" placeholder="..."/>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 86px;">Stock</span>
-                                <input id="txt03_stock" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-                    <strong><i class="fa fa-user"></i> APL del item</strong>
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Prioridad" style="background:#EEEEEE;font-weight:bold;padding-right: 70px;">APL Tipo</span>
-                              <select id="cbo03_apl_tipo" class="form-control selectpicker">
-                                  <option value="G">G - Equipo identificador de Grupo</option>
-                                  <option value="E">E - Referencia de Equipo</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 29px;">APL Referencia</span>
-                                <input id="txt03_apl_ref" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;padding-right: 41px;">APL Cantidad</span>
-                              <input id="txt03_apl_cant" type="text" class="form-control" placeholder="..."/>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div style="padding-left:5px;">
-                            <div class="form-group" style="margin-bottom:5px;">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold;">Cod. Componente</span>
-                                <input id="txt03_cod_comp" type="text" class="form-control" placeholder="..."/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                    </div>
-
-                    <strong><i class="fa fa-user"></i> Descripción del item</strong>
-                    <div class="box-body">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group" style="margin-bottom:5px;">
-                            <div class="input-group">
-                              <textarea class="form-control" id="area03_descripcion" rows="4" cols="200"></textarea>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-              </div>
-              <div class="container">
-                <div class=row style="display:none" id ="detalle01">
-                  <div class="col-md-12">
-                    <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img   width="150px" class="media-object img-circle" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPgAAADLCAMAAAB04a46AAABs1BMVEX19fX9zA44GBv2qQOz8f78zQ7Z9//19fT19ff////+yw77ejg3GBuXl5f29fP09fgjAAA4GBklAAD/2WLyqQD3pwMgAAAqAAD+xxAcAADX+f+18P6y8vw6Fxr2tgnwpQDw0YIxDRH0rgAsAAYyDBb/0iP2twowEhPk/f9GQEP8zCb8wg7spwD79u/A9P/S+f/89txUTE01DQ2CXB93Uh5uSRr//cX//++YjIzy2pr0zjX899DyyyH89emgeCFMKQwvAABePxTwz0b/8ar//MVNOzt0Z2dhUVM1HSBUQUKIfX4+KCr77MX14KjCubv66az45JT13oL022302Fj33Xf87rv544vzwiXdsizOpC68kyethSSSbB9sSA5VMAlDHgcoABFIR0xWWmBnb3RxgoelqK23w8mdw8eVrreGm6LA0tXV5+26xci32eA3DQAuHSRDJAhjaXTGpFzxzW+Oj2Q5NjTj6LSJaiqnklj9zkjJpVflpHX94c6+hROMWBjbtVH3jCXqfULoiFbxo3z96NPvupT1mR/yfCf5z7TfkUz3kSX/dkDf29Pkfyrd3N7PyLqnn5hKzkD6AAAaSklEQVR4nO1diX/TVp73ESFZKLJlnNhOIgfZjgV27BgzJcYHR0J8hiTkBgoN10DaCUyH7e52Z3bSg9IuzQT+5P393nuSLwXICZ2PvkASKbLe+/7ud0g4HDZs2LBhw4YNGzZs2LBhw4YNGzZs2LBhw4YNGzZs2LBhw4YNGzZs2LBhw4YNGzZs2Pi3AQ9/ZcEL3xwC/PM6eF7wCl6vVyCHgiDLDgHAyzIvfOK+Him8sozkeAfQTafLgEnyt1yGo7QMF3iBs4yCcfxbEQdOXl6QJ7PZ2fmFW4tLU1MFiqmlxeXVhZXZYjYNQvH+W5EGgJ7L2ZX5W4tTJSdAFEWO4+gPCKczWZhaXlgpToLFe3n+U3f3cOAF9F8wYYcgl1cWFqeSHIccDbaUcQuimCycWZ0H8hgSBP4Pyx9cVvDKaTmdnV+eKnEmzQ62HeBEJ5csLE4Xy2gjf1jNC6g3YL1YKAFZoM0Z/Az0EoeL4EtpaaGYhmD3B3V4wSGUV24VKD/O2UPTQuMoDBH5c4XF+az8qRnsE2Ch4J9eR7q4sFQiXk2U3XJoUXT2ODhzAo7IiISB5NRCNk2y/R/F4r1QiXj5SVS2BbmPBkihsDwLIcLxR9E81CqO8spyyWml1H1RF7nS8krZ6/2DMBeE8vxiycjUHfgIP28pnNp9aXGl/JkHOXBFUmeX588kRRKpWObq8G4rtMJ9F3Xyb225KGO1+9m6OqnDZXllsURCeDdHagIkYXHc2FgSQGpW/GGMY79z9lqJE0L8atb7GVezXhhipGeXS2J7yjY7j2THkmtr67fv3L3y5cWL9+7dv38Vcf/6vXsXv7xy5876WnJsjGuzFHYHzhkSp6bLMgxiPjVFa0CtlV0oIMe2jovIJJlcW78DbK/f/+p5bGMjFo9vxONxSXJJiHhc1+CMP/b86r0v76wnGfkWdTxKLhZlr/w5WjvU5eX5KY6WH6alA4fk+t2L92PAF9jpei4Xj127di3oDyqK4vP5/H5/MHjtWk5XVcWlavGN2NWLQJ4juZ4FBVrPFRbA3oXPzdO9ENiKy6WumMU5x9av3I9tgEpjwSBQ1GrfPXj46PHmkydP+mNq7c9Pnz599uzZ5uNHD8+/8PuC13JAX43Hcl/cXQO9d+WF0mIxTcYvnxNkPk3V3cF8bP3i83g8FvTVqo/6n/zl66+/OZXJZEZGJs6dO/cXn6pvjRiA01tPNx89AIPXVEnSN55fvF0i5WvrjhDkFsqfW04XssvQzy7ea1eex7Xgi0fPvj516ty5IcBEZqSvbzgzdGpo6M8+xfe0b3gYTgCAex/S33r6+IEvmAPu8Y37d9baowXePrlcROP6TACDEXlliiYsI/8SdV/f0P3nN7cymQkkferUqYkMMsTDU0NfhxX/0xFKG/gP9+EflEpma/NhOAgej9ST7UEOS8GplfTnUbsLggyV2kKhbfRFDX7szlea9mITVDw8gaSRbAap9dHDr8Mu/zODeBuGCffHTV9OUaTYF7fH2gt+uDGYO5QzDoH/xDYv85DEFnFupd3IRXHsbizue7gFDs14w98JIDXSlyHKH/omrAQ3+6yI96Gsvnky49cVKX7ty7WOUgisajnr4OVPndlkKFuKS5jBWt1DFSWv+BXfY1Q3ejQhPjSBlPoyE/T4m7Aa3MwQ8+4GRD+44NyTpk+RXLGrt8fMW4eIp5+ZFbyOTztL4RW86ZUprDDaAjpIIXklGA8DrT7i0ZQ4dfDhCaLwUxNbYTX22JL4MDGKIYiH/T4Mc9euJFteRO4/NZ/28p8syPE8ziWmpws9Aw9u7K5f9T0jHp1h/g0OTlhhRMc/ma0XSuyRBfEROENEAzj3TXUQEnvs4hontqIcZLjSPCb0TzUdKUAZVV4oddPGuBZTBp8R90UHH6KBDfQNcQuNGA4nhjMvFO3bjIWhg8IZb9R6vw/yevz6Wmf5LpYgo38q4hBaHZMLpd5JU+72cx303cdSNsHExLDhvMTsIcZ9p+YeWhAfHjF5o5lktr4LQoy7us61aCOSq1nhExUzAi9kV7t549H6XzUfpDFIzX0Z5tFQuRAjZoEO1D+MxB9YEe+bOGWY+tDQ8MjI1kOfqupfrbcN+MgKxK3sp0jo6OD8ZK+dQzpf+0LzQ9SCeN6XmThlBLbhYXY8RON7X+Z8Lnc+M9yZz4iwWrRpXMg88iuKDjrvlDGkNZz2ONmxqoDtgX9bzIyPfRnzf5sxHZxZLNLuo4ZOCjhCXH2x1a3tNiMZovEQRDPUP6hI2tX1rrZKy1n5pMsYAcqWtKV/Q2DbeIDBGgybBLZTtHIxIjqJ71iZA3GlttVTwIyYwsIISKSRmTjXH1aU+P31LjmDzk/azwXZW562mj3m1r/SvtvqI8QzBgeDANEiHo4wjft7iA8z4bSJaxh8HpmrGNs740npVtZ7sn4uyPxKoZs2Vm/Je/HBpxm0azOgD5HKhRBoGToS11QYnnXxpheRMQ0a+jBWfkB84lzDr7ri95IYROjkHJml4FbLXlxOP7EqTvAWp6ymipNXNgY3M30dDg6BrT2zsUKmL/NAU2F41qtwRpyNaEiJC2I4BxFO2vgy2SltDvI5JvOTs/fsYu9EMSjjdi74rcHbyMWsOjNKV2bASFzyP6OjFBLyKW8zpFOH6DNMYCLzMKhK/rtJOjHL5mZEsbSahVLGe0KxXSjfspgGdnKF6+DgOLQebjN0w1NZjZ4xOALxmGEdjHifKS0gisTNIQ7cZes7kNTfls4glr5n40FcXlxewTW2E2ANQ/D5ktXKAHc35sNKlZSmJH4DUeLeLMKTzMysO/Mw5wLiZq3elcJpAjQCJLH7rZrr+cszBgpJ0RgTlqZWV7Kyg4fIAwI4Nn+XvTzOt3C9EX3tq42HJJNRx2Q12kibp0LpwuYehpF4cHOkRbyP1jftdjLSxwIFVjwjmWfhq8sm8TOgdDaTC8ZXWlqdLZOlVcexKV/wZhfJ5HkPrmy8IJmMOiZN2cM4JCeDUTL7lMGRCuE58q0GA/JWcIPidKLbwUcyTFzDWACPjDy+vtgifqbQNhBGk1+azqZBK8fm7axS7bX1tau+x5m22HzKmGsabkV0IgfK83Gsg3iboRsZb5iZAE5RDpOx/X+0E19iw3SRrDjgZAiYfFk4FlvnYVwgFAudiyWscedt/3cZnCkls8cEExk2d2weZ0ZI1Q5fMpt+nIIZNpDJDJ1D0uw6AJZs58zDkcxEZuI/24mfWWODdNYZrKdKiyuTZJ7gyCflZHly2apig1H4fw0+fvZsc3Pz8eMG4NGjSuUhw4UL1QuA+vkHD86baEqq1DzfhpkZ8q1eN89cIJ+6YBzUZ/67nfj30VCP1YlcCfeQyGSf5JHy9vLzJYvABoZ+77mi42pJMHbtWoxA03IaIpfDf7mcnsvRE+SkAsCTunGG/WRck6Of03TyWfhZ131/a+M9FQmErLYPicmllbTXe7RBjnd4s0tWtEVu3RePa3FVVV2S5IJhJIUWt4Rmcb5Fn4kijmttLbnACf//tOk7Mh6xKKLIaH307/9I88JRmrrApxes4jmuiP7vP//0xf2rf/0KcfX+/fvXv/jiT4iLe+JP/8QvPfiiG9cN3N82WH+fGHcHUhY9wSV28YfTP/7ySoAq/sgmJGW5OGVBG5mHooFEMplco0gmS6VScuz9SET3uoJsFkiSby3ADaPj0ej4+HhgPOB2u6O9lk53jyR+PX369E+/pcHcj0rrAih8jw09KfdAgm136Nim2g2ql1BIdIoRd4rtBCMXk81CoqG3jg1h9JYiCNfNMOCOpvbYJCm+Po348edX8pENWgXrQRl2LUVMz6TH2HdsYqQ/AOlUJBqBVJSA6IRT8uREStzrzhy9LVKKBAYI3O5AJOXszqkG8TenKUDpR8TbkV5N7rWDK0F9bq/dmmavUtFAAPQ2mgAjGQfioQQ5MWBluPQTTPP4PRRBnQcC0UiKbLWw/sAPjDh4evloYruQJWvglg0mBjC7GAa6J/nQ+Ci1VSQeAGtNBAaI6Y7vRbwd0EAi4I6kQpa7hAziA78azE//XOYPv8oGgeLmaIpU6RaNgsZDTNmMuXW3QglANAAK5ghxMRFJoB4TH7fZFaSFMnsvUj/8bjL/CRz98MTLP5/+9XVCtAwqiQFwUzN+7bmnkYpNDOFlhDgVVSr1sZsgCXE2/bRXG9GWypH5IXkLPP+PH0//DtR7K0UniergquCugWg0GkmkUqG2rU+ty0SxdZyKpoxd7BxdePwQwK+BOBXS3leLTnc783/wh9s3I8jpX8idrJmHouiqAUw0BMA/geTZTmyr/oWQ+AeI9hxDLEl9SDxcaLRD5/yh6nbe8eoncqPff41YdTEVjRCAwkncdg+ACUQToT3DEBBPvJ94T6AAjWP2+ABxbLFd5z+XD5XPeeE3405uy6rVdG9MzCmMWBCwkXrIIkWTggSIf5CBIQFju3/CulTtkA5+LvGmxfyXQ+VzPv13dp9fo5YNik5mmyy2i6lEFNTuDiQs1HqMxNlHUq9Npf/42yECHC+Xf2T3eWMZ3XqkgE+XhJB7IBKyzOtiJPKeEGXJxslFBixGo5bXipE3BvX/y/IHf35RNi19dB895UIR0DpEsSMjjvXCR30K2o6+fvPm9evRaOrW5MG3AMs/M97/+ihTM9lBvB8gAakn83KJ6H627tO7RQcC4scRJxmFbBYXnaWVg2+aKf/EiL/+yIZZ6/DHYN79y4MRj+41nLG42hwqLZflA2Rz8ojvK+bikMx6W6bVB6lWRfNUqwMROors/lCqjcP7RjZtHwl1EifqFNuGBns9B1MoHtDSedPFf0hZEiePCbZKqvaxE3F0YN5TjhwFcZbtaeG31wgKfr9woMEKLxjJ7PfTr62CqvF4WQnBmTvNTU7OSMAd7a5lgHio/aKPIg6lehtxOn/h5MaS0CzXvpW2C+JS+UAKF2TDxd9YBmhcsV1anb50o1gsXppfWCyUup4xECEaR7rSIKgvtG+Nd47jOGz3FrQLuDR9a4lJ3YJ4YeVA+UzGAQr49w8DVvUi58SnQSfLc0/yjUajf25nMju9WKKPDBpXIPOuSgaIv7f6tBJvyu1OGb8ka2bTxZ25fKVar1cr+bmd4vRSkjwS073kwSUX0gexdUH47V9vXgdSod7e0OYnd/N1n88fjMVift9grTI3eWO51BH9U4Ge4YUY+WDZvRdxYuKl5Rs7+RmfL0jnpoM+30x+5xI+DtT7QW75INFNdsiXUyGLB2OJcAvTkztVX1CXXABJUvDhksHmk8kbS2YVi1Eg4XZ3zYTvn7iT1C8klnLc0qWdii8IrbKneuAnPeiv7NxYslrrOXMQJ+cFXDjixJ4qBOdjloqOSjiuqhIh7nIpwFxC6nOTqyUjrUFAgoFroMvLD0wcHzxdyDZ8MUlRUdhU5C4X9EILN7ILpZ5Sg5vKHkTj3uyS08rpoA+3snMb11RJQcFTSLQX0IPJji2+oPJEp+ASdBapYxp2LxDrCUUDkM1wR0DhxttaEM3LaNWQuksKxt9eKtCioq3HU8UDRDdZyFouJHBccnUyH9YVVzck7IOvXr5RaDWOKk91pLQEHdm3T6S25t6tJuTRXZxoe1M33oW1LtImdzX8Dhc+uokfQOOCt1iwIu503ppsDCq9vCl3JdbcudTaNcJBfMMypjXZnoq8X8udVkAm3GBQCsqfupEfBIqW7WLT4fyNqa5AfCDifHqla9sqY7M4mfe1bLybuKrmZtLTrU/i3HA0FWohEQ29FyL8ga8iPUpBFRQgWbxw6Z1vL9JUHL53lwqd03j793Go7rNnX6awA6wop0UimNxUcS6MrBWMqWBidFVTVRUK+EWsCmHRNDlI5lC7Bky43YG9EO1BwA1jHZIXktNvw5SfSn2KQVIMY1eU8BxK/BDEMSKUz46O4gRaNBJJJKgEkDZXmt7ZUM2mNK1ZrVQalcqMpKmUtwvcrR/cTTS26ZDR+YD7vRjYA2TdiFTji6/8LtU0K5cp8Jbtgwj0V4sdu/v3nc6g3slug6yhZdJjNn+MAlicrMaonaO2Zxr5RqW/P1/J5yuSrtKeqergznTS2KwB9oLrZgQJCuMgYoUOjZMFFFRioViNmxxVVdNR4JVKtannFCYQiC/xantcEp2L6X1GdZnns7eRNFMV+wbuNr4yF6aKBaFLlXy15q/l+xs+FEFdIxKB3wYrk0s0SncU5HTauasqEEWxN5yLrbBPsTA36DIDqq7XqcAb8K3ul0xLkMJz7Wv53K39V25Cdt0daDdGchAY2J406anNRt4Pzt2EDvgVl/9Cf1VTWBUX3p0mFoIgEcvMTt0h3DquO9u/wvfvizM5Im8wc0WHhut6cKa/v+qX6vlGU0Pm5AltvVn8nokTx1AL8v6mIvDdVNl1K7ccnX87aAQT0HR/NUiJx1RVb/Qjc1pRxRrFdeYkox1xC62dWHyKoTOi97wRiUls9W0YqkQJijSXqs/kKz7dpdexPUnXK/kZ3cgyku/tqjktwCXnBX5fz3LwXhk1bhGD1rONmII2BXENxmSEKiUu4VG+qRluWH7ZKbgBiwDXE+ajXYGdhAL8dwM8nJmzC9vD+EaIq4oGJt+UDOK5C0UaR1CoiZez6X1tCALijuxtK+IvJ2sq1bdez/uqyNxPiCPv/Ew1r1NHlHxz8+NWXPcWhFVIZxeNbmeDhoNLeh4srVGjGtcVvYICr0nE0UEfvlfbLcGO3s7y+9oaIsiO8rYR16h/Ex8fXdjxUwdXdHAzjTCvQT+ChLeGJ2loDzaK40bXTY6drD4WA4HRs+/8xIWgWtArjRphniPEkXd+plHRWD6X/O8WRs0PDmyX9/2gGn9znInNbUT3ATfEdB9LZTN5XZIIcxJdsXld0qsNjVqEVrUOEvtHAJutxBUm8Bq4UxOZE4370cFm4ERNUYjKVa2yMm5+dPzy/icihPLl7fXxUaqbgJuuCI4X0cVR9FqlEgQ/CyJzAnRv1QU9UEkP1ebk9tEQx50TxbrG5E1EqxLmF4A45a1qjSqzNFVpgqnRHReg8AMMS2Xem87O3jz78vY40B8Fu0GNFysaNSloqomoVRjvmVoNHE3Pz7CybqP8cvRDjD4W61nwYKJQbBeIE51jq8TQVPD3hq7S8KZugKmxRDx+8yAzMLgl2Ot1pMvZ2ZXLL0H746MQK6o5GmOIjXUgT9CPqQWjjA9qXjcJEftUfKDnGHKJD4jjtAtI9gVWqrFa3jC0IO5/rOUpcUlRB7M0ug24R89OHoC3CXyVJp/GN07O3pxNU+IY27qJM9SJSSiSb+esqfH3kbcIdN0nBrZ3wipNFlINpzYJaHPGEXMx8DHf2203CciQCw61xZM88SOTt6rKDk8lpxDBQhavELAOGP0BjVNf8KWZqXfQOIjbD7hN4i61toe8+5tGHQ3ER9FMxl9mvYd+VInnyaZoBxCPUcFqjQtBYnKGydf9uAXXn2+yEYyevry9vY4Yb8NoYBSAP3SApbjRXuD149uvwqwcV2t5hm7iNZURH3wFiRg+cxPfK3H47Z0Cbtd3yJ58kN4foyuWxq0OVKFog3Cr0y7mZuR0eTJbzrZhFrGycpPgMsPZblw2cZNhZVb2swEY+HgT0qikGwJv1AgguboMUy+f3X55ebbMO47w9b68Z25QpT3A1EkTKgwWKhXi3ZjkNJpWtIqHJ+8XJvCSrzjok1tIp+lXC5BftF0qN40pAB2iOtQxpqFBPtchuYIa6FyAouoC3uCIX6rAe3aDlLekNSpBwrsGJWslTJlDdcHSiv+dx7p2IHJog3GOgrw2qwtwvadKxwAKUvRT3nloskoqGRXzOCUOwafq8TqO/I05vMNTZ10AK58hvDXUuKYR5pUKq9Vdvl3PHrdgYKrEN9gKcvuBcYK8jppcyPOefIxp3CVBZYy5LF+D2qnepDqfAfNjUSDW8BzHq6EEzzs/zdMg+3c4TIJRIhKX4nSwwCYptLqn18HICx6oXq2FwRs/G1eQF3UDwMNY5QZVcqNJeGO5XNeI8P1Y1bB55/Cc5xgeSsK3Z4MtS8yNQdiSixIH48bhoUaqRhgjvTtSuQtCjRUwENfI+LemEuIuEl7zDc1YWXHpx/KyGB7crRE0ikOtkp+BnEaJa3oFHZzqRZX2OfXxAQjQKhuVwt88OhglrpMAm6+5DKClHwMgRXgcOrMqsPZ6vlGXkHiwWck3WCrFuf0nHsdRvsYCguqganCD0AbEpTgSVxUNj0zervDuHkH1kB0QoA/vBhlxSC5KtYG1BBQUlRkyv+xiHu44UuLQaiVmcJNgTJ6vNGNAfEYHgVdAE8Y0ZKxyLApnfajGVBJgcbpX15v1arU+o9P8TZYYJP9eIf0Qje76Xa1lMw34kokYELg52wXpXfUfj8IpPDK2RdMmLhTjaMlYLsbZOBUC6zG02h9WWutWqiYRgTeluOkCWLXlPYfYzvjhPuzW0KytVs9wcj+cP3qpww3R0NqbJEsp7W1Laqx6fIZOXs2JzFvLpZIBQtwVfuexSNWHb9QhN/UeQbNmDQeQj5M4wrNT99O9CK0O0C9a7DjsHAFuXouzdN2zVosBRpOO08EZPJ48rtFLLd9WEdpgfdeiZDsaIPMgHQL1ehm0XYOQeuzvSBE8nt1qOKaqxjgZfgDatTnPMTbOe+SqX1V6SJPgEqwfu52TPhDqFS0cxDSmwpgl6AvX546zbfzvGcDQBjUr3hpE1JPgTQFNzTWqTd3v12r1yrtdj+f431AChjbIht6mshVtsHrklcMHugGQHbu7MvnphJrcrcR8cTbfgXHFF6ugh53o/yrEY6JBzvwhn/P6WAjo6Z7dJ5Wmb9APGPQ3K0+oqZ3sGzxl3mE5wj4ukLKMR+va3ZkDgLExBxNO9s3UJ/+yf4FEVoG6GZLmjdM2bNiwYcOGDRs2bNiwYcOGDRs2bNiwYcOGDRs2bNiwYcOGDRs2bNiwYcOGDRs2bNiw8Tni/wGZZqtsZe+7/AAAAABJRU5ErkJggg==" alt="...">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h4 class="media-heading"><span id="vehi_titulo">Demo 001</span></h4>
-                            <hr>
-                            <div class="row">
-                              <div class="col-md-2">
-                                  <p style="color:gray; font-size:13px;"><i class="fa fa-film"></i> <span id="vehi_placa">Demo 001</span></p>
-                              </div>
-                              <div class="col-md-2">
-                                  <p style="color:gray; font-size:13px;"><i class="fa fa-tachometer" style="color:gray;" ></i><span id="vehi_odometro">77940 km</span></p>
-                              </div>
-                              <div class="col-md-2">
-                                  <p style="color:gray; font-size:13px;"><i class="fa fa-toggle-on" style="color:gray;"></i><span id="vehi_estado">Activo</span></p>
-                              </div>
-                              <div class="col-md-2">
-                                  <p style="color:gray; font-size:13px;"><i class="fa fa-taxi" style="color:gray;"></i><span id="vehi_tipo">Transporte de carga</span></p>
-                              </div>
-                              <div class="col-md-2">
-                                  <p style="color:gray; font-size:13px;"><i class="fa fa-share-alt" style="color:gray;"></i><span id="vehi_ciudad"></span></p>
-                              </div>
-                              <div class="col-md-2">
-                                  <p  style="color:gray; font-size:13px;"><i class="fa fa-user-circle-o" style="color:gray;"></i> Juan Conductor</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        </h3>
-                      </div>
-                      <div class="panel-body">
-                        <ul class="nav nav-pills">
-                          <li role="presentation" class="active"><a data-toggle="tab" href="#resumen">Resumen</a></li>
-                          <li role="presentation"><a  data-toggle="tab" href="#detalle" >Detalle del vehiculo</a></li>
-                          <li role="presentation"><a data-toggle="tab" href="#documentos" >Documentos</a></li>
-                          <li role="presentation" class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                              Operación <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li role="presentation"><a  data-toggle="tab" href="#tarea" >Tarea</a></li>
-                              <li role="presentation"><a  data-toggle="tab" href="#combustible" >Combustible</a></li>
-                              <li role="presentation"><a  data-toggle="tab" href="#mantenimiento" >Mantenimiento</a></li>
+                                <li class="" title="Combustible"><a href="#reportesCombustible" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i> Combustible</a></li>
+                                <li class="" title="Mantenimiento"><a href="#reportesMantenimiento" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i> Mantenimiento</a></li>
+                                <li class="" title="Mantenimiento"><a href="#reportesGastoOperativo"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i> Otros Gastos</a></li>
+                                <li class="" title="Mantenimiento"><a href="#reportesGastoOperativoTotal"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i> Gasto Operativo</a></li>
                             </ul>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12 tab-content">
-                    <div  id="resumen" class="tab-pane fade in active">
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <div class="row">
-                                <div class="col-md-11">
-                                  <h3 class="panel-title">Histórico de odómetro</h3>
-                                </div>
-                                <div class="col-md-1" style="padding:0px 10px">
-                                  <!-- Button trigger modal -->
-                                  <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i>
-                                </div>
-                              </div>
-                              
-                            </div>
-                            <div class="panel-body">
-                              <table class="datatable table table-striped table-bordered" id="odometroTable">
-                                
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Agregar Odometro</h4>
-                              </div>
-                              <div class="modal-body">
-                                <div class="row">
-                                  <div class="col-md-5 col-md-offset-1">
-                                    <div class="form-group">
-                                      <div class="input-group">
-                                        <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Fecha</span>
-                                        <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-4 col-md-offset-1">
-                                    <div class="form-group">
-                                      <div class="input-group">
-                                        <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Hora</span>
-                                        <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="col-md-10 col-md-offset-1">
-                                    <div class="form-group">
-                                      <div class="input-group">
-                                        <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Odometro</span>
-                                        <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button type="button" class="btn btn-primary">Guardar</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <div class="row">
-                                <div class="col-md-11">
-                                  <h3 class="panel-title">Asignaciones</h3>
-                                </div>
-                                <div class="col-md-1" style="padding:0px 10px">
-                                  <!-- Button trigger modal -->
-                                  <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#asignacionesNew"><i class="fa fa-plus"></i>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="asignacionesNew" tabindex="-1" role="dialog" aria-labelledby="asignacionesLabel">
-                              <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="asignacionesLabel" style="color:black">Agregar asignación</h4>
-                                  </div>
-                                  <div class="modal-body">
-                                    <div class="row">
-                                      <div class="col-md-5 col-md-offset-1">
-                                        <div class="form-group">
-                                          <div class="input-group">
-                                            <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Fecha Ini.</span>
-                                            <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4 col-md-offset-1">
-                                        <div class="form-group">
-                                          <div class="input-group">
-                                            <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Fecha Fin</span>
-                                            <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-5 col-md-offset-1">
-                                        <div class="form-group">
-                                          <div class="input-group">
-                                            <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Hora Ini.</span>
-                                            <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4 col-md-offset-1">
-                                        <div class="form-group">
-                                          <div class="input-group">
-                                            <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Hora Fin</span>
-                                            <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-5 col-md-offset-1">
-                                        <div class="form-group">
-                                          <div class="input-group">
-                                            <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Conductor.</span>
-                                            <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-4 col-md-offset-1">
-                                        <div class="form-group">
-                                          <div class="input-group">
-                                            <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Odómetro Ini.</span>
-                                            <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-10 col-md-offset-1">
-                                        <div class="form-group">
-                                          <div class="input-group">
-                                            <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Comentarios</span>
-                                            <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Guardar</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel-body">
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <p>Actuales/futuras</p>
-                                </div>
-                              </div>
-                              <br>
-                              <div class="row">
-                                
-                                <div class="col-md-12">
-                                  <p><i class="fa fa-tachometer" style="color:gray;" ></i>&nbsp;&nbsp;<b>Juan Conductor</b></p>
-                                  <p style="font-size:11px; color:gray"><b>Inicio:</b> 20/02/22 - 11:22:38 hrs</p>
-                                  <p style="font-size:11px; color:gray"> Sin odormetro inicial</p>
-                                </div>
-                              </div>
-                              <hr>
-                              <div class="row">
-                                
-                                <div class="col-md-12">
-                                  <p><i class="fa fa-tachometer" style="color:gray;" ></i>&nbsp;&nbsp;<b>Carlos Conductor</b></p>
-                                  <p style="font-size:11px; color:gray"><b>Inicio:</b> 20/02/22 - 11:22:38 hrs</p>
-                                  <p style="font-size:11px; color:gray"> Sin odormetro inicial</p>
-                                </div>
-                              </div>
-                              <hr>
-                    
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <div class="row">
-                                <div class="col-md-11">
-                                  <h3 class="panel-title">Cambios de estados</h3>
-                                </div>
-                                <div class="col-md-1">
-                                  <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target="#estadosNew"><i class="fa fa-plus"></i>
-                                </div>
-                              </div>
-                              
-                            </div>
-                            <!-- Modal -->
-                            <div class="modal fade" id="estadosNew" tabindex="-1" role="dialog" aria-labelledby="estadosLabel">
-                              <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="estadosLabel" style="color:black">Cambiar estado del vehiculo</h4>
-                                  </div>
-                                  <div class="modal-body">
-                                    <div class="row">
-                                      
-                                      <div class="col-md-10 col-md-offset-1">
-                                        <div class="form-group">
-                                          <div class="input-group">
-                                            <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Estado Vehiculo</span>
-                                            <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="col-md-10 col-md-offset-1">
-                                        <div class="form-group">
-                                          <div class="input-group">
-                                            <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Motivo</span>
-                                            <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary">Guardar</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="panel-body">
-                              <div class="row">
-                                <div class="col-md-10">
-                                  <p><i class="fa fa-bullseye" style="color:gray;" ></i>&nbsp;&nbsp;<b>Felipe Fernandez</b>cambio de estado a</p>
-                                  <p style="font-size:11px; color:gray">hace 15 dias - 28/02/22 03:29hrs</p>
-                                  <p style="font-size:11px; color:gray"><b>Motivo: </b>SE ESTA HACIENDO UN TRABAJO</p>
-                                </div>
-                                <div class="col-md-2">
-                                  <p><i class="fa fa-bullseye" style="color:gray;" ></i>&nbsp;&nbsp;Activo</p>
-                                </div>
-                              </div>
-                              <hr>
-                              <div class="row">
-                                <div class="col-md-10">
-                                  <p><i class="fa fa-bullseye" style="color:gray;" ></i>&nbsp;&nbsp;<b>Pedro Torres</b>cambio de estado a</p>
-                                  <p style="font-size:11px; color:gray">hace 25 dias - 28/02/22 03:29hrs</p>
-                                  <p style="font-size:11px; color:gray"><b>Motivo: </b>SE ESTA HACIENDO OTRO TRABAJO</p>
-                                </div>
-                                <div class="col-md-2">
-                                  <p><i class="fa fa-bullseye" style="color:gray;" ></i>&nbsp;&nbsp;Activo</p>
-                                </div>
-                              </div>
-                              <hr>
-                              <div class="row">
-                                <div class="col-md-10">
-                                  <p><i class="fa fa-bullseye" style="color:gray;" ></i>&nbsp;&nbsp;<b>Pedro Torres</b>cambio de estado a</p>
-                                  <p style="font-size:11px; color:gray">hace 25 dias - 28/02/22 03:29hrs</p>
-                                  <p style="font-size:11px; color:gray"><b>Motivo: </b>SE ESTA HACIENDO OTRO TRABAJO</p>
-                                </div>
-                                <div class="col-md-2">
-                                  <p><i class="fa fa-bullseye" style="color:gray;" ></i>&nbsp;&nbsp;Activo</p>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h3 class="panel-title">Costos operativos totales</h3>
-                            </div>
-                            <div class="panel-body">
-                              <div id ="dashboardChart04">
-
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h3 class="panel-title">Comentarios</h3>
-                            </div>
-                            <div class="panel-body">
-                              Panel content
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="panel panel-default">
-                            <div class="panel-heading">
-                              <h3 class="panel-title">Historico de cambios</h3>
-                            </div>
-                            <div class="panel-body">
-                              Panel content
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-
-                
-                    </div>
-
-                    <div id="detalle" class="row tab-pane fade"> 
-                      <div class="col-md-12">
-                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                          <div class="panel panel-primary">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                              <div class="row">
-                                <div class="col-md-11">
-                                  <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                      <i class="fa fa-taxi"></i> Detalles
-                                    </a>
-                                  </h4>
-                                </div>
-                                <div class="col-md-1">
-                                  <!-- Modal Button -->
-                                  <a style="color:white" href="" data-toggle="modal" data-target=".detalleEdit"> <i class="fa fa-pencil"></i> </a>
-                                </div>
-                                <!-- Modal -->
-                                <div class="modal fade detalleEdit" tabindex="-1" role="dialog" aria-labelledby="#detalleEditLabel">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="detalleEditLabel" style="color:black">Editar Vehiculo</h4>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="row">
-                                          <div class="col-md-5 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Año</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-4 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Marca</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-10 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Nombre</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary">Guardar</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <div class="panel-body">
-                                    <div class="table-responsive">
-                                      <table class="table">
-                                        <tr>
-                                          <th>Nombre</th>
-                                          <td><span id="det_nombre"></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Estado del vehículo</th>
-                                          <td><span id="det_estado"></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Tipo del Vehículo</th>
-                                          <td><span id="det_tipo"></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Grupo</th>
-                                          <td><span id="det_grupo"></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Tipo de propiedad</th>
-                                          <td><span id="det_propiedad"></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>NIV(número de serie)</th>
-                                          <td><span id="det_serie"></span></td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="panel-body">
-                                    <div class="table-responsive">
-                                      <table class="table">
-                                        <tr>
-                                            <th>Año</th>
-                                            <td><span id="det_anio"></span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Marca</th>
-                                            <td><span id="det_marca"></span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Modelo</th>
-                                            <td><span id="det_modelo"></span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Version</th>
-                                            <td><span id="det_version"></span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Color</th>
-                                            <td><span id="det_color"></span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Cuerpo</th>
-                                            <td><span id="det_cuerpo"></span></td>
-                                        </tr>
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="panel panel-primary">
-                            <div class="panel-heading" role="tab" id="headingTwo">
-                              <div class="row">
-                                <div class="col-md-11">
-                                  <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                      <i class="fa fa-taxi"></i>  Seguro
-                                    </a>
-                                  </h4>
-                                </div>
-                                <div class="col-md-1">
-                                    <!-- Button trigger modal -->
-                                    <a style="color:white" href="" data-toggle="modal" data-target=".seguroNew"> <i class="fa fa-plus"></i> </a>
-                                  <!-- <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target=".seguroNew"><i class="fa fa-plus"></i> -->
-                                </div>
-                                <!-- Modal -->
-                                <div class="modal fade seguroNew" tabindex="-1" role="dialog" aria-labelledby="#seguroNewLabel">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="seguroNewLabel" style="color:black">Agregar seguro</h4>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="row">
-                                          <div class="col-md-5 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Fecha ini</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-4 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Fecha Ven.</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          
-                                          <div class="col-md-5 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Referencia</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-4 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Total</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-10 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Proveedor</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary">Guardar</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                              <div class="row">
-                                <div class="col-md-11">
-                                  <div class="panel-body">
-                                    <p><b>Seguro</b></p>
-                                  </div>
-                                </div>
-                                <div class="col-md-1">
-                                  <!--Modal Button-->
-                                  <div class="panel-body">
-                                    <a style="color:gray" href="" data-toggle="modal" data-target=".seguroEdit"> <i class="fa fa-pencil"></i> </a>
-                                  </div>
-                                </div>
-                                <!-- Modal -->
-                                <div class="modal fade seguroEdit" tabindex="-1" role="dialog" aria-labelledby="#seguroEditLabel">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="seguroEditLabel" style="color:black">Editar seguro</h4>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="row">
-                                          <div class="col-md-5 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Fecha ini</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-4 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Fecha Ven.</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          
-                                          <div class="col-md-5 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Referencia</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-4 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Total</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-10 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Proveedor</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary">Guardar</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="panel-body">
-                                    <div class="table-responsive">
-                                      <table class="table">
-                                        <tr>
-                                          <th>Proveedor</th>
-                                          <td><span id="seg_proveedor"></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Fecha de inicio</th>
-                                          <td><span id="seg_fechaIni"></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Total</th>
-                                          <td><span id="seg_total"></span></td>
-                                        </tr>
-                                      
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="panel-body">
-                                    <div class="table-responsive">
-                                      <table class="table">
-                                          <tr>
-                                            <th>Referencia</th>
-                                            <td><span id="seg_refe"></span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Fecha de vencimiento</th>
-                                            <td><span id="seg_fechaVen"></span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Documentos</th>
-                                            <td><span id="seg_docs"></span></td>
-                                          </tr>
-                                        
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="panel panel-primary">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                              <div class="row">
-                                <div class="col-md-11">
-                                  <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    <i class="fa fa-taxi"></i>  Combustible
-                                    </a>
-                                  </h4>
-                                </div>
-                                <div class="col-md-1">
-                                  <a style="color:white" href="#" > <i class="fa fa-pencil"></i> </a>
-                                </div>
-                              </div>
-                              
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <div class="panel-body">
-                                    <div class="table-responsive">
-                                      <table class="table">
-                                        <tr>
-                                          <th style="color:gray;">Capacidad de tanque 1 de combustible</th>
-                                          <td><span id="com_tanque01"></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Tipo de combustible: Gasolina</th>
-                                          <td><span></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th style="color:gray;">Redimiento semanal esperado</th>
-                                          <td><span id="com_rendimiento"></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Tanque 2 de combustible</th>
-                                          <td><span></span></td>
-                                        </tr>
-                                        <tr style="color:gray;">
-                                          <th>Capacidad de tanque 2 de combustible</th>
-                                          <td><span id="com_tanque02"></span></td>
-                                        </tr>
-                                      
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
-                                
-                              </div>
-                            </div>
-                          </div>
-                          <div class="panel panel-primary">
-                            <div class="panel-heading" role="tab" id="headingFour">
-                              <div class="row">
-                                <div class="col-md-11">
-                                  <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                                    <i class="fa fa-taxi"></i>  Propiedad del vehiculo
-                                    </a>
-                                  </h4>
-                                </div>
-                                <div class="col-md-1">
-                                  <!-- Button trigger modal -->
-                                  <a style="color:white" href="" data-toggle="modal" data-target=".propiedadEdit"> <i class="fa fa-pencil"></i> </a>
-                                  &nbsp;&nbsp;
-                                  <a style="color:white" href="#"> <i class="fa fa-trash"></i> </a>
-                                </div>
-                                <!-- Modal -->
-                                <div class="modal fade propiedadEdit" tabindex="-1" role="dialog" aria-labelledby="#propiedadEditLabel">
-                                  <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                      <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="propiedadEditLabel" style="color:black">Ingresar datos adquisición del vehículo</h4>
-                                      </div>
-                                      <div class="modal-body">
-                                        <div class="row">
-                                          <div class="col-md-5 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Fecha ini</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-4 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Fecha Ven.</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          
-                                          <div class="col-md-5 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Referencia</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-4 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Total</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                          <div class="col-md-10 col-md-offset-1">
-                                            <div class="form-group">
-                                              <div class="input-group">
-                                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Proveedor</span>
-                                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary">Guardar</button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              
-                            </div>
-                            <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <div class="panel-body">
-                                    <div class="table-responsive">
-                                      <table class="table">
-                                        <tr>
-                                          <th>Proveedor</th>
-                                          <td><span id="pro_proveedor"></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Fecha de compra</th>
-                                          <td><span id="pro_fecha_compra"></span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Precio de compra</th>
-                                          <td><span id="pro_precio"></span></td>
-                                        </tr>
-                                        
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="panel-body">
-                                    <div class="table-responsive">
-                                      <table class="table">
-                                          <tr>
-                                            <th>Fecha de expiración de la garantía</th>
-                                            <td><span id="pro_fecha_garan"></span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Notas</th>
-                                            <td><span id="pro_notas"></span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Documentos</th>
-                                            <td><span id="pro_documentos"></span></td>
-                                          </tr>
-                                          
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="panel panel-primary">
-                            <div class="panel-heading" role="tab" id="headingFive">
-                              <div class="row">
-                                <div class="col-md-11">
-                                  <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                                    <i class="fa fa-taxi"></i>  Neumaticos y Ruedas
-                                    </a>
-                                  </h4>
-                                </div>
-                                <div class="col-md-1">
-                                  <a style="color:white" href="#"> <i class="fa fa-pencil"></i> </a>
-                                </div>
-                              </div>
-                              
-                            </div>
-                            <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <div class="panel-body">
-                                    <div class="table-responsive">
-                                      <table class="table">
-                                        <tr>
-                                          <th>Distancia entre ejes</th>
-                                          <td><span id="">-</span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Ancho de eje frontral</th>
-                                          <td><span id="">-</span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Sistema de frenado</th>
-                                          <td><span id="">-</span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Diámetro de neumapticos traseros</th>
-                                          <td><span id="">-</span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Tipo de neumáticos delanteros</th>
-                                          <td><span id="">-</span></td>
-                                        </tr>
-                                        <tr>
-                                          <th>Tipo de neumáticos traseros</th>
-                                          <td><span id="">-</span></td>
-                                        </tr>
-                                        
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="panel-body">
-                                    <div class="table-responsive">
-                                      <table class="table">
-                                          <tr>
-                                            <th>Sistemas de frenado</th>
-                                            <td><span id="">-</span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Ancho del eje trasero</th>
-                                            <td><span id="">-</span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Diámetro de neumapticos delanteros</th>
-                                            <td><span id="">-</span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>Eje posterior</th>
-                                            <td><span id="">-</span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>PSI neumáticos delanteros</th>
-                                            <td><span id="">-</span></td>
-                                          </tr>
-                                          <tr>
-                                            <th>PSI neumáticos traseros</th>
-                                            <td><span id="">-</span></td>
-                                          </tr>
-                                          
-                                      </table>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div id="documentos" class="row tab-pane fade">
-                      <div class="col-md-1 col-md-offset-11">
-                        <div class="panel-body">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target=".documentosNew"><i class="fa fa-plus"></i>
-                        </div>
-                      </div>
-                      <div class="col-md-12">
-                        <div class="panel-body">
-                          <div class="table-responsive">
-                            <table class="table">
-                                <tr>
-                                  <td><span id=""><input type="checkbox" value="">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fa fa-file-text"></i>&nbsp; &nbsp;<a href="">DocumentoSeguroObligatorio DEM 001.docx</a></span></td>
-                                  <td>18/03/2022</td>
-                                  <td>
-                                    <button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app01VerVehiculo('+(parseInt(oData.id))+');" ><i class="fa fa-pencil"></i></button>
-                                    &nbsp;
-                                    <button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app01VerVehiculo('+(parseInt(oData.id))+');" ><i class="fa fa-trash"></i></button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td><span id=""><input type="checkbox" value="">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fa fa-file-text"></i>&nbsp; &nbsp;<a href="">DocumentoSeguroObligatorio DEM 001.docx</a></span></td>
-                                  <td>18/03/2022</td>
-                                  <td>
-                                    <button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app01VerVehiculo('+(parseInt(oData.id))+');" ><i class="fa fa-pencil"></i></button>
-                                    &nbsp;
-                                    <button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app01VerVehiculo('+(parseInt(oData.id))+');" ><i class="fa fa-trash"></i></button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td><span id=""><input type="checkbox" value="">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fa fa-file-text"></i>&nbsp; &nbsp;<a href="">DocumentoSeguroObligatorio DEM 001.docx</a></span></td>
-                                  <td>18/03/2022</td>
-                                  <td>
-                                    <button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app01VerVehiculo('+(parseInt(oData.id))+');" ><i class="fa fa-pencil"></i></button>
-                                    &nbsp;
-                                    <button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app01VerVehiculo('+(parseInt(oData.id))+');" ><i class="fa fa-trash"></i></button>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td><span id=""><input type="checkbox" value="">&nbsp; &nbsp;&nbsp; &nbsp;<i class="fa fa-file-text"></i>&nbsp; &nbsp;<a href="">DocumentoSeguroObligatorio DEM 001.docx</a></span></td>
-                                  <td>18/03/2022</td>
-                                  <td>
-                                    <button id="#" type="button" class="btn btn-primary btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app01VerVehiculo('+(parseInt(oData.id))+');" ><i class="fa fa-pencil"></i></button>
-                                    &nbsp;
-                                    <button id="#" type="button" class="btn btn-danger btn-xs" style="margin-left:2px;margin-right:2px;" title="S" onclick="javascript:app01VerVehiculo('+(parseInt(oData.id))+');" ><i class="fa fa-trash"></i></button>
-                                  </td>
-                                </tr>
-                                
-                              
-                                
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div id="tarea" class="row tab-pane fade">
-                      <div class="col-md-12">
-                        
-                        <h3>Tareas</h3>
-                        <ul class="nav nav-pills">
-                          <li role="presentation2" class="active"><a data-toggle="tab" href="#vencidas">Vencidas</a></li>
-                          <li role="presentation2"><a  data-toggle="tab" href="#porVencer" >Por vencer</a></li>
-                          <li role="presentation2"><a data-toggle="tab" href="#realizadas" >Realizadas</a></li>
-                        </ul>
-                        
-                      </div>
-                      <div class="col-md-1 col-md-offset-11">
-                        <div class="panel-body">
-                            <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary btn-circle " data-toggle="modal" data-target=".tareaNew"><i class="fa fa-plus"></i>
-                        </div>
-                      </div>
-                      <div class="col-md-12 tab-content">
-                        <div id="vencidas" class="row tab-pane fade in active">
-                          <div class="col-md-12">
-                            <div class="panel-body">
-                              <table class="datatable table table-striped table-bordered" id="tareasVencidas">
-                                
-                              </table>
-                            </div>
-                          </div>
-                      
-                        </div>
-                        <div id="porVencer" class="row tab-pane fade">
-                          <div class="col-md-12">
-                            <div class="panel-body">
-                              <table class="datatable table table-striped table-bordered" id="tareasporVencer">
-                                
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                        <div id="realizadas" class="row tab-pane fade">
-                          <div class="col-md-12">
-                            <div class="panel-body">
-                              <table class="datatable table table-striped table-bordered" id="tareasRealizadas">
-                                
-                              </table>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div id="combustible" class="roww tab-pane fade">
-
-                    </div>
-                    <div id="mantenimiento" class="roww tab-pane fade">
-
-                    </div>
-                  </div>
-                  
-                </div>
-                
-              </div>
-            </div>
-
-            <div class="tab-pane fade datos03" id="">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn01_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;;" onclick="javascript:app01Boton_new();"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn01_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app01Boton_cancel();"><i class="fa fa-angle-double-left"></i> Regresar</button>
-                  <button id="btn01_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app01Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn01_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app01Boton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                  
-                </div>
-              </div>
-              <br>
-              <div class="container">
-                <div class="row" id="grid01">
-                  <div class="col-md-12">
-
-                    <div class=" box-primary">
-                      <div class="box-header no-padding">
-                        <div class="box-body table-responsive no-padding">
-                          <table class="datatable table table-striped table-bordered" id="gridConductores">
-                            
-                            </thead>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-
-            </div>
+                        </li>
+                        <li role="presentation" class="dropdown">
+                            <a href="#" id="myTabDropInventario" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="myTabDropInventario-contents"><i class="fa fa-dropbox"></i> Operación
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="myTabDropInventario"
+                                id="myTabDropInventario-contents">
+                                <!--<li class="" title="Tareas"><a href="#HistorialTareas" data-toggle="tab"
+                                        onclick="javascript:app04GridAll();"><i class="fa fa-dropbox"></i> Historial de
+                                        Asignación de
+                                        Tareas</a>
+                                </li>
+                                <li class="" title="Tareas"><a href="#NuevoRegistroTareas" data-toggle="tab"
+                                        onclick="javascript:app04GridAll();"><i class="fa fa-dropbox"></i> Agregar
+                                        Tareas</a>
+                                </li>-->
+                                <li class="" title="Combustible"><a href="#HistorialCombustible" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i> Historial de Combustible</a></li>
+                                <li class="" title="Combustible"><a href="#NuevoRegistroCombustible"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i>Agregar Combustible</a></li>
 
 
-            <div class="tab-pane fade datos04" id="">
-              <div class="box-body">
-                <div class="pull-right">
-                  <button id="btn01_New" type="button" class="btn btn-primary btn-xs" style="margin-top:5px;;" data-toggle="modal" data-target=".opetareaNew"><i class="fa fa-plus"></i> Nuevo</button>
-                  <button id="btn01_Cancel" type="button" class="btn btn-default btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app01Boton_cancel();"><i class="fa fa-angle-double-left"></i> Regresar</button>
-                  <button id="btn01_Update" type="button" class="btn btn-warning btn-xs" style="margin-top:5px;display:none;" onclick="javascript:app01Boton_update();"><i class="fa fa-flash"></i> Actualizar</button>
-                  <button id="btn01_Save" type="button" class="btn btn-success btn-xs" style="margin-top:5px; display:none;" onclick="javascript:app01Boton_save();"><i class="fa fa-flash"></i> Guardar</button>
-                  
-                </div>
-                <!-- Modal -->
-                <div class="modal fade opetareaNew" tabindex="-1" role="dialog" aria-labelledby="#opetareaNewLabel">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="opetareaNewLabel" style="color:black">Agregar tarea</h4>
-                      </div>
-                      <div class="modal-body">
-                        <div class="row">
-                          <div class="col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Nombre</span>
-                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-4 col-md-offset-1">
-                            <div class="form-group">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Tipo</span>
-                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div class="col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Fecha lim.</span>
-                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-4 col-md-offset-1">
-                            <div class="form-group">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Prioridad</span>
-                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Vehiculo</span>
-                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-4 col-md-offset-1">
-                            <div class="form-group">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Responsable</span>
-                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-5 col-md-offset-1">
-                            <div class="form-group">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Conductor</span>
-                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-4 col-md-offset-1">
-                            <div class="form-group">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Proveedor</span>
-                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-10 col-md-offset-1">
-                            <div class="form-group">
-                              <div class="input-group">
-                                <span class="input-group-addon" title="Grupo de Activos" style="background:#EEEEEE;font-weight:bold">Comentarios</span>
-                                <input id="odome_fecha" type="text" class="form-control" placeholder="..." />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary">Guardar</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <br>
-              <div class="container">
-                <div class="row" id="grid01">
-                  <div class="col-md-12">
+                                <!--<li class="" title="Mantenimiento"><a href="#HistorialMantenimiento"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i> Historial de Mantenimiento</a>
+                                </li>
 
-                    <div class=" box-primary">
-                      <div class="box-header no-padding">
-                        <div class="box-body table-responsive no-padding">
-                          <div class="col-md-12">
-                            
-                            <h3>Tareas</h3>
-                            <ul class="nav nav-pills">
-                              <li role="presentation2" class="active"><a data-toggle="tab" href="#opevencidas">Vencidas</a></li>
-                              <li role="presentation2"><a  data-toggle="tab" href="#opeporVencer" >Por vencer</a></li>
-                              <li role="presentation2"><a data-toggle="tab" href="#operealizadas" >Realizadas</a></li>
+                                <li class="" title="Mantenimiento"><a href="#NuevoRegistroMantenimiento"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i> Agregar Mantenimiento</a></li>-->
+
+
+                                <li class="" title="Mantenimiento"><a href="#HistorialCostosOperarios"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i>Historial de Otros Gastos</a>
+                                </li>
+                                <li class="" title="Mantenimiento"><a href="#OperacionGastoOperativo"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i>Agregar Otros Gastos</a></li>
+
                             </ul>
-                            
-                          </div>
-                          
-                          <div class="col-md-12 tab-content">
-                            <div id="opevencidas" class="row tab-pane fade in active">
-                              <div class="container">
+                        </li>
+
+                        <li role="test2" class="dropdown">
+                            <a href="#" id="myTabDropInventario3" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="myTabDropInventario3-contents"><i class="fa fa-dropbox"></i> Flota <span
+                                    class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="myTabDropInventario3"
+                                id="myTabDropInventario3-contents">
+                                <li class="" title="Vehiculos"><a href="#flotavehiculos" data-toggle="tab"
+                                        onclick='updateGrid("gridVehiculo");'><i class="fa fa-dropbox"></i>
+                                        Vehiculos</a>
+                                </li>
+                                <li class="" title="Conductores"><a href="#flotaconductores" data-toggle="tab"
+                                        onclick='updateGrid("gridConductor");'><i class="fa fa-dropbox"></i>
+                                        Conductores</a></li>
+                                <li class="" title="Vehiculos"><a href="#HistorialdeDocumentos" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>
+                                        Historial de Documentos</a>
+                                </li>
+                                <li class="" title="Proveedores"><a href="#AgregarDocumentos" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>
+                                        Agregar Documentos</a></li>
+                                <!--<li class="" title="Proveedores"><a href="#flotaproveedores" data-toggle="tab"
+                                        onclick='updateGrid("gridProveedor");'><i class="fa fa-dropbox"></i>
+                                        Proveedores</a></li>-->
+                            </ul>
+                        </li>
+                        <!--<li role="test2" class="dropdown">
+                            <a href="#" id="myTabDropInventario3" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="myTabDropInventario3-contents"><i class="fa fa-dropbox"></i> Documentos
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="myTabDropInventario3"
+                                id="myTabDropInventario3-contents">
+                                <li class="" title="Vehiculos"><a href="#HistorialdeDocumentos" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>
+                                        Historial de Documentos</a>
+                                </li>
+                                <li class="" title="Proveedores"><a href="#AgregarDocumentos" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>
+                                        Agregar Documentos</a></li>
+                            </ul>
+                        </li>-->
+                        <li role="test2" class="dropdown">
+                            <a href="#" id="myTabDropInventario3" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="myTabDropInventario3-contents"><i class="fa fa-dropbox"></i> Req.
+                                Mantenimiento<span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="myTabDropInventario3"
+                                id="myTabDropInventario3-contents">
+                                <li class="" title="Mantenimiento"><a href="#HistorialSolicitudMantenimiento"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i> Historial de RQ de
+                                        Mantenimiento</a></li>
+
+                                <li class="" title="Mantenimiento"><a href="#NuevoRegistroSolicitudMantenimiento"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i> Nuevo RQ de
+                                        Mantenimiento</a></li>
+                            </ul>
+                        </li>
+
+                        <li role="presentation" class="dropdown">
+                            <a href="#" id="dropdowngestionpersonas" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="dropdowngestionpersonas-contents"><i class="fa fa-dropbox "></i> Gestión
+                                de personas
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdowngestionpersonas"
+                                id="dropdowngestionpersonas-contents">
+                                <li class="" title="Inventario"><a href="#HistorialRequerimientosPersonas"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i>Historial de requerimientos</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevoRegistroPersonas" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Nuevo requerimiento</a>
+                                </li>
+                            </ul>
+                        </li>
+
+
+                        <li role="presentation" class="dropdown">
+                            <a href="#" id="dropdownRequerimientoCompra" class="dropdown-toggle" data-toggle="dropdown"
+                                aria-controls="dropdownRequerimientoCompra-contents"><i class="fa fa-dropbox"></i>
+                                Requerimiento
+                                <span class="caret"></span></a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownRequerimientoCompra"
+                                id="dropdownRequerimientoCompra-contents">
+                                <li class="" title="Inventario"><a href="#HistorialRequerimientos" data-toggle="tab"><i
+                                            class="fa fa-dropbox"></i>Historial de Requerimientos</a>
+                                </li>
+                                <li class="" title="Inventario"><a href="#NuevoRegistroRequerimientos"
+                                        data-toggle="tab"><i class="fa fa-dropbox"></i>Nuevo Requerimiento</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="datos01">
+                            <div class="container">
                                 <div class="row">
-                                  <div class="col-md-12">
-                                    <div class="panel-body">
-                                      <table class="datatable table table-striped table-bordered" id="opetareasVencidas">
-                                        
-                                      </table>
+                                    <div class="col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Estado de la flota</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <!--<div class="col-md-12">
+                                                        <p><i class="fa fa-taxi"></i> &nbsp; &nbsp;Asignados: &nbsp;1
+                                                            &nbsp; &nbsp; Sin asignar: &nbsp;2</p>
+                                                    </div>-->
+
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+
+                                                                <table class="table" id="tablaResumenflota">
+
+                                                                </table>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                  </div>
+                                    <div class="col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Asignaciones</h3>
+                                            </div>
+                                            <div class="panel-body" id="tablaResumenflotaTarea">
+                                                <div class="row" style="margin-bottom:25px">
+                                                    <div class="col-md-12">
+                                                        <p><span id="asig_asignar"></span> &nbsp; &nbsp;Asignados&nbsp;
+                                                            &nbsp; &nbsp; <span id="asig_sinasignar"></span>&nbsp;
+                                                            &nbsp;Sin Asignar</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                              </div>
-                          
-                            </div>
-                            <div id="opeporVencer" class="row tab-pane fade">
-                              <div class="col-md-12">
-                                <div class="panel-body">
-                                  <table class="datatable table table-striped table-bordered" id="tareasporVencer">
-                                    
-                                  </table>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Gasto Operativo</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <!--<div class="col-md-12">
+                                                        <ul class="nav nav-pills">
+                                                            <li role="presentation" class="active"><a
+                                                                    onclick='managenementGraphs("sql_combustible_by_all", "gastoOperativoAll", "resumencombustibleGraphMensual")'
+                                                                    data-toggle="tab"
+                                                                    href="#resumencombustibleGraphMensual"
+                                                                    aria-expanded="true">Mensual</a></li>
+                                                            <li role="presentation"><a
+                                                                    onclick='managenementGraphs("sql_combustible_by_all", "gastoOperativoAll", "resumencombustibleGraphAnual",365)'
+                                                                    data-toggle="tab"
+                                                                    href="#resumencombustibleGraphAnual"
+                                                                    aria-expanded="true">Anual</a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-12 tab-content">
+
+                                                        <div class="row tab-pane fade in active"
+                                                            id="resumencombustibleGraphMensual"></div>
+                                                        <div class="row tab-pane fade"
+                                                            id="resumencombustibleGraphAnual"></div>
+                                                    </div>-->
+                                                    <div class="col-md-12">
+                                                        <div class="box box-body">
+                                                            <div class="form-group" style="margin-bottom:5px;">
+                                                                <div class="input-group">
+
+                                                                    <span class="input-group-addon" title="Departamento"
+                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Año</span>
+                                                                    <input id="txt06_anio_gasto_operativo_total_resumen"
+                                                                        type="number" class="form-control"
+                                                                        placeholder="Año" value="2022" />
+                                                                    <span class="input-group-addon" title="Departamento"
+                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Meses</span>
+                                                                    <select
+                                                                        id="cbo06_meses_gasto_operativo_total_resumen"
+                                                                        class="form-control selectpicker">
+                                                                        <option value="-1">Todos los meses</option>
+                                                                        <option value="1">Enero</option>
+                                                                        <option value="2">Febrero</option>
+                                                                        <option value="3">Marzo</option>
+                                                                        <option value="4">Abril</option>
+                                                                        <option value="5">Mayo</option>
+                                                                        <option value="6">Junio</option>
+                                                                        <option value="7">Julio</option>
+                                                                        <option value="8">Agosto</option>
+                                                                        <option value="9">Setiembre</option>
+                                                                        <option value="10">Octubre</option>
+                                                                        <option value="11">Noviembre</option>
+                                                                        <option value="12">Diciembre</option>
+                                                                    </select>
+                                                                </div>
+
+
+                                                            </div>
+                                                            <!--<div class="btn-group" role="group"
+                                                                aria-label="Basic example"
+                                                                style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                                                <button id="btn06_Visual" type="button"
+                                                                    class="bg-emerald-500 py-4 px-4 text-white"
+                                                                    style="margin-left:5px"
+                                                                    onclick="javascript:resporte_gasto_operativo_total_resumen_fixed();"><i
+                                                                        class="fa fa-flash"></i> Generar
+                                                                    grafica</button>                                                                                                     
+                                                            </div>-->
+                                                            <div class="form-group" style="margin-bottom:5px;">
+                                                                <div class="col-md-12">
+
+                                                                    <div id="chart_gasto_operativo_total_resumen">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Costos de mantenimientos</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="col-md-12">
+                                                    <ul class="nav nav-pills">
+                                                        <li role="presentation" class="active"><a
+                                                                onclick='managenementGraphs("sql_mantenimiento_by_all", "mantenimientoAll", "resumenMantenimientoGraphMensual")'
+                                                                data-toggle="tab"
+                                                                href="#resumenMantenimientoGraphMensual"
+                                                                aria-expanded="true">Mensual</a></li>
+                                                        <li role="presentation"><a
+                                                                onclick='managenementGraphs("sql_mantenimiento_by_all", "mantenimientoAll", "resumenMantenimientoGraphAnual",365)'
+                                                                data-toggle="tab" href="#resumenMantenimientoGraphAnual"
+                                                                aria-expanded="true">Anual</a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12 tab-content">
+                                                        <div class="row tab-pane fade in active"
+                                                            id="resumenMantenimientoGraphMensual"></div>
+                                                        <div class="row tab-pane fade"
+                                                            id="resumenMantenimientoGraphAnual"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
-                              </div>
+                                <!--  <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Conductores</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <p>3</p>
+                                                        <a href="#">
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-success"
+                                                                    role="progressbar" aria-valuenow="40"
+                                                                    aria-valuemin="0" aria-valuemax="100"
+                                                                    style="width: 100%">
+                                                                    <span class="sr-only">40% Complete (success)</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <p style="font-size:10px;">asignados</p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p>1</p>
+                                                        <a href="#">
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-primary"
+                                                                    role="progressbar" aria-valuenow="40"
+                                                                    aria-valuemin="0" aria-valuemax="100"
+                                                                    style="width: 100%">
+                                                                    <span class="sr-only">40% Complete (success)</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+
+                                                        <p style="font-size:10px;">sin asignar</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <p>4</p>
+                                                        <div class="progress">
+                                                            <div class="progress-bar progress-bar-success"
+                                                                role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                                                                aria-valuemax="100" style="width: 100%">
+                                                                <span class="sr-only">40% Complete (success)</span>
+                                                            </div>
+                                                        </div>
+                                                        <p style="font-size:10px;">activos</p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <p>0</p>
+                                                        <div class="progress">
+                                                            <div class="progress-bar progress-bar-danger"
+                                                                role="progressbar" aria-valuenow="40" aria-valuemin="0"
+                                                                aria-valuemax="100" style="width: 100%">
+                                                                <span class="sr-only">40% Complete (success)</span>
+                                                            </div>
+                                                        </div>
+                                                        <p style="font-size:10px;">inactivos</p>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <p><b>Destacados</b></p>
+                                                        <p><b>0</b>&nbsp;&nbsp; con licencia vencida</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Mantenimientos</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="text-center"
+                                                            style="padding :18% 0%; border:1px solid #dddddd;display:flex;align-items:center;justify-content:center">
+                                                            <span
+                                                                style="display:block;font-weight:bold;font-size:16px;padding:0px;width: 50px;height: 50px;line-height: 50px;background:#f1f1f1;border-radius:50%;">4</span>
+                                                        </div>
+                                                        <p class="text-center" style="font-size:10px;">Programados para
+                                                            los proximos 15 dias.</p>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="text-center"
+                                                            style="padding :18% 0%; border:1px solid #dddddd;display:flex;align-items:center;justify-content:center">
+                                                            <span
+                                                                style="display:block;font-weight:bold;font-size:16px;padding:0px;width: 50px;height: 50px;line-height: 50px;background:#f1f1f1;border-radius:50%;">3</span>
+                                                        </div>
+                                                        <p class="text-center" style="font-size:10px;">En proceso</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="text-center"
+                                                            style="padding :18% 0%; border:1px solid #dddddd;display:flex;align-items:center;justify-content:center">
+                                                            <span
+                                                                style="display:block;font-weight:bold;font-size:16px;padding:0px;width: 50px;height: 50px;line-height: 50px;background:#f1f1f1;border-radius:50%;">1</span>
+                                                        </div>
+
+                                                        <p class="text-center" style="font-size:10px;">Realizados en los
+                                                            ultimos 15 dias</p>
+                                                    </div>
+
+                                                </div>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+
                             </div>
-                            <div id="operealizadas" class="row tab-pane fade">
-                              <div class="col-md-12">
-                                <div class="panel-body">
-                                  <table class="datatable table table-striped table-bordered" id="tareasRealizadas">
-                                    
-                                  </table>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          
                         </div>
-                      </div>
+                        <!--<div class="tab-pane fade " id="reportesCombustible">
+                            <div class="row">
+                                <div class="col-md-12" id="">
+                                    <div class="box box-body">
+                                        <div class="col-md-10">
+                                            <div class="form-group" style="margin-bottom:5px;">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NUMERO
+                                                        DE ACTIVO</span>
+
+                                                    <input id="txt_search_vehiculo_responsable" type="text"
+                                                        class="form-control" placeholder="Ingrese codigo" value="" />
+                                                    <input type="hidden" id="txt_search_vehiculo_responsable_report_id"
+                                                        name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchVehiculoReportCombustible');"></button></span>
+
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nº
+                                                        de Activo</span>
+                                                    <input id="txt_search_vehiculo_responsable_report_activo"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripcion</span>
+                                                    <input id="txt_search_vehiculo_responsable_report_descripcion"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Tipo
+                                                    </span>
+                                                    <input id="txt_search_vehiculo_responsable_report_tipo" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <ul class="nav nav-pills">
+                                                <li role="presentation" class=""><button
+                                                        onclick='managementGraphsReport("sql_combustible_report_by_id", "combustibleByReportId", "resumencombustibleGraphReportIndividualMensual")'
+                                                        data-toggle="tab" class="bg-cyan-500 py-4 px-4 text-white"
+                                                        href="#resumencombustibleGraphReportIndividualMensual"
+                                                        aria-expanded="true">Mensual</button></li>
+                                                <li role="presentation"><button
+                                                        onclick='managementGraphsReport("sql_combustible_report_by_id", "combustibleByReportId", "resumencombustibleGraphReportIndividualAnual",365)'
+                                                        data-toggle="tab" class="bg-emerald-500 py-4 px-4 text-white"
+                                                        href="#resumencombustibleGraphReportIndividualAnual"
+                                                        aria-expanded="true">Anual</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 tab-content">
+                                        <div class="row tab-pane fade in active"
+                                            id="resumencombustibleGraphReportIndividualMensual"></div>
+                                        <div class="row tab-pane fade"
+                                            id="resumencombustibleGraphReportIndividualAnual"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>-->
+                        <div class="tab-pane fade " id="reportesCombustible">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Flota</span>
+                                                <select id="cbo06_Contenidos_combustible"
+                                                    class="form-control selectpicker">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Año</span>
+                                                <input id="txt06_anio_combustible" type="number" class="form-control"
+                                                    placeholder="Año" value="2022" />
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Meses</span>
+                                                <select id="cbo06_meses_combustible" class="form-control selectpicker">
+                                                    <option value="-1">Todos los meses</option>
+                                                    <option value="1">Enero</option>
+                                                    <option value="2">Febrero</option>
+                                                    <option value="3">Marzo</option>
+                                                    <option value="4">Abril</option>
+                                                    <option value="5">Mayo</option>
+                                                    <option value="6">Junio</option>
+                                                    <option value="7">Julio</option>
+                                                    <option value="8">Agosto</option>
+                                                    <option value="9">Setiembre</option>
+                                                    <option value="10">Octubre</option>
+                                                    <option value="11">Noviembre</option>
+                                                    <option value="12">Diciembre</option>
+                                                </select>
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Equipo</span>
+                                                <select id="cbo06_Equipos_combustible"
+                                                    class="form-control selectpicker">
+                                                    <option value="-1">Todos los Equipo</option>
+                                                </select>
+                                            </div>
+
+                                            <!--<div class="col-md-2" style="display:none;">
+                                                <div class="form-group" style="margin-bottom:5px;">
+                                                    <div class="input-group">
+                                                        <select id="cbo06_semanas" class="form-control selectpicker">
+                                                            <option value="Primera">semana 1</option>
+                                                            <option value="Segunda">semana 2</option>
+                                                            <option value="Tercera">semana 3</option>
+                                                            <option value="Cuarta">semana 4</option>
+                                                            <option value="Quinta">semana 5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="Basic example"
+                                            style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                            <button id="btn06_Visual" type="button"
+                                                class="bg-emerald-500 py-4 px-4 text-white" style="margin-left:5px"
+                                                onclick="javascript:resporte_combustible_fixed();"><i
+                                                    class="fa fa-flash"></i> Generar grafica</button>
+                                            <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="col-md-12">
+
+                                                <div id="chart_combustible">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="tab-pane fade" id="reportesMantenimiento">
+                            <div class="row">
+                                <div class="col-md-12" id="">
+                                    <div class="box box-body">
+                                        <div class="col-md-10">
+                                            <div class="form-group" style="margin-bottom:5px;">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VEHICULO</span>
+
+                                                    <input id="txt_search_vehiculo_mantenimiento2" type="text"
+                                                        class="form-control" placeholder="Ingrese codigo" value="" />
+                                                    <input type="hidden"
+                                                        id="txt_search_vehiculo_mantenimiento_report_id" name=""
+                                                        value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchVehiculoReportMantenimiento');"></button></span>
+
+
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Activo</span>
+                                                    <input id="txt_search_vehiculo_mantenimiento_report_activo"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripcion</span>
+                                                    <input id="txt_search_vehiculo_mantenimiento_report_descripcion"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <ul class="nav nav-pills">
+                                                <li role="presentation" class="active"><button
+                                                        onclick='managementGraphsReport("sql_mantenimiento_report_by_id", "mantenimientoByReportId", "resumenmantenimientoGraphReportIndividualMensual")'
+                                                        data-toggle="tab" class="bg-cyan-500 py-4 px-4 text-white"
+                                                        href="#resumenmantenimientoGraphReportIndividualMensual"
+                                                        aria-expanded="true">Mensual</button></li>
+                                                <li role="presentation"><button
+                                                        onclick='managementGraphsReport("sql_mantenimiento_report_by_id", "mantenimientoByReportId", "resumenmantenimientoGraphReportIndividualAnual",365)'
+                                                        data-toggle="tab" class="bg-emerald-500 py-4 px-4 text-white"
+                                                        href="#resumenmantenimientoGraphReportIndividualAnual"
+                                                        aria-expanded="true">Anual</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 tab-content">
+
+                                        <div class="row tab-pane fade in active"
+                                            id="resumenmantenimientoGraphReportIndividualMensual"></div>
+                                        <div class="row tab-pane fade"
+                                            id="resumenmantenimientoGraphReportIndividualAnual"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>-->
+                        <div class="tab-pane fade " id="reportesMantenimiento">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Flota</span>
+                                                <select id="cbo06_Contenidos_combustible"
+                                                    class="form-control selectpicker">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Año</span>
+                                                <input id="txt06_anio_combustible" type="number" class="form-control"
+                                                    placeholder="Año" value="2022" />
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Meses</span>
+                                                <select id="cbo06_meses_combustible" class="form-control selectpicker">
+                                                    <option value="-1">Todos los meses</option>
+                                                    <option value="1">Enero</option>
+                                                    <option value="2">Febrero</option>
+                                                    <option value="3">Marzo</option>
+                                                    <option value="4">Abril</option>
+                                                    <option value="5">Mayo</option>
+                                                    <option value="6">Junio</option>
+                                                    <option value="7">Julio</option>
+                                                    <option value="8">Agosto</option>
+                                                    <option value="9">Setiembre</option>
+                                                    <option value="10">Octubre</option>
+                                                    <option value="11">Noviembre</option>
+                                                    <option value="12">Diciembre</option>
+                                                </select>
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Equipo</span>
+                                                <select id="cbo06_Equipos_combustible"
+                                                    class="form-control selectpicker">
+                                                    <option value="-1">Todos los Equipo</option>
+                                                </select>
+                                            </div>
+
+                                            <!--<div class="col-md-2" style="display:none;">
+                                                <div class="form-group" style="margin-bottom:5px;">
+                                                    <div class="input-group">
+                                                        <select id="cbo06_semanas" class="form-control selectpicker">
+                                                            <option value="Primera">semana 1</option>
+                                                            <option value="Segunda">semana 2</option>
+                                                            <option value="Tercera">semana 3</option>
+                                                            <option value="Cuarta">semana 4</option>
+                                                            <option value="Quinta">semana 5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="Basic example"
+                                            style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                            <button id="btn06_Visual" type="button"
+                                                class="bg-emerald-500 py-4 px-4 text-white" style="margin-left:5px"
+                                                onclick="javascript:resporte_combustible_fixed();"><i
+                                                    class="fa fa-flash"></i> Generar grafica</button>
+                                            <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="col-md-12">
+
+                                                <div id="chart_combustible">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="tab-pane fade" id="reportesGastoOperativo">
+                            <div class="row">
+                                <div class="col-md-12" id="">
+                                    <div class="box box-body">
+                                        <div class="col-md-10">
+                                            <div class="form-group" style="margin-bottom:5px;">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VEHICULO</span>
+
+                                                    <input id="txt_search_vehiculo_costoOperacional" type="text"
+                                                        class="form-control" placeholder="Ingrese codigo" value="" />
+                                                    <input type="hidden"
+                                                        id="txt_search_vehiculo_costoOperacional_report_id" name=""
+                                                        value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchVehiculoReportGastoOperativo');"></button></span>
+
+
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Activo</span>
+                                                    <input id="txt_search_vehiculo_costoOperacional_report_activo"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripcion</span>
+                                                    <input id="txt_search_vehiculo_costoOperacional_report_descripcion"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <ul class="nav nav-pills">
+                                                <li role="presentation" class="active"><button
+                                                        onclick='managementGraphsReport("sql_costoOperacional_report_by_id", "costoOperacionalByReportId", "resumencostoOperacionalGraphReportIndividualMensual")'
+                                                        class="bg-cyan-500 py-4 px-4 text-white" data-toggle="tab"
+                                                        href="#resumencostoOperacionalGraphReportIndividualMensual"
+                                                        aria-expanded="true">Mensual</button></li>
+                                                <li role="presentation"><button
+                                                        onclick='managementGraphsReport("sql_costoOperacional_report_by_id", "costoOperacionalByReportId", "resumencostoOperacionalGraphReportIndividualAnual",365)'
+                                                        class="bg-emerald-500 py-4 px-4 text-white" data-toggle="tab"
+                                                        href="#resumencostoOperacionalGraphReportIndividualAnual"
+                                                        aria-expanded="true">Anual</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 tab-content">
+
+                                        <div class="row tab-pane fade in active"
+                                            id="resumencostoOperacionalGraphReportIndividualMensual"></div>
+                                        <div class="row tab-pane fade"
+                                            id="resumencostoOperacionalGraphReportIndividualAnual"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>-->
+                        <div class="tab-pane fade " id="reportesGastoOperativo">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Flota</span>
+                                                <select id="cbo06_Contenidos_gasto_operativo"
+                                                    class="form-control selectpicker">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Año</span>
+                                                <input id="txt06_anio_gasto_operativo" type="number"
+                                                    class="form-control" placeholder="Año" value="2022" />
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Meses</span>
+                                                <select id="cbo06_meses_gasto_operativo"
+                                                    class="form-control selectpicker">
+                                                    <option value="-1">Todos los meses</option>
+                                                    <option value="1">Enero</option>
+                                                    <option value="2">Febrero</option>
+                                                    <option value="3">Marzo</option>
+                                                    <option value="4">Abril</option>
+                                                    <option value="5">Mayo</option>
+                                                    <option value="6">Junio</option>
+                                                    <option value="7">Julio</option>
+                                                    <option value="8">Agosto</option>
+                                                    <option value="9">Setiembre</option>
+                                                    <option value="10">Octubre</option>
+                                                    <option value="11">Noviembre</option>
+                                                    <option value="12">Diciembre</option>
+                                                </select>
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Equipo</span>
+                                                <select id="cbo06_Equipos_gasto_operativo"
+                                                    class="form-control selectpicker">
+                                                    <option value="-1">Todos los Equipo</option>
+                                                </select>
+                                            </div>
+
+                                            <!--<div class="col-md-2" style="display:none;">
+                                                <div class="form-group" style="margin-bottom:5px;">
+                                                    <div class="input-group">
+                                                        <select id="cbo06_semanas" class="form-control selectpicker">
+                                                            <option value="Primera">semana 1</option>
+                                                            <option value="Segunda">semana 2</option>
+                                                            <option value="Tercera">semana 3</option>
+                                                            <option value="Cuarta">semana 4</option>
+                                                            <option value="Quinta">semana 5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="Basic example"
+                                            style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                            <button id="btn06_Visual" type="button"
+                                                class="bg-emerald-500 py-4 px-4 text-white" style="margin-left:5px"
+                                                onclick="javascript:resporte_gasto_operativo_fixed();"><i
+                                                    class="fa fa-flash"></i> Generar grafica</button>
+                                            <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="col-md-12">
+
+                                                <div id="chart_gasto_operativo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="tab-pane fade" id="reportesGastoOperativoTotal">
+                            <div class="row">
+                                <div class="col-md-12" id="">
+                                    <div class="box box-body">
+                                        <div class="col-md-10">
+                                            <div class="form-group" style="margin-bottom:5px;">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VEHICULO</span>
+
+                                                    <input id="txt_search_vehiculo_costoOperacional_total" type="text"
+                                                        class="form-control" placeholder="Ingrese codigo" value="" />
+                                                    <input type="hidden"
+                                                        id="txt_search_vehiculo_costoOperacional_report_id_total"
+                                                        name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchVehiculoReportGastoOperativoTotal');"></button></span>
+
+
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Activo</span>
+                                                    <input id="txt_search_vehiculo_costoOperacional_report_activo_total"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripcion</span>
+                                                    <input
+                                                        id="txt_search_vehiculo_costoOperacional_report_descripcion_total"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <ul class="nav nav-pills">
+                                                <li role="presentation" class=""><button
+                                                        onclick='managementGraphsReport("sql_costoOperacional_report_by_idTotal", "costoOperacionalByReportIdTotal", "resumencostoOperacionalGraphReportIndividualMensualTotal")'
+                                                        data-toggle="tab" class="bg-cyan-500 py-4 px-4 text-white"
+                                                        href="#resumencostoOperacionalGraphReportIndividualMensualTotal"
+                                                        aria-expanded="true">Mensual</button></li>
+                                                <li role="presentation"><button
+                                                        onclick='managementGraphsReport("sql_costoOperacional_report_by_idTotal", "costoOperacionalByReportIdTotal", "resumencostoOperacionalGraphReportIndividualAnualTotal",365)'
+                                                        data-toggle="tab" class="bg-emerald-500 py-4 px-4 text-white"
+                                                        href="#resumencostoOperacionalGraphReportIndividualAnualTotal"
+                                                        aria-expanded="true">Anual</button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 tab-content">
+
+                                        <div class="row tab-pane fade in active"
+                                            id="resumencostoOperacionalGraphReportIndividualMensualTotal"></div>
+                                        <div class="row tab-pane fade"
+                                            id="resumencostoOperacionalGraphReportIndividualAnualTotal"></div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>-->
+                        <div class="tab-pane fade " id="reportesGastoOperativoTotal">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Flota</span>
+                                                <select id="cbo06_Contenidos_gasto_operativo_total"
+                                                    class="form-control selectpicker">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Año</span>
+                                                <input id="txt06_anio_gasto_operativo_total" type="number"
+                                                    class="form-control" placeholder="Año" value="2022" />
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Meses</span>
+                                                <select id="cbo06_meses_gasto_operativo_total"
+                                                    class="form-control selectpicker">
+                                                    <option value="-1">Todos los meses</option>
+                                                    <option value="1">Enero</option>
+                                                    <option value="2">Febrero</option>
+                                                    <option value="3">Marzo</option>
+                                                    <option value="4">Abril</option>
+                                                    <option value="5">Mayo</option>
+                                                    <option value="6">Junio</option>
+                                                    <option value="7">Julio</option>
+                                                    <option value="8">Agosto</option>
+                                                    <option value="9">Setiembre</option>
+                                                    <option value="10">Octubre</option>
+                                                    <option value="11">Noviembre</option>
+                                                    <option value="12">Diciembre</option>
+                                                </select>
+                                                <span class="input-group-addon" title="Departamento"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Equipo</span>
+                                                <select id="cbo06_Equipos_gasto_operativo_total"
+                                                    class="form-control selectpicker">
+                                                    <option value="-1">Todos los Equipo</option>
+                                                </select>
+                                            </div>
+
+                                            <!--<div class="col-md-2" style="display:none;">
+                                                <div class="form-group" style="margin-bottom:5px;">
+                                                    <div class="input-group">
+                                                        <select id="cbo06_semanas" class="form-control selectpicker">
+                                                            <option value="Primera">semana 1</option>
+                                                            <option value="Segunda">semana 2</option>
+                                                            <option value="Tercera">semana 3</option>
+                                                            <option value="Cuarta">semana 4</option>
+                                                            <option value="Quinta">semana 5</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="Basic example"
+                                            style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                            <button id="btn06_Visual" type="button"
+                                                class="bg-emerald-500 py-4 px-4 text-white" style="margin-left:5px"
+                                                onclick="javascript:resporte_gasto_operativo_total_fixed();"><i
+                                                    class="fa fa-flash"></i> Generar grafica</button>
+                                            <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="col-md-12">
+
+                                                <div id="chart_gasto_operativo_total">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="HistorialCombustible">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="search01OperacionCumbustible">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="grd01OperacionCumbustible">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="NuevoRegistroCombustible">
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VEHICULO</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_vehiculo_comburtible" type="text"
+                                                        class="form-control" placeholder="Ingrese Numero de Activo"
+                                                        value="" />
+                                                    <input type="hidden" id="txt_tarea_vehiculo_comburtible" name=""
+                                                        value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchVehiculoCombustible');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Activo</span>
+                                                    <input id="txt_input_search_vehiculo_comburtibleactivo" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripcion</span>
+                                                    <input id="txt_input_search_vehiculo_comburtibledescripcion"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDUCTOR</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_vehiculo_ope" type="text" class="form-control"
+                                                        placeholder="Ingrese Numero de DNI" value="" />
+                                                    <input type="hidden" id="txt_vehiculo_combustible" name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchConductor2');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nombre</span>
+                                                    <input id="txt_vehiculo_combustible_nombre" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Apellido</span>
+                                                    <input id="txt_vehiculo_combustible_apellido" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PROVEEDOR</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_combustible_proveedor" type="text"
+                                                        class="form-control" placeholder="Ingrese Numero de RUC"
+                                                        value="" />
+                                                    <input type="hidden" id="txt_combustible_proveedor_id" name=""
+                                                        value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchProveedor');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nombre</span>
+                                                    <input id="txt_combustible_proveedor_nombre" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Direccion</span>
+                                                    <input id="txt_combustible_proveedor_apellido" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO
+                                                    DE COMBUSTIBLE</span>
+
+                                                <select id="txt_combustible_tipo" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="0">Gasolina de 90
+                                                    </option>
+                                                    <option value="1">Gasolina de 95
+                                                    </option>
+                                                    <option value="2">Gasolina de 97
+                                                    </option>
+                                                    <option value="4">Diésel
+                                                    </option>
+                                                    <option value="5">GLP
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA</span>
+                                                <input id="txt_combustible_fecha" type="date" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA</span>
+                                                <input id="txt_combustible_hora" type="time" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CANTIDAD
+                                                    (En galones)
+                                                </span>
+                                                <input id="txt_combustible_cantidad" type="number" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRECIO
+                                                    POR GALON (En soles S/.)
+                                                </span>
+                                                <input id="txt_combustible_precio" type="number" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TOTAL</span>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">S/.</span>
+                                                <input id="txt_combustible_total" type="number" class="form-control"
+                                                    placeholder="..." value="" disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-4 text-white"
+                                            onclick="add_combustible();">Guardar</button>
+                                        <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="HistorialTareas">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="search01OperacionTarea">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="grd01OperacionTarea">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="tab-pane fade" id="NuevoRegistroTareas">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION
+                                                    DE LA TAREA</span>
+                                                <input id="txt_tarea_nombre" type="text" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO
+                                                    DE LA TAREA</span>
+                                                <input id="txt_tarea_tipo" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                    LIMITE</span>
+                                                <input id="txt_tarea_fecha_limite" type="date" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRIORIDAD</span>
+
+                                                <select id="txt_tarea_prioridad" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="0">Baja
+                                                    </option>
+                                                    <option value="1">Media
+                                                    </option>
+                                                    <option value="2">Alta
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VEHICULO</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_vehiculo" type="text" class="form-control"
+                                                        placeholder="Ingrese Numero de Activo" value="" />
+                                                    <input type="hidden" id="txt_tarea_vehiculo_empleado" name=""
+                                                        value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchVehiculo');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Activo</span>
+                                                    <input id="txt_input_search_vehiculo_activo" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripcion</span>
+                                                    <input id="txt_input_search_vehiculo_descripcion" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">RESPONSABLE</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_responsable" type="text" class="form-control"
+                                                        placeholder="Ingrese DNI" value="" />
+                                                    <input type="hidden" id="txt_tarea_responsable" name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchResponsable');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nombres</span>
+                                                    <input id="txt_input_search_responsable_nombres" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Apellidos</span>
+                                                    <input id="txt_input_search_responsable_apellidos" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDUCTOR</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_conductor" type="text" class="form-control"
+                                                        placeholder="Ingrese DNI" value="" />
+                                                    <input type="hidden" id="txt_tarea_conductor" name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchConductor');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nombres</span>
+                                                    <input id="txt_input_search_conductor_nombres" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Apellidos</span>
+                                                    <input id="txt_input_search_conductor_apellidos" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">COMENTARIO</span>
+                                                <button class="bg-cyan-500 py-4 px-4 text-white" type="button"
+                                                    onclick="addComentario('txt_tarea_comentario','ComentarioParent','tareaComentarioHijo');"><i
+                                                        class="fa fa-plus-circle "></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-primary">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+                                                    <table class="datatable table table-striped table-bordered text-xl"
+                                                        id="txt_tarea_comentario">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>Descripcion</th>
+                                                                <th>Ope</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-4 text-white"
+                                            onclick="add_tarea();">Guardar</button>                                     
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="tab-pane" id="HistorialMantenimiento">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="search01OperacionMantenimiento">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="grd01OperacionMantenimiento">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="HistorialSolicitudMantenimiento">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="search01OperacionSolicitudMantenimiento">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="grd01OperacionSolicitudMantenimiento">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroSolicitudMantenimiento">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VEHICULO</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_vehiculo_solicitud_mantenimiento" type="text"
+                                                        class="form-control" placeholder="Ingrese Numero de codigo"
+                                                        value="" />
+                                                    <input type="hidden" id="txt_vehiculo_solicitud_mantenimiento"
+                                                        name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchVehiculoSolicitudMantenimiento');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Activo</span>
+                                                    <input id="txt_vehiculo_solicitud_mantenimiento_activo" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripcion</span>
+                                                    <input id="txt_vehiculo_solicitud_mantenimiento_descripcion"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <!--<span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DPTO
+                                                    ASIGNADO
+                                                </span>
+                                                <select id="txt_solicitud_mantenimiento_dpt_asignado"
+                                                    class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+
+                                                </select>-->
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRIORIDAD</span>
+                                                <select id="txt_solicitud_mantenimiento_prioridad"
+                                                    class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="1">BAJA (Atendidas dentro de los 7 días).
+                                                    </option>
+                                                    <option value="2">MEDIA (Atendidas dentro de las 72).
+
+                                                    </option>
+                                                    <option value="3">ALTA (Atendidas dentro de las 48 hrs. (Suministros
+                                                        críticos)).
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO
+                                                    DE MANTENIMIENTO
+                                                </span>
+                                                <select id="txt_solicitud_mantenimiento_tipo" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA</span>
+                                                <input id="txt_solicitud_mantenimiento_fecha" type="date"
+                                                    class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <span class="input-group-addon text-xl" title="Expositor"
+                                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION
+                                            </span>
+                                            <textarea class="form-control" id="txt_solicitud_mantenimiento_descripcion"
+                                                rows="5"></textarea>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">COMENTARIO</span>
+                                                <button class="bg-cyan-500 py-4 px-4 text-white" type="button"
+                                                    onclick="addComentario('txt_solicitud_mantenimiento_comentario','ComentarioParentSolicitudMantenimiento','ComentarioHijoSolicitudMantenimiento');"><i
+                                                        class="fa fa-plus-circle "></i></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="box-primary">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+                                                    <table class="datatable table table-striped table-bordered"
+                                                        id="txt_solicitud_mantenimiento_comentario">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>Descripcion</th>
+                                                                <th>Ope</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-4 text-white"
+                                            onclick="add_solicitudMantenimiento();">Guardar</button>
+                                        <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroMantenimiento">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRE
+                                                    DEL SERVICIO</span>
+                                                <input id="txt_mantenimiento_nombre" type="text" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO
+                                                    DE MANTENIMIENTO</span>
+                                                <select id="txt_mantenimiento_tipo" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="0">1
+                                                    </option>
+                                                    <option value="1">2
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">REFERENCIA</span>
+                                                <input id="txt_mantenimiento_referencia" type="text"
+                                                    class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                    INICIO DE MANTENIMIENTO</span>
+                                                <input id="txt_mantenimiento_fecha_inicio" type="date"
+                                                    class="form-control" value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA
+                                                    INICIO</span>
+                                                <input id="txt_mantenimiento_hora_inicio" type="time"
+                                                    class="form-control" placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                    ESTIMADA DE ENTREGA</span>
+                                                <input id="txt_mantenimiento_fecha_entrega" type="date"
+                                                    class="form-control" value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA
+                                                    ESTIMADA</span>
+                                                <input id="txt_mantenimiento_hora_estimada" type="time"
+                                                    class="form-control" value="" />
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ETIQUETAS</span>
+                                                <input id="txt_mantenimiento_etiqueta" type="text" class="form-control"
+                                                    value="" />
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ORDEN
+                                                    DE SERVICIO</span>
+                                                <input id="txt_mantenimiento_orden" type="text" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CAUSA
+                                                    RAIZ</span>
+                                                <input id="txt_mantenimiento_causa" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">UBICACION</span>
+                                                <input id="txt_mantenimiento_ubicacion" type="text" class="form-control"
+                                                    value="" />
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VEHICULO</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_vehiculo_mantenimiento" type="text"
+                                                        class="form-control" placeholder="Ingrese Numero de codigo"
+                                                        value="" />
+                                                    <input type="hidden" id="txt_vehiculo_combustible_id" name=""
+                                                        value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchVehiculoMantenimiento');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Activo</span>
+                                                    <input id="txt_vehiculo_combustible_activo" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripcion</span>
+                                                    <input id="txt_vehiculo_combustible_descripcion" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDUCTOR</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_vehiculo_combustible_conductor" type="text"
+                                                        class="form-control" placeholder="Ingrese Numero de DNI"
+                                                        value="" />
+                                                    <input type="hidden" id="txt_vehiculo_combustible_conductor_id"
+                                                        name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchConductorMantenimiento');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nombre</span>
+                                                    <input id="txt_vehiculo_combustible_conductor_nombre" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Apellido</span>
+                                                    <input id="txt_vehiculo_combustible_conductor_apellido" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">RESPONSABLE</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_vehiculo_combustible_responsable" type="text"
+                                                        class="form-control" placeholder="Ingrese Numero de DNI"
+                                                        value="" />
+                                                    <input type="hidden" id="txt_vehiculo_combustible_responsable_id"
+                                                        name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchResponsableMantenimiento');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nombre</span>
+                                                    <input id="txt_vehiculo_combustible_responsable_nombre" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Apellido</span>
+                                                    <input id="txt_vehiculo_combustible_responsable_apellido"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PROVEEDOR</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_vehiculo_combustible_proveedor" type="text"
+                                                        class="form-control" placeholder="Ingrese Numero de DNI"
+                                                        value="" />
+                                                    <input type="hidden" id="txt_vehiculo_combustible_proveedor_id"
+                                                        name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchProveedorantenimiento');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nombre</span>
+                                                    <input id="txt_vehiculo_combustible_proveedor_nombre" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Apellido</span>
+                                                    <input id="txt_vehiculo_combustible_proveedor_apellido" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VEHICULO</span>
+                                                <input id="txt_mantenimiento_vehiculo" type="text" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDUCTOR</span>
+                                                <input id="txt_mantenimiento_conductor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">RESPONSABLE</span>
+                                                <input id="txt_mantenimiento_responsable" type="text"
+                                                    class="form-control" value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PROVEEDOR</span>
+                                                <input id="txt_mantenimiento_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">COMENTARIO</span>
+                                                <button class="bg-cyan-500 py-4 px-4 text-white" type="button"
+                                                    onclick="addComentario('txt_combustible_comentario','ComentarioParentCombustible','ComentarioHijoCombustible');"><i
+                                                        class="fa fa-plus-circle "></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-primary">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+                                                    <table class="datatable table table-striped table-bordered"
+                                                        id="txt_combustible_comentario">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>Descripcion</th>
+                                                                <th>Ope</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-4 text-white"
+                                            onclick="add_mantenimiento();">Guardar</button>
+                                        <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="HistorialCostosOperarios">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="search01OperacionCostosOperativos">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="grd01OperacionCostosOperativos">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="OperacionGastoOperativo">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRE
+                                                    DEL GASTO</span>
+                                                <input id="txt_gastosoperarios_nombre" type="text" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO
+                                                    DE GASTO</span>
+                                                <input id="txt_gastosoperarios_tipo" type="text" class="form-control"
+                                                    value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VEHICULO</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_gastosoperarios_search_vehiculo" type="text"
+                                                        class="form-control" placeholder="Ingrese Numero de codigo"
+                                                        value="" />
+                                                    <input type="hidden" id="txt_gastosoperarios_search_vehiculo_id"
+                                                        name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchVehiculoCostosOperarios');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Activo</span>
+                                                    <input id="txt_gastosoperarios_search_activo" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripcion</span>
+                                                    <input id="txt_gastosoperarios_search_descripcion" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDUCTOR</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_gastosoperarios_search_conductor" type="text"
+                                                        class="form-control" placeholder="Ingrese Numero de codigo"
+                                                        value="" />
+                                                    <input type="hidden" id="txt_gastosoperarios_search_conductor_id"
+                                                        name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                        <button class="fa fa-search" type="button" aria-hidden="true"
+                                                            onclick="searchInput('searchConductorCostosOperarios');"></button></span>
+                                                </div>
+                                                <div class="input-group">
+
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Activo</span>
+                                                    <input id="txt_gastosoperarios_conductor_search_activo" type="text"
+                                                        class="form-control" placeholder="..." value="" disabled />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripcion</span>
+                                                    <input id="txt_gastosoperarios_conductor_search_descripcion"
+                                                        type="text" class="form-control" placeholder="..." value=""
+                                                        disabled />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">REFERENCIA</span>
+                                                <input id="txt_gastosoperarios_referencia" type="text"
+                                                    class="form-control" value="" />
+                                                <!--<span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ETIQUETAS</span>
+                                                <input id="txt_gastosoperarios_etiquetas" type="text"
+                                                    class="form-control" value="" />-->
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                    EN QUE SUCEDIO</span>
+                                                <input id="txt_gastosoperarios_fecha" type="date" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA
+                                                    DE CARGA</span>
+                                                <input id="txt_gastosoperarios_hora" type="time" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CANTIDAD</span>
+                                                <input id="txt_gastosoperarios_cantidad" type="number"
+                                                    class="form-control" value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">COSTO
+                                                    UNITARIO (En soles S/.)</span>
+                                                <input id="txt_gastosoperarios_precio" type="number"
+                                                    class="form-control" placeholder="..." value="" />
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TOTAL</span>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">S/.</span>
+                                                <input id="txt_gastosoperarios_total" type="text" class="form-control"
+                                                    value="" disabled />
+                                            </div>
+                                        </div>
+
+                                        <!--  <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VEHICULO</span>
+                                                <input id="txt_mantenimiento_vehiculo" type="text" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDUCTOR</span>
+                                                <input id="txt_mantenimiento_conductor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">RESPONSABLE</span>
+                                                <input id="txt_mantenimiento_responsable" type="text"
+                                                    class="form-control" value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PROVEEDOR</span>
+                                                <input id="txt_mantenimiento_proveedor" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>-->
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-4 text-white"
+                                            onclick="add_costosoperativos();">Guardar</button>
+                                        <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="flotavehiculos">
+                            <div class="row">
+                                <!-- <div class="col-md-2">
+                                    <div class="list-group">
+                                        <a href="#" id="link_Flota_Vehiculos"
+                                            class="list-group-item list-group-item-action active" aria-current="true"
+                                            onclick='HistorialdeVehiculo();'>
+                                            <i class="fa fa-folder-open margin-r-5"></i>Historial de Vehiculos
+                                        </a>
+                                    </div>
+                                </div>-->
+                                <div class="col-md-12" id="contentVehiculos">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="search01FlotaVehiculo">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="grd01FlotaVehiculo">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="display:none" id="detalleVehiculo">
+                                    <div class="col-md-12">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">
+                                                    <div class="media">
+                                                        <div class="media-left">
+                                                            <a href="#" style="background-color:#fff;
+                                                                                border-radius:50%;
+                                                                                padding:15px;
+                                                                                display:inline-block;">
+                                                                <i class="fa fa-car fa-3x"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="media-body">
+                                                            <h4 class="media-heading"><span
+                                                                    id="view_descripcion"></span>
+                                                            </h4>
+                                                            <hr>
+                                                            <div class="row">
+
+                                                                <div class="col-md-2">
+                                                                    <p style="color:gray; font-size:13px;"><i
+                                                                            class="fa fa-film"></i> <span
+                                                                            id="view_placa"></span></p>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <p style="color:gray; font-size:13px;"><i
+                                                                            class="fa fa-tachometer"
+                                                                            style="color:gray;"></i><span
+                                                                            id="view_odometro"></span></p>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <p style="color:gray; font-size:13px;"><i
+                                                                            class="fa fa-toggle-on"
+                                                                            style="color:gray;"></i><span
+                                                                            id="view_estado"></span></p>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <!--<p style="color:gray; font-size:13px;"><i
+                                                                            class="fa fa-share-alt"
+                                                                            style="color:gray;"></i><span
+                                                                            id="view_marca"></span></p>-->
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <!--<p style="color:gray; font-size:13px;"><i
+                                                                            class="fa fa-user-circle-o"
+                                                                            style="color:gray;"></i> <span
+                                                                            id="view_conductor"></span></p>-->
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div
+                                                                        style="color:black; font-size:13px;text-align:right;">
+                                                                        <i class="fa fa-chevron-circle-left"
+                                                                            onClick="ViewVehicleDetalle();" ;
+                                                                            style="font-size:25px"></i><span
+                                                                            id=""></span></p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <ul class="nav nav-pills">
+                                                    <li role="" class="active"><a data-toggle="tab"
+                                                            href="#vehiculoresumen">Resumen</a></li>
+                                                    <li role="presentation"><a data-toggle="tab"
+                                                            href="#vehiculodetalle">Detalle
+                                                            del
+                                                            vehiculo</a></li>
+                                                    <li role="presentation"><a data-toggle="tab"
+                                                            href="#vehiculodocumentos">Documentos</a></li>
+                                                    <li role="presentation" class="dropdown">
+                                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                                                            role="button" aria-haspopup="true" aria-expanded="false">
+                                                            Operación <span class="caret"></span>
+                                                        </a>
+                                                        <ul class="dropdown-menu">
+                                                            <!--<li role="presentation"><a data-toggle="tab"
+                                                                    href="#vehiculotarea">Asignación de tarea</a></li>-->
+                                                            <li role="presentation"><a data-toggle="tab"
+                                                                    href="#vehiculocombustible">Combustible</a></li>
+                                                            <li role="presentation"><a data-toggle="tab"
+                                                                    href="#vehiculomantenimiento">Mantenimiento</a></li>
+                                                            <li role="presentation"><a data-toggle="tab"
+                                                                    href="#vehiculogastooperativo">Gasto Operativo</a>
+                                                            </li>
+
+                                                    </li>
+                                                </ul>
+                                                </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 tab-content">
+                                        <div id="vehiculoresumen" class="tab-pane fade in active">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <div class="row">
+                                                                <div class="col-md-11">
+                                                                    <h3 class="panel-title">Histórico de odómetro</h3>
+                                                                </div>
+                                                                <div class="col-md-1" style="padding:0px 10px">
+                                                                    <!-- Button trigger modal -->
+                                                                    <button type="button"
+                                                                        class="bg-cyan-500  py-2 px-2 text-white btn-circle "
+                                                                        data-toggle="modal"
+                                                                        data-target="#ModalOdometro"><i
+                                                                            class="fa fa-plus"></i>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <table class="datatable table" id="odometroTable">
+
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="ModalOdometro" tabindex="-1" role="dialog"
+                                                    aria-labelledby="myModalLabel">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close"><span
+                                                                        aria-hidden="true">&times;</span></button>
+                                                                <h4 class="modal-title" id="myModalLabel">Agregar
+                                                                    Odometro
+                                                                </h4>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="box box-body">
+
+                                                                    <!--<div class="form-group" style="margin-bottom:5px;">
+                                                                        <div class="input-group">
+                                                                            <span class="input-group-addon text-xl"
+                                                                                title="Expositor"
+                                                                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA</span>
+
+                                                                            <input id="txt_odo_add_fecha" type="date"
+                                                                                class="form-control" value="" />
+
+
+                                                                            <span class="input-group-addon text-xl"
+                                                                                title="Expositor"
+                                                                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA
+
+                                                                            </span>
+
+                                                                            <input id="txt_odo_add_hora" type="time"
+                                                                                class="form-control" />
+                                                                            <input type="hidden"
+                                                                                id="txt_id_programa_capacitacion"
+                                                                                value="">
+                                                                            <input type="hidden"
+                                                                                id="txt_id_modal_programa_capacitacion_type"
+                                                                                value="">
+
+                                                                        </div>
+                                                                    </div>-->
+                                                                    <div class="form-group" style="margin-bottom:5px;">
+                                                                        <div class="input-group">
+
+
+
+                                                                            <span class="input-group-addon text-xl"
+                                                                                title="Expositor"
+                                                                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ODOMETRO</span>
+                                                                            <input id="txt_odo_add_odometro"
+                                                                                type="number" class="form-control"
+                                                                                placeholder="..." value="" />
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button"
+                                                                    class="bg-gray-500  py-2 px-2 text-white"
+                                                                    data-dismiss="modal">Cancelar</button>
+                                                                <button type="button"
+                                                                    class="bg-emerald-500  py-2 px-2 text-white"
+                                                                    onclick="add_odometro();">Guardar</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <div class="row">
+                                                                <div class="col-md-11">
+                                                                    <h3 class="panel-title">Asignacione de Tarea</h3>
+                                                                </div>
+                                                                <div class="col-md-1" style="padding:0px 10px">
+                                                                    <!-- Button trigger modal -->
+                                                                    <button type="button"
+                                                                        class="bg-cyan-500  py-2 px-2 text-white btn-circle "
+                                                                        onClick="openModalGeneric('ModalAsigacionesVehiculo');"><i
+                                                                            class="fa fa-plus"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="ModalAsigacionesVehiculo"
+                                                            tabindex="-1" role="dialog"
+                                                            aria-labelledby="asignacionesLabel">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"
+                                                                            aria-label="Close"><span
+                                                                                aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title" id="asignacionesLabel"
+                                                                            style="color:black">Agregar asignación</h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="box box-body">
+                                                                            <div class="form-group">
+                                                                                <div style="display:flex;">
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold; width:200px">Conductor</span>
+                                                                                    <div style="display:flex">
+                                                                                        <input
+                                                                                            id="txt_search_conductor_operaciones_asignaciones"
+                                                                                            type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Buscar por DNI para Ingresar"
+                                                                                            value="" />
+                                                                                        <input type="hidden"
+                                                                                            id="txt_id_hidden_conductor_operaciones_asignaciones"
+                                                                                            name="" value="">
+                                                                                        <span
+                                                                                            class="input-group-addon text-xl"
+                                                                                            title="Expositor"
+                                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                                                            <button type="button"
+                                                                                                class="fa fa-search"
+                                                                                                aria-hidden="true"
+                                                                                                onclick="searchInput('searchConductorOperacionesAsignacion');"></button></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="input-group"
+                                                                                    style="margin-top:20px;">
+
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nombres</span>
+                                                                                    <input
+                                                                                        id="txt_search_conductor_nombres_operaciones_asignaciones"
+                                                                                        type="text" class="form-control"
+                                                                                        placeholder="..." value=""
+                                                                                        disabled />
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Apellidos</span>
+                                                                                    <input
+                                                                                        id="txt_search_conductor_apellidos_operaciones_asignaciones"
+                                                                                        type="text" class="form-control"
+                                                                                        placeholder="..." value=""
+                                                                                        disabled />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">RESPONSABLE</span>
+                                                                                    <div style="display:flex">
+                                                                                        <input
+                                                                                            id="txt_search_responsable"
+                                                                                            type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Ingrese DNI"
+                                                                                            value="" />
+                                                                                        <input type="hidden"
+                                                                                            id="txt_tarea_responsable"
+                                                                                            name="" value="">
+                                                                                        <span
+                                                                                            class="input-group-addon text-xl"
+                                                                                            title="Expositor"
+                                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                                                            <button class="fa fa-search"
+                                                                                                type="button"
+                                                                                                aria-hidden="true"
+                                                                                                onclick="searchInput('searchResponsable');"></button></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+                                                                                    <div class="input-group">
+
+                                                                                        <span
+                                                                                            class="input-group-addon text-xl"
+                                                                                            title="Expositor"
+                                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nombres</span>
+                                                                                        <input
+                                                                                            id="txt_input_search_responsable_nombres"
+                                                                                            type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="..." value=""
+                                                                                            disabled />
+                                                                                        <span
+                                                                                            class="input-group-addon text-xl"
+                                                                                            title="Expositor"
+                                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Apellidos</span>
+                                                                                        <input
+                                                                                            id="txt_input_search_responsable_apellidos"
+                                                                                            type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="..." value=""
+                                                                                            disabled />
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                                                        PROYECTO / CONTRATO</span>
+
+                                                                                    <input id="txt_asi_add_nombre"
+                                                                                        type="text" class="form-control"
+                                                                                        value="" />
+
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION
+                                                                                        DE LA TAREA</span>
+                                                                                    <input id="txt_tarea_nombre"
+                                                                                        type="text" class="form-control"
+                                                                                        value="" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                                                        TIPO</span>
+                                                                                    <select
+                                                                                        id="txt_select_operaciones_asignaciones_tipo"
+                                                                                        class="form-control ">
+                                                                                        <option value="-1">Selecciona...
+                                                                                        </option>
+                                                                                        <option value="0">Alquiler
+                                                                                        </option>
+                                                                                        <option value="1">Servicio
+                                                                                        </option>
+                                                                                    </select>
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                                                        INICIAL</span>
+
+                                                                                    <input id="txt_asig_add_fecha_ini"
+                                                                                        type="date" class="form-control"
+                                                                                        value="" />
+
+
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA
+                                                                                        INICIAL
+
+                                                                                    </span>
+
+                                                                                    <input id="txt_asig_add_hora_ini"
+                                                                                        type="time"
+                                                                                        class="form-control" />
+                                                                                    <input type="hidden"
+                                                                                        id="txt_id_programa_capacitacion"
+                                                                                        value="">
+                                                                                    <input type="hidden"
+                                                                                        id="txt_id_modal_programa_capacitacion_type"
+                                                                                        value="">
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+
+
+
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                                                        FINAL</span>
+
+                                                                                    <input id="txt_asig_add_fecha_fin"
+                                                                                        type="date" class="form-control"
+                                                                                        value="" />
+
+
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA
+                                                                                        FINAL
+
+                                                                                    </span>
+
+                                                                                    <input id="txt_asig_add_hora_fin"
+                                                                                        type="time"
+                                                                                        class="form-control" />
+
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+
+
+
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PUNTO
+                                                                                        DE PARTIDA</span>
+
+                                                                                    <input
+                                                                                        id="txt_asig_add_punto_partida"
+                                                                                        type="text"
+                                                                                        class="form-control" />
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+
+
+
+
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PUNTO
+                                                                                        DE CARGA
+
+                                                                                    </span>
+
+                                                                                    <input id="txt_asig_add_punto_carga"
+                                                                                        type="text"
+                                                                                        class="form-control" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+
+
+
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PUNTO
+                                                                                        DE DESCARGA</span>
+
+                                                                                    <input
+                                                                                        id="txt_asig_add_punto_decarga"
+                                                                                        type="text"
+                                                                                        class="form-control" />
+
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+
+
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PUNTO
+                                                                                        DE RETORNO
+
+                                                                                    </span>
+
+                                                                                    <input
+                                                                                        id="txt_asig_add_punto_retorno"
+                                                                                        type="text"
+                                                                                        class="form-control" />
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">GUIA
+                                                                                        1
+
+
+                                                                                    </span>
+
+                                                                                    <input
+                                                                                        id="txt_file_operaciones_asignaciones_guia1"
+                                                                                        type="file"
+                                                                                        class="form-control" />
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">GUIA
+                                                                                        2
+
+
+                                                                                    </span>
+
+                                                                                    <input
+                                                                                        id="txt_file_operaciones_asignaciones_guia2"
+                                                                                        type="file"
+                                                                                        class="form-control" />
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORÓMETRO/KILOMETRAJE
+                                                                                        INICIAL
+
+                                                                                    </span>
+
+                                                                                    <input id="txt_asig_add_odometro"
+                                                                                        type="text" class="form-control"
+                                                                                        disabled />
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">COMENTARIO</span>
+                                                                                    <button
+                                                                                        class="bg-cyan-500 py-4 px-4 text-white"
+                                                                                        type="button"
+                                                                                        onclick="addComentario('txt_tarea_comentario','ComentarioParent','tareaComentarioHijo');"><i
+                                                                                            class="fa fa-plus-circle "></i></button>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="box-primary">
+                                                                                <div class="box-header no-padding">
+                                                                                    <div
+                                                                                        class="box-body table-responsive no-padding">
+                                                                                        <table
+                                                                                            class="datatable table table-striped table-bordered text-xl"
+                                                                                            id="txt_tarea_comentario">
+                                                                                            <thead>
+                                                                                                <tr>
+
+                                                                                                    <th>Descripcion</th>
+                                                                                                    <th>Ope</th>
+                                                                                                </tr>
+                                                                                            </thead>
+                                                                                            <tbody>
+
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button"
+                                                                            class="bg-gray-500  py-2 px-2 text-white"
+                                                                            data-dismiss="modal">Cancelar</button>
+                                                                        <button type="button"
+                                                                            onclick="add_asignacion_vehiculo();"
+                                                                            class="bg-emerald-500  py-2 px-2 text-white">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <table class="datatable table" id="asignacionesTables">
+
+                                                            </table>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <div class="row">
+                                                                <div class="col-md-11">
+                                                                    <h3 class="panel-title">Cambios de estados</h3>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <button type="button"
+                                                                        class="bg-cyan-500  py-2 px-2 text-white btn-circle"
+                                                                        data-toggle="modal"
+                                                                        data-target="#ModalEstadosVehiculo"><i
+                                                                            class="fa fa-plus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <!-- Modal -->
+                                                        <div class="modal fade" id="ModalEstadosVehiculo" tabindex="-1"
+                                                            role="dialog" aria-labelledby="estadosLabel">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"
+                                                                            aria-label="Close"><span
+                                                                                aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title" id="estadosLabel"
+                                                                            style="color:black">Cambiar estado del
+                                                                            vehiculo
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="box box-body">
+
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ESTADO
+                                                                                        DE VEHICULO</span>
+
+
+                                                                                    <select id="txt_estado_add_estado"
+                                                                                        class="form-control ">
+                                                                                        <option value="-1">Selecciona...
+                                                                                        </option>
+                                                                                        <option value="0">Operativo
+                                                                                        </option>
+                                                                                        <option value="1">Baja</option>
+                                                                                        <option value="2">Asignados
+                                                                                        </option>
+                                                                                        <option value="3">Alquilados
+                                                                                        </option>
+                                                                                        <option value="4">En el taller
+                                                                                        </option>
+                                                                                        <option value="5">Inactivo
+                                                                                        </option>
+                                                                                        <option value="6">Siniestrado
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <span class="input-group-addon text-xl"
+                                                                                    title="Expositor"
+                                                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MOTIVO
+
+                                                                                </span>
+                                                                                <textarea class="form-control"
+                                                                                    id="txt_estado_add_motivo"
+                                                                                    rows="5"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button"
+                                                                            class="bg-gray-500  py-2 px-2 text-white"
+                                                                            data-dismiss="modal">Cancelar</button>
+                                                                        <button type="button"
+                                                                            onclick="add_estado_vehiculo();"
+                                                                            class="bg-cyan-500  py-2 px-2 text-white">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <table class="datatable table" id="EstadosTables">
+
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <div class="row">
+                                                                <div class="col-md-11">
+                                                                    <h3 class="panel-title">Comentarios</h3>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <button type="button"
+                                                                        class="bg-cyan-500  py-2 px-2 text-white btn-circle "
+                                                                        data-toggle="modal"
+                                                                        data-target="#ModalComentarioVehiculo"><i
+                                                                            class="fa fa-plus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal fade" id="ModalComentarioVehiculo"
+                                                            tabindex="-1" role="dialog" aria-labelledby="estadosLabel">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal"
+                                                                            aria-label="Close"><span
+                                                                                aria-hidden="true">&times;</span></button>
+                                                                        <h4 class="modal-title" id="estadosLabel"
+                                                                            style="color:black">Agregar comentario
+                                                                        </h4>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="box box-body">
+                                                                            <div class="form-group"
+                                                                                style="margin-bottom:5px;">
+                                                                                <div class="input-group">
+
+
+
+                                                                                    <span
+                                                                                        class="input-group-addon text-xl"
+                                                                                        title="Expositor"
+                                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">COMENTARIOS</span>
+
+                                                                                    <textarea class="form-control"
+                                                                                        id="txt_comentario_add_comentario"
+                                                                                        rows="5"></textarea>
+
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button"
+                                                                            class="bg-gray-500 py-2 px-2 text-white"
+                                                                            data-dismiss="modal">Cancelar</button>
+                                                                        <button type="button"
+                                                                            onclick="add_comentario_vehiculo();"
+                                                                            class="bg-emerald-500  py-2 px-2 text-white">Guardar</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <table class="datatable table"
+                                                                id="ComentariosVehiculoTables">
+
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">Mantenimiento</h3>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <div class="col-md-12">
+                                                                <ul class="nav nav-pills">
+                                                                    <li role="presentation" class="active"><a
+                                                                            onclick='managementGraphsReport("sql_mantenimiento_report_by_id", "mantenimientoVehiculo","VehiculoTablesMantenimientoMensual")'
+                                                                            data-toggle="tab"
+                                                                            href="#VehiculoTablesMantenimientoMensual"
+                                                                            aria-expanded="true">Mensual</a></li>
+                                                                    <li role="presentation"><a
+                                                                            onclick='managementGraphsReport("sql_mantenimiento_report_by_id", "mantenimientoVehiculo","VehiculoTablesMantenimientoAnual",365)'
+                                                                            data-toggle="tab"
+                                                                            href="#VehiculoTablesMantenimientoAnual"
+                                                                            aria-expanded="true">Anual</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12 tab-content">
+
+                                                                    <div class="row tab-pane fade in active"
+                                                                        id="VehiculoTablesMantenimientoMensual"></div>
+                                                                    <div class="row tab-pane fade"
+                                                                        id="VehiculoTablesMantenimientoAnual"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            <h3 class="panel-title">Gasto operativos totales</h3>
+                                                        </div>
+                                                        <div class="panel-body">
+                                                            <!--<div class="col-md-12">
+                                                                <ul class="nav nav-pills">
+                                                                    <li role="presentation" class="active"><a
+                                                                            onclick='managementGraphsReport("sql_costoOperacional_report_by_id_vehiculo", "costoOperacionaVehiculo","VehiculoTablesGastoOperativoMensual")'
+                                                                            data-toggle="tab"
+                                                                            href="#VehiculoTablesGastoOperativoMensual"
+                                                                            aria-expanded="true">Mensual</a></li>
+                                                                    <li role="presentation"><a
+                                                                            onclick='managementGraphsReport("sql_costoOperacional_report_by_id_vehiculo", "costoOperacionaVehiculo","VehiculoTablesGastoOperativoAnual",365)'
+                                                                            data-toggle="tab"
+                                                                            href="#VehiculoTablesGastoOperativoAnual"
+                                                                            aria-expanded="true">Anual</a></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-12 tab-content">
+                                                                    <div class="row tab-pane fade in active"
+                                                                        id="VehiculoTablesGastoOperativoMensual"></div>
+                                                                    <div class="row tab-pane fade"
+                                                                        id="VehiculoTablesGastoOperativoAnual"></div>
+                                                                </div>
+                                                            </div>-->
+                                                            <div class="col-md-12">
+                                                                <div class="box box-body">
+                                                                    <div class="form-group" style="margin-bottom:5px;">
+                                                                        <div class="input-group">
+
+                                                                            <span class="input-group-addon"
+                                                                                title="Departamento"
+                                                                                style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Año</span>
+                                                                            <input
+                                                                                id="txt06_anio_gasto_operativo_total_resumen_vehicle"
+                                                                                type="number" class="form-control"
+                                                                                placeholder="Año" value="2022" />
+                                                                            <span class="input-group-addon"
+                                                                                title="Departamento"
+                                                                                style="background:#EEEEEE;font-weight:bold;padding-right: 21px;">Meses</span>
+                                                                            <select
+                                                                                id="cbo06_meses_gasto_operativo_total_resumen_vehicle"
+                                                                                class="form-control selectpicker">
+                                                                                <option value="-1">Todos los meses
+                                                                                </option>
+                                                                                <option value="1">Enero</option>
+                                                                                <option value="2">Febrero</option>
+                                                                                <option value="3">Marzo</option>
+                                                                                <option value="4">Abril</option>
+                                                                                <option value="5">Mayo</option>
+                                                                                <option value="6">Junio</option>
+                                                                                <option value="7">Julio</option>
+                                                                                <option value="8">Agosto</option>
+                                                                                <option value="9">Setiembre</option>
+                                                                                <option value="10">Octubre</option>
+                                                                                <option value="11">Noviembre</option>
+                                                                                <option value="12">Diciembre</option>
+                                                                            </select>
+                                                                        </div>
+
+
+                                                                    </div>
+                                                                    <!--<div class="btn-group" role="group"
+                                                                aria-label="Basic example"
+                                                                style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                                                <button id="btn06_Visual" type="button"
+                                                                    class="bg-emerald-500 py-4 px-4 text-white"
+                                                                    style="margin-left:5px"
+                                                                    onclick="javascript:resporte_gasto_operativo_total_resumen_fixed();"><i
+                                                                        class="fa fa-flash"></i> Generar
+                                                                    grafica</button>                                                                                                     
+                                                            </div>-->
+                                                                    <div class="form-group" style="margin-bottom:5px;">
+                                                                        <div class="col-md-12">
+
+                                                                            <div
+                                                                                id="chart_gasto_operativo_total_resumen_vehicle">
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+                                        <div id="vehiculodetalle" class="row tab-pane fade">
+                                            <div class="col-md-12">
+                                                <div id="accordion">
+                                                    <h3>Detalles del Vehiculo</h3>
+                                                    <div class="h-[250px]">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="panel-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table">
+                                                                            <tr>
+                                                                                <th>Identificador</th>
+                                                                                <td><span id="det_categoria"></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th>Activo</th>
+                                                                                <td><span id="det_activo"></span>
+                                                                                </td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <th>Clase</th>
+                                                                                <td><span id="det_marca"></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th>Grupo</th>
+                                                                                <td><span id="det_modelo"></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th>Condicion</th>
+                                                                                <td><span id="det_anio"></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="panel-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table">
+                                                                            <tr>
+                                                                                <th>Inicio de Garantia</th>
+                                                                                <td><span id="det_odometro"></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th>Fin de Garantia</th>
+                                                                                <td><span id="det_propiedad"></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th>Numero de serie</th>
+                                                                                <td><span id="det_serie"></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th>Parte</th>
+                                                                                <td><span id="det_descripcion"></span>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <!--<tr>
+                                                                                    <th>Propietario</th>
+                                                                                    <td><span
+                                                                                            id="det_propietario"></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                
+                                                                                <tr>
+                                                                                    <th>Motor</th>
+                                                                                    <td><span id="det_motor"></span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <th>Transmicion</th>
+                                                                                    <td><span
+                                                                                            id="det_transmision"></span>
+                                                                                    </td>
+                                                                                </tr>-->
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3>Motor</h3>
+                                                    <div>
+                                                        <div class="col-md-12">
+                                                            <div class="panel-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table" id="table_tipo_sistema_11">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Activo
+                                                                                <th>
+                                                                                <th>Clase
+                                                                                <th>
+                                                                                <th>Grupo
+                                                                                <th>
+                                                                                <th>Condiciones
+                                                                                <th>
+                                                                                <th>Fecha Adquisicion
+                                                                                <th>
+                                                                                <th>Fin Garantia
+                                                                                <th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3>Tren Propulsor</h3>
+                                                    <div>
+                                                        <div class="col-md-12">
+                                                            <div class="panel-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table" id="table_tipo_sistema_12">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Activo
+                                                                                <th>
+                                                                                <th>Clase
+                                                                                <th>
+                                                                                <th>Grupo
+                                                                                <th>
+                                                                                <th>Condiciones
+                                                                                <th>
+                                                                                <th>Fecha Adquisicion
+                                                                                <th>
+                                                                                <th>Fin Garantia
+                                                                                <th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3>Aros Llantas y Trenes</h3>
+                                                    <div>
+                                                        <div class="col-md-12">
+                                                            <div class="panel-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table" id="table_tipo_sistema_13">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Activo
+                                                                                <th>
+                                                                                <th>Clase
+                                                                                <th>
+                                                                                <th>Grupo
+                                                                                <th>
+                                                                                <th>Condiciones
+                                                                                <th>
+                                                                                <th>Fecha Adquisicion
+                                                                                <th>
+                                                                                <th>Fin Garantia
+                                                                                <th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3>Sistema de Suspension</h3>
+                                                    <div>
+                                                        <div class="col-md-12">
+                                                            <div class="panel-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table" id="table_tipo_sistema_14">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Activo
+                                                                                <th>
+                                                                                <th>Clase
+                                                                                <th>
+                                                                                <th>Grupo
+                                                                                <th>
+                                                                                <th>Condiciones
+                                                                                <th>
+                                                                                <th>Fecha Adquisicion
+                                                                                <th>
+                                                                                <th>Fin Garantia
+                                                                                <th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3>Sistema Electrico</h3>
+                                                    <div>
+                                                        <div class="col-md-12">
+                                                            <div class="panel-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table" id="table_tipo_sistema_15">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Activo
+                                                                                <th>
+                                                                                <th>Clase
+                                                                                <th>
+                                                                                <th>Grupo
+                                                                                <th>
+                                                                                <th>Condiciones
+                                                                                <th>
+                                                                                <th>Fecha Adquisicion
+                                                                                <th>
+                                                                                <th>Fin Garantia
+                                                                                <th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3>Sistema Hidraulico</h3>
+                                                    <div>
+                                                        <div class="col-md-12">
+                                                            <div class="panel-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table" id="table_tipo_sistema_16">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Activo
+                                                                                <th>
+                                                                                <th>Clase
+                                                                                <th>
+                                                                                <th>Grupo
+                                                                                <th>
+                                                                                <th>Condiciones
+                                                                                <th>
+                                                                                <th>Fecha Adquisicion
+                                                                                <th>
+                                                                                <th>Fin Garantia
+                                                                                <th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3>Carroceria, Chasis</h3>
+                                                    <div>
+                                                        <div class="col-md-12">
+                                                            <div class="panel-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table" id="table_tipo_sistema_17">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Activo
+                                                                                <th>
+                                                                                <th>Clase
+                                                                                <th>
+                                                                                <th>Grupo
+                                                                                <th>
+                                                                                <th>Condiciones
+                                                                                <th>
+                                                                                <th>Fecha Adquisicion
+                                                                                <th>
+                                                                                <th>Fin Garantia
+                                                                                <th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="vehiculodocumentos" class="row tab-pane fade">
+                                            <!--<div class="col-md-1 col-md-offset-11">
+                                                <div class="panel-body">
+                                                     Button trigger modal 
+                                                    <button type="button" class="btn btn-primary btn-circle "
+                                                        data-toggle="modal" data-target="#documentosVehiculoNuevo"><i
+                                                            class="fa fa-plus"></i>
+                                                </div>
+                                            </div>
+                                            <div class="modal fade" tabindex="-1" role="dialog"
+                                                id="documentosVehiculoNuevo" aria-labelledby="#documentosVehiculoNuevo">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close"><span
+                                                                    aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="documentosVehiculoNuevo"
+                                                                style="color:black">Agregar Documento
+                                                            </h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="box box-body">
+                                                                <div class="form-group" style="margin-bottom:5px;">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Resolución
+                                                                            de bonificación</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_1">
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Certificación
+                                                                            de instalación de GPS</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_2">
+
+                                                                    </div>
+                                                                    <div class="input-group">
+
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Peso</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_3">
+                                                                    </div>
+                                                                    <div class="input-group">
+
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Revisión
+                                                                            técnica</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_4">
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Cubicación</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_5">
+
+
+                                                                    </div>
+                                                                    <div class="input-group">
+
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DGN</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_6">
+
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Tarjeta
+                                                                            de mercancías</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_7">
+
+
+                                                                    </div>
+                                                                    <div class="input-group">
+
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Certificado
+                                                                            de operativo</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_8">
+
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Certificado
+                                                                            de Hermeticidad</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_9">
+
+                                                                    </div>
+                                                                    <div class="input-group">
+
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Certificado
+                                                                            de Epoxicado</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_10">
+
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Lavado
+                                                                            interno</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_11">
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Línea
+                                                                            de vida</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_12">
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Materiales
+                                                                            peligrosos MATPEL</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_13">
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Check
+                                                                            List</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_14">
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Contrato</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_15">
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">SOAT</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_16">
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Responsabilidad
+                                                                            Civil</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_17">
+                                                                    </div>
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-addon text-xl"
+                                                                            title="Expositor"
+                                                                            style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Póliza
+                                                                            vehicular</span>
+                                                                        <input class="form-control" type="file"
+                                                                            id="doc_vehiculo_18">
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default"
+                                                                data-dismiss="modal">Cancelar</button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                onclick="add_document();">Guardar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+
+                                            <div class="col-md-12">
+                                                <div class="panel-body">
+                                                    <div class="">
+                                                        <div class="form-group">
+                                                            <div class="input-group" id="search01VehiculoDocumento">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="box-primary" style="width:100%">
+                                                        <div class="box-header no-padding">
+                                                            <div class="box-body table-responsive no-padding">
+                                                                <table style="width:100%"
+                                                                    class="datatable table table-striped table-bordered"
+                                                                    id="grd01VehiculoDocumento">
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="modal fade" tabindex="-1" role="dialog"
+                                            aria-labelledby="myLargeModalLabel" aria-hidden="true"
+                                            id="modal_updateFiles">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="box box-body">
+                                                            <div class="form-group" style="margin-bottom:5px;">
+                                                                <div class="input-group">
+
+                                                                    <span class="input-group-addon text-xl"
+                                                                        title="Expositor"
+                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ARCHIVO</span>
+
+                                                                    <input id="txt_name_file_update" type="file"
+                                                                        class="form-control" />
+                                                                    <input type="hidden"
+                                                                        id="txt_file_vehiculo_update_file" value="">
+                                                                    <input type="hidden"
+                                                                        id="txt_file_vehiculo_update_type" value="">
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button"
+                                                            class="bg-emerald-500 py-4 px-4 text-white"
+                                                            onclick="update_document_vehiculo_file();">Guardar</button>
+                                                        <button type="button" class="bg-gray-500 py-4 px-4 text-white"
+                                                            data-dismiss="modal"
+                                                            onclick="$('#modal_updateFiles').modal('hide')">Cerrar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="modal fade" tabindex="-1" role="dialog"
+                                            aria-labelledby="myLargeModalLabel" aria-hidden="true"
+                                            id="modal_FichaPersonal">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <div class="box box-body">
+
+                                                            <div class="form-group" style="margin-bottom:5px;">
+                                                                <div class="input-group">
+                                                                    <!-- <span class="input-group-addon text-xl"
+                                                                        title="Expositor"
+                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ARCHIVO</span>
+
+                                                                    <input id="txt_id_name_pdf_ficha_personal"
+                                                                        type="text" class="form-control" value="ddf"
+                                                                        disabled />
+-->
+
+
+                                                                    <input type="hidden"
+                                                                        id="txt_id_type_pdf_Ficha_Personal" value="">
+                                                                    <input type="hidden" id="txt_id_type" value="">
+
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group" style="margin-bottom:5px;">
+                                                                <div class="input-group">
+
+                                                                    <span class="input-group-addon text-xl"
+                                                                        title="Expositor"
+                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                                        DE EMISION</span>
+
+                                                                    <input id="txt_ficha_Personal_emi_modal" type="date"
+                                                                        class="form-control" />
+
+                                                                    <span class="input-group-addon text-xl"
+                                                                        title="Expositor"
+                                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                                        CADUCIDAD</span>
+                                                                    <input id="txt_ficha_Personal_cadu_modal"
+                                                                        type="date" class="form-control"
+                                                                        placeholder="..." value="" />
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button"
+                                                            class="bg-emerald-500 py-4 px-4 text-white""
+                                                            onclick=" update_document_vehiculo();">Guardar</button>
+                                                        <button type="button" class="bg-gray-500 py-4 px-4 text-white""
+                                                            data-dismiss=" modal"
+                                                            onclick="$('#modal_FichaPersonal').modal('hide')">Cerrar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <!--<div id="vehiculotarea" class="tab-pane fade">
+                                            <div class="box box-body">
+                                                <div class="form-group" style="margin-bottom:5px;">
+                                                    <div class="input-group" id="01_searchTareaVehiculo">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="box-primary" style="width:100%">
+                                                <div class="box-header no-padding">
+                                                    <div class="box-body table-responsive no-padding">
+                                                        <table style="width:100%"
+                                                            class="datatable table table-striped table-bordered"
+                                                            id="01_gridTareaVehiculo">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>-->
+                                        <div id="vehiculocombustible" class="tab-pane fade">
+                                            <div class="box box-body">
+                                                <div class="form-group" style="margin-bottom:5px;">
+                                                    <div class="input-group" id="01_searchCombustibleVehiculo">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="box-primary" style="width:100%">
+                                                <div class="box-header no-padding">
+                                                    <div class="box-body table-responsive no-padding">
+                                                        <table style="width:100%"
+                                                            class="datatable table table-striped table-bordered"
+                                                            id="01_gridCombustibleVehiculo">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="vehiculomantenimiento" class="tab-pane fade">
+                                            <div class="box box-body">
+                                                <div class="form-group" style="margin-bottom:5px;">
+                                                    <div class="input-group" id="01_searchMantenimientoVehiculo">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="box-primary" style="width:100%">
+                                                <div class="box-header no-padding">
+                                                    <div class="box-body table-responsive no-padding">
+                                                        <table style="width:100%"
+                                                            class="datatable table table-striped table-bordered"
+                                                            id="01_gridMantenimientoVehiculo">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="vehiculogastooperativo" class="tab-pane fade">
+                                            <div class="box box-body">
+                                                <div class="form-group" style="margin-bottom:5px;">
+                                                    <div class="input-group" id="01_searchGastoOperativo">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="box-primary" style="width:100%">
+                                                <div class="box-header no-padding">
+                                                    <div class="box-body table-responsive no-padding">
+                                                        <table style="width:100%"
+                                                            class="datatable table table-striped table-bordered"
+                                                            id="01_gridGastoOperativo">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--<div class="tab-pane fade" id="flotaproveedores">
+                            <div class="row">
+                                <div class="col-md-12" id="HistorialProveedores">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="search01FloatProveedor">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="grd01FloatProveedor">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="tab-pane fade" id="flotaconductores">
+                            <div class="row">
+                                <div class="col-md-12" id="HistorialConductores">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="search01FlotaConductor">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="grd01Conductores">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                                <!--<div class="col-md-10" id="NuevoRegistroConductores" style="display:none">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES</span>
+                                                <input id="txt_conductor_nombre" type="text" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">APELLIDOS</span>
+                                                <input id="txt_conductor_apellido" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                    DE INGRESO</span>
+                                                <input id="txt_conductor_fecha_ingreso" type="date" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ESTADO
+                                                    DEL CONDUCTOR</span>
+                                                <input id="txt_conductor_estado" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NUMERO
+                                                    DE EMPLEADO</span>
+                                                <input id="txt_conductor_n_empleado" type="text" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">EMAIL</span>
+                                                <input id="txt_conductor_email" type="email" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TELEFONO</span>
+                                                <input id="txt_conductor_telefono" type="number" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TELEFONO
+                                                    DE EMERGENCIA</span>
+                                                <input id="txt_conductor_telefono_emergencia" type="number"
+                                                    class="form-control" placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CIUDAD</span>
+                                                <input id="txt_conductor_ciudad" type="text" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DIRECCION</span>
+                                                <input id="txt_conductor_direccion" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                    DE NACIMIENTO</span>
+                                                <input id="txt_conductor_fecha_nacimiento" type="date"
+                                                    class="form-control" value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TARJETA
+                                                    DE TELEPEAJE</span>
+                                                <input id="txt_conductor_tarjeta" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO
+                                                    DE LICENCIA</span>
+                                                <input id="txt_conductor_tipo_licencia" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NUMERO
+                                                    DE LICENCIA</span>
+                                                <input id="txt_conductor_n_licencia" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                    FECHA DE VENCIMIENTO</span>
+                                                <input id="txt_conductor_fecha_vencimiento" type="date"
+                                                    class="form-control" placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                    GRUPO</span>
+                                                <select id="txt_conductor_grupo" class="form-control">
+                                                    <option value="-1">Selecciona...</option>
+                                                    <option value="0">Renuncia del titular</option>
+                                                    <option value="1">Cancelación de contrato</option>
+                                                    <option value="2">Se crea un nuevo cargo</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">COMENTARIOS</span>
+
+                                                <textarea class="form-control" id="txt_conductor_comentario"
+                                                    rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="Basic example"
+                                            style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                            <button type="button" class="btn btn-success"
+                                                onclick="add_conductor();">Guardar</button>
+                                             <button type="button" class="btn btn-warning">Editar</button>                                             
+                                        </div>
+
+                                    </div>
+
+                                </div>-->
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="HistorialdeDocumentos">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="search01OdeDocumentos">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding"
+                                                style="overflow-x:scroll;width:100%:">
+                                                <table style="" class="datatable table table-striped table-bordered"
+                                                    id="grd01OdeDocumentos">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="AgregarDocumentos">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VEHICULO</span>
+
+                                                <input id="txt_search_documentos_vehiculo" type="text"
+                                                    class="form-control" placeholder="Ingrese codigo" value="" />
+                                                <input type="hidden" id="txt_search_documento_vehiculo_id" name=""
+                                                    value="">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                    <button class="fa fa-search" type="button" aria-hidden="true"
+                                                        onclick="searchInput('searchDocumentoVehiculo');"></button></span>
+
+
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Activo</span>
+                                                <input id="txt_search_vehiculo_documento_activo" type="text"
+                                                    class="form-control" placeholder="..." value="" disabled />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Descripcion</span>
+                                                <input id="txt_search_vehiculo_documento_descripcion" type="text"
+                                                    class="form-control" placeholder="..." value="" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Resolución
+                                                    de bonificación</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_1">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Certificación
+                                                    de instalación de GPS</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_2">
+
+                                            </div>
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Peso</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_3">
+                                            </div>
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Revisión
+                                                    técnica</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_4">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Cubicación</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_5">
+
+
+                                            </div>
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DGN</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_6">
+
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Tarjeta
+                                                    de mercancías</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_7">
+
+
+                                            </div>
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Certificado
+                                                    de operativo</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_8">
+
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Certificado
+                                                    de Hermeticidad</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_9">
+
+                                            </div>
+                                            <div class="input-group">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Certificado
+                                                    de Epoxicado</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_10">
+
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Lavado
+                                                    interno</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_11">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Línea
+                                                    de vida</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_12">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Materiales
+                                                    peligrosos MATPEL</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_13">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Check
+                                                    List</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_14">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Contrato</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_15">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">SOAT</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_16">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Responsabilidad
+                                                    Civil</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_17">
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Póliza
+                                                    vehicular</span>
+                                                <input class="form-control" type="file" id="doc_vehiculo_18">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-4 text-white"
+                                            onclick="add_document();">Guardar</button>
+                                        <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="HistorialRequerimientosPersonas">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchRequrimientoPersonalLogisticahtml">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered text-xl"
+                                                    id="gridRequrimientoPersonalLogisticahtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroPersonas">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div style="display:flex;">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold; width:200px">SOLICITANTE</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_solicitante" type="text" class="form-control"
+                                                        placeholder="Buscar por DNI para Ingresar" value="" />
+                                                    <input type="hidden" id="idsolicitanteHidden" name="" value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 30px;">
+                                                        <button type="button" class="fa fa-search" aria-hidden="true"
+                                                            onclick="searchSolicitante();"></button></span>
+                                                </div>
+                                            </div>
+                                            <div class="input-group" style="margin-top:20px;">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES
+                                                    DEL SOLICITANTE</span>
+                                                <input id="txt_solicitante_nombres" type="text" class="form-control"
+                                                    placeholder="..." value="" disabled />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">APELLIDOS
+                                                    DEL SOLICITANTE</span>
+                                                <input id="txt_solicitante_apellidos" type="text" class="form-control"
+                                                    placeholder="..." value="" disabled />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CARGO</span>
+                                                <select id="txt_cargo_personas" class="form-control ">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">N°
+                                                    DE VACANTES</span>
+                                                <input id="txt_n_vacantes_personas" type="number" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <!--<span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">AREA</span>
+                                                <select id="personas_select_area" class="form-control ">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>-->
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                    PLAZO DE CONTRATO</span>
+                                                <select id="personas_select_contrato" class="form-control ">
+                                                    <option value="-1">Selecciona...</option>
+                                                    <option value="0">Permanente</option>
+                                                    <option value="1">Temporal</option>
+                                                    <option value="2">Otro</option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">
+                                                    MOTIVO DEL PEDIDO</span>
+                                                <select id="personas_select_motivo" class="form-control">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group"
+                                            style="margin-bottom:5px;margin-top:10px;margin-bottom:10px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="font-weight:bold;text-align:left;">CONDICIONES DEL
+                                                    PUESTO</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">LUGAR
+                                                    DEL TRABAJO</span>
+                                                <select id="personas_select_lugar" class="form-control selectpicker">
+                                                    <option value="-1">Selecciona...</option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DURACIÓN
+                                                    ESTIMADA</span>
+                                                <input id="personas_select_duracion" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">(meses)</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                    INCORPORACIÓN</span>
+                                                <input id="txt_fecha_g_personas" type="date" class="form-control"
+                                                    value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">REMUNERACIÓN
+                                                    A OFRECER</span>
+                                                <input id="personas_remuneracion" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">OBSERVACIONES</span>
+                                                <button class="bg-cyan-500 py-4 px-4 text-white" type="button"
+                                                    onclick="addObservacionespersonas();"><i
+                                                        class="fa fa-plus-circle "></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-primary">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+                                                    <table class="datatable table table-striped table-bordered text-xl"
+                                                        id="table_observaciones_personas">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>Descripcion</th>
+                                                                <th>Ope</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="btn-group" role="group" aria-label="Basic example"
+                                            style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                            <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                                onclick="insert_registro_personas();">Guardar</button>
+                                            <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="tab-pane" id="HistorialRequerimientos">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group" id="searchRequerimientoshtml">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-primary" style="width:100%">
+                                        <div class="box-header no-padding">
+                                            <div class="box-body table-responsive no-padding">
+                                                <table style="width:100%"
+                                                    class="datatable table table-striped table-bordered"
+                                                    id="gridRequerimientoshtml">
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="NuevoRegistroRequerimientos">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box box-body">
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div style="display:flex;">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold; width:200px">SOLICITANTE</span>
+                                                <div style="display:flex">
+                                                    <input id="txt_search_requerimiento_compra" type="text"
+                                                        class="form-control" placeholder="Buscar por DNI para Ingresar"
+                                                        value="" />
+                                                    <input type="hidden" id="idrequerimientoCompraHidden" name=""
+                                                        value="">
+                                                    <span class="input-group-addon text-xl" title="Expositor"
+                                                        style="background:#EEEEEE;font-weight:bold;padding-right: 30px;">
+                                                        <button type="button" class="fa fa-search" aria-hidden="true"
+                                                            onclick="search_personal_orden_compra();"></button></span>
+                                                </div>
+                                            </div>
+                                            <div class="input-group" style="margin-top:20px;">
+
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES
+                                                    DEL SOLICITANTE</span>
+                                                <input id="txt_search_name_requerimientoCompra" type="text"
+                                                    class="form-control" placeholder="..." value="" disabled />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">APELLIDOS
+                                                    DEL SOLICITANTE</span>
+                                                <input id="txt_search_apellido_requerimientoCompra" type="text"
+                                                    class="form-control" placeholder="..." value="" disabled />
+                                            </div>
+                                        </div>
+                                        <!--<div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">AREA</span>
+
+                                                <select id="slct_area_requerimiento" class="form-control ">
+                                                    <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="0">MANTENIMIENTO
+                                                    </option>
+                                                    <option value="1">OPERACIONES
+                                                    </option>
+                                                    <option value="2">GESTION DE PERSONAS
+                                                    </option>
+                                                    <option value="3">LOGISTICAS
+                                                    </option>
+                                                    <option value="4">FINANZAS
+                                                    </option>
+                                                    </option>
+                                                </select>                                               
+                                            </div>
+                                        </div>-->
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA
+                                                    DE REQUERIMIENTO</span>
+                                                <input id="txt_fecha_requerimiento_requerimiento" type="date"
+                                                    class="form-control" placeholder="..." value="" />
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CENTRO
+                                                    DE COSTOS</span>
+                                                <input id="txt_centro_costo_requerimiento" type="text"
+                                                    class="form-control" placeholder="..." value="" />
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px; ">PRIORIDAD</span>
+                                                <select id="slct_prioridad_requerimiento" class="form-control ">
+                                                <option value="-1">Selecciona...
+                                                    </option>
+                                                    <option value="1">BAJA (Atendidas dentro de los 7 días).
+                                                    </option>
+                                                    <option value="2">MEDIA (Atendidas dentro de las 72).
+
+                                                    </option>
+                                                    <option value="3">ALTA (Atendidas dentro de las 48 hrs. (Suministros
+                                                        críticos)).
+                                                    </option>
+                                                </select>
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MOTIVO
+                                                    DEL REQUERIMIENTO</span>
+                                                <input id="txt_motivo_requerimiento" type="text" class="form-control"
+                                                    placeholder="..." value="" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group" style="margin-bottom:5px;">
+                                            <div class="input-group">
+                                                <span class="input-group-addon text-xl" title="Expositor"
+                                                    style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ITEM
+                                                    DE REQUERIMIENTO</span>
+                                                <button class="bg-cyan-500 py-4 px-4 text-white" type="button"
+                                                    onclick="addItemRequerimiento('tableItemRequerimiento');"><i
+                                                        class="fa fa-plus-circle "></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="box-primary">
+                                            <div class="box-header no-padding">
+                                                <div class="box-body table-responsive no-padding">
+
+                                                    <table class="datatable table table-striped table-bordered text-xl"
+                                                        id="tableItemRequerimiento">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>ITEM</th>
+                                                                <th>CODIGO</th>
+                                                                <th>Nº DE PARTE</th>
+                                                                <th>DESCRIPCION</th>
+                                                                <th>CANTIDAD</th>
+                                                                <th>UNIDAD MEDIDA</th>                                                              
+                                                                <th>OBSERVACION</th>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-group" role="group" aria-label="Basic example"
+                                        style="margin-bottom:5px;display:flex;justify-content:flex-end;gap:1rem">
+
+                                        <button type="button" class="bg-emerald-500 py-4 px-2 text-white"
+                                            onclick="add_Requerimientos();">Guardar</button>
+                                        <!-- <button type="button" class="btn btn-warning">Editar</button>                                             -->
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
                     </div>
 
-                  </div>
                 </div>
-              </div>
-
             </div>
-            
-            
-
-
-          </div>
-        </div>
     </div>
     </form>
-  </div>
+    </div>
 </section>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+    id="modal_gestionPersonas">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
 
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES DEL
+                                SOLICITANTE</span>
+
+                            <input id="txt-modal-gestion-personas-nombre" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">APELLIDOS DEL
+                                SOLICITANTE</span>
+
+                            <input id="txt-modal-gestion-personas-apellido" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">AREA</span>
+
+                            <input id="txt-modal-gestion-personas-area" type="text" class="form-control" value="dni.pdf"
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CARGO
+                                SOLICITADO</span>
+
+                            <input id="txt-modal-gestion-personas-cargo" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MOTIVO</span>
+
+                            <input id="txt-modal-gestion-personas-motivo" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">VACANTES</span>
+
+                            <input id="txt-modal-gestion-personas-vacantes" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ESTADO</span>
+
+                            <input id="txt-modal-gestion-personas-estado" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="box-primary" style="margin-bottom:10px">
+                        <div class="box-header no-padding">
+                            <div class="box-body table-responsive no-padding">
+                                <table class="datatable table table-striped table-bordered text-xl"
+                                    id="table_gestion_personas_vacante_list_observaciones">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Observaciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-primary" style="margin-bottom:10px">
+                        <div class="box-header no-padding">
+                            <div class="box-body table-responsive no-padding">
+                                <table class="datatable table table-striped table-bordered text-xl"
+                                    id="table_gestion_personas_vacante_list">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Nombres</th>
+                                            <th>Apellidos</th>
+                                            <th>Dni</th>
+                                            <th>Puesto Actual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-gray-500 py-4 px-4 text-white" data-dismiss="modal"
+                        onclick="$('#modal_gestionPersonas').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" id="ModalOpenRequerimiento">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">Nº DE
+                                REQUERIMIENTO</span>
+
+                            <input id="txt_n_requerimiento_modal" type="text" class="form-control" value="" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">AREA</span>
+
+                            <input id="txt_area_requerimiento_modal" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">SOLICITANTE</span>
+
+                            <input id="txt_solicitante_requerimiento_modal" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CENTRO DE COSTO</span>
+
+                            <input id="txt_centro_costo_requerimiento_modal" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA DE
+                                REQUERIMIENTO</span>
+
+                            <input id="txt_fecha_requerimiento_modal" type="text" class="form-control" value="dni.pdf"
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRIORIDAD</span>
+
+                            <input id="txt_prioridad_requerimiento_modal" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">MOTIVO</span>
+
+                            <input id="txt_motivo_requerimiento_modal" type="text" class="form-control" value="dni.pdf"
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+
+                            <select id="txt_estado_requerimiento_modal" class="form-control " disabled>
+                                <option value="-1">Selecciona...
+                                </option>
+                                <option value="1">PENDIENTE
+                                </option>
+                                <option value="8">EN EVALUACION
+                                </option>
+                                <option value="5">ATENDIDO
+                                </option>
+                            </select>
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIEMPO DE
+                                ATENCION</span>
+
+                            <input id="txt_tiempo_atencion_requerimiento_modal" type="text" class="form-control"
+                                value="dni.pdf" disabled />
+                        </div>
+                    </div>
+                    <div class="box-primary">
+                        <div class="box-header no-padding">
+                            <div class="box-body table-responsive no-padding">
+
+                                <table class="datatable table table-striped table-bordered"
+                                    id="tableItemRequerimientoModalShow">
+                                    <thead>
+                                        <tr>
+
+                                            <th>ITEM</th>
+                                            <th>CODIGO</th>
+                                            <th>Nº DE PARTE</th>
+                                            <th>DESCRIPCION</th>
+                                            <th>CANTIDAD</th>
+                                            <th>UNIDAD MEDIDA</th>
+                                            <th>PRIORIDAD</th>
+                                            <th>OBSERVACION</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-stone-900 py-4 px-2 text-white" data-dismiss="modal"
+                        onclick="$('#ModalOpenRequerimiento').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" id="modalOpenDetailsTarea">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION DE
+                                TAREA</span>
+
+                            <input id="modalOpenDetailsTarea_nombre" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO DE TAREA</span>
+
+                            <input id="modalOpenDetailsTarea_tipo" type="text" class="form-control" value="" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA</span>
+
+                            <input id="modalOpenDetailsTarea_fecha" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRIORIDAD</span>
+
+                            <input id="modalOpenDetailsTarea_prioridad" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ACTIVO</span>
+
+                            <input id="modalOpenDetailsTarea_activo" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION
+                                VEHICULO</span>
+
+                            <input id="modalOpenDetailsTarea_descripcioin" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;"> CONDICION</span>
+
+                            <input id="modalOpenDetailsTarea_condicion" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES
+                                CONDUCTOR</span>
+
+                            <input id="modalOpenDetailsTarea_conductor" type="text" class="form-control" value=""
+                                disabled />
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRES RESPONSABLE
+                                VEHICULO</span>
+
+                            <input id="modalOpenDetailsTarea_responsable" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="box-primary">
+                        <div class="box-header no-padding">
+                            <div class="box-body table-responsive no-padding">
+                                <table class="datatable table table-striped table-bordered"
+                                    id="modalOpenDetailsTarea_comentarios_table">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Nª</th>
+                                            <th>COMENTARIOS</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-stone-900 py-4 px-2 text-white" data-dismiss="modal"
+                        onclick="$('#modalOpenDetailsTarea').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"
+    id="modalOpenDetailsCombustible">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO DE
+                                COMBUSTIBLE</span>
+
+                            <input id="modalOpenDetailsCombustible_tipo_combustible" type="text" class="form-control"
+                                value="" disabled />
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA</span>
+
+                            <input id="modalOpenDetailsCombustible_fecha" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA</span>
+
+                            <input id="modalOpenDetailsCombustible_hora" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CANTIDAD (En
+                                Galones)</span>
+
+                            <input id="modalOpenDetailsCombustible_cantidad" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRECIO POR GALÓN</span>
+
+                            <input id="modalOpenDetailsCombustible_precio" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TOTAL</span>
+
+                            <input id="modalOpenDetailsCombustible_total" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION
+                                VEHICULO</span>
+
+                            <input id="modalOpenDetailsCombustible_vehiculo" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">ACTIVO VEHICULO</span>
+
+                            <input id="modalOpenDetailsCombustible_active" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDICION</span>
+
+                            <input id="modalOpenDetailsCombustible_condicion" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRE CONDUCTOR</span>
+
+                            <input id="modalOpenDetailsCombustible_nombres_conductor" type="text" class="form-control"
+                                value="" disabled />
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PROVEEDOR</span>
+
+                            <input id="modalOpenDetailsCombustible_proveedor" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">RUC PROVEEDOR</span>
+
+                            <input id="modalOpenDetailsCombustible_ruc" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-stone-900 py-4 px-2 text-white" data-dismiss="modal"
+                        onclick="$('#modalOpenDetailsCombustible').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"
+    id="modalOpenDetailsOtrosGastos">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION DE
+                                GASTO</span>
+
+                            <input id="modalOpenDetailsOtrosGastos_nombre" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO DE GASTO</span>
+
+                            <input id="modalOpenDetailsOtrosGastos_tipo" type="text" class="form-control" value=""
+                                disabled />
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA</span>
+
+                            <input id="modalOpenDetailsOtrosGastos_fecha" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA</span>
+
+                            <input id="modalOpenDetailsOtrosGastos_hora" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">REFERENCIA</span>
+
+                            <input id="modalOpenDetailsOtrosGastos_referencia" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CODIGO DEL VEHICULO
+                            </span>
+
+                            <input id="modalOpenDetailsOtrosGastos_vehiculo" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION DEL
+                                VEHICULO</span>
+
+                            <input id="modalOpenDetailsOtrosGastos_descripcion" type="text" class="form-control"
+                                value="" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PRECIO
+                                UNITARIO</span>
+
+                            <input id="modalOpenDetailsOtrosGastos_precio" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CANTIDAD</span>
+
+                            <input id="modalOpenDetailsOtrosGastos_cantidad" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TOTAL</span>
+
+                            <input id="modalOpenDetailsOtrosGastos_total" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">NOMBRE CONDUCTOR</span>
+
+                            <input id="modalOpenDetailsOtrosGastos_nombres_conductor" type="text" class="form-control"
+                                value="" disabled />
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-stone-900 py-4 px-2 text-white" data-dismiss="modal"
+                        onclick="$('#modalOpenDetailsCombustible').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true"
+    id="ModalViewAsignacionVehiculo">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="box box-body">
+
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA INICIAL</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_fecha_ini" type="text" class="form-control"
+                                value="" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA INICIAL</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_hora_ini" type="text" class="form-control"
+                                value="" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">FECHA FINAL</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_fecha_final" type="text" class="form-control"
+                                value="" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">HORA FINAL</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_hora_final" type="text" class="form-control"
+                                value="" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">>ODOMETRO</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_odometro" type="text" class="form-control"
+                                value="" disabled />
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PUNTO DE PARTIDA</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_punto_partida" type="text" class="form-control"
+                                value="" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PUNTO DE CARGA</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_punto_carga" type="text" class="form-control"
+                                value="" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PUNTO DECARGA</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_punto_decarga" type="text" class="form-control"
+                                value="" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PUNTO RETORNO</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_punto_retorno" type="text" class="form-control"
+                                value="" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">PROYECTO/CONTRATO</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_nombre" type="text" class="form-control" value=""
+                                disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">TIPO</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_tipo" type="text" class="form-control" value=""
+                                disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION DE
+                                TAREA</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_descripcion_tarea" type="text"
+                                class="form-control" value="" disabled />
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CODIGO VEHICULO</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_activo_vehiculo" type="text" class="form-control"
+                                value="" disabled />
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">DESCRIPCION DE
+                                VEHICULO</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_descripcion_vehiculo" type="text"
+                                class="form-control" value="" disabled />
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">CONDUCTOR</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_nombres_conductor" type="text"
+                                class="form-control" value="" disabled />
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:5px;">
+                        <div class="input-group">
+                            <span class="input-group-addon" title="Expositor"
+                                style="background:#EEEEEE;font-weight:bold;padding-right: 52px;">RESPONSABLE</span>
+
+                            <input id="txt_ModalViewAsignacionVehiculo_nombres_responsable" type="text"
+                                class="form-control" value="" disabled />
+
+                        </div>
+                    </div>
+                    <div class="box-primary">
+                        <div class="box-header no-padding">
+                            <div class="box-body table-responsive no-padding">
+
+                                <table class="datatable table table-striped table-bordered"
+                                    id="txt_ModalViewAsignacionVehiculo_table">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Nº</th>
+                                            <th>COMENTARIO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="bg-stone-900 py-4 px-2 text-white" data-dismiss="modal"
+                        onclick="$('#ModalViewAsignacionVehiculo').modal('hide')">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="pages/catalogos/operaciones/operaciones.js"></script>
 <script>
-  $(document).ready(function(){
-    appBotonReset();
-  });
+$(document).ready(function() {
 
- 
-  
+
+    updateGrid("gridCombustibleVehiculo");
+    updateGrid("gridTareaVehiculo");
+    //updateGrid("gridMantenimientoVehiculo");
+    updateGrid("gridGastosOperativosVehiculo");
+
+    //updateGrid("gridOperacionMantenimiento");
+    updateGrid("gridOperacionTarea");
+    updateGrid("gridOperacionCumbustible");
+    // updateGrid("gridDocumentoVehiculo");
+    updateGrid("gridOperacionCostosOperarios");
+
+    updateGrid("gridOperacionSolicitudMantenimiento");
+    updateGrid("gridRequerimientoPersonalOrdenCompra");
+    updateGrid("gridRequerimientoPersonalGrid");
+    // updateGrid("gridOperacionSolicitudTrabajo");
+    updateGrid("griddeDocumentos");
+
+    updateGrid("gridRequerimientoPersonalOperaciones");
+
+    resumenEstadoFlota();
+    resumenAsignacionFlota();
+
+    UtilLoadSelect("sql_select_get_tipo_mantenimiento", "txt_solicitud_mantenimiento_tipo");
+
+    UtilLoadSelect("sql_select_get_tipo_area", "txt_solicitud_mantenimiento_dpt_asignado");
+    //managenementGraphs("sql_combustible_by_id", "combustible", "reporteCombustible");
+    //managenementGraphs("sql_mantenimiento_by_id", "mantenimiento", "reporteMantenimiento");
+    //managenementGraphs("sql_gastoOperativo_by_id", "gastoOperativo", "reporteGastoOperativo");
+
+    //managenementGraphs("sql_combustible_by_all", "gastoOperativoAll", "resumencombustibleGraphMensual");
+    //managenementGraphs("sql_combustible_by_all", "gastoOperativoAll", "resumencombustibleGraphAnual", 365);
+    //managenementGraphs("sql_mantenimiento_by_all", "mantenimientoAll", "resumenMantenimientoGraphMensual");
+    //managenementGraphs("sql_mantenimiento_by_all", "mantenimientoAll", "resumenMantenimientoGraphAnual", 365);
+
+    $('#txt_tarea_fecha_limite').val(new Date().toISOString().slice(0, 10));
+    $('#txt_asig_add_fecha_fin').val(new Date().toISOString().slice(0, 10));
+    $('#txt_asig_add_fecha_ini').val(new Date().toISOString().slice(0, 10));
+    $('#txt_fecha_g_personas').val(new Date().toISOString().slice(0, 10));
+
+    $('#txt_solicitud_mantenimiento_fecha').val(new Date().toISOString().slice(0, 10));
+
+    $('#txt_asig_add_hora_ini').val(new Date().getHours() + ":" + new Date().getMinutes());
+    $('#txt_asig_add_hora_fin').val(new Date().getHours() + ":" + new Date().getMinutes());
+
+    $('#txt_combustible_fecha').val(new Date().toISOString().slice(0, 10));
+    $('#txt_combustible_hora').val(new Date().getHours() + ":" + new Date().getMinutes());
+
+    $('#txt_mantenimiento_fecha_entrega').val(new Date().toISOString().slice(0, 10));
+    $('#txt_mantenimiento_hora_inicio').val(new Date().getHours() + ":" + new Date().getMinutes());
+    $('#txt_mantenimiento_fecha_inicio').val(new Date().toISOString().slice(0, 10));
+    $('#txt_mantenimiento_hora_estimada').val(new Date().getHours() + ":" + new Date().getMinutes());
+    $('#txt_gastosoperarios_fecha').val(new Date().toISOString().slice(0, 10));
+    $('#txt_gastosoperarios_hora').val(new Date().getHours() + ":" + new Date().getMinutes());
+
+    UtilLoadSelect("sql_select_get_cargo", "txt_cargo_personas");
+    UtilLoadSelect("03_selected_gestionPersona_motivo", "personas_select_motivo");
+    UtilLoadSelect("sql_select_get_lugar_trabajo", "personas_select_lugar");
+
+    //UtilLoadSelect("sql_select_get_prioridad", "slct_prioridad_requerimiento");
+
+    UtilLoadSelect("sql_select_get_clase_flota", "cbo06_Contenidos_combustible");
+    UtilLoadSelect("sql_select_get_clase_flota", "cbo06_Contenidos_gasto_operativo");
+    UtilLoadSelect("sql_select_get_clase_flota", "cbo06_Contenidos_gasto_operativo_total");
+
+    updateGrid("gridRequerimientoGrid");
+
+    $('#txt_conductor_fecha_nacimiento').val(new Date().toISOString().slice(0, 10));
+
+    $('#txt_conductor_fecha_vencimiento').val(new Date().toISOString().slice(0, 10));
+
+    $('#txt_conductor_fecha_ingreso').val(new Date().toISOString().slice(0, 10));
+
+    $("#txt_combustible_precio").keyup(function() {
+        let cantidad = $("#txt_combustible_cantidad").val()
+        let precio = $("#txt_combustible_precio").val()
+
+        let total = (Number(cantidad) * Number(precio)).toString()
+        $("#txt_combustible_total").val(total);
+    });
+
+    $("#txt_gastosoperarios_precio").keyup(function() {
+        let cantidad = $("#txt_gastosoperarios_cantidad").val()
+        let precio = $("#txt_gastosoperarios_precio").val()
+        $("#txt_gastosoperarios_total").val(Number(cantidad) * Number(precio));
+    });
+
+    $("#accordion").accordion({
+        collapsible: true
+    });
+
+
+    $('#cbo06_Contenidos_combustible').change(function() {
+
+        var $option = $(this).find('option:selected');
+        var value = $option.val();
+
+
+        let datos = {
+            TipoQuery: 'sqlGroupClassByGroup',
+            data: value
+        };
+
+        console.log(value)
+        appAjaxQuery(datos, rutaSQL).done(function(resp) {
+            $("#cbo06_Equipos_combustible option[value!='-1']").remove();
+            resp.data.forEach((item) => {
+                $('#cbo06_Equipos_combustible').append($("<option>", {
+                    value: item.id,
+                    text: item.description
+                }));
+            })
+
+        });
+
+    })
+
+
+    $('#cbo06_Contenidos_gasto_operativo').change(function() {
+
+        var $option = $(this).find('option:selected');
+        var value = $option.val();
+
+
+        let datos = {
+            TipoQuery: 'sqlGroupClassByGroup',
+            data: value
+        };
+
+        console.log(value)
+        appAjaxQuery(datos, rutaSQL).done(function(resp) {
+            $("#cbo06_Equipos_gasto_operativo option[value!='-1']").remove();
+            resp.data.forEach((item) => {
+                $('#cbo06_Equipos_gasto_operativo').append($("<option>", {
+                    value: item.id,
+                    text: item.description
+                }));
+            })
+
+        });
+
+    })
+
+
+    $('#cbo06_Contenidos_gasto_operativo_total').change(function() {
+
+        var $option = $(this).find('option:selected');
+        var value = $option.val();
+
+
+        let datos = {
+            TipoQuery: 'sqlGroupClassByGroup',
+            data: value
+        };
+
+        console.log(value)
+        appAjaxQuery(datos, rutaSQL).done(function(resp) {
+            $("#cbo06_Equipos_gasto_operativo_total option[value!='-1']").remove();
+            resp.data.forEach((item) => {
+                $('#cbo06_Equipos_gasto_operativo_total').append($("<option>", {
+                    value: item.id,
+                    text: item.description
+                }));
+            })
+
+        });
+
+    })
+   
+    resporte_gasto_operativo_total_resumen_fixed();
+    
+    $('#cbo06_meses_gasto_operativo_total_resumen').change(function() {
+        resporte_gasto_operativo_total_resumen_fixed();
+    })
+    $('#cbo06_meses_gasto_operativo_total_resumen_vehicle').change(function() {
+        resporte_gasto_operativo_total_resumen_vehicle_fixed();
+    })
+});
 </script>

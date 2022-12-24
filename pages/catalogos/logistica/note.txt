@@ -1,0 +1,7 @@
+add function SELECT AND EVALUATION provvedor
+fixed correaltive: Groups,classgruups, and items
+BUG into VIEW button Historial de requerimientos de PERSONAL
+FIX GENERATE ORDEN COMPRA BECAUSE THE HISTORIAL DONT DISABLED REQUEMIENTS INTO STATE ATENTIDO
+---------------------------
+ITEMS
+    reparar los correlativos

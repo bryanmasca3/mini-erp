@@ -21,7 +21,7 @@ function validatecamposchecklistcisterna(){
   let data={
       id: $('#txt01_conductor_cisterna_id').val(),
     
-      lc:$('#txt01_conductor_cisterna_LC').val(),
+     // lc:$('#txt01_conductor_cisterna_LC').val(),
       capacidad: $('#txt01_conductor_cisterna_capacidad').val(),
 
       fecha: $('#txt01_conductor_cisterna_fecha').val(),
@@ -29,7 +29,7 @@ function validatecamposchecklistcisterna(){
       placa: $('#txt01_conductor_cisterna_placas').val(),
 
       km_tracto: $('#txt01_conductor_cisterna_km_tracto').val(),
-      km_cisterna: $('#txt01_conductor_cisterna_km_cisterna').val(),     
+     // km_cisterna: $('#txt01_conductor_cisterna_km_cisterna').val(),     
       actividad: $('#txt01_conductor_cisterna_actividad').val(),
 
       km_inicial: $('#txt01_conductor_km_inicial').val(),
@@ -54,10 +54,10 @@ function validatecamposchecklistcisterna(){
       $('#txt01_conductor_cisterna_id').after('<span class="error">Este campo es requerido</span>');  
       error=1;
       }  
-      if (!data.lc.length) {  
+    /*  if (!data.lc.length) {  
         $('#txt01_conductor_cisterna_LC').after('<span class="error">Este campo es requerido</span>');  
         error=1;
-        }  
+        }  */
         if (!data.capacidad.length) {  
           $('#txt01_conductor_cisterna_capacidad').after('<span class="error">Este campo es requerido</span>');  
           error=1;
@@ -76,10 +76,10 @@ function validatecamposchecklistcisterna(){
         error=1;
       }  
 
-      if (!data.km_cisterna.length) {  
+     /* if (!data.km_cisterna.length) {  
         $('#txt01_conductor_cisterna_km_cisterna').after('<span class="error">Este campo es requerido</span>');  
         error=1;
-      }  
+      }  */
       if (!data.actividad.length) {  
         $('#txt01_conductor_cisterna_actividad').after('<span class="error">Este campo es requerido</span>');  
         error=1;
@@ -100,7 +100,7 @@ function validatecamposchecklistcisterna(){
         $('#txt01_conductor_hora_ini_2').after('<span class="error">Este campo es requerido</span>');  
         error=1;
       }  
-      if (!data.firma_conductor.length) {  
+      /*if (!data.firma_conductor.length) {  
         $('#txt_firma_conductor_citerna').after('<span class="error">Este campo es requerido</span>');  
         error=1;
       }   
@@ -108,7 +108,7 @@ function validatecamposchecklistcisterna(){
         $('#txt_firma_supervisor_citerna').after('<span class="error">Este campo es requerido</span>');  
         error=1;
       }  
-
+*/
 
 
 
@@ -125,11 +125,11 @@ function validatecamposchecklistcisterna(){
         $('#cisterna_documentos_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
         error=1;
       }  
-      if (data.checkList4.length<17) {  
+      if (data.checkList4.length<13) {  
         $('#cisterna_general_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
         error=1;
       }  
-      if (data.checkList5.length<5) {  
+      if (data.checkList5.length<4) {  
         $('#cisterna_neumaticos_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
         error=1;
       }  
@@ -137,12 +137,12 @@ function validatecamposchecklistcisterna(){
         $('#cisterna_motor_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
         error=1;
       }  
-      if (data.checkList7.length<27) {  
+      if (data.checkList7.length<31) {  
         $('#cisterna_seguridad_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
         error=1;
       }  
 
-      if (data.checkList8.length<9) {  
+      if (data.checkList8.length<6) {  
         $('#cisterna_sistema_recarga_table').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
         error=1;
       }  
@@ -202,7 +202,7 @@ function validatecamposchecklistcamioneta(){
         $('#declaracion_jurada_camioneta').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
         error=1;
       }  
-      if (data.checkList2.length<9) {  
+      if (data.checkList2.length<6) {  
         $('#camioneta_luces').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
         error=1;
       }  
@@ -210,7 +210,7 @@ function validatecamposchecklistcamioneta(){
         $('#camioneta_documentos').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
         error=1;
       }  
-      if (data.checkList4.length<12) {  
+      if (data.checkList4.length<15) {  
         $('#camioneta_general').after('<span class="error">Los campos  SI / NO son requeridos</span>');  
         error=1;
       }  
@@ -280,8 +280,8 @@ function validarcamposNuevoRegistro(){
         tema: $('#txt_tema').val(),
         tipo: $('#seguridad_tipo_registro_select').val(),
         area: $('#seguridad_area_select').val(),
-        expositor: $('#txt_expositor').val(),
-        empresa: $('#txt_expositor_empresa').val(),      
+       // expositor: $('#idExpositorHidden').val(),
+        //empresa: $('#txt_expositor_surname').val(),      
         hora_ini: $('#txt_hora_inicio').val(),
         hora_final: $('#txt_hora_final').val(),
         hora_total: $('#txt_hora_total').val(),
@@ -304,14 +304,15 @@ function validarcamposNuevoRegistro(){
       $('#seguridad_area_select').after('<span class="error">Este campo es requerido</span>');  
       error=1;
     }  
+    /*
     if (!data.expositor.length) {  
-        $('#txt_expositor').after('<span class="error">Este campo es requerido</span>');  
+        $('#idExpositorHidden').after('<span class="error">Este campo es requerido</span>');  
         error=1;
-        }  
-    if (!data.empresa.length) {  
+        }  */
+   /* if (!data.empresa.length) {  
       $('#txt_expositor_empresa').after('<span class="error">Este campo es requerido</span>'); 
       error=1; 
-    }  
+    }  */
     if (!data.hora_ini.length) {  
         $('#txt_hora_inicio').after('<span class="error">Este campo es requerido</span>');  
         error=1;
@@ -351,8 +352,8 @@ function validarcamposNuevoControl(){
       sec1:$(".check_Section_1:radio:checked"),
       sec2:$(".check_Section_2:radio:checked"),
       conclusion:$("#txt01_control_somnolencia_conclusion").val(),
-      firma_operador:$("#txt01_control_somnolencia_firma_operador").val(),
-      firma_evaluador:$("#txt01_control_somnolencia_firma_evaluador").val()
+     // firma_operador:$("#txt01_control_somnolencia_firma_operador").val(),
+     // firma_evaluador:$("#txt01_control_somnolencia_firma_evaluador").val()
   }
   $(".error").remove();  
   if (!data.operador.length) {  
@@ -388,13 +389,13 @@ function validarcamposNuevoControl(){
     $('#txt01_control_somnolencia_conclusion').after('<span class="error">Este campo es requerido</span>');  
     error=1;
   }  
-  if(!data.firma_operador.length){
+ /* if(!data.firma_operador.length){
     $('#txt01_control_somnolencia_firma_operador').after('<span class="error">Este campo es requerido</span>');  
     error=1;
   }  
   if(!data.firma_evaluador.length){
     $('#txt01_control_somnolencia_firma_evaluador').after('<span class="error">Este campo es requerido</span>');  
     error=1;
-  }  
+  }  */
   return error;
 }
